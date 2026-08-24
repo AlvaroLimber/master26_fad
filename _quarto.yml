@@ -41,7 +41,7 @@ book:
     #    - cap7-wrangling-avanzado.qmd # Programación funcional con purrr, cruces relacionales/espaciales y optimización para grandes volúmenes de datos [2].
     #    - cap8-ingenieria-variables.qmd # Feature Engineering: Creación, escalado, codificación y selección de características [4, 5].
     #    - cap9-datos-desequilibrados.qmd # Diagnóstico de desbalance de clases, técnicas de remuestreo (over/under-sampling) y balanceo de datos [4, 5].
-     - references.qmd
+    - references.qmd
 
 
 bibliography: references.bib

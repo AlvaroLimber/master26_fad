@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="MSc. Alvaro Chirino Gutierrez">
-<meta name="dcterms.date" content="2026-01-01">
 
-<title>Fundamentos de Análisis de Datos</title>
+<title>Referencias – Fundamentos de Análisis de Datos</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,7 +23,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -35,7 +52,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -77,10 +94,8 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta name="twitter:title" content="Fundamentos de Análisis de Datos">
-<meta name="twitter:description" content="Notas de Clase y Guía de Aprendizaje en R">
-<meta name="twitter:image" content="https://alvarolimber.github.io/master_fad/_book/cover.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Referencias – Fundamentos de Análisis de Datos">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar docked quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
@@ -252,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Bienvenido</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">Referencias</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -300,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bienvenido</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Referencias</span></a>
   </div>
 </li>
@@ -315,26 +330,8 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#bienvenido" id="toc-bienvenido" class="nav-link active" data-scroll-target="#bienvenido">Bienvenido</a>
-  <ul class="collapse">
-  <li><a href="#propósito-del-curso" id="toc-propósito-del-curso" class="nav-link" data-scroll-target="#propósito-del-curso">Propósito del Curso</a></li>
-  <li><a href="#estructura-del-libro" id="toc-estructura-del-libro" class="nav-link" data-scroll-target="#estructura-del-libro">Estructura del Libro</a>
-  <ul class="collapse">
-  <li><a href="#parte-i-adquisición-transformación-y-manipulación-de-datos" id="toc-parte-i-adquisición-transformación-y-manipulación-de-datos" class="nav-link" data-scroll-target="#parte-i-adquisición-transformación-y-manipulación-de-datos">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li>
-  <li><a href="#parte-ii-análisis-exploratorio-y-tratamiento-de-datos-faltantes" id="toc-parte-ii-análisis-exploratorio-y-tratamiento-de-datos-faltantes" class="nav-link" data-scroll-target="#parte-ii-análisis-exploratorio-y-tratamiento-de-datos-faltantes">Parte II: Análisis Exploratorio y Tratamiento de Datos Faltantes</a></li>
-  <li><a href="#iii-wrangling-avanzado-big-data-y-datos-desequilibrados" id="toc-iii-wrangling-avanzado-big-data-y-datos-desequilibrados" class="nav-link" data-scroll-target="#iii-wrangling-avanzado-big-data-y-datos-desequilibrados">III: Wrangling Avanzado, Big Data y Datos Desequilibrados</a></li>
-  </ul></li>
-  <li><a href="#metodología-y-logística-de-clases" id="toc-metodología-y-logística-de-clases" class="nav-link" data-scroll-target="#metodología-y-logística-de-clases">Metodología y Logística de Clases</a></li>
-  <li><a href="#sistema-de-evaluación-100-puntos" id="toc-sistema-de-evaluación-100-puntos" class="nav-link" data-scroll-target="#sistema-de-evaluación-100-puntos">Sistema de Evaluación (100 Puntos)</a></li>
-  <li><a href="#referencias-bibliográficas-clave" id="toc-referencias-bibliográficas-clave" class="nav-link" data-scroll-target="#referencias-bibliográficas-clave">Referencias Bibliográficas Clave</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -342,27 +339,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Fundamentos de Análisis de Datos</h1>
-<p class="subtitle lead">Notas de Clase y Guía de Aprendizaje en R</p>
+<h1 class="title">Referencias</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>MSc. Alvaro Chirino Gutierrez </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -372,105 +356,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div id="refs" role="list" style="display: none">
 
-<section id="bienvenido" class="level1 unnumbered">
-<h1 class="unnumbered">Bienvenido</h1><p><img src="cover.jpg" title="Fundamentos de Análisis de Datos" class="quarto-cover-image nolightbox img-fluid"></p>
-<p>¡Bienvenido al libro de apuntes de <strong>Fundamentos de Análisis de Datos</strong>! Este texto de apoyo ha sido diseñado específicamente para la <strong>Maestría en Inteligencia Artificial y Gestión de Datos para Finanzas, Economía y Negocios</strong> de la <strong>Universidad Católica Boliviana (UCB)</strong>.</p>
-<p>Este libro sirve como guía práctica, teórica y metodológica para nuestras <strong>24 sesiones de aprendizaje</strong>, ofreciendo un hilo conductor estructurado para navegar de forma fluida a través de los conceptos esenciales del ciclo de vida de los datos: desde su adquisición y limpieza hasta su transformación y comunicación interactiva.</p>
-<section id="propósito-del-curso" class="level2">
-<h2 class="anchored" data-anchor-id="propósito-del-curso">Propósito del Curso</h2>
-<p>El propósito principal de esta materia es proporcionar a los estudiantes los conocimientos, criterios y habilidades técnicas esenciales para <strong>recolectar, limpiar, explorar, analizar e interpretar datos</strong> en diversos contextos. A través de este proceso, se busca establecer una base sólida y reproducible para el desarrollo de productos de datos de alto impacto, como dashboards dinámicos y reportes científicos interactivos.</p>
-<p>Al finalizar el módulo, dominarás las etapas iniciales de la ciencia de datos, garantizando que cualquier conjunto de información con el que trabajes sea <strong>de alta calidad, válido, reproducible y útil</strong> para el modelado analítico o la toma de decisiones empresariales.</p>
-</section>
-<section id="estructura-del-libro" class="level2">
-<h2 class="anchored" data-anchor-id="estructura-del-libro">Estructura del Libro</h2>
-<p>A diferencia de un programa curricular rígido, este libro está diseñado para ser un compañero de desarrollo interactivo. El contenido se divide en <strong>tres partes fundamentales</strong> de un flujo moderno de análisis de datos, organizadas en un máximo de tres capítulos sustantivos cada una:</p>
-<section id="parte-i-adquisición-transformación-y-manipulación-de-datos" class="level3">
-<h3 class="anchored" data-anchor-id="parte-i-adquisición-transformación-y-manipulación-de-datos">Parte I: Adquisición, Transformación y Manipulación de Datos</h3>
-<ul>
-<li><strong>Capítulo 1: Adquisición de Datos</strong>: Configuración del entorno profesional de trabajo (R, RStudio, Git y GitHub) e ingesta de diversas fuentes: archivos planos (CSV, TXT), bases de datos, APIs (JSON/XML) y técnicas iniciales de Web Scraping con <code>rvest</code>.</li>
-<li><strong>Capítulo 2: Filosofía Tidy Data</strong>: El arte de estructurar datos desordenados y la manipulación avanzada de dataframes utilizando la potencia de la suite <code>tidyverse</code> (particularmente <code>dplyr</code> y <code>tidyr</code>).</li>
-<li><strong>Capítulo 3: Datos de Tipo Específico</strong>: Tratamiento y limpieza avanzada de cadenas de texto mediante Expresiones Regulares (Regex) con <code>stringr</code> y la correcta administración de fechas, horas y zonas horarias con <code>lubridate</code>.</li>
-</ul>
-</section>
-<section id="parte-ii-análisis-exploratorio-y-tratamiento-de-datos-faltantes" class="level3">
-<h3 class="anchored" data-anchor-id="parte-ii-análisis-exploratorio-y-tratamiento-de-datos-faltantes">Parte II: Análisis Exploratorio y Tratamiento de Datos Faltantes</h3>
-<ul>
-<li><strong>Capítulo 4: Análisis Exploratorio de Datos (EDA)</strong>: Descubrimiento de patrones mediante estadística descriptiva analítica, medidas de resumen robustas y visualización de datos científica utilizando la gramática de gráficos de <code>ggplot2</code>.</li>
-<li><strong>Capítulo 5: Tratamiento de Datos Faltantes</strong>: Diagnóstico científico de mecanismos de pérdida de datos (MCAR, MAR, MNAR) e implementación de estrategias de imputación simple y múltiple para evitar sesgos en modelos posteriores.</li>
-<li><strong>Capítulo 6: Dashboards y KPIs</strong>: El paso de la exploración a la acción. Diseño metodológico de Indicadores Clave de Rendimiento (KPIs) y desarrollo de dashboards interactivos utilizando <code>Shiny</code> y <code>flexdashboard</code> en R.</li>
-</ul>
-</section>
-<section id="iii-wrangling-avanzado-big-data-y-datos-desequilibrados" class="level3">
-<h3 class="anchored" data-anchor-id="iii-wrangling-avanzado-big-data-y-datos-desequilibrados">III: Wrangling Avanzado, Big Data y Datos Desequilibrados</h3>
-<ul>
-<li><strong>Capítulo 7: Wrangling Avanzado y Grandes Volúmenes</strong>: Programación funcional aplicada al procesamiento de datos con <code>purrr</code> (iteración sobre listas y dataframes complejos), cruces relacionales avanzados y optimización para Big Data.</li>
-<li><strong>Capítulo 8: Ingeniería de Características (Feature Engineering)</strong>: Preparación de datos para modelos predictivos y de Machine Learning mediante la creación de nuevas variables, escalado numérico, codificación de variables categóricas y selección de atributos.</li>
-<li><strong>Capítulo 9: Tratamiento de Datos Desequilibrados</strong>: Diagnóstico de desbalance de clases en problemas de clasificación, y la aplicación práctica de técnicas de remuestreo (over-sampling, under-sampling) y balanceo de datos para modelos de clasificación equitativos.</li>
-</ul>
-</section>
-</section>
-<section id="metodología-y-logística-de-clases" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-y-logística-de-clases">Metodología y Logística de Clases</h2>
-<p>Las clases se desarrollan de forma presencial/sincrónica bajo una modalidad de <strong>taller práctico constante</strong> (hands-on):</p>
-<ul>
-<li><strong>Sesiones</strong>: 24 sesiones de 2.5 horas de duración cada una (Lunes, Miércoles y Viernes).</li>
-<li><strong>Horarios</strong>:
-<ul>
-<li><strong>Lunes y Miércoles</strong>: 20:15 a 22:45</li>
-<li><strong>Viernes</strong>: 19:00 a 21:30</li>
-</ul></li>
-<li><strong>Estructura de cada Sesión</strong>: Para optimizar el rendimiento cognitivo, cada sesión de 150 minutos se divide de la siguiente manera:
-<ul>
-<li><strong>Primer Bloque (90 min)</strong>: Teoría conceptual, discusión y desarrollo del código base.</li>
-<li><strong>Receso (15 min)</strong>: Pausa para descanso.</li>
-<li><strong>Segundo Bloque (45 min)</strong>: Taller práctico aplicado, resolución de problemas y avance guiado.</li>
-</ul></li>
-<li><strong>Ecosistema Tecnológico</strong>: Operaremos bajo la filosofía de investigación reproducible utilizando exclusivamente <strong>R</strong>, el entorno de desarrollo integrado <strong>RStudio</strong> y el control de versiones con <strong>Git / GitHub</strong> para asegurar que el código sea auditable y transferible de forma profesional.</li>
-</ul>
-</section>
-<section id="sistema-de-evaluación-100-puntos" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-evaluación-100-puntos">Sistema de Evaluación (100 Puntos)</h2>
-<p>La evaluación de la materia es netamente práctica y acumulativa, diseñada para medir el dominio real de las habilidades adquiridas:</p>
-<ol type="1">
-<li><strong>Laboratorio 1 (30 puntos)</strong>: Ejercicios prácticos que abarcan las destrezas de adquisición (scraping y APIs), estructuración bajo principios <em>Tidy Data</em>, manipulación específica (regex y fechas) y visualización/EDA.</li>
-<li><strong>Laboratorio 2 (30 puntos)</strong>: Práctica de nivel avanzado enfocada en diagnóstico e imputación de datos faltantes, programación funcional con <code>purrr</code>, ingeniería de características y tratamiento de clases desbalanceadas.</li>
-<li><strong>Trabajo Práctico Final (40 puntos) - Dashboard de Métricas</strong>:
-<ul>
-<li><strong>Entregable</strong>: Un dashboard interactivo completamente funcional en R (<code>Shiny</code> o <code>flexdashboard</code>) desplegado de manera pública o ejecutable desde GitHub.</li>
-<li><strong>Métricas y KPIs</strong>: El dashboard debe diseñar, calcular e ilustrar de forma clara Indicadores Clave de Rendimiento (KPIs) de valor analítico.</li>
-<li><strong>Dataset Nacional</strong>: Se exige el uso estricto de un dataset de origen boliviano (datos públicos, censos, encuestas nacionales, datos financieros sectoriales bolivianos, etc.) para fomentar el análisis de la realidad local.</li>
-<li><strong>Fuera de Dominio</strong>: El proyecto debe enfocarse obligatoriamente en un área temática <strong>diferente al área de dominio profesional actual o de pregrado del estudiante</strong>, con el fin de sacarlo de su zona de confort y demostrar su versatilidad analítica en nuevos contextos.</li>
-</ul></li>
-</ol>
-</section>
-<section id="referencias-bibliográficas-clave" class="level2">
-<h2 class="anchored" data-anchor-id="referencias-bibliográficas-clave">Referencias Bibliográficas Clave</h2>
-<p>A lo largo del libro y de las sesiones haremos uso constante de las siguientes referencias bibliográficas fundamentales (todas ellas disponibles de forma libre y gratuita):</p>
-<ol type="1">
-<li><strong>Wickham, H., Grolemund, G., &amp; Çetinkaya-Rundel, M. (2023)</strong>. <em>R for Data Science</em> (2nd ed.). O’Reilly Media.
-<ul>
-<li><a href="https://r4ds.hadley.nz/">Versión en línea en inglés</a></li>
-<li><a href="https://davidrsch.github.io/r4ds-es/">Traducción de la comunidad en español</a></li>
-</ul></li>
-<li><strong>Boehmke, B. (2016)</strong>. <em>Data Wrangling with R</em>. Springer.
-<ul>
-<li><em>Nota: Referencia fundamental para expresiones regulares, manejo avanzado de estructuras de control, tipos de datos específicos, listas y web scraping práctico en R.</em></li>
-</ul></li>
-<li><strong>Kuhn, M., &amp; Johnson, K. (2019)</strong>. <em>Feature Engineering and Selection: A Practical Approach for Predictive Models</em>. CRC Press.
-<ul>
-<li><a href="https://bookdown.org/max/FES/">Versión en línea en inglés</a></li>
-</ul></li>
-<li><strong>Lovelace, R., Nowosad, J., &amp; Muenchow, J. (2019)</strong>. <em>Geocomputation with R</em>. CRC Press.
-<ul>
-<li><a href="https://geocompr.robinlovelace.net/">Versión en línea en inglés</a></li>
-<li><a href="https://r.geocompx.org/es/">Traducción en español</a></li>
-</ul></li>
-</ol>
+</div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -888,11 +778,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Bienvenido">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bienvenido</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="Referencias">
-        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
