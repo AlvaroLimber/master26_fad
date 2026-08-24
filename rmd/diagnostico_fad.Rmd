@@ -1,0 +1,27 @@
+---
+title: "**Módulo: Fundamentos de Análisis de Datos**"
+subtitle: "Guía de Diagnóstico"
+author: "MSc. Alvaro Chirino Gutierrez"
+date: "Agosto, 20206"
+output: 
+  pdf_document:
+    number_sections: true 
+editor_options: 
+  chunk_output_type: console
+---
+
+> **Nota de Introducción:**
+> *"Estimados colegas, bienvenidos al módulo. Las trayectorias previas son diversas y los módulos precedentes han sentado bases fundamentales. Antes de adentrarnos en el uso de R y en el desarrollo práctico, es necesario realizar un breve ejercicio de calibración y nivelación. Este espacio no tiene un carácter punitivo; su propósito es identificar con precisión los vacíos conceptuales o técnicos existentes, de modo que podamos asegurar una progresión sólida y conectar nuestras herramientas con una visión crítica de la disciplina."*
+
+# Ejes de Discusión y Preguntas Guía
+
+1. **Revisión de bases analíticas (Estadística de Pregrado)**
+  * **Cuestionamiento:** Retornando a la formación de pregrado, ¿identifican algún concepto, premisa o estimador estadístico (por ejemplo, distribuciones de probabilidad, pruebas de hipótesis o inferencia) que en su momento no haya quedado completamente claro y cuya comprensión limitada pueda representar una limitación en esta etapa de posgrado?
+2. **Evaluación de competencias previas (Programación y Estructuras)**
+  * **Cuestionamiento:** De los contenidos abordados en los módulos anteriores, ¿qué componentes generaron mayor fricción o complejidad? (A saber: la lógica algorítmica, la sintaxis de programación o la abstracción y manejo inicial de estructuras de datos).
+3. **Práctica analítica y gestión del dato real**
+  * **Cuestionamiento:** Al enfrentarse a conjuntos de datos del mundo real —caracterizados por inconsistencias, asimetrías o anomalías—, ¿en qué fase operativa específica del proceso se experimenta mayor incertidumbre o dificultad metodológica?
+4. **Proyección y expectativas del módulo**
+  * **Cuestionamiento:** Considerando que el módulo culmina con el diseño y despliegue de un *dashboard* interactivo basado en un repositorio de datos nacional, ¿qué desafío técnico o metodológico vislumbran como el principal obstáculo para alcanzar dicho objetivo?
+5. **Dimensión Epistemológica y Cierre (IA, Ciencia de Datos y Big Data)**
+  * **Cuestionamiento:** Para cerrar la reflexión: en la actualidad se habla indistintamente de Inteligencia Artificial, Ciencia de Datos, *Big Data* y modelado predictivo. Desde la perspectiva de sus campos profesionales (finanzas, economía y negocios), ¿hasta qué punto consideramos que existe una verdadera ruptura epistemológica en cómo interpretamos la realidad a través de los datos, o estamos simplemente ante una sofisticación técnica de herramientas estadísticas tradicionales?
