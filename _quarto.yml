@@ -1,0 +1,43 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Fundamentos de Análisis de Datos"
+  subtitle: "Notas de Clase y Guía de Aprendizaje en R"
+  author: "MSc. Alvaro Chirino Gutierrez"
+  date: "2026-01-01"
+  date-format: "YYYY"
+  twitter-card: true
+  site-url: https://alvarolimber.github.io/master_fad/_book
+  search: true
+  repo-url: https://github.com/master_fad/
+  sharing: [twitter, facebook]
+  cover-image: cover.jpg
+  page-footer: 
+    left: "Copyright 2026, Alvaro Chirino" 
+    right: "Maestría en Inteligencia Artificial y Gestión de Datos - UCB"
+  language: es
+  
+  sidebar:
+    style: "docked"
+    search: true
+    collapse-level: 1
+
+  chapters:
+    - index.qmd # Introducción al libro, enfoque pedagógico y bibliografía clave
+    #- part: "Parte I: Adquisición, Transformación y Manipulación de Datos"
+    #  chapters:
+    #    - cap1-adquisicion.qmd   # Entorno (RStudio/Git), ingesta de archivos planos, bases de datos, consumo de APIs y Web Scraping [1].
+    #    - cap2-tidy-data.qmd     # Filosofía Tidy Data, manipulación y reestructuración de dataframes (dplyr, tidyr) [1, 3].
+    #    - cap3-datos-especificos.qmd # Tratamiento de textos con expresiones regulares (stringr) y manejo de fechas/tiempo (lubridate) [2].
+    #- part: "Parte II: Análisis Exploratorio y Tratamiento de Datos Faltantes"
+    #  chapters:
+    #    - cap4-eda-visualizacion.qmd # Estadística descriptiva, medidas de resumen y visualización de datos con ggplot2 [2, 3].
+    #    - cap5-datos-faltantes.qmd   # Mecanismos de pérdida (MCAR, MAR, MNAR), diagnóstico, imputación simple y múltiple [2].
+    #    - cap6-dashboards-kpis.qmd   # Aplicación práctica: Desarrollo de dashboards interactivos (Shiny/flexdashboard) y diseño de KPIs [4, 5].
+    #- part: "Parte III: Wrangling Avanzado, Big Data y Datos Desequilibrados"
+    #  chapters:
+    #    - cap7-wrangling-avanzado.qmd # Programación funcional con purrr, cruces relacionales/espaciales y optimización para grandes volúmenes de datos [2].
+    #    - cap8-ingenieria-variables.qmd # Feature Engineering: Creación, escalado, codificación y selección de características [4, 5].
+    #    - cap9-datos-desequilibrados.qmd # Diagnóstico de desbalance de clases, técnicas de remuestreo (over/under-sampling) y balanceo de datos [4, 5].

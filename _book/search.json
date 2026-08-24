@@ -1,0 +1,62 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Fundamentos de Análisis de Datos",
+    "section": "",
+    "text": "Bienvenido\n¡Bienvenido al libro de apuntes de Fundamentos de Análisis de Datos! Este texto de apoyo ha sido diseñado específicamente para la Maestría en Inteligencia Artificial y Gestión de Datos para Finanzas, Economía y Negocios de la Universidad Católica Boliviana (UCB).\nEste libro sirve como guía práctica, teórica y metodológica para nuestras 24 sesiones de aprendizaje, ofreciendo un hilo conductor estructurado para navegar de forma fluida a través de los conceptos esenciales del ciclo de vida de los datos: desde su adquisición y limpieza hasta su transformación y comunicación interactiva.",
+    "crumbs": [
+      "Bienvenido"
+    ]
+  },
+  {
+    "objectID": "index.html#propósito-del-curso",
+    "href": "index.html#propósito-del-curso",
+    "title": "Fundamentos de Análisis de Datos",
+    "section": "Propósito del Curso",
+    "text": "Propósito del Curso\nEl propósito principal de esta materia es proporcionar a los estudiantes los conocimientos, criterios y habilidades técnicas esenciales para recolectar, limpiar, explorar, analizar e interpretar datos en diversos contextos. A través de este proceso, se busca establecer una base sólida y reproducible para el desarrollo de productos de datos de alto impacto, como dashboards dinámicos y reportes científicos interactivos.\nAl finalizar el módulo, dominarás las etapas iniciales de la ciencia de datos, garantizando que cualquier conjunto de información con el que trabajes sea de alta calidad, válido, reproducible y útil para el modelado analítico o la toma de decisiones empresariales.",
+    "crumbs": [
+      "Bienvenido"
+    ]
+  },
+  {
+    "objectID": "index.html#estructura-del-libro",
+    "href": "index.html#estructura-del-libro",
+    "title": "Fundamentos de Análisis de Datos",
+    "section": "Estructura del Libro",
+    "text": "Estructura del Libro\nA diferencia de un programa curricular rígido, este libro está diseñado para ser un compañero de desarrollo interactivo. El contenido se divide en tres partes fundamentales de un flujo moderno de análisis de datos, organizadas en un máximo de tres capítulos sustantivos cada una:\n\nParte I: Adquisición, Transformación y Manipulación de Datos\n\nCapítulo 1: Adquisición de Datos: Configuración del entorno profesional de trabajo (R, RStudio, Git y GitHub) e ingesta de diversas fuentes: archivos planos (CSV, TXT), bases de datos, APIs (JSON/XML) y técnicas iniciales de Web Scraping con rvest.\nCapítulo 2: Filosofía Tidy Data: El arte de estructurar datos desordenados y la manipulación avanzada de dataframes utilizando la potencia de la suite tidyverse (particularmente dplyr y tidyr).\nCapítulo 3: Datos de Tipo Específico: Tratamiento y limpieza avanzada de cadenas de texto mediante Expresiones Regulares (Regex) con stringr y la correcta administración de fechas, horas y zonas horarias con lubridate.\n\n\n\nParte II: Análisis Exploratorio y Tratamiento de Datos Faltantes\n\nCapítulo 4: Análisis Exploratorio de Datos (EDA): Descubrimiento de patrones mediante estadística descriptiva analítica, medidas de resumen robustas y visualización de datos científica utilizando la gramática de gráficos de ggplot2.\nCapítulo 5: Tratamiento de Datos Faltantes: Diagnóstico científico de mecanismos de pérdida de datos (MCAR, MAR, MNAR) e implementación de estrategias de imputación simple y múltiple para evitar sesgos en modelos posteriores.\nCapítulo 6: Dashboards y KPIs: El paso de la exploración a la acción. Diseño metodológico de Indicadores Clave de Rendimiento (KPIs) y desarrollo de dashboards interactivos utilizando Shiny y flexdashboard en R.\n\n\n\nIII: Wrangling Avanzado, Big Data y Datos Desequilibrados\n\nCapítulo 7: Wrangling Avanzado y Grandes Volúmenes: Programación funcional aplicada al procesamiento de datos con purrr (iteración sobre listas y dataframes complejos), cruces relacionales avanzados y optimización para Big Data.\nCapítulo 8: Ingeniería de Características (Feature Engineering): Preparación de datos para modelos predictivos y de Machine Learning mediante la creación de nuevas variables, escalado numérico, codificación de variables categóricas y selección de atributos.\nCapítulo 9: Tratamiento de Datos Desequilibrados: Diagnóstico de desbalance de clases en problemas de clasificación, y la aplicación práctica de técnicas de remuestreo (over-sampling, under-sampling) y balanceo de datos para modelos de clasificación equitativos.",
+    "crumbs": [
+      "Bienvenido"
+    ]
+  },
+  {
+    "objectID": "index.html#metodología-y-logística-de-clases",
+    "href": "index.html#metodología-y-logística-de-clases",
+    "title": "Fundamentos de Análisis de Datos",
+    "section": "Metodología y Logística de Clases",
+    "text": "Metodología y Logística de Clases\nLas clases se desarrollan de forma presencial/sincrónica bajo una modalidad de taller práctico constante (hands-on):\n\nSesiones: 24 sesiones de 2.5 horas de duración cada una (Lunes, Miércoles y Viernes).\nHorarios:\n\nLunes y Miércoles: 20:15 a 22:45\nViernes: 19:00 a 21:30\n\nEstructura de cada Sesión: Para optimizar el rendimiento cognitivo, cada sesión de 150 minutos se divide de la siguiente manera:\n\nPrimer Bloque (90 min): Teoría conceptual, discusión y desarrollo del código base.\nReceso (15 min): Pausa para descanso.\nSegundo Bloque (45 min): Taller práctico aplicado, resolución de problemas y avance guiado.\n\nEcosistema Tecnológico: Operaremos bajo la filosofía de investigación reproducible utilizando exclusivamente R, el entorno de desarrollo integrado RStudio y el control de versiones con Git / GitHub para asegurar que el código sea auditable y transferible de forma profesional.",
+    "crumbs": [
+      "Bienvenido"
+    ]
+  },
+  {
+    "objectID": "index.html#sistema-de-evaluación-100-puntos",
+    "href": "index.html#sistema-de-evaluación-100-puntos",
+    "title": "Fundamentos de Análisis de Datos",
+    "section": "Sistema de Evaluación (100 Puntos)",
+    "text": "Sistema de Evaluación (100 Puntos)\nLa evaluación de la materia es netamente práctica y acumulativa, diseñada para medir el dominio real de las habilidades adquiridas:\n\nLaboratorio 1 (30 puntos): Ejercicios prácticos que abarcan las destrezas de adquisición (scraping y APIs), estructuración bajo principios Tidy Data, manipulación específica (regex y fechas) y visualización/EDA.\nLaboratorio 2 (30 puntos): Práctica de nivel avanzado enfocada en diagnóstico e imputación de datos faltantes, programación funcional con purrr, ingeniería de características y tratamiento de clases desbalanceadas.\nTrabajo Práctico Final (40 puntos) - Dashboard de Métricas:\n\nEntregable: Un dashboard interactivo completamente funcional en R (Shiny o flexdashboard) desplegado de manera pública o ejecutable desde GitHub.\nMétricas y KPIs: El dashboard debe diseñar, calcular e ilustrar de forma clara Indicadores Clave de Rendimiento (KPIs) de valor analítico.\nDataset Nacional: Se exige el uso estricto de un dataset de origen boliviano (datos públicos, censos, encuestas nacionales, datos financieros sectoriales bolivianos, etc.) para fomentar el análisis de la realidad local.\nFuera de Dominio: El proyecto debe enfocarse obligatoriamente en un área temática diferente al área de dominio profesional actual o de pregrado del estudiante, con el fin de sacarlo de su zona de confort y demostrar su versatilidad analítica en nuevos contextos.",
+    "crumbs": [
+      "Bienvenido"
+    ]
+  },
+  {
+    "objectID": "index.html#referencias-bibliográficas-clave",
+    "href": "index.html#referencias-bibliográficas-clave",
+    "title": "Fundamentos de Análisis de Datos",
+    "section": "Referencias Bibliográficas Clave",
+    "text": "Referencias Bibliográficas Clave\nA lo largo del libro y de las sesiones haremos uso constante de las siguientes referencias bibliográficas fundamentales (todas ellas disponibles de forma libre y gratuita):\n\nWickham, H., Grolemund, G., & Çetinkaya-Rundel, M. (2023). R for Data Science (2nd ed.). O’Reilly Media.\n\nVersión en línea en inglés\nTraducción de la comunidad en español\n\nBoehmke, B. (2016). Data Wrangling with R. Springer.\n\nNota: Referencia fundamental para expresiones regulares, manejo avanzado de estructuras de control, tipos de datos específicos, listas y web scraping práctico en R.\n\nKuhn, M., & Johnson, K. (2019). Feature Engineering and Selection: A Practical Approach for Predictive Models. CRC Press.\n\nVersión en línea en inglés\n\nLovelace, R., Nowosad, J., & Muenchow, J. (2019). Geocomputation with R. CRC Press.\n\nVersión en línea en inglés\nTraducción en español",
+    "crumbs": [
+      "Bienvenido"
+    ]
+  }
+]

@@ -1,0 +1,116 @@
+---
+title: "**Módulo: Fundamentos de Análisis de Datos**"
+subtitle: "Programa académico"
+author: "MSc. Alvaro Chirino Gutierrez"
+date: "Agosto, 20206"
+output: 
+  pdf_document:
+    number_sections: true 
+editor_options: 
+  chunk_output_type: console
+---
+
+# Características
+
+- **Programa:** Maestría en Inteligencia Artificial y Gestión de Datos para Finanzas, Economía y Negocios
+- **Institución:** Universidad Católica Boliviana (UCB)
+- **Docente:** MSc. Alvaro Chirino Gutiérrez
+- **Modalidad / Sesiones:** 24 sesiones de 2.5 horas (Lunes, Miércoles y Viernes)
+  - Lunes y miércoles de 20:15 a 22:45
+  - Viernes de 19:00 a 21:30
+- **Estructura de la Sesión:** 150 minutos repartidos en 90 (clase) + 15 (receso) + 45 (clase)
+- **Tecnología y Herramientas:** R, RStudio y GitHub
+
+
+# Descripción
+
+En este módulo se desarrolla la capacidad para recolectar, depurar, explorar y transformar datos con fines analíticos. Se revisan técnicas de adquisición y manipulación de información, análisis exploratorio, tratamiento de datos faltantes, estrategias avanzadas de data wrangling (incluyendo expresiones regulares, web scraping y programación funcional) y procesos de ingeniería de características. Se busca que el estudiante domine las etapas iniciales y fundamentales del ciclo de vida del análisis de datos, garantizando su calidad, validez y utilidad para su posterior análisis o visualización interactiva.
+
+# Propósito
+
+Proporcionar a los estudiantes los conocimientos y habilidades esenciales para recolectar, limpiar, explorar, analizar e interpretar datos en diversos contextos, estableciendo una base sólida para el desarrollo de productos de datos y dashboards.
+
+# Unidades de Aprendizaje 
+
+- **Unidad 1: Adquisición, Transformación y Manipulación de Datos**
+  *   Configuración del entorno (R/RStudio, GitHub).
+  *   Adquisición de datos: archivos planos, bases de datos, consumo de APIs (JSON/XML) y Web Scraping.
+  *   Principios de "Tidy Data" y reestructuración de conjuntos de datos.
+  *   Manejo avanzado de tipos de datos: Expresiones regulares (regex) para texto y manipulación de fechas/horas.
+- **Unidad 2: Análisis Exploratorio y Tratamiento de Datos Faltantes**
+  *   **Análisis Exploratorio de Datos (EDA):** Visualizaciones, estadística descriptiva y análisis preliminares.
+  *   **Tratamiento de Datos Faltantes:** Mecanismos de pérdida, diagnóstico y técnicas de imputación.
+- **Unidad 3: Data Wrangling Avanzado, Big Data y Datos Desequilibrados**
+  *   **Data Wrangling:** Programación funcional aplicada a la limpieza (listas y dataframes), cruces relacionales y optimización.
+  *   **Ingeniería de Características:** Creación, transformación y selección de atributos.
+  *   **Datos Desequilibrados:** Tratamiento analítico, técnicas de remuestreo y balanceo de clases.
+
+# Sistema de Evaluación (100 Puntos)
+
+*   **Laboratorio 1 (30 puntos):** Ejercicios prácticos de adquisición (incluyendo scraping/APIs), manipulación de datos (Tidy Data, regex) y Análisis Exploratorio (EDA).
+*   **Laboratorio 2 (30 puntos):** Práctica avanzada de tratamiento de datos faltantes, Data Wrangling (programación funcional), ingeniería de características y balanceo de datos.
+*   **Trabajo Práctico Final (40 puntos):** Desarrollo e implementación de un **Dashboard en R** para el seguimiento interactivo de métricas.
+    *   *Requisitos:* El dashboard debe calcular e ilustrar **KPIs**, utilizar estrictamente un **dataset nacional** y enfocarse en un área temática **diferente al área de dominio** del estudiante.
+
+# Cronograma Semanal (8 Semanas / 24 Sesiones)
+
+*Nota: Todas las sesiones (2.5 horas) cuentan con una pausa de 15 minutos tras los primeros 90 minutos de clase.*
+
+**Semana 1: Entorno y Adquisición de Datos Estructurados y No Estructurados**
+
+*   **Sesión 1 (Lunes):** Presentación del módulo, **Clase Inicial con Evaluación Diagnóstica** y configuración del entorno (R, RStudio, GitHub).
+*   **Sesión 2 (Miércoles):** Estrategias de adquisición de datos (archivos flat, bases de datos relacionales, importación de JSON/XML).
+*   **Sesión 3 (Viernes):** Consumo de datos mediante APIs y técnicas de Web Scraping (rvest).
+
+**Semana 2: Transformación, Tidy Data y Manipulación Específica**
+
+*   **Sesión 4 (Lunes):** Estructuras de datos en R, manipulación básica y filosofía "Tidy Data".
+*   **Sesión 5 (Miércoles):** Transformación y reestructuración avanzada de datos (dplyr, tidyr - pivot_longer/pivot_wider).
+*   **Sesión 6 (Viernes):** Operaciones específicas: Expresiones regulares (regex) para cadenas de texto (stringr) y manejo de fechas (lubridate).
+
+**Semana 3: Análisis Exploratorio de Datos (EDA) y Evaluación 1**
+
+*   **Sesión 7 (Lunes):** Estadística descriptiva y medidas de resumen.
+*   **Sesión 8 (Miércoles):** Visualización de datos y análisis preliminares (ggplot2).
+*   **Sesión 9 (Viernes):** **Evaluación: Laboratorio 1 (30 puntos)**.
+
+**Semana 4: Tratamiento de Datos Faltantes**
+
+*   **Sesión 10 (Lunes):** Identificación y diagnóstico de datos faltantes (MCAR, MAR, MNAR).
+*   **Sesión 11 (Miércoles):** Métodos de imputación simple.
+*   **Sesión 12 (Viernes):** Métodos de imputación múltiple y evaluación de impacto.
+
+**Semana 5: Data Wrangling Avanzado y Programación Funcional**
+
+*   **Sesión 13 (Lunes):** Programación funcional aplicada al Data Wrangling (purrr) e iteración sobre estructuras complejas (listas).
+*   **Sesión 14 (Miércoles):** Cruces espaciales y relacionales complejos (Joins).
+*   **Sesión 15 (Viernes):** Optimización en la preparación de bases de datos para Big Data.
+
+**Semana 6: Ingeniería de Características y Datos Desequilibrados**
+
+*   **Sesión 16 (Lunes):** Ingeniería de características: escalado, codificación y creación de variables predictivas.
+*   **Sesión 17 (Miércoles):** Problemática y diagnóstico de datos desequilibrados.
+*   **Sesión 18 (Viernes):** **Evaluación: Laboratorio 2 (30 puntos)** (Tratamiento de faltantes, wrangling y balanceo).
+
+**Semana 7: Desarrollo de Dashboards en R**
+
+*   **Sesión 19 (Lunes):** Introducción al desarrollo de Dashboards en R (Shiny / flexdashboard) y control de versiones en GitHub.
+*   **Sesión 20 (Miércoles):** Construcción y diseño de KPIs efectivos.
+*   **Sesión 21 (Viernes):** Taller práctico: Exploración y selección de Datasets Nacionales.
+
+**Semana 8: Proyecto Final y Defensa**
+
+*   **Sesión 22 (Lunes):** Mentoría y revisión de avances del Trabajo Práctico (verificación de área fuera de dominio).
+*   **Sesión 23 (Miércoles):** Ajustes finales, pruebas de usabilidad y despliegue del dashboard.
+*   **Sesión 24 (Viernes):** **Clase Final: Defensa del Trabajo Práctico (40 puntos)**.
+
+# Referencias Bibliográficas
+
+1. **Wickham, H., Grolemund, G., & Çetinkaya-Rundel, M.** (2023). *R for Data Science* (2nd ed.). O'Reilly Media.  
+   *Disponible gratuitamente en:* [https://r4ds.hadley.nz/](https://r4ds.hadley.nz/)
+2. **Boehmke, B.** (2016). *Data Wrangling with R*. Springer.  
+   *(Referencia fundamental para expresiones regulares, manejo de strings, fechas, listas y web scraping en R)*
+3. **Kuhn, M., & Johnson, K.** (2019). *Feature Engineering and Selection: A Practical Approach for Predictive Models*. CRC Press.  
+   *Disponible gratuitamente en:* [https://bookdown.org/max/FES/](https://bookdown.org/max/FES/)
+4. **Lovelace, R., Nowosad, J., & Muenchow, J.** (2019). *Geocomputation with R*. CRC Press.  
+   *Disponible gratuitamente en:* [https://geocompr.robinlovelace.net/](https://geocompr.robinlovelace.net/)
