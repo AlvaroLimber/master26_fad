@@ -2,17 +2,15 @@
 
 ::: {.callout-note}
 ### Cobertura del Módulo
+
 Este capítulo cubre las **Sesiones 1, 2 y 3 (Semana 1)** de la materia. Está diseñado para sentar las bases conceptuales, metodológicas y de entorno necesarias antes de proceder a la manipulación de datos.
 :::
 
 Este capítulo inicial sienta las bases técnicas y metodológicas necesarias para afrontar con éxito el ciclo de vida del análisis de datos. En primer lugar, abordaremos la configuración de un entorno de trabajo reproducible basado en proyectos y buenas prácticas de organización. Posteriormente, estudiaremos la fundamentación estadística de los datos antes de proceder a la ingesta práctica de archivos planos, hojas de cálculo, APIs y Web Scraping.
----
 
 ## Configuración del Entorno y Flujo de Trabajo Basado en Proyectos
 
 Para garantizar la reproducibilidad de nuestras investigaciones, utilizaremos de manera obligatoria el ecosistema conformado por **R**, el entorno de desarrollo integrado **RStudio** y el sistema de control de versiones **Git/GitHub**. 
-
-### El Rol de los Proyectos de RStudio (.Rproj)
 
 En el análisis de datos profesional, el uso de rutas absolutas rígidas (como `C:/Usuarios/MiNombre/Documentos/datos.csv`) o el empleo manual de `setwd()` son considerados malas prácticas que rompen la reproducibilidad @stoudt2021principles. 
 
@@ -48,6 +46,169 @@ Para evitar conflictos de codificación en distintos sistemas operativos y facil
 1. Abre RStudio. Go to **File > New Project...**
 2. Selecciona **New Directory > New Project**. Nombra tu proyecto en minúsculas y sin espacios (ej. `analisis-ventas-bolivia`).
 3. En la pestaña **Files** (panel inferior derecho), haz clic en **New Folder** y crea la estructura base descrita anteriormente (`data`, `data/raw`, `data/processed`, `scripts`, `figuras`).
+:::
+
+## Sintaxis Básica y Operaciones en la Consola
+
+Esta sigue el principio matemático de: 
+
+$$
+f(x)=y\\
+comando(arg1,arg2, \ldots)
+$$
+
+, donde aplicamos una **función** a un **argumento** para obtener un resultado.
+
+::: {.panel-tabset}
+### R como Calculadora
+R maneja operaciones de alta precisión respetando el orden algebraico estándar:
+```r
+# Operaciones aritméticas
+(1500 * 0.15) + 200  # Cálculo de interés
+sqrt(144)            # Función raíz cuadrada
+10^2                 # Potenciación
+```
+### Operadores Lógicos
+Esenciales para el filtrado de reglas de negocio en BI, devuelven valores `TRUE` o `FALSE`:
+```r
+100 >= 50    # Mayor o igual
+10 == 10     # Igualdad estricta (doble igual)
+10 != 5      # Diferente de
+(5 > 3) & (10 < 2) # Operador Y (AND)
+```
+
+### Palabras Reservadas
+R tiene términos protegidos con significados técnicos específicos:
+
+*   `NA`: Dato perdido (*Not Available*).
+*   `NULL`: Objeto vacío o inexistente.
+*   `NaN`: Error en cálculo numérico (*Not a Number*).
+*   `Inf`: Infinito matemático.
+
+### Clases
+
+```r
+class(100)    # numérica
+class("hola") # Texto, caractér
+class(2>3)    # Lógica
+```
+:::
+
+::: {.callout-note}
+### Actividad (5 min)
+**Escenario:** Un cliente tiene un crédito de 50,000 USD a una tasa del 1.2% mensual.
+
+1.  Use la **consola** como calculadora para hallar el interés del primer mes.
+2.  Verifique si ese interés es mayor a 500 USD usando un operador lógico.
+3.  Utilice el comando `?log` para investigar cómo calcular el logaritmo en base 10 del monto total del crédito.
+:::
+
+## Estructuras de Datos: Los Activos de Información
+
+En R, todo es un **objeto**. Para crear estos activos en la memoria, utilizamos el operador de asignación `<-` (evite el uso de `=` para asignaciones, ya que puede confundirse con igualdad lógica).
+
+### Estructuras Homogéneas (Mismo tipo de dato)
+
+Contienen elementos de una sola clase (números, texto o lógicos):
+
+*   **Scalar:** Un único valor individual.
+*   **Vector:** Una colección indexada de valores columna. Se crean con la función combinar `c()`.
+*   **Matriz:** Una estructura bidimensional donde todos los datos son del mismo tipo (ej. una tabla de puros montos financieros).
+* **Array:** Una generalización de la matriz de mas de 2 dimensiones
+
+::: {.panel-tabset}
+### Scalar 
+
+```r
+s1  <-  2
+s2  <-  "hola a todos"
+s3  <-  3==4
+```
+### Vector
+```r
+v1  <-  c(2,4,6,8,10)
+v2  <-  c("a", "b", "c", "hola", "buenos días")
+v3  <-  v1>5
+```
+
+### Matriz
+```r
+m1  <-  matrix(c(1, 2, 3, 4) , 2, 2 )
+m2  <-  matrix(c("a", "b", "c", "d") , 2, 2 )
+m3  <-  m1>=2
+```
+
+### Array
+```r
+a1  <-  array(1:8, c(2, 2, 2))
+```
+:::
+
+### Estructuras Heterogéneas (Múltiples tipos de datos)
+Permiten combinar diferentes naturalezas de información, siendo las más poderosas para el analista:
+
+*   **Data Frames:** Es el formato estándar de las bases de datos (tabular). Cada columna es una variable (puede ser de distinto tipo) y cada fila es una observación.
+*   **Listas:** El objeto más flexible; puede contener vectores, matrices, modelos y hasta otras listas en un solo contenedor.
+
+::: {.panel-tabset}
+### Dataframe
+
+```r
+nombre  <- c("Maria", "Jose", "Ana")
+edad  <-  c(19, 30, 23)
+df1 <-  data.frame(nombre, edad)
+df1
+```
+
+### Lista
+```r
+s1 <- 1; v1<-c(1,2)
+l1 <- list(s1, v1, df1)
+l1
+```
+:::
+
+![Estructuras en R](fig/class.jpeg)
+
+::: {.callout-important}
+### Actividad: Creación de un Dataset Estratégico (5 min)
+Debe registrar el desempeño de tres vendedores: Ana, Luis y Pedro. Vendieron 15, 20 y 12 unidades respectivamente.
+
+1.  Cree el vector `vendedores` con los nombres.
+2.  Cree el vector `ventas` con las unidades.
+3.  Cree un dataframe llamado `df_comercial` que una ambos vectores.
+4.  Use la función `str(df_comercial)` para inspeccionar la estructura de su base de datos.
+:::
+
+### Indexación
+
+Se refiere al proceso de acceder, seleccionar o extraer elementos específicos dentro de las estructuras de datos en R (vectores, matrices, data frames y listas) utilizando operadores de extracción.
+
+::: {.panel-tabset}
+### Vectores
+```r
+set.seed(123) # Semilla aleatoria
+v1<-runif(10) # Distribución uniforme de 0 a 1
+v1[2]
+v1[c(3,7)]
+v1[2:5]
+```
+
+### Matrices y dataframe
+```r
+data(iris) #datos en R
+iris[2,] #Fila
+iris[,2] #Columna
+iris[c(2, 5), c(1, 5)]
+iris$Petal.Length #seleccionar variable
+```
+
+### Listas
+```r
+l1<-list(2, 1:10, iris)
+l1[[2]]
+l1[[3]]$Species
+```
 :::
 
 ## Fundamentos Metodológicos y Estadísticos de los Datos
@@ -134,9 +295,7 @@ spec(datos_readr)
 
 :::
 
-#### Parámetros Clave para una Ingesta Robusta
-
-Para garantizar la correcta lectura de archivos con inconsistencias o estructuras complejas, se deben dominar los siguientes argumentos analíticos @boehmke2016data:
+Para garantizar la correcta lectura de archivos con inconsistencias o estructuras complejas, se deben dominar los siguientes argumentos:
 
 *   `col_names` / `header`: Define si la primera fila contiene los nombres de las variables (`TRUE` o `FALSE`).
 *   `delim` / `sep`: Especifica el carácter delimitador de campos (ej. `,`, `;`, `\t` para tabuladores).
@@ -192,7 +351,6 @@ datos_preventivos <- read_csv(
 
 A diferencia de los archivos planos, los archivos de Microsoft Excel (`.xls`, `.xlsx`) son binarios y pueden albergar múltiples pestañas, estilos, celdas combinadas y fórmulas. 
 
-#### Preparación del Formato Tabular Limpio
 Antes de leer una hoja de Excel en R, se debe asegurar que el diseño sea **tabular**:
 
 1.  **Fila única de cabecera**: Los nombres de las variables deben estar en la primera fila. Evitar cabeceras dobles o celdas combinadas.
@@ -230,8 +388,6 @@ datos_rango <- read_excel(
 
 :::
 
----
-
 ## Adquisición de Datos desde la Web: APIs y Web Scraping
 
 La recolección moderna de datos requiere, de forma indispensable, interactuar directamente con la web. Estudiaremos cómo automatizar este proceso mediante el consumo de APIs especializadas y Web Scraping de páginas HTML.
@@ -262,37 +418,150 @@ pib_bolivia <- wb_data(
 head(pib_bolivia)
 ```
 
-#### Caso Práctico 2: Bureau of Labor Statistics (`blsAPI`)
+## Captura y Preservación de la Información
 
-Existen envoltorios específicos para otras instituciones globales. Por ejemplo, `blsAPI` permite la descarga directa de series de tiempo del mercado laboral norteamericano utilizando su identificador único de serie @boehmke2016data.
+En el ámbito del análisis de datos, el primer paso crítico consiste en obtener información de calidad mediante un proceso sistemático de captura y preservación. Tradicionalmente, la estadística y la investigación social han dependido de **fuentes convencionales** como censos, encuestas por muestreo y registros administrativos. 
 
-```r
-library(blsAPI)
-library(rjson)
+Sin embargo, en el ecosistema digital moderno, la Inteligencia de Negocios y la minería de datos exigen incorporar la captura de información generada en espacios digitales, redes sociales y portales web. Este cambio metodológico demanda del analista **mucha paciencia** y creatividad, ya que la interacción con áreas externas y el preprocesamiento de datos crudos consumen la mayor parte del esfuerzo técnico.
 
-# Solicitar datos de desempleo de una serie específica del BLS (formato JSON)
-respuesta_json <- blsAPI("MLUMS00NN0001003")
+La justificación de este esfuerzo radica en la naturaleza de los datos del mundo real: independientemente de su origen, la mayoría de los datos son **ruidosos, inconsistentes y adolecen de valores perdidos**. Por ello, aunque la recopilación en la web pueda parecer de bajo costo, la creación de datos de alta calidad mediante limpieza, estandarización e integración representa una inversión considerable para cualquier organización.
 
-# Convertir la respuesta JSON en una lista nativa estructurada de R
-lista_datos <- fromJSON(respuesta_json)
-str(lista_datos$Results)
+![Datos Web](fig/dataweb.jpeg)
+
+| Característica | Estudio Observacional | Registro Transaccional |
+| --- | --- | --- |
+| **Origen** | Diseñado ex profeso (con intensión) para investigar o medir. | Generado automáticamente por una operación del día a día. |
+| **Intención** | Analítica / Científica. | Operativa / Administrativa. |
+| **Intervención** | El investigador diseña las preguntas o variables a medir. | El sistema registra el evento tal como sucede por necesidad operativa. |
+
+## El Ciclo de Recopilación de Información (Los 5 Pasos de Iacus)
+
+Para evitar sesgos y garantizar que la recolección automática de información de los sitios web sea un proceso científico [@Iacus2015], se debe seguir una secuencia metodológica estructurada:
+
+```
+[1. Definición de Necesidad] ──> [2. Identificación de Fuentes] ──> [3. Teoría de Generación]
+                                                                            │
+[5. Toma de Decisión y Raspado] <── [4. Balance y Aspecto Legal] <──────────┘
 ```
 
-### Web Scraping con `rvest`
-
-Cuando el sitio web de interés no dispone de una API formal ni de archivos de descarga estructurados, recurrimos al **Web Scraping**: la extracción programática y automatizada de datos contenidos dentro de la estructura de etiquetas **HTML** de un sitio web @boehmke2016data.
-
-Utilizaremos el paquete **`rvest`**, el cual analiza y parsea el árbol jerárquico de nodos de un sitio web para aislar la información necesaria @boehmke2016data.
-
-
+1.  **Definición de la Necesidad de Información:** Delimitar con precisión qué datos se requieren para apoyar una mejor toma de decisiones dentro del negocio.
+2.  **Identificación de Fuentes en la Web:** Buscar portales digitales que contengan los atributos o propiedades requeridos para el estudio.
+3.  **Teoría del Proceso de Generación de Datos:** Comprender quién genera el dato, con qué frecuencia se actualiza y qué sesgos potenciales puede contener la plataforma de origen.
+4.  **Balance de Ventajas, Desventajas y Legalidad:** Evaluar la viabilidad técnica de la captura frente a las políticas de uso del portal y el archivo `robots.txt` del servidor. *https://www.ejemplo.com/robots.txt*
+5.  **Toma de Decisión e Inicio de la Recopilación:** Diseñar el script de extracción automatizada resguardando la preservación y consistencia de los datos capturados.
 
 ::: {.callout-note}
-### Actividad de Paso: Copiar Selectores CSS Precisos (3 minutos)
-Para extraer información específica de un nodo en una página web compleja, debemos identificar el selector CSS preciso utilizando las herramientas de tu navegador:
+### Actividad: Planificando la Captura (10 min)
+**Instrucción:** En grupos de tres estudiantes, elijan un portal de comercio electrónico o de noticias de su país.
 
-1. Abre tu navegador web (Chrome, Firefox o Edge) e ingresa a un sitio de tu elección.
-2. Presiona la tecla **`F12`** (o haz clic derecho y selecciona **Inspeccionar**) para abrir las Herramientas del Desarrollador.
-3. Activa el **Selector de Elementos** (icono de una flecha apuntando a un recuadro en la esquina superior izquierda de la consola).
-4. Haz clic sobre el título, párrafo o tabla que desees raspar.
-5. En el panel de código HTML que se ilumina, haz clic derecho sobre la línea, selecciona **Copiar > Copiar selector** (o *Copy XPath*). Ese string exacto es el que debes pasar como argumento a la función `html_nodes()` para una extracción quirúrgica @boehmke2016data.
+1. Definan un objetivo de negocio que requiera raspar ese sitio.
+2. Identifiquen si los datos que obtendrán son el resultado de un estudio observacional o un registro transaccional.
+3. Mencionen dos posibles inconsistencias o ruidos que esperan encontrar en la data cruda.
+:::
+
+## Fundamentos Tecnológicos de la Web: HTML y CSS
+
+Para realizar la extracción automática de datos sin la intervención de un humano que navegue visualmente [@Mitchell2015], debemos entender el lenguaje con el que están construidas las páginas. El **HTML** (*HyperText Markup Language*) es un lenguaje de texto que se utiliza para estructurar y desplegar una página web.
+
+HTML funciona bajo una **estructura jerárquica y entornos de encapsulamiento** definidos por etiquetas (tags) y atributos. Por ejemplo:
+
+```html
+<div class="oferta" id="sucursal_la_paz">
+  <span class="producto">Laptop de Oficina</span>
+  <span class="precio">750.00 USD</span>
+</div>
+```
+
+En minería de datos, no necesitamos leer todo el código de una página. El diseño estético de la web utiliza hojas de estilo (CSS) que asignan clases (como `.producto` o `.precio`) a los elementos. Estas clases actúan como **selectores o direcciones postales** que le permiten a nuestro código en R extraer quirúrgicamente la información de interés.
+
+![Scraping en R](fig/scrap1.jpeg)
+
+## Raspado Web Práctico en R con `rvest`
+
+En R, la librería diseñada para interactuar con páginas estáticas y realizar raspado web es **`rvest`**, la cual forma parte del universo de herramientas de **`tidyverse`**. Para facilitar la identificación del selector CSS de cualquier elemento sin inspeccionar manualmente el código, se emplea la extensión de navegador **SelectorGadget**.
+
+::: {.panel-tabset}
+
+### Instalación y Carga
+Para comenzar a trabajar con `rvest`, instale el paquete desde el CRAN y cárguelo en su sesión de trabajo junto con el núcleo de `tidyverse`:
+```r
+# Instalación (se ejecuta una sola vez)
+install.packages("rvest")
+
+# Carga de librerías en la sesión actual
+library(rvest)
+library(dplyr)
+```
+
+### Funciones Clave
+La extracción con `rvest` se basa en cuatro funciones secuenciales que procesan la información mediante la tubería o *pipe* (`%>%`):
+*   `read_html()`: Carga y analiza la estructura jerárquica del documento HTML.
+*   `html_nodes()`: Extrae los entornos específicos que coinciden con el selector CSS.
+*   `html_text()`: Limpia el código de marcado y extrae únicamente el texto plano.
+*   `html_table()`: Convierte tablas HTML (`<table>`) directamente en estructuras de datos de R (*data frames*).
+
+### Ejemplo de Raspado
+A continuación se presenta la sintaxis estándar para estructurar texto extraído de un contenedor web:
+```r
+library(rvest)
+library(dplyr)
+
+# 1. Leer el portal web de origen
+url_portal <- "https://ejemplo-tienda-bolivia.com"
+web_html   <- read_html(url_portal)
+
+# 2. Capturar nodos y transformarlos a un vector de texto limpio
+nombres_productos <- web_html %>%
+  html_nodes(".producto") %>%
+  html_text()
+```
+:::
+
+::: {.callout-tip}
+### Ejercicios
+
+1. Obtén la tabla de esta fuente y genera un dataframe. https://www.bcb.gob.bo/tco_reporte_detalle_historico.php?fecha=2026-08-20 
+2. Hacer web scraping de un portal de comercio electrónico, clasificados o supermercados locales en Bolivia.
+3. Hacer un web scraping de una biblioteca universitaria digital en Bolivia y capturar una búsqueda de interés.
+:::
+
+## Interfaces de Programación de Aplicaciones (APIs)
+
+Aunque el raspado web es una herramienta flexible, tiene una limitación: si el administrador de la página cambia el diseño o el nombre de las clases CSS, el código fallará. Como alternativa estructurada, existen las **APIs** (*Application Programming Interface*).
+
+Las APIs son **puertas de entrada creadas por los administradores de una página web** que permiten el acceso controlado a información seleccionada en formatos amigables y altamente estructurados (como JSON o XML), aunque debido a esto no siempre contienen toda la información que el analista desea.
+
+| Dimensión Analítica | Web Scraping Tradicional | Acceso por APIs Oficiales |
+| :--- | :--- | :--- |
+| **Estabilidad** | Baja (sensible a rediseños estéticos de la web)  | Alta (los esquemas de datos permanecen estables). |
+| **Estructura** | No estructurada (requiere transformaciones complejas) | Altamente estructurada (JSON, XML listos para análisis). |
+| **Limitaciones** | Bloqueos de IP por peticiones masivas | Regulado por cuotas de acceso y claves de autenticación. |
+
+### Caso Práctico: Consumo de la API del Banco Mundial
+
+La API del Banco Mundial ofrece acceso libre a más de **16,000 indicadores de series de tiempo** con una cobertura histórica superior a los 50 años para la mayoría de los países. En R, no necesitamos realizar peticiones HTTP manuales para consumir esta API, ya que existe la librería especializada **`wbstats`** que encapsula las consultas de manera directa.
+
+```r
+# Instalar y cargar la librería de acceso a la API del Banco Mundial
+install.packages("wbstats")
+library(wbstats)
+
+# Buscar indicadores relacionados con el desempleo
+busqueda_desempleo <- wb_search("unemployment")
+
+# Descargar datos de desempleo para Bolivia desde el año 2000
+datos_bolivia <- wb_data(
+  country = "BO", 
+  indicator = "SL.UEM.TOTL.ZS", 
+  start_date = 2000, 
+  end_date = 2025
+)
+```
+
+::: {.callout-tip}
+### Ejercicios de Aplicación Práctica
+
+1.  **Raspado de Tipo de Cambio Oficial:** Diseñe un script en R utilizando `rvest` para extraer el precio de compra y venta del dólar estadounidense, así como la fecha de actualización, desde la página oficial del **Banco Central de Bolivia** (https://www.bcb.gob.bo). Asegúrese de guardar los resultados en un data frame estructurado con nombres de atributos limpios.
+2.  **Estructuración de Ofertas Laborales:** Utilice la estructura de la plataforma **Trabajópolis** (https://www.trabajopolis.bo) para seleccionar un departamento de Bolivia y armar un data frame que contenga: título del empleo, empresa ofertante y salario (si está disponible). Identifique los desafíos de limpieza de texto asociados a este ejercicio.
+3.  **Análisis de Tendencias con gtrendsR:** Instale la librería `gtrendsR` para consumir la API de Google Trends. Realice una consulta para evaluar en qué meses del año es más frecuente la búsqueda del término "descuentos" o "compras" en Bolivia, y comente cómo esta información apoya la analítica predictiva de una empresa de retail.
 :::
