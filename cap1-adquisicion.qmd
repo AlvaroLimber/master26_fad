@@ -52,10 +52,8 @@ Para evitar conflictos de codificación en distintos sistemas operativos y facil
 
 Esta sigue el principio matemático de: 
 
-$$
-f(x)=y\\
-comando(arg1,arg2, \ldots)
-$$
+$$f(x)=y$$
+$$comando(arg1,arg2, \ldots)$$
 
 , donde aplicamos una **función** a un **argumento** para obtener un resultado.
 
