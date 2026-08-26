@@ -26,9 +26,9 @@ book:
 
   chapters:
     - index.qmd # Introducción al libro, enfoque pedagógico y bibliografía clave
-    #- part: "Parte I: Adquisición, Transformación y Manipulación de Datos"
-    #  chapters:
-    #    - cap1-adquisicion.qmd   # Entorno (RStudio/Git), ingesta de archivos planos, bases de datos, consumo de APIs y Web Scraping [1].
+    - part: "Parte I: Adquisición, Transformación y Manipulación de Datos"
+      chapters:
+        - cap1-adquisicion.qmd   # Entorno (RStudio/Git), ingesta de archivos planos, bases de datos, consumo de APIs y Web Scraping [1].
     #    - cap2-tidy-data.qmd     # Filosofía Tidy Data, manipulación y reestructuración de dataframes (dplyr, tidyr) [1, 3].
     #    - cap3-datos-especificos.qmd # Tratamiento de textos con expresiones regulares (stringr) y manejo de fechas/tiempo (lubridate) [2].
     #- part: "Parte II: Análisis Exploratorio y Tratamiento de Datos Faltantes"

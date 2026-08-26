@@ -2,7 +2,7 @@
 title: "**Módulo: Fundamentos de Análisis de Datos**"
 subtitle: "Programa académico"
 author: "MSc. Alvaro Chirino Gutierrez"
-date: "Agosto, 20206"
+date: "Agosto, 2026"
 output: 
   pdf_document:
     number_sections: true 
@@ -50,7 +50,7 @@ Proporcionar a los estudiantes los conocimientos y habilidades esenciales para r
 *   **Laboratorio 1 (30 puntos):** Ejercicios prácticos de adquisición (incluyendo scraping/APIs), manipulación de datos (Tidy Data, regex) y Análisis Exploratorio (EDA).
 *   **Laboratorio 2 (30 puntos):** Práctica avanzada de tratamiento de datos faltantes, Data Wrangling (programación funcional), ingeniería de características y balanceo de datos.
 *   **Trabajo Práctico Final (40 puntos):** Desarrollo e implementación de un **Dashboard en R** para el seguimiento interactivo de métricas.
-    *   *Requisitos:* El dashboard debe calcular e ilustrar **KPIs**, utilizar estrictamente un **dataset nacional** y enfocarse en un área temática **diferente al área de dominio** del estudiante.
+    *   *Requisitos:* El dashboard debe calcular e ilustrar **KPIs**, utilizar estrictamente un **dataset nacional** a elección del estudiante.
 
 # Cronograma Semanal (8 Semanas / 24 Sesiones)
 
@@ -82,27 +82,27 @@ Proporcionar a los estudiantes los conocimientos y habilidades esenciales para r
 
 **Semana 5: Data Wrangling Avanzado y Programación Funcional**
 
-*   **Sesión 13 (Lunes):** Programación funcional aplicada al Data Wrangling (purrr) e iteración sobre estructuras complejas (listas).
-*   **Sesión 14 (Miércoles):** Cruces espaciales y relacionales complejos (Joins).
-*   **Sesión 15 (Viernes):** Optimización en la preparación de bases de datos para Big Data.
+*   **Sesión 13**^[Asueto por el 21 de septiembre, se pasa a miercoles la sesión] (Miércoles):** Programación funcional aplicada al Data Wrangling (purrr) e iteración sobre estructuras complejas (listas).
+*   **Sesión 14 (Viernes):** Cruces espaciales y relacionales complejos (Joins).
+*   **Sesión 15 (Lunes):** Optimización en la preparación de bases de datos para Big Data.
 
 **Semana 6: Ingeniería de Características y Datos Desequilibrados**
 
-*   **Sesión 16 (Lunes):** Ingeniería de características: escalado, codificación y creación de variables predictivas.
-*   **Sesión 17 (Miércoles):** Problemática y diagnóstico de datos desequilibrados.
-*   **Sesión 18 (Viernes):** **Evaluación: Laboratorio 2 (30 puntos)** (Tratamiento de faltantes, wrangling y balanceo).
+*   **Sesión 16 (Miércoles):** Ingeniería de características: escalado, codificación y creación de variables predictivas.
+*   **Sesión 17 (Viernes):** Problemática y diagnóstico de datos desequilibrados.
+*   **Sesión 18 (Lunes):** **Evaluación: Laboratorio 2 (30 puntos)** (Tratamiento de faltantes, wrangling y balanceo).
 
 **Semana 7: Desarrollo de Dashboards en R**
 
-*   **Sesión 19 (Lunes):** Introducción al desarrollo de Dashboards en R (Shiny / flexdashboard) y control de versiones en GitHub.
-*   **Sesión 20 (Miércoles):** Construcción y diseño de KPIs efectivos.
-*   **Sesión 21 (Viernes):** Taller práctico: Exploración y selección de Datasets Nacionales.
+*   **Sesión 19 (Miércoles):** Introducción al desarrollo de Dashboards en R (Shiny / flexdashboard) y control de versiones en GitHub.
+*   **Sesión 20 (Viernes):** Construcción y diseño de KPIs efectivos.
+*   **Sesión 21 (Lunes):** Taller práctico: Exploración y selección de Datasets Nacionales.
 
 **Semana 8: Proyecto Final y Defensa**
 
-*   **Sesión 22 (Lunes):** Mentoría y revisión de avances del Trabajo Práctico (verificación de área fuera de dominio).
-*   **Sesión 23 (Miércoles):** Ajustes finales, pruebas de usabilidad y despliegue del dashboard.
-*   **Sesión 24 (Viernes):** **Clase Final: Defensa del Trabajo Práctico (40 puntos)**.
+*   **Sesión 22 (Miércoles):** Mentoría y revisión de avances del Trabajo Práctico (verificación de área fuera de dominio).
+*   **Sesión 23 (Viernes):** Ajustes finales, pruebas de usabilidad y despliegue del dashboard.
+*   **Sesión 24 (Lunes):** **Clase Final: Defensa del Trabajo Práctico (40 puntos)**.
 
 # Referencias Bibliográficas
 

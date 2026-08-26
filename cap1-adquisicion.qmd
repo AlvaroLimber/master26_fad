@@ -1,0 +1,298 @@
+# Adquisición de Datos y Configuración del Entorno
+
+::: {.callout-note}
+### Cobertura del Módulo
+Este capítulo cubre las **Sesiones 1, 2 y 3 (Semana 1)** de la materia. Está diseñado para sentar las bases conceptuales, metodológicas y de entorno necesarias antes de proceder a la manipulación de datos.
+:::
+
+Este capítulo inicial sienta las bases técnicas y metodológicas necesarias para afrontar con éxito el ciclo de vida del análisis de datos. En primer lugar, abordaremos la configuración de un entorno de trabajo reproducible basado en proyectos y buenas prácticas de organización. Posteriormente, estudiaremos la fundamentación estadística de los datos antes de proceder a la ingesta práctica de archivos planos, hojas de cálculo, APIs y Web Scraping.
+---
+
+## Configuración del Entorno y Flujo de Trabajo Basado en Proyectos
+
+Para garantizar la reproducibilidad de nuestras investigaciones, utilizaremos de manera obligatoria el ecosistema conformado por **R**, el entorno de desarrollo integrado **RStudio** y el sistema de control de versiones **Git/GitHub**. 
+
+### El Rol de los Proyectos de RStudio (.Rproj)
+
+En el análisis de datos profesional, el uso de rutas absolutas rígidas (como `C:/Usuarios/MiNombre/Documentos/datos.csv`) o el empleo manual de `setwd()` son considerados malas prácticas que rompen la reproducibilidad @stoudt2021principles. 
+
+Para solucionar esto, RStudio introduce los **Proyectos de RStudio** (archivos con extensión `.Rproj`). Al abrir un proyecto, RStudio establece automáticamente el directorio de trabajo activo en la carpeta donde reside el archivo `.Rproj`. Esto permite gestionar todo el código mediante **rutas relativas** (por ejemplo, `"data/ventas.csv"`), garantizando que el proyecto funcione de forma idéntica en cualquier otra computadora.
+
+### Estructura de Carpetas Recomendada
+
+Todo proyecto analítico ordenado debe seguir una jerarquía estricta de subdirectorios dentro del directorio raíz @stoudt2021principles:
+
+```text
+mi-proyecto/
+├── mi-proyecto.Rproj  <- Archivo de proyecto de RStudio
+├── data/              <- Carpeta contenedora de datos
+│   ├── raw/           <- Datos originales (¡NUNCA SE MODIFICAN!)
+│   └── processed/     <- Datos limpios listos para análisis
+├── scripts/           <- Scripts de código R (.R) o documentos Quarto (.qmd)
+├── figuras/           <- Gráficos y visualizaciones exportadas
+└── docs/              <- Reportes, presentaciones y documentación adicional
+```
+
+### Buenas Prácticas de Nomenclatura
+
+Para evitar conflictos de codificación en distintos sistemas operativos y facilitar la legibilidad del código, se establecen las siguientes directrices de nomenclatura para archivos, scripts y variables:
+
+*   **Minúsculas siempre**: Utilizar siempre letras minúsculas (evitar `DatosVentas.csv`, preferir `datos_ventas.csv`).
+*   **Sin espacios ni caracteres especiales**: Reemplazar espacios por guiones medios (`-`) o bajos (`_`). Nunca usar tildes, la letra "ñ" o caracteres especiales en nombres de archivos o variables.
+*   **Nombres autodescriptivos pero cortos**: El nombre debe indicar claramente el contenido (ej. `01_limpieza_ingresos.R`).
+*   **Secuenciación de scripts**: Si el análisis requiere varios pasos, anteponer números secuenciales para indicar el orden de ejecución (ej. `01_ingesta.R`, `02_limpieza.R`, `03_eda.R`).
+
+::: {.callout-note}
+### Actividad de Paso: Creación de la Estructura de un Proyecto (3 minutos)
+
+1. Abre RStudio. Go to **File > New Project...**
+2. Selecciona **New Directory > New Project**. Nombra tu proyecto en minúsculas y sin espacios (ej. `analisis-ventas-bolivia`).
+3. En la pestaña **Files** (panel inferior derecho), haz clic en **New Folder** y crea la estructura base descrita anteriormente (`data`, `data/raw`, `data/processed`, `scripts`, `figuras`).
+:::
+
+## Fundamentos Metodológicos y Estadísticos de los Datos
+
+Antes de escribir la primera línea de código para leer un archivo, es indispensable comprender la naturaleza metodológica y estadística del conjunto de datos con el que trabajaremos.
+
+### Nomenclatura Estándar en Análisis de Datos
+
+En el ámbito de la ciencia de datos y la estadística, interactuamos con diferentes estructuras de datos @wickham2023r:
+
+*   **Datos Estructurados**: Información organizada en tablas formales de filas y columnas (dataframes), donde cada fila representa una observación y cada columna una variable.
+*   **Datos Semiestructurados**: No tienen una estructura de tabla rígida pero contienen marcadores o etiquetas organizativas (ej. archivos JSON o XML).
+*   **Datos No Estructurados**: Información sin un formato predefinido (ej. textos libres, audios, imágenes).
+*   **Dataset (Conjunto de Datos)**: Colección estructurada de datos.
+*   **Observación (o Caso)**: La unidad mínima sobre la cual se recopilan los datos (fila).
+*   **Variable**: Una característica cuantitativa o cualitativa medida sobre las observaciones (columna).
+
+### Fuentes de Información y su Naturaleza
+
+La procedencia y el diseño de la recolección de los datos determinan el tipo de conclusiones estadísticas válidas que podemos extraer @groves2009survey:
+
+*   **Censos**: Recolección de información sobre la totalidad de los elementos de una población de interés. Proporcionan parámetros poblacionales exactos pero conllevan altos costos y tiempos de ejecución.
+*   **Encuestas por Muestreo**: Recolección de datos sobre un subconjunto representativo (muestra) extraído probabilísticamente de la población. Permiten realizar inferencia estadística sobre la población general con un margen de error controlable @groves2009survey.
+*   **Registros Administrativos**: Datos recopilados de manera continua con propósitos de control institucional u operativo (ej. facturaciones de impuestos, registros de aduana, admisiones hospitalarias). Tienen la ventaja de ser económicos y continuos, pero no están diseñados con fines estadísticos, lo que suele requerir un exhaustivo trabajo de depuración.
+
+Adicionalmente, según el nivel de control en la obtención de datos, distinguimos entre:
+
+| Dimensión | Datos de Estudios Observacionales | Datos Transaccionales |
+| --- | --- | --- |
+| **Origen / Propósito** | Diseñados por un investigador para responder una hipótesis concreta. | Generados automáticamente por la operativa del negocio/sistema (ventas, clicks, facturas). |
+| **Control sobre las variables** | **Sin intervención directa** en los sujetos, pero con control explícito en el instrumento de medición (encuestas, fichas clínicas). | Ninguno. Registra únicamente los eventos conforme suceden en el sistema. |
+| **Volumen y Frecuencia** | Muestras finitas o acotadas (encuestas, cohortes) tomadas en momentos específicos. | Flujo continuo (*streaming*) de gran volumen (Big Data), en tiempo real o por lotes. |
+| **Calidad y Limpieza** | Alta consistencia lógica previa, pues se diseñan variables y escalas predeterminadas. | Requiere un esfuerzo considerable de procesamiento, ya que suelen contener datos duplicados, nulos o con ruido. |
+| **Capacidad de Inferencia** | Diseñados estadísticamente para inferir hacia una población o identificar asociaciones controlando sesgos. | Útiles para describir comportamientos históricos y patrones de uso; la inferencia estadística requiere sesgos de selección cuidadosos. |
+
+### Población Objetivo y Unidad de Análisis
+
+Antes de realizar la ingesta de un dataset, todo analista de datos debe responder con precisión dos preguntas fundamentales:
+
+1.  **¿Cuál es la Población Objetivo (*Target Population*)?**: Es el conjunto completo de elementos sobre los cuales se desean realizar generalizaciones o inferencias @groves2009survey.
+2.  **¿Cuál es la Unidad de Análisis?**: Es el elemento básico sobre el cual se realiza la medición o la observación en el dataset (ej. una persona, un hogar, una transacción, una escuela).
+
+::: {.callout-important}
+### Falacia Ecológica
+Confundir la unidad de análisis puede llevarnos al sesgo de la **falacia ecológica**: cometer el error de deducir conclusiones sobre individuos a partir de datos agregados de un grupo (por ejemplo, asumir que porque un departamento del país tiene un PIB promedio alto, cada habitante seleccionado al azar de ese departamento es de ingresos altos).
+:::
+
+## Ingesta de Datos Estructurados
+
+Una vez configurado nuestro proyecto y definida la naturaleza metodológica de nuestros datos, procedemos a cargarlos en la memoria de R para su análisis.
+
+### Archivos Planos (CSV, TXT)
+
+Los archivos de texto plano delimitados (como CSV o TXT) son los formatos más universales para el intercambio de datos estructurados. Estudiaremos dos enfoques de lectura: las funciones nativas de **Base R** y las funciones optimizadas del paquete **`readr`** (parte de `tidyverse`) @boehmke2016data.
+
+::: {.panel-tabset}
+
+### Enfoque Base R
+
+Las funciones tradicionales como `read.csv()` no requieren cargar paquetes externos, pero presentan limitaciones históricas de rendimiento y coerción silenciosa de tipos de datos.
+
+```r
+# Lectura usando Base R
+# stringsAsFactors = FALSE evita que columnas de texto se fuercen a factores categóricos
+datos_base <- read.csv("data/raw/ventas_bolivia.csv", stringsAsFactors = FALSE)
+
+# Inspeccionar estructura básica
+str(datos_base)
+```
+
+### Enfoque `readr` (Recomendado)
+
+El paquete `readr` está diseñado para la ciencia de datos moderna: es hasta 10 veces más rápido que Base R, lee los archivos directamente como `tibbles` (estructuras legibles de dataframes) y no realiza conversiones automáticas ni altera los nombres de las columnas @boehmke2016data.
+
+```r
+library(readr)
+
+# Lectura moderna con readr
+datos_readr <- read_csv("data/raw/ventas_bolivia.csv")
+
+# Ver especificación de columnas detectada
+spec(datos_readr)
+```
+
+:::
+
+#### Parámetros Clave para una Ingesta Robusta
+
+Para garantizar la correcta lectura de archivos con inconsistencias o estructuras complejas, se deben dominar los siguientes argumentos analíticos @boehmke2016data:
+
+*   `col_names` / `header`: Define si la primera fila contiene los nombres de las variables (`TRUE` o `FALSE`).
+*   `delim` / `sep`: Especifica el carácter delimitador de campos (ej. `,`, `;`, `\t` para tabuladores).
+*   `na`: Define explícitamente qué strings deben interpretarse en R como un valor faltante real (`NA`). En bases de datos reales bolivianas, es común ver valores perdidos codificados como `"999"`, `"N/A"` o simplemente guiones `"-"`.
+*   `skip`: Permite saltar un número determinado de líneas iniciales (muy común cuando los archivos contienen metadatos informativos en la cabecera antes de la tabla real de datos).
+
+```r
+# Ejemplo avanzado de ingesta controlada de un archivo CSV con inconsistencias
+ventas_limpias <- read_csv(
+  file = "data/raw/ventas_bolivia.csv",
+  col_names = TRUE,
+  na = c("999", "N/A", "-"),
+  skip = 3,           # Omitir las primeras 3 líneas de metadatos o comentarios
+  n_max = 1000        # Cargar solo las primeras 1000 observaciones para prueba rápida
+)
+```
+
+::: {.callout-note}
+### Actividad de Paso: Tipos de Datos Preventivos (3 minutos)
+Al importar datos, identificadores categóricos como la Cédula de Identidad (CI) o códigos de sucursal pueden ser erróneamente interpretados por R como variables numéricas continuas sobre las cuales calcular medias o desviaciones estándar. 
+
+Para prevenir esto, podemos forzar el tipo de dato correcto durante el proceso mismo de lectura:
+
+::: {.panel-tabset}
+
+### Enfoque Base R
+```r
+# Forzar columna 1 como numérico y columnas 2 y 3 como carácter
+datos_preventivos <- read.csv(
+  "data/raw/ventas_bolivia.csv",
+  colClasses = c("numeric", "character", "character")
+)
+```
+
+### Enfoque `readr`
+```r
+library(readr)
+# Definir tipos específicos de columnas
+datos_preventivos <- read_csv(
+  "data/raw/ventas_bolivia.csv",
+  col_types = cols(
+    id_cliente = col_character(),
+    ci_nit = col_character(),
+    monto_bs = col_double()
+  )
+)
+```
+:::
+
+:::
+
+### Hojas de Cálculo (Microsoft Excel)
+
+A diferencia de los archivos planos, los archivos de Microsoft Excel (`.xls`, `.xlsx`) son binarios y pueden albergar múltiples pestañas, estilos, celdas combinadas y fórmulas. 
+
+#### Preparación del Formato Tabular Limpio
+Antes de leer una hoja de Excel en R, se debe asegurar que el diseño sea **tabular**:
+
+1.  **Fila única de cabecera**: Los nombres de las variables deben estar en la primera fila. Evitar cabeceras dobles o celdas combinadas.
+2.  **Una observación por fila**: No intercalar filas de totales, resúmenes parciales o comentarios intermedios.
+3.  **Sin formatos de celda con significado analítico**: Si una celda pintada de rojo significa "mora", esa información debe convertirse en una variable explícita en su propia columna (ej. `estado_mora = "mora"`) antes de la ingesta, ya que R no leerá colores de relleno como datos analíticos.
+
+Para importar estas hojas de manera eficiente y sin dependencias externas complejas, utilizaremos el paquete **`readxl`** de la suite `tidyverse` @boehmke2016data.
+
+::: {.panel-tabset}
+
+### Ingesta de Hoja por Defecto
+```r
+library(readxl)
+
+# Lee la primera pestaña del libro de Excel de forma automática
+datos_excel <- read_excel("data/raw/reporte_sucursales.xlsx")
+```
+
+### Ingesta de Pestaña Específica y Rangos
+```r
+library(readxl)
+
+# Leer una pestaña específica por su nombre
+datos_pestaña <- read_excel(
+  path = "data/raw/reporte_sucursales.xlsx",
+  sheet = "sucursal_lpz"
+)
+
+# Leer un rango específico de celdas delimitado
+datos_rango <- read_excel(
+  path = "data/raw/reporte_sucursales.xlsx",
+  range = "B5:F105"
+)
+```
+
+:::
+
+---
+
+## Adquisición de Datos desde la Web: APIs y Web Scraping
+
+La recolección moderna de datos requiere, de forma indispensable, interactuar directamente con la web. Estudiaremos cómo automatizar este proceso mediante el consumo de APIs especializadas y Web Scraping de páginas HTML.
+
+### Consumo de APIs con Librerías Especializadas
+
+Una **API (Application Programming Interface)** es un canal estructurado provisto por un servidor web para transferir datos de manera automatizada. En lugar de procesar solicitudes manuales o lidiar con el diseño visual de un sitio web, consumimos APIs usando paquetes en R que actúan como envoltorios de conexión directa.
+
+#### Caso Práctico 1: Banco Mundial (`wbstats`)
+
+El paquete `wbstats` permite realizar búsquedas y descargas directas de los miles de indicadores macroeconómicos y sociales que publica el Banco Mundial.
+
+```r
+library(wbstats)
+
+# Buscar el identificador de indicador para el PIB per cápita
+pib_id <- wb_search("GDP per capita (current US\\$)")
+
+# Descargar datos de Bolivia (código de país "BO") desde 2015 a 2024
+pib_bolivia <- wb_data(
+  indicator = "NY.GDP.PCAP.CD", 
+  country = "BO", 
+  start_date = 2015, 
+  end_date = 2024
+)
+
+# Mostrar las primeras filas del indicador macroeconómico recuperado
+head(pib_bolivia)
+```
+
+#### Caso Práctico 2: Bureau of Labor Statistics (`blsAPI`)
+
+Existen envoltorios específicos para otras instituciones globales. Por ejemplo, `blsAPI` permite la descarga directa de series de tiempo del mercado laboral norteamericano utilizando su identificador único de serie @boehmke2016data.
+
+```r
+library(blsAPI)
+library(rjson)
+
+# Solicitar datos de desempleo de una serie específica del BLS (formato JSON)
+respuesta_json <- blsAPI("MLUMS00NN0001003")
+
+# Convertir la respuesta JSON en una lista nativa estructurada de R
+lista_datos <- fromJSON(respuesta_json)
+str(lista_datos$Results)
+```
+
+### Web Scraping con `rvest`
+
+Cuando el sitio web de interés no dispone de una API formal ni de archivos de descarga estructurados, recurrimos al **Web Scraping**: la extracción programática y automatizada de datos contenidos dentro de la estructura de etiquetas **HTML** de un sitio web @boehmke2016data.
+
+Utilizaremos el paquete **`rvest`**, el cual analiza y parsea el árbol jerárquico de nodos de un sitio web para aislar la información necesaria @boehmke2016data.
+
+
+
+::: {.callout-note}
+### Actividad de Paso: Copiar Selectores CSS Precisos (3 minutos)
+Para extraer información específica de un nodo en una página web compleja, debemos identificar el selector CSS preciso utilizando las herramientas de tu navegador:
+
+1. Abre tu navegador web (Chrome, Firefox o Edge) e ingresa a un sitio de tu elección.
+2. Presiona la tecla **`F12`** (o haz clic derecho y selecciona **Inspeccionar**) para abrir las Herramientas del Desarrollador.
+3. Activa el **Selector de Elementos** (icono de una flecha apuntando a un recuadro en la esquina superior izquierda de la consola).
+4. Haz clic sobre el título, párrafo o tabla que desees raspar.
+5. En el panel de código HTML que se ilumina, haz clic derecho sobre la línea, selecciona **Copiar > Copiar selector** (o *Copy XPath*). Ese string exacto es el que debes pasar como argumento a la función `html_nodes()` para una extracción quirúrgica @boehmke2016data.
+:::

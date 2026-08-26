@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Adquisición de Datos y Configuración del Entorno – Fundamentos de Análisis de Datos</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b2cbf88ee9ee288985b87b7430834320.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-528989212f0d08e68774375b94c3ff31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta name="twitter:title" content="1&nbsp; Adquisición de Datos y Configuración del Entorno – Fundamentos de Análisis de Datos">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap1-adquisicion.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Adquisición de Datos y Configuración del Entorno</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Fundamentos de Análisis de Datos</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/master_fad/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenido</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Parte I: Adquisición, Transformación y Manipulación de Datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap1-adquisicion.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Adquisición de Datos y Configuración del Entorno</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#este-capítulo-inicial-sienta-las-bases-técnicas-y-metodológicas-necesarias-para-afrontar-con-éxito-el-ciclo-de-vida-del-análisis-de-datos.-en-primer-lugar-abordaremos-la-configuración-de-un-entorno-de-trabajo-reproducible-basado-en-proyectos-y-buenas-prácticas-de-organización.-posteriormente-estudiaremos-la-fundamentación-estadística-de-los-datos-antes-de-proceder-a-la-ingesta-práctica-de-archivos-planos-hojas-de-cálculo-apis-y-web-scraping." id="toc-este-capítulo-inicial-sienta-las-bases-técnicas-y-metodológicas-necesarias-para-afrontar-con-éxito-el-ciclo-de-vida-del-análisis-de-datos.-en-primer-lugar-abordaremos-la-configuración-de-un-entorno-de-trabajo-reproducible-basado-en-proyectos-y-buenas-prácticas-de-organización.-posteriormente-estudiaremos-la-fundamentación-estadística-de-los-datos-antes-de-proceder-a-la-ingesta-práctica-de-archivos-planos-hojas-de-cálculo-apis-y-web-scraping." class="nav-link active" data-scroll-target="#este-capítulo-inicial-sienta-las-bases-técnicas-y-metodológicas-necesarias-para-afrontar-con-éxito-el-ciclo-de-vida-del-análisis-de-datos.-en-primer-lugar-abordaremos-la-configuración-de-un-entorno-de-trabajo-reproducible-basado-en-proyectos-y-buenas-prácticas-de-organización.-posteriormente-estudiaremos-la-fundamentación-estadística-de-los-datos-antes-de-proceder-a-la-ingesta-práctica-de-archivos-planos-hojas-de-cálculo-apis-y-web-scraping."><span class="header-section-number">1.1</span> Este capítulo inicial sienta las bases técnicas y metodológicas necesarias para afrontar con éxito el ciclo de vida del análisis de datos. En primer lugar, abordaremos la configuración de un entorno de trabajo reproducible basado en proyectos y buenas prácticas de organización. Posteriormente, estudiaremos la fundamentación estadística de los datos antes de proceder a la ingesta práctica de archivos planos, hojas de cálculo, APIs y Web Scraping.</a></li>
+  <li><a href="#configuración-del-entorno-y-flujo-de-trabajo-basado-en-proyectos" id="toc-configuración-del-entorno-y-flujo-de-trabajo-basado-en-proyectos" class="nav-link" data-scroll-target="#configuración-del-entorno-y-flujo-de-trabajo-basado-en-proyectos"><span class="header-section-number">1.2</span> Configuración del Entorno y Flujo de Trabajo Basado en Proyectos</a>
+  <ul class="collapse">
+  <li><a href="#el-rol-de-los-proyectos-de-rstudio-.rproj" id="toc-el-rol-de-los-proyectos-de-rstudio-.rproj" class="nav-link" data-scroll-target="#el-rol-de-los-proyectos-de-rstudio-.rproj"><span class="header-section-number">1.2.1</span> El Rol de los Proyectos de RStudio (.Rproj)</a></li>
+  <li><a href="#estructura-de-carpetas-recomendada" id="toc-estructura-de-carpetas-recomendada" class="nav-link" data-scroll-target="#estructura-de-carpetas-recomendada"><span class="header-section-number">1.2.2</span> Estructura de Carpetas Recomendada</a></li>
+  <li><a href="#buenas-prácticas-de-nomenclatura" id="toc-buenas-prácticas-de-nomenclatura" class="nav-link" data-scroll-target="#buenas-prácticas-de-nomenclatura"><span class="header-section-number">1.2.3</span> Buenas Prácticas de Nomenclatura</a></li>
+  </ul></li>
+  <li><a href="#fundamentos-metodológicos-y-estadísticos-de-los-datos" id="toc-fundamentos-metodológicos-y-estadísticos-de-los-datos" class="nav-link" data-scroll-target="#fundamentos-metodológicos-y-estadísticos-de-los-datos"><span class="header-section-number">1.3</span> Fundamentos Metodológicos y Estadísticos de los Datos</a>
+  <ul class="collapse">
+  <li><a href="#nomenclatura-estándar-en-análisis-de-datos" id="toc-nomenclatura-estándar-en-análisis-de-datos" class="nav-link" data-scroll-target="#nomenclatura-estándar-en-análisis-de-datos"><span class="header-section-number">1.3.1</span> Nomenclatura Estándar en Análisis de Datos</a></li>
+  <li><a href="#fuentes-de-información-y-su-naturaleza" id="toc-fuentes-de-información-y-su-naturaleza" class="nav-link" data-scroll-target="#fuentes-de-información-y-su-naturaleza"><span class="header-section-number">1.3.2</span> Fuentes de Información y su Naturaleza</a></li>
+  <li><a href="#población-objetivo-y-unidad-de-análisis" id="toc-población-objetivo-y-unidad-de-análisis" class="nav-link" data-scroll-target="#población-objetivo-y-unidad-de-análisis"><span class="header-section-number">1.3.3</span> Población Objetivo y Unidad de Análisis</a></li>
+  </ul></li>
+  <li><a href="#ingesta-de-datos-estructurados" id="toc-ingesta-de-datos-estructurados" class="nav-link" data-scroll-target="#ingesta-de-datos-estructurados"><span class="header-section-number">1.4</span> Ingesta de Datos Estructurados</a>
+  <ul class="collapse">
+  <li><a href="#archivos-planos-csv-txt" id="toc-archivos-planos-csv-txt" class="nav-link" data-scroll-target="#archivos-planos-csv-txt"><span class="header-section-number">1.4.1</span> Archivos Planos (CSV, TXT)</a></li>
+  <li><a href="#hojas-de-cálculo-microsoft-excel" id="toc-hojas-de-cálculo-microsoft-excel" class="nav-link" data-scroll-target="#hojas-de-cálculo-microsoft-excel"><span class="header-section-number">1.4.2</span> Hojas de Cálculo (Microsoft Excel)</a></li>
+  </ul></li>
+  <li><a href="#adquisición-de-datos-desde-la-web-apis-y-web-scraping" id="toc-adquisición-de-datos-desde-la-web-apis-y-web-scraping" class="nav-link" data-scroll-target="#adquisición-de-datos-desde-la-web-apis-y-web-scraping"><span class="header-section-number">1.5</span> Adquisición de Datos desde la Web: APIs y Web Scraping</a>
+  <ul class="collapse">
+  <li><a href="#consumo-de-apis-con-librerías-especializadas" id="toc-consumo-de-apis-con-librerías-especializadas" class="nav-link" data-scroll-target="#consumo-de-apis-con-librerías-especializadas"><span class="header-section-number">1.5.1</span> Consumo de APIs con Librerías Especializadas</a></li>
+  <li><a href="#web-scraping-con-rvest" id="toc-web-scraping-con-rvest" class="nav-link" data-scroll-target="#web-scraping-con-rvest"><span class="header-section-number">1.5.2</span> Web Scraping con <code>rvest</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap1-adquisicion.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Adquisición de Datos y Configuración del Entorno</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Adquisición de Datos y Configuración del Entorno</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Cobertura del Módulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este capítulo cubre las <strong>Sesiones 1, 2 y 3 (Semana 1)</strong> de la materia. Está diseñado para sentar las bases conceptuales, metodológicas y de entorno necesarias antes de proceder a la manipulación de datos.</p>
+</div>
+</div>
+<section id="este-capítulo-inicial-sienta-las-bases-técnicas-y-metodológicas-necesarias-para-afrontar-con-éxito-el-ciclo-de-vida-del-análisis-de-datos.-en-primer-lugar-abordaremos-la-configuración-de-un-entorno-de-trabajo-reproducible-basado-en-proyectos-y-buenas-prácticas-de-organización.-posteriormente-estudiaremos-la-fundamentación-estadística-de-los-datos-antes-de-proceder-a-la-ingesta-práctica-de-archivos-planos-hojas-de-cálculo-apis-y-web-scraping." class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="este-capítulo-inicial-sienta-las-bases-técnicas-y-metodológicas-necesarias-para-afrontar-con-éxito-el-ciclo-de-vida-del-análisis-de-datos.-en-primer-lugar-abordaremos-la-configuración-de-un-entorno-de-trabajo-reproducible-basado-en-proyectos-y-buenas-prácticas-de-organización.-posteriormente-estudiaremos-la-fundamentación-estadística-de-los-datos-antes-de-proceder-a-la-ingesta-práctica-de-archivos-planos-hojas-de-cálculo-apis-y-web-scraping."><span class="header-section-number">1.1</span> Este capítulo inicial sienta las bases técnicas y metodológicas necesarias para afrontar con éxito el ciclo de vida del análisis de datos. En primer lugar, abordaremos la configuración de un entorno de trabajo reproducible basado en proyectos y buenas prácticas de organización. Posteriormente, estudiaremos la fundamentación estadística de los datos antes de proceder a la ingesta práctica de archivos planos, hojas de cálculo, APIs y Web Scraping.</h2>
+</section>
+<section id="configuración-del-entorno-y-flujo-de-trabajo-basado-en-proyectos" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="configuración-del-entorno-y-flujo-de-trabajo-basado-en-proyectos"><span class="header-section-number">1.2</span> Configuración del Entorno y Flujo de Trabajo Basado en Proyectos</h2>
+<p>Para garantizar la reproducibilidad de nuestras investigaciones, utilizaremos de manera obligatoria el ecosistema conformado por <strong>R</strong>, el entorno de desarrollo integrado <strong>RStudio</strong> y el sistema de control de versiones <strong>Git/GitHub</strong>.</p>
+<section id="el-rol-de-los-proyectos-de-rstudio-.rproj" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="el-rol-de-los-proyectos-de-rstudio-.rproj"><span class="header-section-number">1.2.1</span> El Rol de los Proyectos de RStudio (.Rproj)</h3>
+<p>En el análisis de datos profesional, el uso de rutas absolutas rígidas (como <code>C:/Usuarios/MiNombre/Documentos/datos.csv</code>) o el empleo manual de <code>setwd()</code> son considerados malas prácticas que rompen la reproducibilidad <span class="citation" data-cites="stoudt2021principles">Stoudt et al. (<a href="references.html#ref-stoudt2021principles" role="doc-biblioref">2021</a>)</span>.</p>
+<p>Para solucionar esto, RStudio introduce los <strong>Proyectos de RStudio</strong> (archivos con extensión <code>.Rproj</code>). Al abrir un proyecto, RStudio establece automáticamente el directorio de trabajo activo en la carpeta donde reside el archivo <code>.Rproj</code>. Esto permite gestionar todo el código mediante <strong>rutas relativas</strong> (por ejemplo, <code>"data/ventas.csv"</code>), garantizando que el proyecto funcione de forma idéntica en cualquier otra computadora.</p>
+</section>
+<section id="estructura-de-carpetas-recomendada" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="estructura-de-carpetas-recomendada"><span class="header-section-number">1.2.2</span> Estructura de Carpetas Recomendada</h3>
+<p>Todo proyecto analítico ordenado debe seguir una jerarquía estricta de subdirectorios dentro del directorio raíz <span class="citation" data-cites="stoudt2021principles">Stoudt et al. (<a href="references.html#ref-stoudt2021principles" role="doc-biblioref">2021</a>)</span>:</p>
+<pre class="text"><code>mi-proyecto/
+├── mi-proyecto.Rproj  &lt;- Archivo de proyecto de RStudio
+├── data/              &lt;- Carpeta contenedora de datos
+│   ├── raw/           &lt;- Datos originales (¡NUNCA SE MODIFICAN!)
+│   └── processed/     &lt;- Datos limpios listos para análisis
+├── scripts/           &lt;- Scripts de código R (.R) o documentos Quarto (.qmd)
+├── figuras/           &lt;- Gráficos y visualizaciones exportadas
+└── docs/              &lt;- Reportes, presentaciones y documentación adicional</code></pre>
+</section>
+<section id="buenas-prácticas-de-nomenclatura" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="buenas-prácticas-de-nomenclatura"><span class="header-section-number">1.2.3</span> Buenas Prácticas de Nomenclatura</h3>
+<p>Para evitar conflictos de codificación en distintos sistemas operativos y facilitar la legibilidad del código, se establecen las siguientes directrices de nomenclatura para archivos, scripts y variables:</p>
+<ul>
+<li><strong>Minúsculas siempre</strong>: Utilizar siempre letras minúsculas (evitar <code>DatosVentas.csv</code>, preferir <code>datos_ventas.csv</code>).</li>
+<li><strong>Sin espacios ni caracteres especiales</strong>: Reemplazar espacios por guiones medios (<code>-</code>) o bajos (<code>_</code>). Nunca usar tildes, la letra “ñ” o caracteres especiales en nombres de archivos o variables.</li>
+<li><strong>Nombres autodescriptivos pero cortos</strong>: El nombre debe indicar claramente el contenido (ej. <code>01_limpieza_ingresos.R</code>).</li>
+<li><strong>Secuenciación de scripts</strong>: Si el análisis requiere varios pasos, anteponer números secuenciales para indicar el orden de ejecución (ej. <code>01_ingesta.R</code>, <code>02_limpieza.R</code>, <code>03_eda.R</code>).</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Actividad de Paso: Creación de la Estructura de un Proyecto (3 minutos)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Abre RStudio. Go to <strong>File &gt; New Project…</strong></li>
+<li>Selecciona <strong>New Directory &gt; New Project</strong>. Nombra tu proyecto en minúsculas y sin espacios (ej. <code>analisis-ventas-bolivia</code>).</li>
+<li>En la pestaña <strong>Files</strong> (panel inferior derecho), haz clic en <strong>New Folder</strong> y crea la estructura base descrita anteriormente (<code>data</code>, <code>data/raw</code>, <code>data/processed</code>, <code>scripts</code>, <code>figuras</code>).</li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="fundamentos-metodológicos-y-estadísticos-de-los-datos" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="fundamentos-metodológicos-y-estadísticos-de-los-datos"><span class="header-section-number">1.3</span> Fundamentos Metodológicos y Estadísticos de los Datos</h2>
+<p>Antes de escribir la primera línea de código para leer un archivo, es indispensable comprender la naturaleza metodológica y estadística del conjunto de datos con el que trabajaremos.</p>
+<section id="nomenclatura-estándar-en-análisis-de-datos" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="nomenclatura-estándar-en-análisis-de-datos"><span class="header-section-number">1.3.1</span> Nomenclatura Estándar en Análisis de Datos</h3>
+<p>En el ámbito de la ciencia de datos y la estadística, interactuamos con diferentes estructuras de datos <span class="citation" data-cites="wickham2023r">Wickham et al. (<a href="references.html#ref-wickham2023r" role="doc-biblioref">2023</a>)</span>:</p>
+<ul>
+<li><strong>Datos Estructurados</strong>: Información organizada en tablas formales de filas y columnas (dataframes), donde cada fila representa una observación y cada columna una variable.</li>
+<li><strong>Datos Semiestructurados</strong>: No tienen una estructura de tabla rígida pero contienen marcadores o etiquetas organizativas (ej. archivos JSON o XML).</li>
+<li><strong>Datos No Estructurados</strong>: Información sin un formato predefinido (ej. textos libres, audios, imágenes).</li>
+<li><strong>Dataset (Conjunto de Datos)</strong>: Colección estructurada de datos.</li>
+<li><strong>Observación (o Caso)</strong>: La unidad mínima sobre la cual se recopilan los datos (fila).</li>
+<li><strong>Variable</strong>: Una característica cuantitativa o cualitativa medida sobre las observaciones (columna).</li>
+</ul>
+</section>
+<section id="fuentes-de-información-y-su-naturaleza" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="fuentes-de-información-y-su-naturaleza"><span class="header-section-number">1.3.2</span> Fuentes de Información y su Naturaleza</h3>
+<p>La procedencia y el diseño de la recolección de los datos determinan el tipo de conclusiones estadísticas válidas que podemos extraer <span class="citation" data-cites="groves2009survey">Groves et al. (<a href="references.html#ref-groves2009survey" role="doc-biblioref">2009</a>)</span>:</p>
+<ul>
+<li><strong>Censos</strong>: Recolección de información sobre la totalidad de los elementos de una población de interés. Proporcionan parámetros poblacionales exactos pero conllevan altos costos y tiempos de ejecución.</li>
+<li><strong>Encuestas por Muestreo</strong>: Recolección de datos sobre un subconjunto representativo (muestra) extraído probabilísticamente de la población. Permiten realizar inferencia estadística sobre la población general con un margen de error controlable <span class="citation" data-cites="groves2009survey">Groves et al. (<a href="references.html#ref-groves2009survey" role="doc-biblioref">2009</a>)</span>.</li>
+<li><strong>Registros Administrativos</strong>: Datos recopilados de manera continua con propósitos de control institucional u operativo (ej. facturaciones de impuestos, registros de aduana, admisiones hospitalarias). Tienen la ventaja de ser económicos y continuos, pero no están diseñados con fines estadísticos, lo que suele requerir un exhaustivo trabajo de depuración.</li>
+</ul>
+<p>Adicionalmente, según el nivel de control en la obtención de datos, distinguimos entre:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimensión</th>
+<th>Datos de Estudios Observacionales</th>
+<th>Datos Transaccionales</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Origen / Propósito</strong></td>
+<td>Diseñados por un investigador para responder una hipótesis concreta.</td>
+<td>Generados automáticamente por la operativa del negocio/sistema (ventas, clicks, facturas).</td>
+</tr>
+<tr class="even">
+<td><strong>Control sobre las variables</strong></td>
+<td><strong>Sin intervención directa</strong> en los sujetos, pero con control explícito en el instrumento de medición (encuestas, fichas clínicas).</td>
+<td>Ninguno. Registra únicamente los eventos conforme suceden en el sistema.</td>
+</tr>
+<tr class="odd">
+<td><strong>Volumen y Frecuencia</strong></td>
+<td>Muestras finitas o acotadas (encuestas, cohortes) tomadas en momentos específicos.</td>
+<td>Flujo continuo (<em>streaming</em>) de gran volumen (Big Data), en tiempo real o por lotes.</td>
+</tr>
+<tr class="even">
+<td><strong>Calidad y Limpieza</strong></td>
+<td>Alta consistencia lógica previa, pues se diseñan variables y escalas predeterminadas.</td>
+<td>Requiere un esfuerzo considerable de procesamiento, ya que suelen contener datos duplicados, nulos o con ruido.</td>
+</tr>
+<tr class="odd">
+<td><strong>Capacidad de Inferencia</strong></td>
+<td>Diseñados estadísticamente para inferir hacia una población o identificar asociaciones controlando sesgos.</td>
+<td>Útiles para describir comportamientos históricos y patrones de uso; la inferencia estadística requiere sesgos de selección cuidadosos.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="población-objetivo-y-unidad-de-análisis" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="población-objetivo-y-unidad-de-análisis"><span class="header-section-number">1.3.3</span> Población Objetivo y Unidad de Análisis</h3>
+<p>Antes de realizar la ingesta de un dataset, todo analista de datos debe responder con precisión dos preguntas fundamentales:</p>
+<ol type="1">
+<li><strong>¿Cuál es la Población Objetivo (<em>Target Population</em>)?</strong>: Es el conjunto completo de elementos sobre los cuales se desean realizar generalizaciones o inferencias <span class="citation" data-cites="groves2009survey">Groves et al. (<a href="references.html#ref-groves2009survey" role="doc-biblioref">2009</a>)</span>.</li>
+<li><strong>¿Cuál es la Unidad de Análisis?</strong>: Es el elemento básico sobre el cual se realiza la medición o la observación en el dataset (ej. una persona, un hogar, una transacción, una escuela).</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Falacia Ecológica
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Confundir la unidad de análisis puede llevarnos al sesgo de la <strong>falacia ecológica</strong>: cometer el error de deducir conclusiones sobre individuos a partir de datos agregados de un grupo (por ejemplo, asumir que porque un departamento del país tiene un PIB promedio alto, cada habitante seleccionado al azar de ese departamento es de ingresos altos).</p>
+</div>
+</div>
+</section>
+</section>
+<section id="ingesta-de-datos-estructurados" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="ingesta-de-datos-estructurados"><span class="header-section-number">1.4</span> Ingesta de Datos Estructurados</h2>
+<p>Una vez configurado nuestro proyecto y definida la naturaleza metodológica de nuestros datos, procedemos a cargarlos en la memoria de R para su análisis.</p>
+<section id="archivos-planos-csv-txt" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="archivos-planos-csv-txt"><span class="header-section-number">1.4.1</span> Archivos Planos (CSV, TXT)</h3>
+<p>Los archivos de texto plano delimitados (como CSV o TXT) son los formatos más universales para el intercambio de datos estructurados. Estudiaremos dos enfoques de lectura: las funciones nativas de <strong>Base R</strong> y las funciones optimizadas del paquete <strong><code>readr</code></strong> (parte de <code>tidyverse</code>) <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Enfoque Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Enfoque <code>readr</code> (Recomendado)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Las funciones tradicionales como <code>read.csv()</code> no requieren cargar paquetes externos, pero presentan limitaciones históricas de rendimiento y coerción silenciosa de tipos de datos.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura usando Base R</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># stringsAsFactors = FALSE evita que columnas de texto se fuercen a factores categóricos</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>datos_base <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/ventas_bolivia.csv"</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar estructura básica</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>El paquete <code>readr</code> está diseñado para la ciencia de datos moderna: es hasta 10 veces más rápido que Base R, lee los archivos directamente como <code>tibbles</code> (estructuras legibles de dataframes) y no realiza conversiones automáticas ni altera los nombres de las columnas <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura moderna con readr</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>datos_readr <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/ventas_bolivia.csv"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver especificación de columnas detectada</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(datos_readr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<section id="parámetros-clave-para-una-ingesta-robusta" class="level4" data-number="1.4.1.1">
+<h4 data-number="1.4.1.1" class="anchored" data-anchor-id="parámetros-clave-para-una-ingesta-robusta"><span class="header-section-number">1.4.1.1</span> Parámetros Clave para una Ingesta Robusta</h4>
+<p>Para garantizar la correcta lectura de archivos con inconsistencias o estructuras complejas, se deben dominar los siguientes argumentos analíticos <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>:</p>
+<ul>
+<li><code>col_names</code> / <code>header</code>: Define si la primera fila contiene los nombres de las variables (<code>TRUE</code> o <code>FALSE</code>).</li>
+<li><code>delim</code> / <code>sep</code>: Especifica el carácter delimitador de campos (ej. <code>,</code>, <code>;</code>, <code>\t</code> para tabuladores).</li>
+<li><code>na</code>: Define explícitamente qué strings deben interpretarse en R como un valor faltante real (<code>NA</code>). En bases de datos reales bolivianas, es común ver valores perdidos codificados como <code>"999"</code>, <code>"N/A"</code> o simplemente guiones <code>"-"</code>.</li>
+<li><code>skip</code>: Permite saltar un número determinado de líneas iniciales (muy común cuando los archivos contienen metadatos informativos en la cabecera antes de la tabla real de datos).</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo avanzado de ingesta controlada de un archivo CSV con inconsistencias</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ventas_limpias <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/raw/ventas_bolivia.csv"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"999"</span>, <span class="st">"N/A"</span>, <span class="st">"-"</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">3</span>,           <span class="co"># Omitir las primeras 3 líneas de metadatos o comentarios</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_max =</span> <span class="dv">1000</span>        <span class="co"># Cargar solo las primeras 1000 observaciones para prueba rápida</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Actividad de Paso: Tipos de Datos Preventivos (3 minutos)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Al importar datos, identificadores categóricos como la Cédula de Identidad (CI) o códigos de sucursal pueden ser erróneamente interpretados por R como variables numéricas continuas sobre las cuales calcular medias o desviaciones estándar.</p>
+<p>Para prevenir esto, podemos forzar el tipo de dato correcto durante el proceso mismo de lectura:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Enfoque Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Enfoque <code>readr</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forzar columna 1 como numérico y columnas 2 y 3 como carácter</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>datos_preventivos <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/raw/ventas_bolivia.csv"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">"numeric"</span>, <span class="st">"character"</span>, <span class="st">"character"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir tipos específicos de columnas</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>datos_preventivos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/raw/ventas_bolivia.csv"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">id_cliente =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_nit =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">monto_bs =</span> <span class="fu">col_double</span>()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="hojas-de-cálculo-microsoft-excel" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="hojas-de-cálculo-microsoft-excel"><span class="header-section-number">1.4.2</span> Hojas de Cálculo (Microsoft Excel)</h3>
+<p>A diferencia de los archivos planos, los archivos de Microsoft Excel (<code>.xls</code>, <code>.xlsx</code>) son binarios y pueden albergar múltiples pestañas, estilos, celdas combinadas y fórmulas.</p>
+<section id="preparación-del-formato-tabular-limpio" class="level4" data-number="1.4.2.1">
+<h4 data-number="1.4.2.1" class="anchored" data-anchor-id="preparación-del-formato-tabular-limpio"><span class="header-section-number">1.4.2.1</span> Preparación del Formato Tabular Limpio</h4>
+<p>Antes de leer una hoja de Excel en R, se debe asegurar que el diseño sea <strong>tabular</strong>:</p>
+<ol type="1">
+<li><strong>Fila única de cabecera</strong>: Los nombres de las variables deben estar en la primera fila. Evitar cabeceras dobles o celdas combinadas.</li>
+<li><strong>Una observación por fila</strong>: No intercalar filas de totales, resúmenes parciales o comentarios intermedios.</li>
+<li><strong>Sin formatos de celda con significado analítico</strong>: Si una celda pintada de rojo significa “mora”, esa información debe convertirse en una variable explícita en su propia columna (ej. <code>estado_mora = "mora"</code>) antes de la ingesta, ya que R no leerá colores de relleno como datos analíticos.</li>
+</ol>
+<p>Para importar estas hojas de manera eficiente y sin dependencias externas complejas, utilizaremos el paquete <strong><code>readxl</code></strong> de la suite <code>tidyverse</code> <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Ingesta de Hoja por Defecto</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Ingesta de Pestaña Específica y Rangos</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lee la primera pestaña del libro de Excel de forma automática</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>datos_excel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/reporte_sucursales.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Leer una pestaña específica por su nombre</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>datos_pestaña <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/raw/reporte_sucursales.xlsx"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"sucursal_lpz"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Leer un rango específico de celdas delimitado</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>datos_rango <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/raw/reporte_sucursales.xlsx"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="st">"B5:F105"</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="adquisición-de-datos-desde-la-web-apis-y-web-scraping" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="adquisición-de-datos-desde-la-web-apis-y-web-scraping"><span class="header-section-number">1.5</span> Adquisición de Datos desde la Web: APIs y Web Scraping</h2>
+<p>La recolección moderna de datos requiere, de forma indispensable, interactuar directamente con la web. Estudiaremos cómo automatizar este proceso mediante el consumo de APIs especializadas y Web Scraping de páginas HTML.</p>
+<section id="consumo-de-apis-con-librerías-especializadas" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="consumo-de-apis-con-librerías-especializadas"><span class="header-section-number">1.5.1</span> Consumo de APIs con Librerías Especializadas</h3>
+<p>Una <strong>API (Application Programming Interface)</strong> es un canal estructurado provisto por un servidor web para transferir datos de manera automatizada. En lugar de procesar solicitudes manuales o lidiar con el diseño visual de un sitio web, consumimos APIs usando paquetes en R que actúan como envoltorios de conexión directa.</p>
+<section id="caso-práctico-1-banco-mundial-wbstats" class="level4" data-number="1.5.1.1">
+<h4 data-number="1.5.1.1" class="anchored" data-anchor-id="caso-práctico-1-banco-mundial-wbstats"><span class="header-section-number">1.5.1.1</span> Caso Práctico 1: Banco Mundial (<code>wbstats</code>)</h4>
+<p>El paquete <code>wbstats</code> permite realizar búsquedas y descargas directas de los miles de indicadores macroeconómicos y sociales que publica el Banco Mundial.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wbstats)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Buscar el identificador de indicador para el PIB per cápita</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>pib_id <span class="ot">&lt;-</span> <span class="fu">wb_search</span>(<span class="st">"GDP per capita (current US</span><span class="sc">\\</span><span class="st">$)"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Descargar datos de Bolivia (código de país "BO") desde 2015 a 2024</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>pib_bolivia <span class="ot">&lt;-</span> <span class="fu">wb_data</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">indicator =</span> <span class="st">"NY.GDP.PCAP.CD"</span>, </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="st">"BO"</span>, </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_date =</span> <span class="dv">2015</span>, </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_date =</span> <span class="dv">2024</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar las primeras filas del indicador macroeconómico recuperado</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pib_bolivia)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="caso-práctico-2-bureau-of-labor-statistics-blsapi" class="level4" data-number="1.5.1.2">
+<h4 data-number="1.5.1.2" class="anchored" data-anchor-id="caso-práctico-2-bureau-of-labor-statistics-blsapi"><span class="header-section-number">1.5.1.2</span> Caso Práctico 2: Bureau of Labor Statistics (<code>blsAPI</code>)</h4>
+<p>Existen envoltorios específicos para otras instituciones globales. Por ejemplo, <code>blsAPI</code> permite la descarga directa de series de tiempo del mercado laboral norteamericano utilizando su identificador único de serie <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(blsAPI)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjson)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Solicitar datos de desempleo de una serie específica del BLS (formato JSON)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>respuesta_json <span class="ot">&lt;-</span> <span class="fu">blsAPI</span>(<span class="st">"MLUMS00NN0001003"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir la respuesta JSON en una lista nativa estructurada de R</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>lista_datos <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(respuesta_json)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lista_datos<span class="sc">$</span>Results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="web-scraping-con-rvest" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="web-scraping-con-rvest"><span class="header-section-number">1.5.2</span> Web Scraping con <code>rvest</code></h3>
+<p>Cuando el sitio web de interés no dispone de una API formal ni de archivos de descarga estructurados, recurrimos al <strong>Web Scraping</strong>: la extracción programática y automatizada de datos contenidos dentro de la estructura de etiquetas <strong>HTML</strong> de un sitio web <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<p>Utilizaremos el paquete <strong><code>rvest</code></strong>, el cual analiza y parsea el árbol jerárquico de nodos de un sitio web para aislar la información necesaria <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Actividad de Paso: Copiar Selectores CSS Precisos (3 minutos)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para extraer información específica de un nodo en una página web compleja, debemos identificar el selector CSS preciso utilizando las herramientas de tu navegador:</p>
+<ol type="1">
+<li>Abre tu navegador web (Chrome, Firefox o Edge) e ingresa a un sitio de tu elección.</li>
+<li>Presiona la tecla <strong><code>F12</code></strong> (o haz clic derecho y selecciona <strong>Inspeccionar</strong>) para abrir las Herramientas del Desarrollador.</li>
+<li>Activa el <strong>Selector de Elementos</strong> (icono de una flecha apuntando a un recuadro en la esquina superior izquierda de la consola).</li>
+<li>Haz clic sobre el título, párrafo o tabla que desees raspar.</li>
+<li>En el panel de código HTML que se ilumina, haz clic derecho sobre la línea, selecciona <strong>Copiar &gt; Copiar selector</strong> (o <em>Copy XPath</em>). Ese string exacto es el que debes pasar como argumento a la función <code>html_nodes()</code> para una extracción quirúrgica <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</li>
+</ol>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-boehmke2016data" class="csl-entry" role="listitem">
+Boehmke, Bradley C. 2016. <em>Data Wrangling with r</em>. Use <span>R</span>! Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-45599-0">https://doi.org/10.1007/978-3-319-45599-0</a>.
+</div>
+<div id="ref-groves2009survey" class="csl-entry" role="listitem">
+Groves, Robert M., Floyd J. Fowler, Mick P. Couper, James M. Lepkowski, Eleanor Singer, and Roger Tourangeau. 2009. <em>Survey Methodology</em>. 2nd ed. John Wiley &amp; Sons.
+</div>
+<div id="ref-stoudt2021principles" class="csl-entry" role="listitem">
+Stoudt, Sara, Váleri N. Vásquez, and Ciera C. Martinez. 2021. <span>“Principles for Data Analysis Workflows.”</span> <em>PLOS Computational Biology</em> 17 (3): e1008770. <a href="https://doi.org/10.1371/journal.pcbi.1008770">https://doi.org/10.1371/journal.pcbi.1008770</a>.
+</div>
+<div id="ref-wickham2023r" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science</em>. 2nd ed. O’Reilly Media. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alvarolimber\.github\.io\/master_fad\/_book");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Bienvenido">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bienvenido</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2026, Alvaro Chirino</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Maestría en Inteligencia Artificial y Gestión de Datos - UCB</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
