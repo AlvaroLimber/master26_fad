@@ -87,7 +87,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./cap2-tidy-data.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -161,8 +161,7 @@ window.Quarto = {
 
 <meta name="twitter:title" content="1&nbsp; Adquisición de Datos y Configuración del Entorno – Fundamentos de Análisis de Datos">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://alvarolimber.github.io/master_fad/_book/fig/class.jpeg">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar docked quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
@@ -401,6 +400,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Adquisición de Datos y Configuración del Entorno</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2-tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -425,11 +430,11 @@ window.Quarto = {
   <li><a href="#buenas-prácticas-de-nomenclatura" id="toc-buenas-prácticas-de-nomenclatura" class="nav-link" data-scroll-target="#buenas-prácticas-de-nomenclatura"><span class="header-section-number">1.1.2</span> Buenas Prácticas de Nomenclatura</a></li>
   </ul></li>
   <li><a href="#sintaxis-básica-y-operaciones-en-la-consola" id="toc-sintaxis-básica-y-operaciones-en-la-consola" class="nav-link" data-scroll-target="#sintaxis-básica-y-operaciones-en-la-consola"><span class="header-section-number">1.2</span> Sintaxis Básica y Operaciones en la Consola</a></li>
-  <li><a href="#estructuras-de-datos-los-activos-de-información" id="toc-estructuras-de-datos-los-activos-de-información" class="nav-link" data-scroll-target="#estructuras-de-datos-los-activos-de-información"><span class="header-section-number">1.3</span> Estructuras de Datos: Los Activos de Información</a>
+  <li><a href="#estructuras-de-datos" id="toc-estructuras-de-datos" class="nav-link" data-scroll-target="#estructuras-de-datos"><span class="header-section-number">1.3</span> Estructuras de Datos</a>
   <ul class="collapse">
   <li><a href="#estructuras-homogéneas-mismo-tipo-de-dato" id="toc-estructuras-homogéneas-mismo-tipo-de-dato" class="nav-link" data-scroll-target="#estructuras-homogéneas-mismo-tipo-de-dato"><span class="header-section-number">1.3.1</span> Estructuras Homogéneas (Mismo tipo de dato)</a></li>
   <li><a href="#estructuras-heterogéneas-múltiples-tipos-de-datos" id="toc-estructuras-heterogéneas-múltiples-tipos-de-datos" class="nav-link" data-scroll-target="#estructuras-heterogéneas-múltiples-tipos-de-datos"><span class="header-section-number">1.3.2</span> Estructuras Heterogéneas (Múltiples tipos de datos)</a></li>
-  <li><a href="#indexación" id="toc-indexación" class="nav-link" data-scroll-target="#indexación"><span class="header-section-number">1.3.3</span> Indexación</a></li>
+  <li><a href="#indexación-y-selección-de-elementos" id="toc-indexación-y-selección-de-elementos" class="nav-link" data-scroll-target="#indexación-y-selección-de-elementos"><span class="header-section-number">1.3.3</span> Indexación y Selección de Elementos</a></li>
   </ul></li>
   <li><a href="#fundamentos-metodológicos-y-estadísticos-de-los-datos" id="toc-fundamentos-metodológicos-y-estadísticos-de-los-datos" class="nav-link" data-scroll-target="#fundamentos-metodológicos-y-estadísticos-de-los-datos"><span class="header-section-number">1.4</span> Fundamentos Metodológicos y Estadísticos de los Datos</a>
   <ul class="collapse">
@@ -442,17 +447,12 @@ window.Quarto = {
   <li><a href="#archivos-planos-csv-txt" id="toc-archivos-planos-csv-txt" class="nav-link" data-scroll-target="#archivos-planos-csv-txt"><span class="header-section-number">1.5.1</span> Archivos Planos (CSV, TXT)</a></li>
   <li><a href="#hojas-de-cálculo-microsoft-excel" id="toc-hojas-de-cálculo-microsoft-excel" class="nav-link" data-scroll-target="#hojas-de-cálculo-microsoft-excel"><span class="header-section-number">1.5.2</span> Hojas de Cálculo (Microsoft Excel)</a></li>
   </ul></li>
-  <li><a href="#adquisición-de-datos-desde-la-web-apis-y-web-scraping" id="toc-adquisición-de-datos-desde-la-web-apis-y-web-scraping" class="nav-link" data-scroll-target="#adquisición-de-datos-desde-la-web-apis-y-web-scraping"><span class="header-section-number">1.6</span> Adquisición de Datos desde la Web: APIs y Web Scraping</a>
+  <li><a href="#adquisición-de-datos-desde-la-web-scraping-y-apis" id="toc-adquisición-de-datos-desde-la-web-scraping-y-apis" class="nav-link" data-scroll-target="#adquisición-de-datos-desde-la-web-scraping-y-apis"><span class="header-section-number">1.6</span> Adquisición de Datos desde la Web: Scraping y APIs</a>
   <ul class="collapse">
-  <li><a href="#consumo-de-apis-con-librerías-especializadas" id="toc-consumo-de-apis-con-librerías-especializadas" class="nav-link" data-scroll-target="#consumo-de-apis-con-librerías-especializadas"><span class="header-section-number">1.6.1</span> Consumo de APIs con Librerías Especializadas</a></li>
-  </ul></li>
-  <li><a href="#captura-y-preservación-de-la-información" id="toc-captura-y-preservación-de-la-información" class="nav-link" data-scroll-target="#captura-y-preservación-de-la-información"><span class="header-section-number">1.7</span> Captura y Preservación de la Información</a></li>
-  <li><a href="#el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus" id="toc-el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus" class="nav-link" data-scroll-target="#el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus"><span class="header-section-number">1.8</span> El Ciclo de Recopilación de Información (Los 5 Pasos de Iacus)</a></li>
-  <li><a href="#fundamentos-tecnológicos-de-la-web-html-y-css" id="toc-fundamentos-tecnológicos-de-la-web-html-y-css" class="nav-link" data-scroll-target="#fundamentos-tecnológicos-de-la-web-html-y-css"><span class="header-section-number">1.9</span> Fundamentos Tecnológicos de la Web: HTML y CSS</a></li>
-  <li><a href="#raspado-web-práctico-en-r-con-rvest" id="toc-raspado-web-práctico-en-r-con-rvest" class="nav-link" data-scroll-target="#raspado-web-práctico-en-r-con-rvest"><span class="header-section-number">1.10</span> Raspado Web Práctico en R con <code>rvest</code></a></li>
-  <li><a href="#interfaces-de-programación-de-aplicaciones-apis" id="toc-interfaces-de-programación-de-aplicaciones-apis" class="nav-link" data-scroll-target="#interfaces-de-programación-de-aplicaciones-apis"><span class="header-section-number">1.11</span> Interfaces de Programación de Aplicaciones (APIs)</a>
-  <ul class="collapse">
-  <li><a href="#caso-práctico-consumo-de-la-api-del-banco-mundial" id="toc-caso-práctico-consumo-de-la-api-del-banco-mundial" class="nav-link" data-scroll-target="#caso-práctico-consumo-de-la-api-del-banco-mundial"><span class="header-section-number">1.11.1</span> Caso Práctico: Consumo de la API del Banco Mundial</a></li>
+  <li><a href="#el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus" id="toc-el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus" class="nav-link" data-scroll-target="#el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus"><span class="header-section-number">1.6.1</span> El Ciclo de Recopilación de Información (Los 5 Pasos de Iacus)</a></li>
+  <li><a href="#fundamentos-de-la-web-html-y-css" id="toc-fundamentos-de-la-web-html-y-css" class="nav-link" data-scroll-target="#fundamentos-de-la-web-html-y-css"><span class="header-section-number">1.6.2</span> Fundamentos de la Web: HTML y CSS</a></li>
+  <li><a href="#web-scraping-con-rvest" id="toc-web-scraping-con-rvest" class="nav-link" data-scroll-target="#web-scraping-con-rvest"><span class="header-section-number">1.6.3</span> Web Scraping con <code>rvest</code></a></li>
+  <li><a href="#consumo-de-interfaces-de-programación-de-aplicaciones-apis" id="toc-consumo-de-interfaces-de-programación-de-aplicaciones-apis" class="nav-link" data-scroll-target="#consumo-de-interfaces-de-programación-de-aplicaciones-apis"><span class="header-section-number">1.6.4</span> Consumo de Interfaces de Programación de Aplicaciones (APIs)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -498,7 +498,7 @@ window.Quarto = {
 <h2 data-number="1.1" class="anchored" data-anchor-id="configuración-del-entorno-y-flujo-de-trabajo-basado-en-proyectos"><span class="header-section-number">1.1</span> Configuración del Entorno y Flujo de Trabajo Basado en Proyectos</h2>
 <p>Para garantizar la reproducibilidad de nuestras investigaciones, utilizaremos de manera obligatoria el ecosistema conformado por <strong>R</strong>, el entorno de desarrollo integrado <strong>RStudio</strong> y el sistema de control de versiones <strong>Git/GitHub</strong>.</p>
 <p>En el análisis de datos profesional, el uso de rutas absolutas rígidas (como <code>C:/Usuarios/MiNombre/Documentos/datos.csv</code>) o el empleo manual de <code>setwd()</code> son considerados malas prácticas que rompen la reproducibilidad <span class="citation" data-cites="stoudt2021principles">Stoudt et al. (<a href="references.html#ref-stoudt2021principles" role="doc-biblioref">2021</a>)</span>.</p>
-<p>Para solucionar esto, RStudio introduce los <strong>Proyectos de RStudio</strong> (archivos con extensión <code>.Rproj</code>). Al abrir un proyecto, RStudio establece automáticamente el directorio de trabajo activo en la carpeta donde reside el archivo <code>.Rproj</code>. Esto permite gestionar todo el código mediante <strong>rutas relativas</strong> (por ejemplo, <code>"data/ventas.csv"</code>), garantizando que el proyecto funcione de forma idéntica en cualquier otra computadora.</p>
+<p>Para solucionar esto, RStudio introduce los <strong>Proyectos de RStudio</strong> (archivos con extensión <code>.Rproj</code>). Al abrir un proyecto, RStudio establece automáticamente el directorio de trabajo activo en la carpeta donde reside el archivo <code>.Rproj</code>. Esto permite gestionar todo el código mediante <strong>rutas relativas</strong> (por ejemplo, <code>"data/registros.csv"</code>), garantizando que el proyecto funcione de forma idéntica en cualquier otra computadora.</p>
 <section id="estructura-de-carpetas-recomendada" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="estructura-de-carpetas-recomendada"><span class="header-section-number">1.1.1</span> Estructura de Carpetas Recomendada</h3>
 <p>Todo proyecto analítico ordenado debe seguir una jerarquía estricta de subdirectorios dentro del directorio raíz <span class="citation" data-cites="stoudt2021principles">Stoudt et al. (<a href="references.html#ref-stoudt2021principles" role="doc-biblioref">2021</a>)</span>:</p>
@@ -509,13 +509,14 @@ window.Quarto = {
 │   └── processed/     &lt;- Datos limpios listos para análisis
 ├── scripts/           &lt;- Scripts de código R (.R) o documentos Quarto (.qmd)
 ├── figuras/           &lt;- Gráficos y visualizaciones exportadas
-└── docs/              &lt;- Reportes, presentaciones y documentación adicional</code></pre>
+└── docs/              &lt;- Reportes, presentaciones y documentación adicional
+</code></pre>
 </section>
 <section id="buenas-prácticas-de-nomenclatura" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="buenas-prácticas-de-nomenclatura"><span class="header-section-number">1.1.2</span> Buenas Prácticas de Nomenclatura</h3>
 <p>Para evitar conflictos de codificación en distintos sistemas operativos y facilitar la legibilidad del código, se establecen las siguientes directrices de nomenclatura para archivos, scripts y variables:</p>
 <ul>
-<li><strong>Minúsculas siempre</strong>: Utilizar siempre letras minúsculas (evitar <code>DatosVentas.csv</code>, preferir <code>datos_ventas.csv</code>).</li>
+<li><strong>Minúsculas siempre</strong>: Utilizar siempre letras minúsculas (evitar <code>DatosRegistros.csv</code>, preferir <code>datos_registros.csv</code>).</li>
 <li><strong>Sin espacios ni caracteres especiales</strong>: Reemplazar espacios por guiones medios (<code>-</code>) o bajos (<code>_</code>). Nunca usar tildes, la letra “ñ” o caracteres especiales en nombres de archivos o variables.</li>
 <li><strong>Nombres autodescriptivos pero cortos</strong>: El nombre debe indicar claramente el contenido (ej. <code>01_limpieza_ingresos.R</code>).</li>
 <li><strong>Secuenciación de scripts</strong>: Si el análisis requiere varios pasos, anteponer números secuenciales para indicar el orden de ejecución (ej. <code>01_ingesta.R</code>, <code>02_limpieza.R</code>, <code>03_eda.R</code>).</li>
@@ -531,8 +532,8 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Abre RStudio. Go to <strong>File &gt; New Project…</strong></li>
-<li>Selecciona <strong>New Directory &gt; New Project</strong>. Nombra tu proyecto en minúsculas y sin espacios (ej. <code>analisis-ventas-bolivia</code>).</li>
+<li>Abre RStudio. Ve a <strong>File &gt; New Project…</strong></li>
+<li>Selecciona <strong>New Directory &gt; New Project</strong>. Nombra tu proyecto en minúsculas y sin espacios (ej. <code>analisis-datos-bolivia</code>).</li>
 <li>En la pestaña <strong>Files</strong> (panel inferior derecho), haz clic en <strong>New Folder</strong> y crea la estructura base descrita anteriormente (<code>data</code>, <code>data/raw</code>, <code>data/processed</code>, <code>scripts</code>, <code>figuras</code>).</li>
 </ol>
 </div>
@@ -542,7 +543,8 @@ window.Quarto = {
 <section id="sintaxis-básica-y-operaciones-en-la-consola" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="sintaxis-básica-y-operaciones-en-la-consola"><span class="header-section-number">1.2</span> Sintaxis Básica y Operaciones en la Consola</h2>
 <p>Esta sigue el principio matemático de:</p>
-<p><span class="math display">\[f(x)=y\]</span> <span class="math display">\[comando(arg1,arg2, \ldots)\]</span></p>
+<p><span class="math display">\[f(x)=y\]</span></p>
+<p><span class="math display">\[comando(arg1,arg2, \ldots)\]</span></p>
 <p>, donde aplicamos una <strong>función</strong> a un <strong>argumento</strong> para obtener un resultado.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">R como Calculadora</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Operadores Lógicos</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Palabras Reservadas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Clases</a></li></ul>
@@ -550,12 +552,12 @@ window.Quarto = {
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>R maneja operaciones de alta precisión respetando el orden algebraico estándar:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Operaciones aritméticas</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1500</span> <span class="sc">*</span> <span class="fl">0.15</span>) <span class="sc">+</span> <span class="dv">200</span>  <span class="co"># Cálculo de interés</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1500</span> <span class="sc">*</span> <span class="fl">0.15</span>) <span class="sc">+</span> <span class="dv">200</span>  <span class="co"># Operación aritmética combinada</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">144</span>)            <span class="co"># Función raíz cuadrada</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">^</span><span class="dv">2</span>                 <span class="co"># Potenciación</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Esenciales para el filtrado de reglas de negocio en BI, devuelven valores <code>TRUE</code> o <code>FALSE</code>:</p>
+<p>Esenciales para el filtrado de observaciones bajo condiciones específicas, devuelven valores <code>TRUE</code> o <code>FALSE</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">&gt;=</span> <span class="dv">50</span>    <span class="co"># Mayor o igual</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">==</span> <span class="dv">10</span>     <span class="co"># Igualdad estricta (doble igual)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">!=</span> <span class="dv">5</span>      <span class="co"># Diferente de</span></span>
@@ -572,7 +574,7 @@ window.Quarto = {
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">100</span>)    <span class="co"># numérica</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">"hola"</span>) <span class="co"># Texto, caractér</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">"hola"</span>) <span class="co"># Texto, carácter</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">2</span><span class="sc">&gt;</span><span class="dv">3</span>)    <span class="co"># Lógica</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
@@ -587,26 +589,26 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Escenario:</strong> Un cliente tiene un crédito de 50,000 USD a una tasa del 1.2% mensual.</p>
+<p><strong>Escenario:</strong> Se analiza un fondo o registro que inicia con un valor de 50,000 unidades a una tasa del 1.2% mensual.</p>
 <ol type="1">
-<li>Use la <strong>consola</strong> como calculadora para hallar el interés del primer mes.</li>
-<li>Verifique si ese interés es mayor a 500 USD usando un operador lógico.</li>
-<li>Utilice el comando <code>?log</code> para investigar cómo calcular el logaritmo en base 10 del monto total del crédito.</li>
+<li>Use la <strong>consola</strong> como calculadora para hallar el rendimiento o interés del primer mes.</li>
+<li>Verifique si ese resultado es mayor a 500 unidades usando un operador lógico.</li>
+<li>Utilice el comando <code>?log</code> para investigar cómo calcular el logaritmo en base 10 del valor total acumulado.</li>
 </ol>
 </div>
 </div>
 </section>
-<section id="estructuras-de-datos-los-activos-de-información" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="estructuras-de-datos-los-activos-de-información"><span class="header-section-number">1.3</span> Estructuras de Datos: Los Activos de Información</h2>
-<p>En R, todo es un <strong>objeto</strong>. Para crear estos activos en la memoria, utilizamos el operador de asignación <code>&lt;-</code> (evite el uso de <code>=</code> para asignaciones, ya que puede confundirse con igualdad lógica).</p>
+<section id="estructuras-de-datos" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="estructuras-de-datos"><span class="header-section-number">1.3</span> Estructuras de Datos</h2>
+<p>En R, todo es un <strong>objeto</strong>. Para crear estos elementos en la memoria, utilizamos el operador de asignación <code>&lt;-</code> (evite el uso de <code>=</code> para asignaciones, ya que puede confundirse con igualdad lógica).</p>
 <section id="estructuras-homogéneas-mismo-tipo-de-dato" class="level3" data-number="1.3.1">
 <h3 data-number="1.3.1" class="anchored" data-anchor-id="estructuras-homogéneas-mismo-tipo-de-dato"><span class="header-section-number">1.3.1</span> Estructuras Homogéneas (Mismo tipo de dato)</h3>
 <p>Contienen elementos de una sola clase (números, texto o lógicos):</p>
 <ul>
 <li><strong>Scalar:</strong> Un único valor individual.</li>
-<li><strong>Vector:</strong> Una colección indexada de valores columna. Se crean con la función combinar <code>c()</code>.</li>
-<li><strong>Matriz:</strong> Una estructura bidimensional donde todos los datos son del mismo tipo (ej. una tabla de puros montos financieros).</li>
-<li><strong>Array:</strong> Una generalización de la matriz de mas de 2 dimensiones</li>
+<li><strong>Vector:</strong> Una colección indexada de valores de una dimensión. Se crean con la función combinar <code>c()</code>.</li>
+<li><strong>Matriz:</strong> Una estructura bidimensional donde todos los datos son del mismo tipo.</li>
+<li><strong>Array:</strong> Una generalización de la matriz de más de 2 dimensiones.</li>
 </ul>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Scalar</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Vector</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Matriz</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false" href="">Array</a></li></ul>
@@ -634,7 +636,7 @@ window.Quarto = {
 </section>
 <section id="estructuras-heterogéneas-múltiples-tipos-de-datos" class="level3" data-number="1.3.2">
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="estructuras-heterogéneas-múltiples-tipos-de-datos"><span class="header-section-number">1.3.2</span> Estructuras Heterogéneas (Múltiples tipos de datos)</h3>
-<p>Permiten combinar diferentes naturalezas de información, siendo las más poderosas para el analista:</p>
+<p>Permiten combinar diferentes naturalezas de información:</p>
 <ul>
 <li><strong>Data Frames:</strong> Es el formato estándar de las bases de datos (tabular). Cada columna es una variable (puede ser de distinto tipo) y cada fila es una observación.</li>
 <li><strong>Listas:</strong> El objeto más flexible; puede contener vectores, matrices, modelos y hasta otras listas en un solo contenedor.</li>
@@ -644,22 +646,16 @@ window.Quarto = {
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nombre  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Maria"</span>, <span class="st">"Jose"</span>, <span class="st">"Ana"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>edad  <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">30</span>, <span class="dv">23</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(nombre, edad)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>edad    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">30</span>, <span class="dv">23</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df1     <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombre, edad)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>df1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="dv">1</span>; v1<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="dv">1</span>; v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">list</span>(s1, v1, df1)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>l1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/class.jpeg" class="img-fluid figure-img"></p>
-<figcaption>Estructuras en R</figcaption>
-</figure>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -667,42 +663,42 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Actividad: Creación de un Dataset Estratégico (5 min)
+<span class="screen-reader-only">Important</span>Actividad: Creación de un Dataset Base (5 min)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Debe registrar el desempeño de tres vendedores: Ana, Luis y Pedro. Vendieron 15, 20 y 12 unidades respectivamente.</p>
+<p>Debe registrar las mediciones de tres participantes: Ana, Luis y Pedro, con valores de 15, 20 y 12 observaciones respectivamente.</p>
 <ol type="1">
-<li>Cree el vector <code>vendedores</code> con los nombres.</li>
-<li>Cree el vector <code>ventas</code> con las unidades.</li>
-<li>Cree un dataframe llamado <code>df_comercial</code> que una ambos vectores.</li>
-<li>Use la función <code>str(df_comercial)</code> para inspeccionar la estructura de su base de datos.</li>
+<li>Cree el vector <code>participantes</code> con los nombres.</li>
+<li>Cree el vector <code>registros</code> con los valores numéricos.</li>
+<li>Cree un dataframe llamado <code>df_estudio</code> que una ambos vectores.</li>
+<li>Use la función <code>str(df_estudio)</code> para inspeccionar la estructura de su base de datos.</li>
 </ol>
 </div>
 </div>
 </section>
-<section id="indexación" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="indexación"><span class="header-section-number">1.3.3</span> Indexación</h3>
+<section id="indexación-y-selección-de-elementos" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="indexación-y-selección-de-elementos"><span class="header-section-number">1.3.3</span> Indexación y Selección de Elementos</h3>
 <p>Se refiere al proceso de acceder, seleccionar o extraer elementos específicos dentro de las estructuras de datos en R (vectores, matrices, data frames y listas) utilizando operadores de extracción.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Vectores</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Matrices y dataframe</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false" href="">Listas</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Vectores</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Matrices y Data Frames</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false" href="">Listas</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Semilla aleatoria</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>v1<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">10</span>) <span class="co"># Distribución uniforme de 0 a 1</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>) <span class="co"># Distribución uniforme de 0 a 1</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>v1[<span class="dv">2</span>]</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>v1[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>)]</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>v1[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris) <span class="co">#datos en R</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>iris[<span class="dv">2</span>,] <span class="co">#Fila</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>iris[,<span class="dv">2</span>] <span class="co">#Columna</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris) <span class="co"># datos integrados en R</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>iris[<span class="dv">2</span>,]   <span class="co"># Fila 2</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>iris[,<span class="dv">2</span>]   <span class="co"># Columna 2</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>iris[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)]</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Petal.Length <span class="co">#seleccionar variable</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Petal.Length <span class="co"># Seleccionar una variable por nombre</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>l1<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, iris)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, iris)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>l1[[<span class="dv">2</span>]]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>l1[[<span class="dv">3</span>]]<span class="sc">$</span>Species</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -712,13 +708,13 @@ window.Quarto = {
 </section>
 <section id="fundamentos-metodológicos-y-estadísticos-de-los-datos" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="fundamentos-metodológicos-y-estadísticos-de-los-datos"><span class="header-section-number">1.4</span> Fundamentos Metodológicos y Estadísticos de los Datos</h2>
-<p>Antes de escribir la primera línea de código para leer un archivo, es indispensable comprender la naturaleza metodológica y estadística del conjunto de datos con el que trabajaremos.</p>
+<p>Antes de escribir código para importar un archivo, es indispensable comprender la naturaleza metodológica y estadística del conjunto de datos con el que trabajaremos.</p>
 <section id="nomenclatura-estándar-en-análisis-de-datos" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="nomenclatura-estándar-en-análisis-de-datos"><span class="header-section-number">1.4.1</span> Nomenclatura Estándar en Análisis de Datos</h3>
-<p>En el ámbito de la ciencia de datos y la estadística, interactuamos con diferentes estructuras de datos <span class="citation" data-cites="wickham2023r">Wickham et al. (<a href="references.html#ref-wickham2023r" role="doc-biblioref">2023</a>)</span>:</p>
+<p>En el ámbito del análisis de datos y la estadística, interactuamos con diferentes estructuras de información <span class="citation" data-cites="wickham2023r">Wickham et al. (<a href="references.html#ref-wickham2023r" role="doc-biblioref">2023</a>)</span>:</p>
 <ul>
 <li><strong>Datos Estructurados</strong>: Información organizada en tablas formales de filas y columnas (dataframes), donde cada fila representa una observación y cada columna una variable.</li>
-<li><strong>Datos Semiestructurados</strong>: No tienen una estructura de tabla rígida pero contienen marcadores o etiquetas organizativas (ej. archivos JSON o XML).</li>
+<li><strong>Datos Semiestructurados</strong>: No tienen una estructura tabular rígida pero contienen marcadores o etiquetas organizativas (ej. archivos JSON o XML).</li>
 <li><strong>Datos No Estructurados</strong>: Información sin un formato predefinido (ej. textos libres, audios, imágenes).</li>
 <li><strong>Dataset (Conjunto de Datos)</strong>: Colección estructurada de datos.</li>
 <li><strong>Observación (o Caso)</strong>: La unidad mínima sobre la cual se recopilan los datos (fila).</li>
@@ -731,7 +727,7 @@ window.Quarto = {
 <ul>
 <li><strong>Censos</strong>: Recolección de información sobre la totalidad de los elementos de una población de interés. Proporcionan parámetros poblacionales exactos pero conllevan altos costos y tiempos de ejecución.</li>
 <li><strong>Encuestas por Muestreo</strong>: Recolección de datos sobre un subconjunto representativo (muestra) extraído probabilísticamente de la población. Permiten realizar inferencia estadística sobre la población general con un margen de error controlable <span class="citation" data-cites="groves2009survey">Groves et al. (<a href="references.html#ref-groves2009survey" role="doc-biblioref">2009</a>)</span>.</li>
-<li><strong>Registros Administrativos</strong>: Datos recopilados de manera continua con propósitos de control institucional u operativo (ej. facturaciones de impuestos, registros de aduana, admisiones hospitalarias). Tienen la ventaja de ser económicos y continuos, pero no están diseñados con fines estadísticos, lo que suele requerir un exhaustivo trabajo de depuración.</li>
+<li><strong>Registros Administrativos</strong>: Datos recopilados de manera continua con propósitos de control institucional u operativo (ej. registros tributarios, aduaneros o ingresos institucionales). Tienen la ventaja de ser económicos y continuos, pero no están diseñados originalmente con fines estadísticos, lo que suele requerir un trabajo de depuración previo.</li>
 </ul>
 <p>Adicionalmente, según el nivel de control en la obtención de datos, distinguimos entre:</p>
 <table class="caption-top table">
@@ -744,44 +740,44 @@ window.Quarto = {
 <tr class="header">
 <th>Dimensión</th>
 <th>Datos de Estudios Observacionales</th>
-<th>Datos Transaccionales</th>
+<th>Datos Transaccionales / Operativos</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Origen / Propósito</strong></td>
-<td>Diseñados por un investigador para responder una hipótesis concreta.</td>
-<td>Generados automáticamente por la operativa del negocio/sistema (ventas, clicks, facturas).</td>
+<td>Diseñados por un investigador para responder una hipótesis o pregunta concreta.</td>
+<td>Generados automáticamente por la operativa continua de un sistema o plataforma.</td>
 </tr>
 <tr class="even">
 <td><strong>Control sobre las variables</strong></td>
-<td><strong>Sin intervención directa</strong> en los sujetos, pero con control explícito en el instrumento de medición (encuestas, fichas clínicas).</td>
+<td><strong>Sin intervención directa</strong> en los sujetos, pero con control explícito en el instrumento de medición.</td>
 <td>Ninguno. Registra únicamente los eventos conforme suceden en el sistema.</td>
 </tr>
 <tr class="odd">
 <td><strong>Volumen y Frecuencia</strong></td>
-<td>Muestras finitas o acotadas (encuestas, cohortes) tomadas en momentos específicos.</td>
-<td>Flujo continuo (<em>streaming</em>) de gran volumen (Big Data), en tiempo real o por lotes.</td>
+<td>Muestras finitas o acotadas tomadas en momentos específicos.</td>
+<td>Flujo continuo de gran volumen, generado en tiempo real o por lotes.</td>
 </tr>
 <tr class="even">
 <td><strong>Calidad y Limpieza</strong></td>
 <td>Alta consistencia lógica previa, pues se diseñan variables y escalas predeterminadas.</td>
-<td>Requiere un esfuerzo considerable de procesamiento, ya que suelen contener datos duplicados, nulos o con ruido.</td>
+<td>Requiere procesamiento previo, ya que suele contener datos duplicados, nulos o imprecisiones.</td>
 </tr>
 <tr class="odd">
 <td><strong>Capacidad de Inferencia</strong></td>
 <td>Diseñados estadísticamente para inferir hacia una población o identificar asociaciones controlando sesgos.</td>
-<td>Útiles para describir comportamientos históricos y patrones de uso; la inferencia estadística requiere sesgos de selección cuidadosos.</td>
+<td>Útiles para describir comportamientos históricos y patrones; la inferencia estadística requiere evaluación cuidadosa de sesgos de selección.</td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="población-objetivo-y-unidad-de-análisis" class="level3" data-number="1.4.3">
 <h3 data-number="1.4.3" class="anchored" data-anchor-id="población-objetivo-y-unidad-de-análisis"><span class="header-section-number">1.4.3</span> Población Objetivo y Unidad de Análisis</h3>
-<p>Antes de realizar la ingesta de un dataset, todo analista de datos debe responder con precisión dos preguntas fundamentales:</p>
+<p>Antes de realizar la ingesta de un dataset, todo analista debe responder con precisión dos preguntas fundamentales:</p>
 <ol type="1">
 <li><strong>¿Cuál es la Población Objetivo (<em>Target Population</em>)?</strong>: Es el conjunto completo de elementos sobre los cuales se desean realizar generalizaciones o inferencias <span class="citation" data-cites="groves2009survey">Groves et al. (<a href="references.html#ref-groves2009survey" role="doc-biblioref">2009</a>)</span>.</li>
-<li><strong>¿Cuál es la Unidad de Análisis?</strong>: Es el elemento básico sobre el cual se realiza la medición o la observación en el dataset (ej. una persona, un hogar, una transacción, una escuela).</li>
+<li><strong>¿Cuál es la Unidad de Análisis?</strong>: Es el elemento básico sobre el cual se realiza la medición o la observación en el dataset (ej. una persona, un hogar, un evento, una institución).</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -793,7 +789,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Confundir la unidad de análisis puede llevarnos al sesgo de la <strong>falacia ecológica</strong>: cometer el error de deducir conclusiones sobre individuos a partir de datos agregados de un grupo (por ejemplo, asumir que porque un departamento del país tiene un PIB promedio alto, cada habitante seleccionado al azar de ese departamento es de ingresos altos).</p>
+<p>Confundir la unidad de análisis puede llevarnos al sesgo de la <strong>falacia ecológica</strong>: cometer el error de deducir conclusiones sobre individuos a partir de datos agregados de un grupo (por ejemplo, asumir que porque un departamento del país tiene un promedio de ingresos alto, cada habitante seleccionado al azar de ese departamento posee necesariamente ingresos altos).</p>
 </div>
 </div>
 </section>
@@ -808,20 +804,20 @@ window.Quarto = {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Enfoque Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Enfoque <code>readr</code> (Recomendado)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
-<p>Las funciones tradicionales como <code>read.csv()</code> no requieren cargar paquetes externos, pero presentan limitaciones históricas de rendimiento y coerción silenciosa de tipos de datos.</p>
+<p>Las funciones tradicionales como <code>read.csv()</code> no requieren cargar paquetes externos, pero presentan limitaciones de rendimiento en archivos grandes y pueden aplicar conversiones automáticas no deseadas.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura usando Base R</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># stringsAsFactors = FALSE evita que columnas de texto se fuercen a factores categóricos</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>datos_base <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/ventas_bolivia.csv"</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>datos_base <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/datos_bolivia.csv"</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar estructura básica</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
-<p>El paquete <code>readr</code> está diseñado para la ciencia de datos moderna: es hasta 10 veces más rápido que Base R, lee los archivos directamente como <code>tibbles</code> (estructuras legibles de dataframes) y no realiza conversiones automáticas ni altera los nombres de las columnas <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<p>El paquete <code>readr</code> está diseñado para el análisis moderno: es significativamente más rápido que Base R, lee los archivos directamente como <code>tibbles</code> (estructuras legibles de dataframes) y no altera los nombres de las columnas <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura moderna con readr</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>datos_readr <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/ventas_bolivia.csv"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>datos_readr <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/datos_bolivia.csv"</span>)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver especificación de columnas detectada</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(datos_readr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -832,12 +828,12 @@ window.Quarto = {
 <ul>
 <li><code>col_names</code> / <code>header</code>: Define si la primera fila contiene los nombres de las variables (<code>TRUE</code> o <code>FALSE</code>).</li>
 <li><code>delim</code> / <code>sep</code>: Especifica el carácter delimitador de campos (ej. <code>,</code>, <code>;</code>, <code>\t</code> para tabuladores).</li>
-<li><code>na</code>: Define explícitamente qué strings deben interpretarse en R como un valor faltante real (<code>NA</code>). En bases de datos reales bolivianas, es común ver valores perdidos codificados como <code>"999"</code>, <code>"N/A"</code> o simplemente guiones <code>"-"</code>.</li>
-<li><code>skip</code>: Permite saltar un número determinado de líneas iniciales (muy común cuando los archivos contienen metadatos informativos en la cabecera antes de la tabla real de datos).</li>
+<li><code>na</code>: Define explícitamente qué valores de texto deben interpretarse en R como un valor faltante real (<code>NA</code>). En bases de datos reales, es común ver valores perdidos codificados como <code>"999"</code>, <code>"N/A"</code> o simplemente guiones <code>"-"</code>.</li>
+<li><code>skip</code>: Permite saltar un número determinado de líneas iniciales (útil cuando los archivos contienen cabeceras informativas antes de la tabla real de datos).</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo avanzado de ingesta controlada de un archivo CSV con inconsistencias</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ventas_limpias <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/raw/ventas_bolivia.csv"</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo de ingesta controlada de un archivo CSV con inconsistencias</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>datos_limpios <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/raw/datos_bolivia.csv"</span>,</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"999"</span>, <span class="st">"N/A"</span>, <span class="st">"-"</span>),</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">3</span>,           <span class="co"># Omitir las primeras 3 líneas de metadatos o comentarios</span></span>
@@ -849,19 +845,19 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Actividad de Paso: Tipos de Datos Preventivos (3 minutos)
+<span class="screen-reader-only">Note</span>Actividad de Paso: Definición Preventiva de Tipos de Datos (3 minutos)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Al importar datos, identificadores categóricos como la Cédula de Identidad (CI) o códigos de sucursal pueden ser erróneamente interpretados por R como variables numéricas continuas sobre las cuales calcular medias o desviaciones estándar.</p>
-<p>Para prevenir esto, podemos forzar el tipo de dato correcto durante el proceso mismo de lectura:</p>
+<p>Al importar datos, identificadores categóricos como la Cédula de Identidad (CI) o códigos de zona pueden ser erróneamente interpretados por R como variables numéricas continuas sobre las cuales no tiene sentido calcular promedios.</p>
+<p>Para prevenir esto, podemos forzar el tipo de dato correcto durante el proceso de lectura:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Enfoque Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Enfoque <code>readr</code></a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forzar columna 1 como numérico y columnas 2 y 3 como carácter</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>datos_preventivos <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/raw/ventas_bolivia.csv"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/raw/datos_bolivia.csv"</span>,</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">"numeric"</span>, <span class="st">"character"</span>, <span class="st">"character"</span>)</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -869,9 +865,9 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir tipos específicos de columnas</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>datos_preventivos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/raw/ventas_bolivia.csv"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/raw/datos_bolivia.csv"</span>,</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">id_cliente =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">id_registro =</span> <span class="fu">col_character</span>(),</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_nit =</span> <span class="fu">col_character</span>(),</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">monto_bs =</span> <span class="fu">col_double</span>()</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  )</span>
@@ -885,34 +881,34 @@ window.Quarto = {
 <section id="hojas-de-cálculo-microsoft-excel" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="hojas-de-cálculo-microsoft-excel"><span class="header-section-number">1.5.2</span> Hojas de Cálculo (Microsoft Excel)</h3>
 <p>A diferencia de los archivos planos, los archivos de Microsoft Excel (<code>.xls</code>, <code>.xlsx</code>) son binarios y pueden albergar múltiples pestañas, estilos, celdas combinadas y fórmulas.</p>
-<p>Antes de leer una hoja de Excel en R, se debe asegurar que el diseño sea <strong>tabular</strong>:</p>
+<p>Antes de leer una hoja de Excel en R, se debe asegurar que la estructura sea <strong>tabular</strong>:</p>
 <ol type="1">
 <li><strong>Fila única de cabecera</strong>: Los nombres de las variables deben estar en la primera fila. Evitar cabeceras dobles o celdas combinadas.</li>
 <li><strong>Una observación por fila</strong>: No intercalar filas de totales, resúmenes parciales o comentarios intermedios.</li>
-<li><strong>Sin formatos de celda con significado analítico</strong>: Si una celda pintada de rojo significa “mora”, esa información debe convertirse en una variable explícita en su propia columna (ej. <code>estado_mora = "mora"</code>) antes de la ingesta, ya que R no leerá colores de relleno como datos analíticos.</li>
+<li><strong>Sin formatos de celda con significado analítico</strong>: Si una celda destacada en rojo tiene una connotación específica (ej. “pendiente”), esa información debe convertirse en una variable explícita en su propia columna (ej. <code>estado = "pendiente"</code>) antes de la ingesta, ya que R no leerá colores de relleno como datos.</li>
 </ol>
-<p>Para importar estas hojas de manera eficiente y sin dependencias externas complejas, utilizaremos el paquete <strong><code>readxl</code></strong> de la suite <code>tidyverse</code> <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<p>Para importar estas hojas de manera eficiente, utilizaremos el paquete <strong><code>readxl</code></strong> de la suite <code>tidyverse</code> <span class="citation" data-cites="boehmke2016data">Boehmke (<a href="references.html#ref-boehmke2016data" role="doc-biblioref">2016</a>)</span>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Ingesta de Hoja por Defecto</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Ingesta de Pestaña Específica y Rangos</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Ingesta de Hoja Por Defecto</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Ingesta de Pestaña Específica y Rangos</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lee la primera pestaña del libro de Excel de forma automática</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>datos_excel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/reporte_sucursales.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>datos_excel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/reporte_regional.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Leer una pestaña específica por su nombre</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>datos_pestaña <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/raw/reporte_sucursales.xlsx"</span>,</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"sucursal_lpz"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>datos_pestana <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/raw/reporte_regional.xlsx"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"lapaz"</span></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Leer un rango específico de celdas delimitado</span></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>datos_rango <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/raw/reporte_sucursales.xlsx"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/raw/reporte_regional.xlsx"</span>,</span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="st">"B5:F105"</span></span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -920,88 +916,22 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="adquisición-de-datos-desde-la-web-apis-y-web-scraping" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="adquisición-de-datos-desde-la-web-apis-y-web-scraping"><span class="header-section-number">1.6</span> Adquisición de Datos desde la Web: APIs y Web Scraping</h2>
-<p>La recolección moderna de datos requiere, de forma indispensable, interactuar directamente con la web. Estudiaremos cómo automatizar este proceso mediante el consumo de APIs especializadas y Web Scraping de páginas HTML.</p>
-<section id="consumo-de-apis-con-librerías-especializadas" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1" class="anchored" data-anchor-id="consumo-de-apis-con-librerías-especializadas"><span class="header-section-number">1.6.1</span> Consumo de APIs con Librerías Especializadas</h3>
-<p>Una <strong>API (Application Programming Interface)</strong> es un canal estructurado provisto por un servidor web para transferir datos de manera automatizada. En lugar de procesar solicitudes manuales o lidiar con el diseño visual de un sitio web, consumimos APIs usando paquetes en R que actúan como envoltorios de conexión directa.</p>
-<section id="caso-práctico-1-banco-mundial-wbstats" class="level4" data-number="1.6.1.1">
-<h4 data-number="1.6.1.1" class="anchored" data-anchor-id="caso-práctico-1-banco-mundial-wbstats"><span class="header-section-number">1.6.1.1</span> Caso Práctico 1: Banco Mundial (<code>wbstats</code>)</h4>
-<p>El paquete <code>wbstats</code> permite realizar búsquedas y descargas directas de los miles de indicadores macroeconómicos y sociales que publica el Banco Mundial.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wbstats)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Buscar el identificador de indicador para el PIB per cápita</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>pib_id <span class="ot">&lt;-</span> <span class="fu">wb_search</span>(<span class="st">"GDP per capita (current US</span><span class="sc">\\</span><span class="st">$)"</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Descargar datos de Bolivia (código de país "BO") desde 2015 a 2024</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>pib_bolivia <span class="ot">&lt;-</span> <span class="fu">wb_data</span>(</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">indicator =</span> <span class="st">"NY.GDP.PCAP.CD"</span>, </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="st">"BO"</span>, </span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_date =</span> <span class="dv">2015</span>, </span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_date =</span> <span class="dv">2024</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar las primeras filas del indicador macroeconómico recuperado</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pib_bolivia)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-</section>
-<section id="captura-y-preservación-de-la-información" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="captura-y-preservación-de-la-información"><span class="header-section-number">1.7</span> Captura y Preservación de la Información</h2>
-<p>En el ámbito del análisis de datos, el primer paso crítico consiste en obtener información de calidad mediante un proceso sistemático de captura y preservación. Tradicionalmente, la estadística y la investigación social han dependido de <strong>fuentes convencionales</strong> como censos, encuestas por muestreo y registros administrativos.</p>
-<p>Sin embargo, en el ecosistema digital moderno, la Inteligencia de Negocios y la minería de datos exigen incorporar la captura de información generada en espacios digitales, redes sociales y portales web. Este cambio metodológico demanda del analista <strong>mucha paciencia</strong> y creatividad, ya que la interacción con áreas externas y el preprocesamiento de datos crudos consumen la mayor parte del esfuerzo técnico.</p>
-<p>La justificación de este esfuerzo radica en la naturaleza de los datos del mundo real: independientemente de su origen, la mayoría de los datos son <strong>ruidosos, inconsistentes y adolecen de valores perdidos</strong>. Por ello, aunque la recopilación en la web pueda parecer de bajo costo, la creación de datos de alta calidad mediante limpieza, estandarización e integración representa una inversión considerable para cualquier organización.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/dataweb.jpeg" class="img-fluid figure-img"></p>
-<figcaption>Datos Web</figcaption>
-</figure>
-</div>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Característica</th>
-<th>Estudio Observacional</th>
-<th>Registro Transaccional</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Origen</strong></td>
-<td>Diseñado ex profeso (con intensión) para investigar o medir.</td>
-<td>Generado automáticamente por una operación del día a día.</td>
-</tr>
-<tr class="even">
-<td><strong>Intención</strong></td>
-<td>Analítica / Científica.</td>
-<td>Operativa / Administrativa.</td>
-</tr>
-<tr class="odd">
-<td><strong>Intervención</strong></td>
-<td>El investigador diseña las preguntas o variables a medir.</td>
-<td>El sistema registra el evento tal como sucede por necesidad operativa.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus"><span class="header-section-number">1.8</span> El Ciclo de Recopilación de Información (Los 5 Pasos de Iacus)</h2>
-<p>Para evitar sesgos y garantizar que la recolección automática de información de los sitios web sea un proceso científico <span class="citation" data-cites="Iacus2015">(<a href="references.html#ref-Iacus2015" role="doc-biblioref">Iacus et al. 2015</a>)</span>, se debe seguir una secuencia metodológica estructurada:</p>
-<pre><code>[1. Definición de Necesidad] ──&gt; [2. Identificación de Fuentes] ──&gt; [3. Teoría de Generación]
+<section id="adquisición-de-datos-desde-la-web-scraping-y-apis" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="adquisición-de-datos-desde-la-web-scraping-y-apis"><span class="header-section-number">1.6</span> Adquisición de Datos desde la Web: Scraping y APIs</h2>
+<p>La recolección moderna de datos requiere, en muchos casos, interactuar con fuentes públicas o plataformas en la web. Estudiaremos cómo automatizar este proceso mediante el consumo de APIs especializadas y la extracción de datos desde documentos HTML.</p>
+<section id="el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="el-ciclo-de-recopilación-de-información-los-5-pasos-de-iacus"><span class="header-section-number">1.6.1</span> El Ciclo de Recopilación de Información (Los 5 Pasos de Iacus)</h3>
+<p>Para evitar sesgos y garantizar que la recolección automática de información desde la web sea un proceso riguroso <span class="citation" data-cites="Iacus2015">(<a href="references.html#ref-Iacus2015" role="doc-biblioref">Iacus et al. 2015</a>)</span>, se debe seguir una secuencia metodológica estructurada:</p>
+<pre class="text"><code>[1. Definición de Necesidad] ──&gt; [2. Identificación de Fuentes] ──&gt; [3. Teoría de Generación]
                                                                             │
-[5. Toma de Decisión y Raspado] &lt;── [4. Balance y Aspecto Legal] &lt;──────────┘</code></pre>
+[5. Toma de Decisión y Captura] &lt;── [4. Evaluacion Técnica e Implicaciones] ┘
+</code></pre>
 <ol type="1">
-<li><strong>Definición de la Necesidad de Información:</strong> Delimitar con precisión qué datos se requieren para apoyar una mejor toma de decisiones dentro del negocio.</li>
-<li><strong>Identificación de Fuentes en la Web:</strong> Buscar portales digitales que contengan los atributos o propiedades requeridos para el estudio.</li>
-<li><strong>Teoría del Proceso de Generación de Datos:</strong> Comprender quién genera el dato, con qué frecuencia se actualiza y qué sesgos potenciales puede contener la plataforma de origen.</li>
-<li><strong>Balance de Ventajas, Desventajas y Legalidad:</strong> Evaluar la viabilidad técnica de la captura frente a las políticas de uso del portal y el archivo <code>robots.txt</code> del servidor. <em>https://www.ejemplo.com/robots.txt</em></li>
-<li><strong>Toma de Decisión e Inicio de la Recopilación:</strong> Diseñar el script de extracción automatizada resguardando la preservación y consistencia de los datos capturados.</li>
+<li><strong>Definición de la Necesidad de Información:</strong> Delimitar con precisión qué datos se requieren para responder a la pregunta de investigación o análisis.</li>
+<li><strong>Identificación de Fuentes en la Web:</strong> Buscar portales digitales que contengan las variables requeridas para el estudio.</li>
+<li><strong>Teoría del Proceso de Generación de Datos:</strong> Comprender quién genera el dato, con qué frecuencia se actualiza y qué posibles sesgos o limitaciones de cobertura presenta la fuente de origen.</li>
+<li><strong>Evaluación Técnica e Implicaciones de Uso:</strong> Evaluar la viabilidad técnica de la extracción frente a las políticas de uso de la plataforma y las pautas establecidas en su archivo de configuración <code>robots.txt</code> (ej. <code>https://www.ejemplo.com/robots.txt</code>).</li>
+<li><strong>Toma de Decisión e Inicio de la Recopilación:</strong> Diseñar el script de extracción automatizada garantizando la integridad, consistencia y almacenamiento de los datos capturados.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1013,62 +943,61 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Instrucción:</strong> En grupos de tres estudiantes, elijan un portal de comercio electrónico o de noticias de su país.</p>
+<p><strong>Instrucción:</strong> En grupos de tres estudiantes, elijan un portal institucional, académico o de noticias locales.</p>
 <ol type="1">
-<li>Definan un objetivo de negocio que requiera raspar ese sitio.</li>
-<li>Identifiquen si los datos que obtendrán son el resultado de un estudio observacional o un registro transaccional.</li>
+<li>Definan una pregunta o necesidad de información que requiera recopilar datos de ese sitio.</li>
+<li>Identifiquen si los datos que obtendrán corresponden a un estudio observacional o a un registro transaccional/operativo.</li>
 <li>Mencionen dos posibles inconsistencias o ruidos que esperan encontrar en la data cruda.</li>
 </ol>
 </div>
 </div>
 </section>
-<section id="fundamentos-tecnológicos-de-la-web-html-y-css" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="fundamentos-tecnológicos-de-la-web-html-y-css"><span class="header-section-number">1.9</span> Fundamentos Tecnológicos de la Web: HTML y CSS</h2>
-<p>Para realizar la extracción automática de datos sin la intervención de un humano que navegue visualmente <span class="citation" data-cites="Mitchell2015">(<a href="references.html#ref-Mitchell2015" role="doc-biblioref">Mitchell 2015</a>)</span>, debemos entender el lenguaje con el que están construidas las páginas. El <strong>HTML</strong> (<em>HyperText Markup Language</em>) es un lenguaje de texto que se utiliza para estructurar y desplegar una página web.</p>
-<p>HTML funciona bajo una <strong>estructura jerárquica y entornos de encapsulamiento</strong> definidos por etiquetas (tags) y atributos. Por ejemplo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"oferta"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"sucursal_la_paz"</span><span class="dt">&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"producto"</span><span class="dt">&gt;</span>Laptop de Oficina<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"precio"</span><span class="dt">&gt;</span>750.00 USD<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>En minería de datos, no necesitamos leer todo el código de una página. El diseño estético de la web utiliza hojas de estilo (CSS) que asignan clases (como <code>.producto</code> o <code>.precio</code>) a los elementos. Estas clases actúan como <strong>selectores o direcciones postales</strong> que le permiten a nuestro código en R extraer quirúrgicamente la información de interés.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/scrap1.jpeg" class="img-fluid figure-img"></p>
-<figcaption>Scraping en R</figcaption>
-</figure>
-</div>
+<section id="fundamentos-de-la-web-html-y-css" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="fundamentos-de-la-web-html-y-css"><span class="header-section-number">1.6.2</span> Fundamentos de la Web: HTML y CSS</h3>
+<p>Para realizar la extracción de datos sin navegación manual <span class="citation" data-cites="Mitchell2015">(<a href="references.html#ref-Mitchell2015" role="doc-biblioref">Mitchell 2015</a>)</span>, debemos comprender el lenguaje básico con el que se estructuran las páginas web. El <strong>HTML</strong> (<em>HyperText Markup Language</em>) es un código basado en etiquetas que define la estructura del contenido.</p>
+<p>HTML funciona bajo una <strong>estructura jerárquica</strong> delimitada por etiquetas (<em>tags</em>) y atributos. Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"seccion"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"region_lapaz"</span><span class="dt">&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"categoria"</span><span class="dt">&gt;</span>Artículos de Estudio<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"valor"</span><span class="dt">&gt;</span>750.00<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para dar estilo a estos elementos, se utilizan hojas de estilo en cascada (<strong>CSS</strong>), que asignan clases (como <code>.categoria</code> o <code>.valor</code>) a las etiquetas. Estas clases actúan como <strong>selectores o identificadores</strong> que le permiten a nuestro código en R extraer de manera precisa la información de interés.</p>
 </section>
-<section id="raspado-web-práctico-en-r-con-rvest" class="level2" data-number="1.10">
-<h2 data-number="1.10" class="anchored" data-anchor-id="raspado-web-práctico-en-r-con-rvest"><span class="header-section-number">1.10</span> Raspado Web Práctico en R con <code>rvest</code></h2>
-<p>En R, la librería diseñada para interactuar con páginas estáticas y realizar raspado web es <strong><code>rvest</code></strong>, la cual forma parte del universo de herramientas de <strong><code>tidyverse</code></strong>. Para facilitar la identificación del selector CSS de cualquier elemento sin inspeccionar manualmente el código, se emplea la extensión de navegador <strong>SelectorGadget</strong>.</p>
+<section id="web-scraping-con-rvest" class="level3" data-number="1.6.3">
+<h3 data-number="1.6.3" class="anchored" data-anchor-id="web-scraping-con-rvest"><span class="header-section-number">1.6.3</span> Web Scraping con <code>rvest</code></h3>
+<p>En R, la librería estándar para interactuar con páginas web estáticas es <strong><code>rvest</code></strong>, perteneciente al universo <code>tidyverse</code>. Para identificar fácilmente el selector CSS de cualquier elemento de una página, se suele utilizar la extensión de navegador <strong>SelectorGadget</strong>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">Instalación y Carga</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">Funciones Clave</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-3" role="tab" aria-controls="tabset-8-3" aria-selected="false" href="">Ejemplo de Raspado</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">Instalación y Carga</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">Funciones Clave</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-3" role="tab" aria-controls="tabset-8-3" aria-selected="false" href="">Ejemplo Práctico</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
-<p>Para comenzar a trabajar con <code>rvest</code>, instale el paquete desde el CRAN y cárguelo en su sesión de trabajo junto con el núcleo de <code>tidyverse</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalación (se ejecuta una sola vez)</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rvest"</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de librerías en la sesión actual</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalación (se ejecuta una sola vez)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rvest"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de librerías en la sesión actual</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
-<p>La extracción con <code>rvest</code> se basa en cuatro funciones secuenciales que procesan la información mediante la tubería o <em>pipe</em> (<code>%&gt;%</code>): * <code>read_html()</code>: Carga y analiza la estructura jerárquica del documento HTML. * <code>html_nodes()</code>: Extrae los entornos específicos que coinciden con el selector CSS. * <code>html_text()</code>: Limpia el código de marcado y extrae únicamente el texto plano. * <code>html_table()</code>: Convierte tablas HTML (<code>&lt;table&gt;</code>) directamente en estructuras de datos de R (<em>data frames</em>).</p>
+<p>La extracción con <code>rvest</code> se realiza combinando las siguientes funciones mediante el operador tubería (<em>pipe</em> <code>%&gt;%</code>):</p>
+<ul>
+<li><code>read_html()</code>: Descarga y analiza la estructura del documento HTML.</li>
+<li><code>html_nodes()</code> / <code>html_elements()</code>: Selecciona los nodos que coinciden con el selector CSS indicado.</li>
+<li><code>html_text()</code> / <code>html_text2()</code>: Extrae el texto contenido en las etiquetas limpiando el código HTML.</li>
+<li><code>html_table()</code>: Convierte tablas HTML (<code>&lt;table&gt;</code>) directamente en data frames de R.</li>
+</ul>
 </div>
 <div id="tabset-8-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-3-tab">
-<p>A continuación se presenta la sintaxis estándar para estructurar texto extraído de un contenedor web:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Leer el portal web de origen</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>url_portal <span class="ot">&lt;-</span> <span class="st">"https://ejemplo-tienda-bolivia.com"</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>web_html   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url_portal)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Capturar nodos y transformarlos a un vector de texto limpio</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>nombres_productos <span class="ot">&lt;-</span> web_html <span class="sc">%&gt;%</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".producto"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Sintaxis básica para extraer elementos de texto según su clase CSS:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Leer la página web de origen</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>url_pagina <span class="ot">&lt;-</span> <span class="st">"[https://ejemplo-institucional.org](https://ejemplo-institucional.org)"</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>web_html   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url_pagina)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Capturar nodos específicos y extraer texto limpio</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>elementos_texto <span class="ot">&lt;-</span> web_html <span class="sc">%&gt;%</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".categoria"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1078,22 +1007,22 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Ejercicios
+<span class="screen-reader-only">Tip</span>Ejercicios de Web Scraping
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Obtén la tabla de esta fuente y genera un dataframe. https://www.bcb.gob.bo/tco_reporte_detalle_historico.php?fecha=2026-08-20</li>
-<li>Hacer web scraping de un portal de comercio electrónico, clasificados o supermercados locales en Bolivia.</li>
-<li>Hacer un web scraping de una biblioteca universitaria digital en Bolivia y capturar una búsqueda de interés.</li>
+<li>Obtener la tabla con datos históricos publicada por el Banco Central de Bolivia y cargarla en un dataframe: <code>https://www.bcb.gob.bo/tco_reporte_detalle_historico.php?fecha=2026-08-20</code></li>
+<li>Realizar la extracción de listas o catálogos públicos en un portal local de información o avisos.</li>
+<li>Diseñar un script para extraer el catálogo de publicaciones de una biblioteca universitaria o repositorio digital en Bolivia.</li>
 </ol>
 </div>
 </div>
 </section>
-<section id="interfaces-de-programación-de-aplicaciones-apis" class="level2" data-number="1.11">
-<h2 data-number="1.11" class="anchored" data-anchor-id="interfaces-de-programación-de-aplicaciones-apis"><span class="header-section-number">1.11</span> Interfaces de Programación de Aplicaciones (APIs)</h2>
-<p>Aunque el raspado web es una herramienta flexible, tiene una limitación: si el administrador de la página cambia el diseño o el nombre de las clases CSS, el código fallará. Como alternativa estructurada, existen las <strong>APIs</strong> (<em>Application Programming Interface</em>).</p>
-<p>Las APIs son <strong>puertas de entrada creadas por los administradores de una página web</strong> que permiten el acceso controlado a información seleccionada en formatos amigables y altamente estructurados (como JSON o XML), aunque debido a esto no siempre contienen toda la información que el analista desea.</p>
+<section id="consumo-de-interfaces-de-programación-de-aplicaciones-apis" class="level3" data-number="1.6.4">
+<h3 data-number="1.6.4" class="anchored" data-anchor-id="consumo-de-interfaces-de-programación-de-aplicaciones-apis"><span class="header-section-number">1.6.4</span> Consumo de Interfaces de Programación de Aplicaciones (APIs)</h3>
+<p>Aunque el Web Scraping es una herramienta versátil, presenta una limitante: si la estructura o diseño estético de la página web cambia, el script puede fallar. Una alternativa más estable para la ingesta de datos son las <strong>APIs</strong> (<em>Application Programming Interface</em>).</p>
+<p>Una API es un <strong>canal estructurado ofrecido por un servidor web</strong> para permitir la consulta y transferencia automática de datos en formatos estandarizados (como JSON o XML).</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -1102,46 +1031,49 @@ window.Quarto = {
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Dimensión Analítica</th>
-<th style="text-align: left;">Web Scraping Tradicional</th>
-<th style="text-align: left;">Acceso por APIs Oficiales</th>
+<th>Dimensión Analítica</th>
+<th>Web Scraping</th>
+<th>Consumo de APIs Oficiales</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Estabilidad</strong></td>
-<td style="text-align: left;">Baja (sensible a rediseños estéticos de la web)</td>
-<td style="text-align: left;">Alta (los esquemas de datos permanecen estables).</td>
+<td><strong>Estabilidad</strong></td>
+<td>Sensible a cambios de diseño estético del sitio.</td>
+<td>Alta; las estructuras y esquemas se mantienen estables.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Estructura</strong></td>
-<td style="text-align: left;">No estructurada (requiere transformaciones complejas)</td>
-<td style="text-align: left;">Altamente estructurada (JSON, XML listos para análisis).</td>
+<td><strong>Estructura</strong></td>
+<td>Variable; requiere limpieza de sintaxis HTML.</td>
+<td>Estructurada; datos listos para formatear en JSON o XML.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Limitaciones</strong></td>
-<td style="text-align: left;">Bloqueos de IP por peticiones masivas</td>
-<td style="text-align: left;">Regulado por cuotas de acceso y claves de autenticación.</td>
+<td><strong>Acceso</strong></td>
+<td>Puede ser limitado por políticas del servidor.</td>
+<td>Regulado por parámetros, límites de peticiones o claves.</td>
 </tr>
 </tbody>
 </table>
-<section id="caso-práctico-consumo-de-la-api-del-banco-mundial" class="level3" data-number="1.11.1">
-<h3 data-number="1.11.1" class="anchored" data-anchor-id="caso-práctico-consumo-de-la-api-del-banco-mundial"><span class="header-section-number">1.11.1</span> Caso Práctico: Consumo de la API del Banco Mundial</h3>
-<p>La API del Banco Mundial ofrece acceso libre a más de <strong>16,000 indicadores de series de tiempo</strong> con una cobertura histórica superior a los 50 años para la mayoría de los países. En R, no necesitamos realizar peticiones HTTP manuales para consumir esta API, ya que existe la librería especializada <strong><code>wbstats</code></strong> que encapsula las consultas de manera directa.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalar y cargar la librería de acceso a la API del Banco Mundial</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"wbstats"</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wbstats)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Buscar indicadores relacionados con el desempleo</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>busqueda_desempleo <span class="ot">&lt;-</span> <span class="fu">wb_search</span>(<span class="st">"unemployment"</span>)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Descargar datos de desempleo para Bolivia desde el año 2000</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>datos_bolivia <span class="ot">&lt;-</span> <span class="fu">wb_data</span>(</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="st">"BO"</span>, </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">indicator =</span> <span class="st">"SL.UEM.TOTL.ZS"</span>, </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_date =</span> <span class="dv">2000</span>, </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_date =</span> <span class="dv">2025</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="ejemplo-con-paquetes-especializados-banco-mundial-wbstats" class="level4" data-number="1.6.4.1">
+<h4 data-number="1.6.4.1" class="anchored" data-anchor-id="ejemplo-con-paquetes-especializados-banco-mundial-wbstats"><span class="header-section-number">1.6.4.1</span> Ejemplo con Paquetes Especializados: Banco Mundial (<code>wbstats</code>)</h4>
+<p>En R, existen paquetes que simplifican el consumo de APIs públicas complejas evitando la redacción manual de peticiones HTTP. Un ejemplo es <strong><code>wbstats</code></strong>, que da acceso directo a los indicadores del Banco Mundial.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalar y cargar la librería especializada</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"wbstats"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wbstats)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Buscar indicadores relacionados con desempleo o empleo</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>busqueda_indicador <span class="ot">&lt;-</span> <span class="fu">wb_search</span>(<span class="st">"unemployment"</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Descargar datos del indicador seleccionado para Bolivia desde el año 2000</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>datos_bolivia <span class="ot">&lt;-</span> <span class="fu">wb_data</span>(</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="st">"BO"</span>, </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">indicator =</span> <span class="st">"SL.UEM.TOTL.ZS"</span>, </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_date =</span> <span class="dv">2000</span>, </span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_date =</span> <span class="dv">2025</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar las primeras observaciones del dataset</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos_bolivia)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1153,9 +1085,9 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><strong>Raspado de Tipo de Cambio Oficial:</strong> Diseñe un script en R utilizando <code>rvest</code> para extraer el precio de compra y venta del dólar estadounidense, así como la fecha de actualización, desde la página oficial del <strong>Banco Central de Bolivia</strong> (https://www.bcb.gob.bo). Asegúrese de guardar los resultados en un data frame estructurado con nombres de atributos limpios.</li>
-<li><strong>Estructuración de Ofertas Laborales:</strong> Utilice la estructura de la plataforma <strong>Trabajópolis</strong> (https://www.trabajopolis.bo) para seleccionar un departamento de Bolivia y armar un data frame que contenga: título del empleo, empresa ofertante y salario (si está disponible). Identifique los desafíos de limpieza de texto asociados a este ejercicio.</li>
-<li><strong>Análisis de Tendencias con gtrendsR:</strong> Instale la librería <code>gtrendsR</code> para consumir la API de Google Trends. Realice una consulta para evaluar en qué meses del año es más frecuente la búsqueda del término “descuentos” o “compras” en Bolivia, y comente cómo esta información apoya la analítica predictiva de una empresa de retail.</li>
+<li><strong>Consulta de Tipos de Cambio:</strong> Diseñe un script en R utilizando <code>rvest</code> para extraer los valores de cotización de la página oficial del <strong>Banco Central de Bolivia</strong> (https://www.bcb.gob.bo) y guarde los resultados en un dataframe estructurado.</li>
+<li><strong>Extracción de Publicaciones y Ofertas:</strong> Seleccione un portal de avisos o convocatorias institucionales e identifique los selectores CSS necesarios para construir un dataframe con el título del registro, la entidad/fuente y la fecha de publicación.</li>
+<li><strong>Análisis de Interés con Google Trends:</strong> Utilice la librería <code>gtrendsR</code> para realizar una consulta sobre las variaciones en las búsquedas de un término general en Bolivia a lo largo del tiempo, y describa cómo evoluciona dicho interés.</li>
 </ol>
 </div>
 </div>
@@ -1181,6 +1113,7 @@ Stoudt, Sara, Váleri N. Vásquez, and Ciera C. Martinez. 2021. <span>“Princip
 Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science</em>. 2nd ed. O’Reilly Media. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
 </div>
 </div>
+</section>
 </section>
 </section>
 
@@ -1605,8 +1538,8 @@ Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for 
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="Referencias">
-        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cap2-tidy-data.html" class="pagination-link" aria-label="Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular">
+        <span class="nav-page-text">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

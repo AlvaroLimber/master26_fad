@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular – Fundamentos de Análisis de Datos</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./cap1-adquisicion.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b2cbf88ee9ee288985b87b7430834320.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-528989212f0d08e68774375b94c3ff31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular – Fundamentos de Análisis de Datos">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap2-tidy-data.html">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Fundamentos de Análisis de Datos</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/master_fad/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenido</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Parte I: Adquisición, Transformación y Manipulación de Datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap1-adquisicion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Adquisición de Datos y Configuración del Entorno</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2-tidy-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dimensiones-fundamentales-de-la-calidad-del-dato" id="toc-dimensiones-fundamentales-de-la-calidad-del-dato" class="nav-link active" data-scroll-target="#dimensiones-fundamentales-de-la-calidad-del-dato">Dimensiones Fundamentales de la Calidad del Dato</a>
+  <ul class="collapse">
+  <li><a href="#precisión-accuracyprecision" id="toc-precisión-accuracyprecision" class="nav-link" data-scroll-target="#precisión-accuracyprecision">Precisión (Accuracy/Precision)</a></li>
+  <li><a href="#consistencia-consistency" id="toc-consistencia-consistency" class="nav-link" data-scroll-target="#consistencia-consistency">Consistencia (Consistency)</a></li>
+  <li><a href="#completitud-completeness" id="toc-completitud-completeness" class="nav-link" data-scroll-target="#completitud-completeness">Completitud (Completeness)</a></li>
+  <li><a href="#puntualidad-timeliness" id="toc-puntualidad-timeliness" class="nav-link" data-scroll-target="#puntualidad-timeliness">Puntualidad (Timeliness)</a></li>
+  <li><a href="#integridad-integrity" id="toc-integridad-integrity" class="nav-link" data-scroll-target="#integridad-integrity">Integridad (Integrity)</a></li>
+  </ul></li>
+  <li><a href="#fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" id="toc-fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" class="nav-link" data-scroll-target="#fundamentos-conceptuales-de-los-datos-ordenados-tidy-data">Fundamentos Conceptuales de los Datos Ordenados (Tidy Data)</a>
+  <ul class="collapse">
+  <li><a href="#las-tres-reglas-de-oro" id="toc-las-tres-reglas-de-oro" class="nav-link" data-scroll-target="#las-tres-reglas-de-oro">Las Tres Reglas de Oro</a></li>
+  <li><a href="#formato-ancho-wide-vs.-formato-largo-long" id="toc-formato-ancho-wide-vs.-formato-largo-long" class="nav-link" data-scroll-target="#formato-ancho-wide-vs.-formato-largo-long">Formato Ancho (Wide) vs.&nbsp;Formato Largo (Long)</a></li>
+  </ul></li>
+  <li><a href="#la-gramática-de-la-manipulación-de-datos-dplyr" id="toc-la-gramática-de-la-manipulación-de-datos-dplyr" class="nav-link" data-scroll-target="#la-gramática-de-la-manipulación-de-datos-dplyr">La Gramática de la Manipulación de Datos (<code>dplyr</code>)</a>
+  <ul class="collapse">
+  <li><a href="#los-verbos-principales-de-dplyr" id="toc-los-verbos-principales-de-dplyr" class="nav-link" data-scroll-target="#los-verbos-principales-de-dplyr">Los Verbos Principales de <code>dplyr</code></a></li>
+  <li><a href="#el-paradigma-split-apply-combine-dividir-aplicar-combinar" id="toc-el-paradigma-split-apply-combine-dividir-aplicar-combinar" class="nav-link" data-scroll-target="#el-paradigma-split-apply-combine-dividir-aplicar-combinar">El Paradigma “Split-Apply-Combine” (Dividir-Aplicar-Combinar)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap2-tidy-data.html">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Cobertura de Sesiones
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este capítulo cubre los contenidos correspondientes a las <strong>Sesiones 4 y 5 (Semana 2)</strong> del programa académico <span class="citation" data-cites="chirino2026programa">(<a href="references.html#ref-chirino2026programa" role="doc-biblioref">Chirino Gutiérrez 2026</a>)</span>. Nos enfocaremos en los fundamentos conceptuales de la calidad de datos, la estructura ordenada y en las operaciones de transformación esenciales para preparar un dataset para el análisis.</p>
+</div>
+</div>
+<p>El análisis de datos profesional no comienza con el ajuste de modelos predictivos o la generación de visualizaciones de alto impacto <span class="citation" data-cites="stoudt2021principles">(<a href="references.html#ref-stoudt2021principles" role="doc-biblioref">Stoudt et al. 2021</a>)</span>. En la práctica, la mayor parte del tiempo de un proyecto se consume en la preparación, limpieza y estructuración de los datos, un proceso a menudo estimado en un 50% o hasta 80% del tiempo total de análisis <span class="citation" data-cites="boehmke2016data kopra2024r">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>; <a href="references.html#ref-kopra2024r" role="doc-biblioref">Kopra et al. 2024</a>)</span>. Este capítulo aborda de manera profunda las dimensiones de la <strong>calidad del dato</strong>, la <strong>Filosofía Tidy Data</strong> (datos ordenados) y los principios lógicos que rigen la manipulación eficiente de estructuras de datos, utilizando las abstracciones conceptuales del ecosistema R.</p>
+<section id="dimensiones-fundamentales-de-la-calidad-del-dato" class="level2">
+<h2 class="anchored" data-anchor-id="dimensiones-fundamentales-de-la-calidad-del-dato">Dimensiones Fundamentales de la Calidad del Dato</h2>
+<p>La calidad de un conjunto de datos es el pilar que sostiene la validez de cualquier inferencia estadística o modelo de machine learning. Datos de baja calidad conducen al fenómeno clásico de <em>garbage in, garbage out</em> (basura entra, basura sale). Metodológicamente, la calidad del dato se evalúa a través de cinco dimensiones fundamentales <span class="citation" data-cites="groves2009survey">(<a href="references.html#ref-groves2009survey" role="doc-biblioref">Groves et al. 2009</a>)</span>:</p>
+<section id="precisión-accuracyprecision" class="level3">
+<h3 class="anchored" data-anchor-id="precisión-accuracyprecision">Precisión (Accuracy/Precision)</h3>
+<p>Representa el grado de cercanía entre los datos registrados en el dataset y el valor real y verdadero de la característica medida en la población objetivo.</p>
+<ul>
+<li><strong>Implicación estadística</strong>: Las discrepancias constantes en la precisión introducen errores de medición sistemáticos (sesgos) o aleatorios. Estadísticamente, el error de medición aleatorio en variables independientes (predictores) genera un sesgo de atenuación hacia el cero, lo que debilita artificialmente las relaciones estimadas en modelos de regresión lineal o logística.</li>
+</ul>
+</section>
+<section id="consistencia-consistency" class="level3">
+<h3 class="anchored" data-anchor-id="consistencia-consistency">Consistencia (Consistency)</h3>
+<p>Determina la ausencia de contradicciones y contradicciones lógicas dentro de un dataset o entre bases de datos relacionadas. Por ejemplo, la consistencia exige que si la variable <code>Edad</code> es <span class="math inline">\(18\)</span>, la fecha de nacimiento registrada corresponda exactamente a hace 18 años, o que una categoría como “La Paz” no esté codificada simultáneamente como “La Paz”, “LP” o “la paz”.</p>
+<ul>
+<li><strong>Implicación analítica</strong>: Las inconsistencias fragmentan artificialmente el espacio de las categorías cualitativas en variables categóricas, subestimando la representatividad y el poder de segmentación de las clases reales, lo que deteriora la validez interna del análisis.</li>
+</ul>
+</section>
+<section id="completitud-completeness" class="level3">
+<h3 class="anchored" data-anchor-id="completitud-completeness">Completitud (Completeness)</h3>
+<p>Indica la proporción de observaciones y variables esperadas que contienen registros válidos, en contraste con celdas con valores faltantes (<code>NA</code> o nulos).</p>
+<ul>
+<li><strong>Implicación estadística</strong>: Un dataset incompleto limita el poder estadístico al reducir el tamaño muestral efectivo. Peor aún, si la pérdida de datos no es aleatoria (mecanismos MAR o MNAR), realizar un análisis limitado a casos completos introduce sesgos de selección severos en los estimadores de los parámetros, distorsionando la realidad analizada.</li>
+</ul>
+</section>
+<section id="puntualidad-timeliness" class="level3">
+<h3 class="anchored" data-anchor-id="puntualidad-timeliness">Puntualidad (Timeliness)</h3>
+<p>Se refiere a si la información registrada es actual y está disponible a tiempo para reflejar con precisión el estado presente del fenómeno que se estudia. Un conjunto de datos puede ser preciso, completo y consistente, pero si es obsoleto o se procesa con retraso, pierde su valor operativo y analítico.</p>
+<ul>
+<li><strong>Implicación analítica</strong>: En entornos altamente dinámicos (como mercados financieros u operaciones logísticas transaccionales), la obsolescencia de los datos rompe los supuestos de estacionariedad temporal, provocando que los modelos entrenados con datos históricos fallen al predecir comportamientos en tiempo real.</li>
+</ul>
+</section>
+<section id="integridad-integrity" class="level3">
+<h3 class="anchored" data-anchor-id="integridad-integrity">Integridad (Integrity)</h3>
+<p>Mide el cumplimiento de las restricciones estructurales y relacionales preestablecidas para los datos. Esto incluye la validación de claves primarias (que no existan identificadores duplicados para unidades de análisis individuales), la existencia de relaciones referenciales válidas y el respeto a las restricciones de rango de las variables.</p>
+<ul>
+<li><strong>Implicación analítica</strong>: La falta de integridad rompe las relaciones lógicas entre las tablas de datos, lo que resulta en uniones incorrectas (<em>joins</em>), pérdida silenciosa de registros al realizar cruces, y duplicaciones artificiales que inflan el tamaño de la muestra y sesgan los resultados.</li>
+</ul>
+</section>
+</section>
+<section id="fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" class="level2">
+<h2 class="anchored" data-anchor-id="fundamentos-conceptuales-de-los-datos-ordenados-tidy-data">Fundamentos Conceptuales de los Datos Ordenados (Tidy Data)</h2>
+<p>El concepto de <em>Tidy Data</em> representa un marco teórico propuesto por Hadley Wickham que estandariza la forma en que los conjuntos de datos deben estructurarse físicamente para alinearse con su semántica analítica <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>. Estructuralmente, un conjunto de datos es una colección de <strong>valores</strong>, los cuales pueden clasificarse de manera general en dos categorías: variables y observaciones.</p>
+<section id="las-tres-reglas-de-oro" class="level3">
+<h3 class="anchored" data-anchor-id="las-tres-reglas-de-oro">Las Tres Reglas de Oro</h3>
+<p>Para que un dataset se considere ordenado (<em>tidy</em>), debe cumplir estrictamente con tres reglas interconectadas <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>:</p>
+<ol type="1">
+<li><strong>Cada variable debe estar en una columna</strong>: Una variable es una característica o atributo que mide un aspecto específico (por ejemplo, el PIB, la edad o el género) de todas las unidades bajo análisis.</li>
+<li><strong>Cada observación debe estar en una fila</strong>: Una observación (o caso) representa una unidad de análisis única (un individuo, un país, un punto en el tiempo) en la cual se midieron todas las variables asociadas.</li>
+<li><strong>Cada valor debe estar en una celda</strong>: Un valor es el resultado de la intersección entre una variable y una observación.</li>
+</ol>
+<p>Desde una perspectiva estadística, la organización de los datos en formato <em>tidy</em> se alinea perfectamente con la noción matemática de una <strong>matriz de datos</strong> <span class="math inline">\(X_{n \times p}\)</span>, donde las <span class="math inline">\(p\)</span> columnas representan variables aleatorias y las <span class="math inline">\(n\)</span> filas representan realizaciones independientes (observaciones) de estas variables.</p>
+</section>
+<section id="formato-ancho-wide-vs.-formato-largo-long" class="level3">
+<h3 class="anchored" data-anchor-id="formato-ancho-wide-vs.-formato-largo-long">Formato Ancho (Wide) vs.&nbsp;Formato Largo (Long)</h3>
+<p>Los datos se presentan habitualmente en dos estructuras según las necesidades del usuario:</p>
+<ul>
+<li><strong>Formato Ancho (<em>Wide format</em>)</strong>: En esta estructura, cada fila representa una unidad de análisis y los diferentes valores medidos a lo largo del tiempo o bajo diferentes condiciones se distribuyen horizontalmente en columnas separadas (por ejemplo, columnas llamadas <code>2020</code>, <code>2021</code>, <code>2022</code>). Es un formato altamente eficiente para la entrada manual de datos y la visualización en hojas de cálculo por parte de humanos <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.</li>
+<li><strong>Formato Largo (<em>Long format</em>)</strong>: En esta estructura, los identificadores temporales o condicionales se consolidan en una única columna de “clave” o “clave-tiempo”, y los valores correspondientes se colocan en una única columna de “valor”. Es el formato óptimo para realizar operaciones de filtrado, agregaciones, modelos estadísticos lineales y para alimentar las capas de visualización científica como <code>ggplot2</code> <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Actividad de Paso: Diagnóstico de Estructura (2 minutos)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Observa mentalmente la siguiente tabla que representa el registro de exportaciones bolivianas:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Departamento</th>
+<th>Exportaciones_2023</th>
+<th>Exportaciones_2024</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>La Paz</td>
+<td>1500</td>
+<td>1650</td>
+</tr>
+<tr class="even">
+<td>Santa Cruz</td>
+<td>2800</td>
+<td>2950</td>
+</tr>
+</tbody>
+</table>
+<p>¿Cumple esta tabla con las reglas de <em>Tidy Data</em>?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="la-gramática-de-la-manipulación-de-datos-dplyr" class="level2">
+<h2 class="anchored" data-anchor-id="la-gramática-de-la-manipulación-de-datos-dplyr">La Gramática de la Manipulación de Datos (<code>dplyr</code>)</h2>
+<p>Para transformar datos de manera robusta y legible, el paquete <code>dplyr</code> proporciona una gramática consistente estructurada alrededor de <strong>verbos de acción</strong> <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>. Estos verbos operan sobre dataframes (o su versión moderna, los <code>tibbles</code>) y están diseñados para minimizar la complejidad cognitiva del analista, permitiendo encadenar operaciones secuenciales mediante el operador pipeline (<code>|&gt;</code>).</p>
+<section id="los-verbos-principales-de-dplyr" class="level3">
+<h3 class="anchored" data-anchor-id="los-verbos-principales-de-dplyr">Los Verbos Principales de <code>dplyr</code></h3>
+<p>Cada uno de estos verbos cumple una función de transformación específica en el flujo de trabajo analítico <span class="citation" data-cites="wickham2023r kopra2024r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>; <a href="references.html#ref-kopra2024r" role="doc-biblioref">Kopra et al. 2024</a>)</span>:</p>
+<ul>
+<li><code>select()</code>: Extrae un subconjunto de columnas (variables) según su nombre, posición o tipo de dato, simplificando datasets con exceso de dimensiones.</li>
+<li><code>filter()</code>: Extrae un subconjunto de filas (observaciones) que cumplen con una o más condiciones lógicas estadísticas.</li>
+<li><code>arrange()</code>: Reordena las filas de la tabla de manera ascendente o descendente en función del valor de una o más variables específicas.</li>
+<li><code>mutate()</code>: Crea nuevas variables agregándolas como columnas calculadas a partir de variables preexistentes o modifica variables actuales.</li>
+<li><code>summarise()</code>: Reduce múltiples valores de una o más columnas a un único resumen estadístico descriptivo (como la media, desviación estándar, o conteos).</li>
+</ul>
+</section>
+<section id="el-paradigma-split-apply-combine-dividir-aplicar-combinar" class="level3">
+<h3 class="anchored">El Paradigma “Split-Apply-Combine” (Dividir-Aplicar-Combinar)</h3>
+<p>Una de las técnicas más poderosas en estadística analítica es agrupar observaciones homogéneas para comparar sus métricas descriptivas <span class="citation" data-cites="kopra2024r">(<a href="references.html#ref-kopra2024r" role="doc-biblioref">Kopra et al. 2024</a>)</span>. El verbo <code>group_by()</code> de <code>dplyr</code> no altera los valores de los datos, sino que añade un atributo de metadatos invisible al dataframe que indica a los verbos posteriores (principalmente a <code>summarise()</code>) que deben operar de forma independiente en cada categoría o grupo definido <span class="citation" data-cites="kopra2024r">(<a href="references.html#ref-kopra2024r" role="doc-biblioref">Kopra et al. 2024</a>)</span>. Esto permite particionar el espacio muestral, calcular estimadores puntuales por grupo y luego combinar los resultados de vuelta en una estructura tabular limpia.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="" aria-current="page">Enfoque Moderno (<code>dplyr</code> + Pipeline)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Pivoteo: De Ancho a Largo (<code>pivot_longer()</code>)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Pivoteo: De Largo a Ancho (<code>pivot_wider()</code>)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false" href="">Limpieza de Brechas Administrativas: <code>fill()</code> y <code>replace_na()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-5" role="tab" aria-controls="tabset-2-5" aria-selected="false" href="">Ejercicio 1: Impacto Inferencia de la Calidad del Dato</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-6" role="tab" aria-controls="tabset-2-6" aria-selected="false" href="">Ejercicio 2: Álgebra Matricial y Semántica de Tidy Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-7" role="tab" aria-controls="tabset-2-7" aria-selected="false" href="">Ejercicio 3: Lógica de Transformación Integrada</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>El uso de <code>dplyr</code> junto con el operador de tubería moderno de R (<code>|&gt;</code>) permite leer el flujo de transformaciones como una secuencia de instrucciones estructuradas, eliminando la necesidad de guardar múltiples objetos intermedios redundantes <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Flujo legible: seleccionar, filtrar, agrupar, resumir y ordenar</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>resumen_exportaciones <span class="ot">&lt;-</span> exportaciones_bolivia <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(departamento, categoria, anio, valor_usd) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2024</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(departamento) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_exportado =</span> <span class="fu">sum</span>(valor_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">promedio_transaccion =</span> <span class="fu">mean</span>(valor_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_operaciones =</span> <span class="fu">n</span>()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_exportado))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="técnicas-de-reestructuración-y-pivoteo-tidyr" class="level2">
+<h2 class="anchored" data-anchor-id="técnicas-de-reestructuración-y-pivoteo-tidyr">Técnicas de Reestructuración y Pivoteo (<code>tidyr</code>)</h2>
+<p>Cuando nos enfrentamos a conjuntos de datos crudos o reportes provenientes de sistemas transaccionales u hojas de cálculo Excel administrativas, comúnmente encontramos estructuras no optimizadas para el modelado o la visualización estadística <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>. El paquete <code>tidyr</code> proporciona herramientas de reestructuración geométrica para alterar la dimensión espacial de las tablas conservando la consistencia de los datos <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
+</section>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>La función <code>pivot_longer()</code> resuelve el caso más común de desorden de datos: cuando los nombres de las columnas no son nombres de variables, sino que representan valores de una variable oculta <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>. Esta función colapsa las columnas especificadas en dos nuevas columnas: una que almacena los nombres antiguos como categorías (comúnmente llamada <code>name</code> o <code>key</code>) y otra que almacena los valores numéricos correspondientes (<code>value</code>).</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>La función <code>pivot_wider()</code> realiza la operación inversa. Se utiliza cuando una observación se encuentra dispersa a lo largo de múltiples filas (por ejemplo, cuando una columna llamada <code>metrica</code> tiene filas con etiquetas “Temperatura” y “Presión”, y otra columna tiene los números). Esta función toma una columna de clave y una de valor, y crea nuevas columnas individuales para cada categoría única.</p>
+</div>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<p>Un problema persistente al importar reportes de Excel es la presencia de celdas vacías (<code>NA</code>) que ocurren porque los diseñadores omiten repetir el nombre de una categoría o año en filas consecutivas para mejorar la estética visual <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.</p>
+<ul>
+<li><code>fill()</code>: Imputa de manera determinística valores faltantes reemplazándolos con el valor no nulo inmediatamente anterior (<code>.direction = \"down\"</code>) o posterior (<code>.direction = \"up\"</code>) <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.<code>replace_na()</code>: Permite definir valores por defecto estandarizados para reemplazar nulos de forma controlada según el tipo de variable <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.</li>
+</ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Pivoteo Largo (Wide to Long)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Pivoteo Ancho (Long to Wide)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Imaginemos que importamos un reporte anual de regalías mineras por departamento boliviano con columnas horizontales para cada año y deseamos ordenarlo bajo el estándar de <em>Tidy Data</em> <span class="citation" data-cites="stoudt2021principles">(<a href="references.html#ref-stoudt2021principles" role="doc-biblioref">Stoudt et al. 2021</a>)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformar columnas anuales en una variable de tiempo explícita</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>regalias_tidy <span class="ot">&lt;-</span> regalias_ancho <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"gestion_"</span>), <span class="co"># Seleccionar las columnas temporales</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"anio"</span>,              <span class="co"># Nombre de la nueva variable cualitativa</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"gestion_"</span>,      <span class="co"># Limpiar el prefijo de texto de los nombres</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"monto_bob"</span>         <span class="co"># Nombre de la variable cuantitativa</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Si tuviéramos un dataset en formato largo donde las variables analíticas de interés (por ejemplo, exportaciones e importaciones de una aduana) están en filas bajo una columna “flujo” y requerimos calcular su saldo neto, pivoteamos para colocarlas lado a lado en columnas separadas <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribuir categorías de flujo en columnas individuales de medición</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>balanza_comercial <span class="ot">&lt;-</span> aduana_largo <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> tipo_flujo,      <span class="co"># Columna que contiene las nuevas etiquetas de columna</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> valor_usd,      <span class="co"># Columna que contiene los números de medición</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_fill =</span> <span class="dv">0</span>               <span class="co"># Rellenar con cero aduanas que no registraron un flujo específico</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">saldo_neto =</span> exportaciones <span class="sc">-</span> importaciones)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto de 5 Minutos: Tu Primer Pipeline de Reestructuración Integrado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Imagina que has importado un archivo Excel que contiene el reporte de inflación del Banco Central para tres sectores económicos con el formato estético típico de reporte de oficina:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset crudo de simulación</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>reporte_sucio <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sector =</span> <span class="fu">c</span>(<span class="st">"Alimentos"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="st">"Transporte"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metrica =</span> <span class="fu">c</span>(<span class="st">"IPC"</span>, <span class="st">"Ponderacion"</span>, <span class="st">"Variacion"</span>, <span class="st">"IPC"</span>, <span class="st">"Ponderacion"</span>, <span class="st">"Variacion"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2023</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">105.2</span>, <span class="fl">0.35</span>, <span class="fl">0.02</span>, <span class="fl">102.1</span>, <span class="fl">0.15</span>, <span class="fl">0.01</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2024</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">108.5</span>, <span class="fl">0.35</span>, <span class="fl">0.03</span>, <span class="fl">104.3</span>, <span class="fl">0.15</span>, <span class="fl">0.02</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Tu reto:</strong> Escribe una tubería de código (<code>|&gt;</code>) utilizando <code>dplyr</code> y <code>tidyr</code> que realice las siguientes acciones de forma encadenada: 1. Utiliza <code>fill()</code> para propagar la variable cualitativa <code>Sector</code> hacia abajo eliminando los nulos. 2. Usa <code>pivot_longer()</code> para unificar los años (<code>2023</code> y <code>2024</code>) en una variable llamada <code>Anio</code> y los valores correspondientes en <code>Monto</code>. 3. Usa <code>pivot_wider()</code> para transformar la columna <code>Metrica</code> de modo que <code>IPC</code>, <code>Ponderacion</code> y <code>Variacion</code> se conviertan en tres columnas individuales limpias a nivel de Sector y Año.</p>
+<p><strong>Código de Solución Sugerido:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>reporte_tidy <span class="ot">&lt;-</span> reporte_sucio <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(Sector, <span class="at">.direction =</span> <span class="st">"down"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2023</span><span class="st">`</span>, <span class="st">`</span><span class="at">2024</span><span class="st">`</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Anio"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Monto"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> Metrica,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> Monto</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<section id="ejercicios-de-autoevaluación" class="level2">
+<h2 class="anchored" data-anchor-id="ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</h2>
+</section>
+</div>
+<div id="tabset-2-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-5-tab">
+<p>Supongamos que trabajas con los registros administrativos de ingresos aduaneros nacionales en Bolivia.</p>
+<ol type="a">
+<li>Describe un escenario de negocio o investigación donde un fallo en la dimensión de <strong>Integridad</strong> afecte directamente los estimadores descriptivos de ingresos totales.</li>
+<li>Explica por qué una baja dimensión en la <strong>Completitud</strong> de los datos no puede resolverse simplemente eliminando de manera automática las observaciones que presenten valores faltantes (<code>drop_na()</code>), fundamentando tu respuesta en el sesgo de selección.</li>
+</ol>
+</div>
+<div id="tabset-2-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-6-tab">
+<p>Dada una matriz de datos tradicional <span class="math inline">\(X_{n \times p}\)</span>:</p>
+<ol type="a">
+<li>Establece detalladamente la equivalencia matemática y semántica entre los elementos de la matriz (<span class="math inline">\(x_{ij}\)</span>) y las tres reglas de oro de la Filosofía <em>Tidy Data</em>.</li>
+<li>Si un dataset con la estructura <code>| Departamento | Exportaciones_2023 | Exportaciones_2024 |</code> se almacena directamente en un modelo estadístico lineal de la forma <span class="math inline">\(Y = \beta_0 + \beta_1 X + \epsilon\)</span>, explica la colisión estructural que ocurre con la variable explicativa <code>Año</code> y cómo la reestructuración a formato largo soluciona conceptualmente el modelo.</li>
+</ol>
+</div>
+<div id="tabset-2-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-7-tab">
+<p>Considera el reporte sucio de inflación sectorial del “Reto de 5 Minutos”:</p>
+<ol type="a">
+<li>Dibuja un diagrama de flujo secuencial que muestre el estado de las dimensiones de la tabla de datos tras la ejecución de cada uno de los tres verbos lógicos empleados (<code>fill</code>, <code>pivot_longer</code>, <code>pivot_wider</code>). Debe incluir la evolución espacial del dataset (número de filas e identidad de las columnas en cada paso).</li>
+<li>¿Qué ocurriría con los registros del dataset si realizas la operación <code>pivot_wider</code> antes de ejecutar la función <code>fill</code>? Justifica tu respuesta en términos de la pérdida de la consistencia e integridad relacional del dataframe.</li>
+</ol>
+
+
+</div>
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-boehmke2016data" class="csl-entry" role="listitem">
+Boehmke, Bradley C. 2016. <em>Data Wrangling with r</em>. Use <span>R</span>! Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-45599-0">https://doi.org/10.1007/978-3-319-45599-0</a>.
+</div>
+<div id="ref-chirino2026programa" class="csl-entry" role="listitem">
+Chirino Gutiérrez, Alvaro. 2026. <em>Programa de La Materia: Fundamentos de an<span>á</span>lisis de Datos</em>. Maestr<span>í</span>a en Inteligencia Artificial y Gesti<span>ó</span>n de Datos para Finanzas, Econom<span>í</span>a y Negocios, Universidad Cat<span>ó</span>lica Boliviana.
+</div>
+<div id="ref-groves2009survey" class="csl-entry" role="listitem">
+Groves, Robert M., Floyd J. Fowler, Mick P. Couper, James M. Lepkowski, Eleanor Singer, and Roger Tourangeau. 2009. <em>Survey Methodology</em>. 2nd ed. John Wiley &amp; Sons.
+</div>
+<div id="ref-kopra2024r" class="csl-entry" role="listitem">
+Kopra, Juho, Santtu Tikka, Merja Heinäniemi, Sonsoles López-Pernas, and Mohammed Saqr. 2024. <span>“An <span>R</span> Approach to Data Cleaning and Wrangling for Education Research.”</span> In <em>Learning Analytics Methods and Tutorials: A Practical Guide Using r</em>, edited by Mohammed Saqr and Sonsoles López-Pernas. Springer. <a href="https://doi.org/10.1007/978-3-031-54464-4_4">https://doi.org/10.1007/978-3-031-54464-4_4</a>.
+</div>
+<div id="ref-stoudt2021principles" class="csl-entry" role="listitem">
+Stoudt, Sara, Váleri N. Vásquez, and Ciera C. Martinez. 2021. <span>“Principles for Data Analysis Workflows.”</span> <em>PLOS Computational Biology</em> 17 (3): e1008770. <a href="https://doi.org/10.1371/journal.pcbi.1008770">https://doi.org/10.1371/journal.pcbi.1008770</a>.
+</div>
+<div id="ref-wickham2023r" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science</em>. 2nd ed. O’Reilly Media. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alvarolimber\.github\.io\/master_fad\/_book");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./cap1-adquisicion.html" class="pagination-link" aria-label="Adquisición de Datos y Configuración del Entorno">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Adquisición de Datos y Configuración del Entorno</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2026, Alvaro Chirino</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Maestría en Inteligencia Artificial y Gestión de Datos - UCB</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

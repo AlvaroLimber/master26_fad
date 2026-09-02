@@ -1,0 +1,219 @@
+# Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular {.unnumbered}
+
+::: {.callout-warning}
+### Cobertura de Sesiones
+Este capítulo cubre los contenidos correspondientes a las **Sesiones 4 y 5 (Semana 2)** del programa académico [@chirino2026programa]. Nos enfocaremos en los fundamentos conceptuales de la calidad de datos, la estructura ordenada y en las operaciones de transformación esenciales para preparar un dataset para el análisis.
+:::
+
+El análisis de datos profesional no comienza con el ajuste de modelos predictivos o la generación de visualizaciones de alto impacto [@stoudt2021principles]. En la práctica, la mayor parte del tiempo de un proyecto se consume en la preparación, limpieza y estructuración de los datos, un proceso a menudo estimado en un 50% o hasta 80% del tiempo total de análisis [@boehmke2016data; @kopra2024r]. Este capítulo aborda de manera profunda las dimensiones de la **calidad del dato**, la **Filosofía Tidy Data** (datos ordenados) y los principios lógicos que rigen la manipulación eficiente de estructuras de datos, utilizando las abstracciones conceptuales del ecosistema R.
+
+## Dimensiones Fundamentales de la Calidad del Dato
+
+La calidad de un conjunto de datos es el pilar que sostiene la validez de cualquier inferencia estadística o modelo de machine learning. Datos de baja calidad conducen al fenómeno clásico de *garbage in, garbage out* (basura entra, basura sale). Metodológicamente, la calidad del dato se evalúa a través de cinco dimensiones fundamentales [@groves2009survey]:
+
+### Precisión (Accuracy/Precision)
+Representa el grado de cercanía entre los datos registrados en el dataset y el valor real y verdadero de la característica medida en la población objetivo. 
+
+*   **Implicación estadística**: Las discrepancias constantes en la precisión introducen errores de medición sistemáticos (sesgos) o aleatorios. Estadísticamente, el error de medición aleatorio en variables independientes (predictores) genera un sesgo de atenuación hacia el cero, lo que debilita artificialmente las relaciones estimadas en modelos de regresión lineal o logística.
+
+### Consistencia (Consistency)
+Determina la ausencia de contradicciones y contradicciones lógicas dentro de un dataset o entre bases de datos relacionadas. Por ejemplo, la consistencia exige que si la variable `Edad` es $18$, la fecha de nacimiento registrada corresponda exactamente a hace 18 años, o que una categoría como "La Paz" no esté codificada simultáneamente como "La Paz", "LP" o "la paz".
+
+*   **Implicación analítica**: Las inconsistencias fragmentan artificialmente el espacio de las categorías cualitativas en variables categóricas, subestimando la representatividad y el poder de segmentación de las clases reales, lo que deteriora la validez interna del análisis.
+
+### Completitud (Completeness)
+Indica la proporción de observaciones y variables esperadas que contienen registros válidos, en contraste con celdas con valores faltantes (`NA` o nulos). 
+
+*   **Implicación estadística**: Un dataset incompleto limita el poder estadístico al reducir el tamaño muestral efectivo. Peor aún, si la pérdida de datos no es aleatoria (mecanismos MAR o MNAR), realizar un análisis limitado a casos completos introduce sesgos de selección severos en los estimadores de los parámetros, distorsionando la realidad analizada.
+
+### Puntualidad (Timeliness)
+Se refiere a si la información registrada es actual y está disponible a tiempo para reflejar con precisión el estado presente del fenómeno que se estudia. Un conjunto de datos puede ser preciso, completo y consistente, pero si es obsoleto o se procesa con retraso, pierde su valor operativo y analítico.
+
+*   **Implicación analítica**: En entornos altamente dinámicos (como mercados financieros u operaciones logísticas transaccionales), la obsolescencia de los datos rompe los supuestos de estacionariedad temporal, provocando que los modelos entrenados con datos históricos fallen al predecir comportamientos en tiempo real.
+
+### Integridad (Integrity)
+Mide el cumplimiento de las restricciones estructurales y relacionales preestablecidas para los datos. Esto incluye la validación de claves primarias (que no existan identificadores duplicados para unidades de análisis individuales), la existencia de relaciones referenciales válidas y el respeto a las restricciones de rango de las variables.
+
+*   **Implicación analítica**: La falta de integridad rompe las relaciones lógicas entre las tablas de datos, lo que resulta en uniones incorrectas (*joins*), pérdida silenciosa de registros al realizar cruces, y duplicaciones artificiales que inflan el tamaño de la muestra y sesgan los resultados.
+
+## Fundamentos Conceptuales de los Datos Ordenados (Tidy Data)
+
+El concepto de *Tidy Data* representa un marco teórico propuesto por Hadley Wickham que estandariza la forma en que los conjuntos de datos deben estructurarse físicamente para alinearse con su semántica analítica [@wickham2023r]. Estructuralmente, un conjunto de datos es una colección de **valores**, los cuales pueden clasificarse de manera general en dos categorías: variables y observaciones.
+
+### Las Tres Reglas de Oro
+
+Para que un dataset se considere ordenado (*tidy*), debe cumplir estrictamente con tres reglas interconectadas [@wickham2023r]:
+
+1.  **Cada variable debe estar en una columna**: Una variable es una característica o atributo que mide un aspecto específico (por ejemplo, el PIB, la edad o el género) de todas las unidades bajo análisis.
+2.  **Cada observación debe estar en una fila**: Una observación (o caso) representa una unidad de análisis única (un individuo, un país, un punto en el tiempo) en la cual se midieron todas las variables asociadas.
+3.  **Cada valor debe estar en una celda**: Un valor es el resultado de la intersección entre una variable y una observación.
+
+Desde una perspectiva estadística, la organización de los datos en formato *tidy* se alinea perfectamente con la noción matemática de una **matriz de datos** $X_{n \times p}$, donde las $p$ columnas representan variables aleatorias y las $n$ filas representan realizaciones independientes (observaciones) de estas variables.
+
+### Formato Ancho (Wide) vs. Formato Largo (Long)
+
+Los datos se presentan habitualmente en dos estructuras según las necesidades del usuario:
+
+*   **Formato Ancho (*Wide format*)**: En esta estructura, cada fila representa una unidad de análisis y los diferentes valores medidos a lo largo del tiempo o bajo diferentes condiciones se distribuyen horizontalmente en columnas separadas (por ejemplo, columnas llamadas `2020`, `2021`, `2022`). Es un formato altamente eficiente para la entrada manual de datos y la visualización en hojas de cálculo por parte de humanos [@boehmke2016data].
+*   **Formato Largo (*Long format*)**: En esta estructura, los identificadores temporales o condicionales se consolidan en una única columna de "clave" o "clave-tiempo", y los valores correspondientes se colocan en una única columna de "valor". Es el formato óptimo para realizar operaciones de filtrado, agregaciones, modelos estadísticos lineales y para alimentar las capas de visualización científica como `ggplot2` [@wickham2023r].
+
+::: {.callout-note}
+### Actividad de Paso: Diagnóstico de Estructura (2 minutos)
+Observa mentalmente la siguiente tabla que representa el registro de exportaciones bolivianas:
+
+| Departamento | Exportaciones_2023 | Exportaciones_2024 |
+|--------------|--------------------|--------------------|
+| La Paz       | 1500               | 1650               |
+| Santa Cruz   | 2800               | 2950               |
+
+¿Cumple esta tabla con las reglas de *Tidy Data*? 
+:::
+
+## La Gramática de la Manipulación de Datos (`dplyr`)
+
+Para transformar datos de manera robusta y legible, el paquete `dplyr` proporciona una gramática consistente estructurada alrededor de **verbos de acción** [@wickham2023r]. Estos verbos operan sobre dataframes (o su versión moderna, los `tibbles`) y están diseñados para minimizar la complejidad cognitiva del analista, permitiendo encadenar operaciones secuenciales mediante el operador pipeline (`|>`).
+
+### Los Verbos Principales de `dplyr`
+Cada uno de estos verbos cumple una función de transformación específica en el flujo de trabajo analítico [@wickham2023r; @kopra2024r]:
+
+*   `select()`: Extrae un subconjunto de columnas (variables) según su nombre, posición o tipo de dato, simplificando datasets con exceso de dimensiones.
+*   `filter()`: Extrae un subconjunto de filas (observaciones) que cumplen con una o más condiciones lógicas estadísticas.
+*   `arrange()`: Reordena las filas de la tabla de manera ascendente o descendente en función del valor de una o más variables específicas.
+*   `mutate()`: Crea nuevas variables agregándolas como columnas calculadas a partir de variables preexistentes o modifica variables actuales.
+*   `summarise()`: Reduce múltiples valores de una o más columnas a un único resumen estadístico descriptivo (como la media, desviación estándar, o conteos).
+
+### El Paradigma "Split-Apply-Combine" (Dividir-Aplicar-Combinar)
+Una de las técnicas más poderosas en estadística analítica es agrupar observaciones homogéneas para comparar sus métricas descriptivas [@kopra2024r]. El verbo `group_by()` de `dplyr` no altera los valores de los datos, sino que añade un atributo de metadatos invisible al dataframe que indica a los verbos posteriores (principalmente a `summarise()`) que deben operar de forma independiente en cada categoría o grupo definido [@kopra2024r]. Esto permite particionar el espacio muestral, calcular estimadores puntuales por grupo y luego combinar los resultados de vuelta en una estructura tabular limpia.
+
+::: {.panel-tabset}
+
+### Enfoque Moderno (`dplyr` + Pipeline)
+
+El uso de `dplyr` junto con el operador de tubería moderno de R (`|>`) permite leer el flujo de transformaciones como una secuencia de instrucciones estructuradas, eliminando la necesidad de guardar múltiples objetos intermedios redundantes [@wickham2023r].
+
+```r
+library(dplyr)
+
+# Flujo legible: seleccionar, filtrar, agrupar, resumir y ordenar
+resumen_exportaciones <- exportaciones_bolivia |>
+  select(departamento, categoria, anio, valor_usd) |>
+  filter(anio == 2024) |>
+  group_by(departamento) |>
+  summarise(
+    total_exportado = sum(valor_usd, na.rm = TRUE),
+    promedio_transaccion = mean(valor_usd, na.rm = TRUE),
+    n_operaciones = n()
+  ) |>
+  arrange(desc(total_exportado))
+```
+
+## Técnicas de Reestructuración y Pivoteo (`tidyr`)
+
+Cuando nos enfrentamos a conjuntos de datos crudos o reportes provenientes de sistemas transaccionales u hojas de cálculo Excel administrativas, comúnmente encontramos estructuras no optimizadas para el modelado o la visualización estadística [@boehmke2016data]. El paquete `tidyr` proporciona herramientas de reestructuración geométrica para alterar la dimensión espacial de las tablas conservando la consistencia de los datos [@wickham2023r].
+
+### Pivoteo: De Ancho a Largo (`pivot_longer()`)
+La función `pivot_longer()` resuelve el caso más común de desorden de datos: cuando los nombres de las columnas no son nombres de variables, sino que representan valores de una variable oculta [@wickham2023r]. Esta función colapsa las columnas especificadas en dos nuevas columnas: una que almacena los nombres antiguos como categorías (comúnmente llamada `name` o `key`) y otra que almacena los valores numéricos correspondientes (`value`).
+
+### Pivoteo: De Largo a Ancho (`pivot_wider()`)
+La función `pivot_wider()` realiza la operación inversa. Se utiliza cuando una observación se encuentra dispersa a lo largo de múltiples filas (por ejemplo, cuando una columna llamada `metrica` tiene filas con etiquetas "Temperatura" y "Presión", y otra columna tiene los números). Esta función toma una columna de clave y una de valor, y crea nuevas columnas individuales para cada categoría única.
+
+### Limpieza de Brechas Administrativas: `fill()` y `replace_na()`
+Un problema persistente al importar reportes de Excel es la presencia de celdas vacías (`NA`) que ocurren porque los diseñadores omiten repetir el nombre de una categoría o año en filas consecutivas para mejorar la estética visual [@boehmke2016data]. 
+
+*   `fill()`: Imputa de manera determinística valores faltantes reemplazándolos con el valor no nulo inmediatamente anterior (`.direction = \"down\"`) o posterior (`.direction = \"up\"`) [@boehmke2016data].\n*   `replace_na()`: Permite definir valores por defecto estandarizados para reemplazar nulos de forma controlada según el tipo de variable [@boehmke2016data].
+
+::: {.panel-tabset}
+
+### Pivoteo Largo (Wide to Long)
+
+Imaginemos que importamos un reporte anual de regalías mineras por departamento boliviano con columnas horizontales para cada año y deseamos ordenarlo bajo el estándar de *Tidy Data* [@stoudt2021principles].
+
+```r
+library(tidyr)
+
+# Transformar columnas anuales en una variable de tiempo explícita
+regalias_tidy <- regalias_ancho |>
+  pivot_longer(
+    cols = starts_with("gestion_"), # Seleccionar las columnas temporales
+    names_to = "anio",              # Nombre de la nueva variable cualitativa
+    names_prefix = "gestion_",      # Limpiar el prefijo de texto de los nombres
+    values_to = "monto_bob"         # Nombre de la variable cuantitativa
+  )
+```
+
+### Pivoteo Ancho (Long to Wide)
+
+Si tuviéramos un dataset en formato largo donde las variables analíticas de interés (por ejemplo, exportaciones e importaciones de una aduana) están en filas bajo una columna "flujo" y requerimos calcular su saldo neto, pivoteamos para colocarlas lado a lado en columnas separadas [@wickham2023r].
+
+```r
+library(tidyr)
+
+# Distribuir categorías de flujo en columnas individuales de medición
+balanza_comercial <- aduana_largo |>
+  pivot_wider(
+    names_from = tipo_flujo,      # Columna que contiene las nuevas etiquetas de columna
+    values_from = valor_usd,      # Columna que contiene los números de medición
+    values_fill = 0               # Rellenar con cero aduanas que no registraron un flujo específico
+  ) |>
+  mutate(saldo_neto = exportaciones - importaciones)
+```
+
+:::
+
+::: {.callout-tip}
+### Reto de 5 Minutos: Tu Primer Pipeline de Reestructuración Integrado
+Imagina que has importado un archivo Excel que contiene el reporte de inflación del Banco Central para tres sectores económicos con el formato estético típico de reporte de oficina:
+
+```r
+# Dataset crudo de simulación
+reporte_sucio <- tibble::tibble(
+  Sector = c("Alimentos", NA, NA, "Transporte", NA, NA),
+  Metrica = c("IPC", "Ponderacion", "Variacion", "IPC", "Ponderacion", "Variacion"),
+  `2023` = c(105.2, 0.35, 0.02, 102.1, 0.15, 0.01),
+  `2024` = c(108.5, 0.35, 0.03, 104.3, 0.15, 0.02)
+)
+```
+
+**Tu reto:** Escribe una tubería de código (`|>`) utilizando `dplyr` y `tidyr` que realice las siguientes acciones de forma encadenada:
+1.  Utiliza `fill()` para propagar la variable cualitativa `Sector` hacia abajo eliminando los nulos.
+2.  Usa `pivot_longer()` para unificar los años (`2023` y `2024`) en una variable llamada `Anio` y los valores correspondientes en `Monto`.
+3.  Usa `pivot_wider()` para transformar la columna `Metrica` de modo que `IPC`, `Ponderacion` y `Variacion` se conviertan en tres columnas individuales limpias a nivel de Sector y Año.
+
+**Código de Solución Sugerido:**
+```r
+library(dplyr)
+library(tidyr)
+
+reporte_tidy <- reporte_sucio |>
+  fill(Sector, .direction = "down") |>
+  pivot_longer(
+    cols = c(`2023`, `2024`),
+    names_to = "Anio",
+    values_to = "Monto"
+  ) |>
+  pivot_wider(
+    names_from = Metrica,
+    values_from = Monto
+  )
+```
+:::
+
+## Ejercicios de Autoevaluación
+
+### Ejercicio 1: Impacto Inferencia de la Calidad del Dato
+Supongamos que trabajas con los registros administrativos de ingresos aduaneros nacionales en Bolivia.
+
+a) Describe un escenario de negocio o investigación donde un fallo en la dimensión de **Integridad** afecte directamente los estimadores descriptivos de ingresos totales. 
+b) Explica por qué una baja dimensión en la **Completitud** de los datos no puede resolverse simplemente eliminando de manera automática las observaciones que presenten valores faltantes (`drop_na()`), fundamentando tu respuesta en el sesgo de selección.
+
+### Ejercicio 2: Álgebra Matricial y Semántica de Tidy Data
+Dada una matriz de datos tradicional $X_{n \times p}$:
+
+a) Establece detalladamente la equivalencia matemática y semántica entre los elementos de la matriz ($x_{ij}$) y las tres reglas de oro de la Filosofía *Tidy Data*.
+b) Si un dataset con la estructura `| Departamento | Exportaciones_2023 | Exportaciones_2024 |` se almacena directamente en un modelo estadístico lineal de la forma $Y = \beta_0 + \beta_1 X + \epsilon$, explica la colisión estructural que ocurre con la variable explicativa `Año` y cómo la reestructuración a formato largo soluciona conceptualmente el modelo.
+
+### Ejercicio 3: Lógica de Transformación Integrada
+Considera el reporte sucio de inflación sectorial del "Reto de 5 Minutos":
+
+a) Dibuja un diagrama de flujo secuencial que muestre el estado de las dimensiones de la tabla de datos tras la ejecución de cada uno de los tres verbos lógicos empleados (`fill`, `pivot_longer`, `pivot_wider`). Debe incluir la evolución espacial del dataset (número de filas e identidad de las columnas en cada paso).
+b) ¿Qué ocurriría con los registros del dataset si realizas la operación `pivot_wider` antes de ejecutar la función `fill`? Justifica tu respuesta en términos de la pérdida de la consistencia e integridad relacional del dataframe.
