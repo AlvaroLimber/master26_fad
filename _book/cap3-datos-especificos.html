@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Datos de Tipo Específico: Cadenas de Texto y Fechas – Fundamentos de Análisis de Datos</title>
+<title>3&nbsp; Datos de Tipo Específico: Cadenas de Texto y Fechas – Fundamentos de Análisis de Datos</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -140,7 +140,7 @@ window.Quarto = {
 };
 </script>
 
-<meta name="twitter:title" content="Datos de Tipo Específico: Cadenas de Texto y Fechas – Fundamentos de Análisis de Datos">
+<meta name="twitter:title" content="3&nbsp; Datos de Tipo Específico: Cadenas de Texto y Fechas – Fundamentos de Análisis de Datos">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -314,7 +314,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap3-datos-especificos.html">Datos de Tipo Específico: Cadenas de Texto y Fechas</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap3-datos-especificos.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Tipo Específico: Cadenas de Texto y Fechas</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -390,7 +390,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap3-datos-especificos.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Datos de Tipo Específico: Cadenas de Texto y Fechas</span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Tipo Específico: Cadenas de Texto y Fechas</span></span></a>
   </div>
 </li>
       </ul>
@@ -411,24 +411,24 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#análisis-de-cadenas-de-texto-y-control-de-cardinalidad" id="toc-análisis-de-cadenas-de-texto-y-control-de-cardinalidad" class="nav-link active" data-scroll-target="#análisis-de-cadenas-de-texto-y-control-de-cardinalidad">Análisis de Cadenas de Texto y Control de Cardinalidad</a>
+  <li><a href="#análisis-de-cadenas-de-texto-y-control-de-cardinalidad" id="toc-análisis-de-cadenas-de-texto-y-control-de-cardinalidad" class="nav-link active" data-scroll-target="#análisis-de-cadenas-de-texto-y-control-de-cardinalidad"><span class="header-section-number">3.1</span> Análisis de Cadenas de Texto y Control de Cardinalidad</a>
   <ul class="collapse">
-  <li><a href="#el-impacto-analítico-de-la-cardinalidad-sucia" id="toc-el-impacto-analítico-de-la-cardinalidad-sucia" class="nav-link" data-scroll-target="#el-impacto-analítico-de-la-cardinalidad-sucia">El Impacto Analítico de la Cardinalidad Sucia</a></li>
-  <li><a href="#normalización-de-textos-como-reducción-de-ruido" id="toc-normalización-de-textos-como-reducción-de-ruido" class="nav-link" data-scroll-target="#normalización-de-textos-como-reducción-de-ruido">Normalización de Textos como Reducción de Ruido</a></li>
+  <li><a href="#el-impacto-analítico-de-la-cardinalidad-sucia" id="toc-el-impacto-analítico-de-la-cardinalidad-sucia" class="nav-link" data-scroll-target="#el-impacto-analítico-de-la-cardinalidad-sucia"><span class="header-section-number">3.1.1</span> El Impacto Analítico de la Cardinalidad Sucia</a></li>
+  <li><a href="#normalización-de-textos-como-reducción-de-ruido" id="toc-normalización-de-textos-como-reducción-de-ruido" class="nav-link" data-scroll-target="#normalización-de-textos-como-reducción-de-ruido"><span class="header-section-number">3.1.2</span> Normalización de Textos como Reducción de Ruido</a></li>
   </ul></li>
-  <li><a href="#expresiones-regulares-regex-como-clasificadores-deterministas" id="toc-expresiones-regulares-regex-como-clasificadores-deterministas" class="nav-link" data-scroll-target="#expresiones-regulares-regex-como-clasificadores-deterministas">Expresiones Regulares (Regex) como Clasificadores Deterministas</a>
+  <li><a href="#expresiones-regulares-regex-como-clasificadores-deterministas" id="toc-expresiones-regulares-regex-como-clasificadores-deterministas" class="nav-link" data-scroll-target="#expresiones-regulares-regex-como-clasificadores-deterministas"><span class="header-section-number">3.2</span> Expresiones Regulares (Regex) como Clasificadores Deterministas</a>
   <ul class="collapse">
-  <li><a href="#regex-desde-la-perspectiva-de-datos" id="toc-regex-desde-la-perspectiva-de-datos" class="nav-link" data-scroll-target="#regex-desde-la-perspectiva-de-datos">Regex desde la Perspectiva de Datos</a></li>
+  <li><a href="#regex-desde-la-perspectiva-de-datos" id="toc-regex-desde-la-perspectiva-de-datos" class="nav-link" data-scroll-target="#regex-desde-la-perspectiva-de-datos"><span class="header-section-number">3.2.1</span> Regex desde la Perspectiva de Datos</a></li>
   </ul></li>
-  <li><a href="#álgebra-temporal-y-extracción-de-atributos-estacionales" id="toc-álgebra-temporal-y-extracción-de-atributos-estacionales" class="nav-link" data-scroll-target="#álgebra-temporal-y-extracción-de-atributos-estacionales">Álgebra Temporal y Extracción de Atributos Estacionales</a>
+  <li><a href="#álgebra-temporal-y-extracción-de-atributos-estacionales" id="toc-álgebra-temporal-y-extracción-de-atributos-estacionales" class="nav-link" data-scroll-target="#álgebra-temporal-y-extracción-de-atributos-estacionales"><span class="header-section-number">3.3</span> Álgebra Temporal y Extracción de Atributos Estacionales</a>
   <ul class="collapse">
-  <li><a href="#almacenamiento-interno-de-fechas-en-r" id="toc-almacenamiento-interno-de-fechas-en-r" class="nav-link" data-scroll-target="#almacenamiento-interno-de-fechas-en-r">Almacenamiento Interno de Fechas en R</a></li>
+  <li><a href="#almacenamiento-interno-de-fechas-en-r" id="toc-almacenamiento-interno-de-fechas-en-r" class="nav-link" data-scroll-target="#almacenamiento-interno-de-fechas-en-r"><span class="header-section-number">3.3.1</span> Almacenamiento Interno de Fechas en R</a></li>
   </ul></li>
-  <li><a href="#ejercicios-de-autoevaluación" id="toc-ejercicios-de-autoevaluación" class="nav-link" data-scroll-target="#ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</a>
+  <li><a href="#ejercicios-de-autoevaluación" id="toc-ejercicios-de-autoevaluación" class="nav-link" data-scroll-target="#ejercicios-de-autoevaluación"><span class="header-section-number">3.4</span> Ejercicios de Autoevaluación</a>
   <ul class="collapse">
-  <li><a href="#ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" id="toc-ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" class="nav-link" data-scroll-target="#ejercicio-1-cardinalidad-categórica-e-inferencia-estadística">Ejercicio 1 (Cardinalidad categórica e inferencia estadística)</a></li>
-  <li><a href="#ejercicio-2-modelado-lógico-mediante-regex" id="toc-ejercicio-2-modelado-lógico-mediante-regex" class="nav-link" data-scroll-target="#ejercicio-2-modelado-lógico-mediante-regex">Ejercicio 2 (Modelado lógico mediante Regex)</a></li>
-  <li><a href="#ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" id="toc-ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" class="nav-link" data-scroll-target="#ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos">Ejercicio 3 (Efectos fijos temporales en Ciencia de Datos)</a></li>
+  <li><a href="#ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" id="toc-ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" class="nav-link" data-scroll-target="#ejercicio-1-cardinalidad-categórica-e-inferencia-estadística"><span class="header-section-number">3.4.1</span> Ejercicio 1 (Cardinalidad categórica e inferencia estadística)</a></li>
+  <li><a href="#ejercicio-2-modelado-lógico-mediante-regex" id="toc-ejercicio-2-modelado-lógico-mediante-regex" class="nav-link" data-scroll-target="#ejercicio-2-modelado-lógico-mediante-regex"><span class="header-section-number">3.4.2</span> Ejercicio 2 (Modelado lógico mediante Regex)</a></li>
+  <li><a href="#ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" id="toc-ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" class="nav-link" data-scroll-target="#ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos"><span class="header-section-number">3.4.3</span> Ejercicio 3 (Efectos fijos temporales en Ciencia de Datos)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -437,9 +437,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap3-datos-especificos.html">Datos de Tipo Específico: Cadenas de Texto y Fechas</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap3-datos-especificos.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Tipo Específico: Cadenas de Texto y Fechas</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Datos de Tipo Específico: Cadenas de Texto y Fechas</h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Tipo Específico: Cadenas de Texto y Fechas</span></h1>
 </div>
 
 
@@ -471,16 +471,16 @@ window.Quarto = {
 </div>
 <p>En la práctica profesional del análisis de datos, con frecuencia nos enfrentamos a información que no se ajusta a la estructura limpia de las variables numéricas tradicionales. Gran parte de la riqueza de los conjuntos de datos modernos reside en campos de texto libre (cadenas de caracteres o <em>strings</em>) y en registros temporales (fechas, marcas de tiempo y horas).</p>
 <p>Desde una perspectiva analítica, el texto libre representa una fuente de datos semiestructurada o no estructurada que contiene una altísima densidad de información. Sin embargo, para que un modelo estadístico pueda procesar esta información, esta debe ser normalizada, depurada y mapeada de manera rigurosa. Por otra parte, las variables temporales añaden una dimensión de orden secuencial indispensable para capturar patrones dinámicos (tendencias y estacionalidad), pero su manipulación matemática requiere un control estricto de las complejidades del calendario humano, tales como años bisiestos, formatos regionales dispares y husos horarios.</p>
-<section id="análisis-de-cadenas-de-texto-y-control-de-cardinalidad" class="level2">
-<h2 class="anchored" data-anchor-id="análisis-de-cadenas-de-texto-y-control-de-cardinalidad">Análisis de Cadenas de Texto y Control de Cardinalidad</h2>
+<section id="análisis-de-cadenas-de-texto-y-control-de-cardinalidad" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="análisis-de-cadenas-de-texto-y-control-de-cardinalidad"><span class="header-section-number">3.1</span> Análisis de Cadenas de Texto y Control de Cardinalidad</h2>
 <p>En la investigación aplicada y en los registros administrativos, las variables cualitativas nominales suelen ingresarse inicialmente como cadenas de caracteres libres. Sin embargo, un campo de texto sin normalizar introduce un grave problema analítico conocido como <strong>explosión de cardinalidad</strong>.</p>
-<section id="el-impacto-analítico-de-la-cardinalidad-sucia" class="level3">
-<h3 class="anchored" data-anchor-id="el-impacto-analítico-de-la-cardinalidad-sucia">El Impacto Analítico de la Cardinalidad Sucia</h3>
+<section id="el-impacto-analítico-de-la-cardinalidad-sucia" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="el-impacto-analítico-de-la-cardinalidad-sucia"><span class="header-section-number">3.1.1</span> El Impacto Analítico de la Cardinalidad Sucia</h3>
 <p>Cuando los usuarios o los sistemas registran información de texto sin restricciones (por ejemplo, el nombre de un departamento de Bolivia ingresado como <code>"La Paz"</code>, <code>"la paz"</code>, <code>"La Paz "</code>, o <code>"LA PAZ"</code>), el software estadístico interpreta cada variación tipográfica como una categoría analítica completamente distinta.</p>
 <p>Desde el punto de vista estadístico, este fenómeno fragmenta de manera artificial el espacio muestral. Al aumentar la cardinalidad (el número de niveles únicos de una variable categórica) debido a errores de registro, se reduce la cantidad de observaciones disponibles por nivel, lo que disminuye drásticamente los grados de libertad del análisis, incrementa la varianza de los estimadores y eleva exponencialmente el riesgo de sobreajuste (<em>overfitting</em>) en modelos lineales o de clasificación.</p>
 </section>
-<section id="normalización-de-textos-como-reducción-de-ruido" class="level3">
-<h3 class="anchored" data-anchor-id="normalización-de-textos-como-reducción-de-ruido">Normalización de Textos como Reducción de Ruido</h3>
+<section id="normalización-de-textos-como-reducción-de-ruido" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="normalización-de-textos-como-reducción-de-ruido"><span class="header-section-number">3.1.2</span> Normalización de Textos como Reducción de Ruido</h3>
 <p>La limpieza de variables de caracteres tiene como propósito unificar representaciones semánticas equivalentes para garantizar la integridad y consistencia del dato. Este flujo comprende:</p>
 <ol type="1">
 <li><strong>Case Folding (Conversión de caja)</strong>: Homogeneizar el texto forzándolo completamente a minúsculas o mayúsculas.</li>
@@ -490,11 +490,11 @@ window.Quarto = {
 </ol>
 </section>
 </section>
-<section id="expresiones-regulares-regex-como-clasificadores-deterministas" class="level2">
-<h2 class="anchored" data-anchor-id="expresiones-regulares-regex-como-clasificadores-deterministas">Expresiones Regulares (Regex) como Clasificadores Deterministas</h2>
+<section id="expresiones-regulares-regex-como-clasificadores-deterministas" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="expresiones-regulares-regex-como-clasificadores-deterministas"><span class="header-section-number">3.2</span> Expresiones Regulares (Regex) como Clasificadores Deterministas</h2>
 <p>Para realizar búsquedas, validaciones e investigaciones estructuradas dentro de variables de texto, la herramienta metodológica por excelencia es la <strong>Expresión Regular (Regex)</strong>.</p>
-<section id="regex-desde-la-perspectiva-de-datos" class="level3">
-<h3 class="anchored" data-anchor-id="regex-desde-la-perspectiva-de-datos">Regex desde la Perspectiva de Datos</h3>
+<section id="regex-desde-la-perspectiva-de-datos" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="regex-desde-la-perspectiva-de-datos"><span class="header-section-number">3.2.1</span> Regex desde la Perspectiva de Datos</h3>
 <p>Desde una perspectiva teórica, una expresión regular es una regla lógica que define un autómata determinista. Este autómata evalúa cada cadena de texto y divide el dataset en dos subespacios mutuamente excluyentes: las observaciones que cumplen con el patrón y las que no. Esto nos permite generar de manera inmediata <strong>variables indicadoras binarias</strong> (0 o 1) que indican la presencia o ausencia de un atributo analítico complejo.</p>
 <p>Los componentes fundamentales de la sintaxis de Regex se resumen en:</p>
 <ul>
@@ -566,11 +566,11 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="álgebra-temporal-y-extracción-de-atributos-estacionales" class="level2">
-<h2 class="anchored" data-anchor-id="álgebra-temporal-y-extracción-de-atributos-estacionales">Álgebra Temporal y Extracción de Atributos Estacionales</h2>
+<section id="álgebra-temporal-y-extracción-de-atributos-estacionales" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="álgebra-temporal-y-extracción-de-atributos-estacionales"><span class="header-section-number">3.3</span> Álgebra Temporal y Extracción de Atributos Estacionales</h2>
 <p>La inclusión del tiempo en el análisis de datos es fundamental para comprender comportamientos y procesos dinámicos. Sin embargo, el tiempo plantea un doble desafío analítico: por un lado, fluye de manera continua y lineal; por el otro, la actividad humana lo experimenta de manera cíclica e intermitente (por horas, días de la semana, meses y años).</p>
-<section id="almacenamiento-interno-de-fechas-en-r" class="level3">
-<h3 class="anchored" data-anchor-id="almacenamiento-interno-de-fechas-en-r">Almacenamiento Interno de Fechas en R</h3>
+<section id="almacenamiento-interno-de-fechas-en-r" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="almacenamiento-interno-de-fechas-en-r"><span class="header-section-number">3.3.1</span> Almacenamiento Interno de Fechas en R</h3>
 <p>Para realizar operaciones matemáticas consistentes sobre el tiempo (como calcular días transcurridos o duraciones), R evita la debilidad de almacenar las fechas como simples textos. En su lugar, el motor del software utiliza representaciones numéricas de referencia:</p>
 <ul>
 <li><strong>Clase <code>Date</code></strong>: Almacena de manera interna el número de <strong>días transcurridos</strong> desde un origen de referencia fijado de manera universal el <strong>1 de enero de 1970</strong>. Cualquier fecha previa a este origen se representa internamente como un número entero negativo.</li>
@@ -634,18 +634,18 @@ window.Quarto = {
 <hr>
 </section>
 </section>
-<section id="ejercicios-de-autoevaluación" class="level2">
-<h2 class="anchored" data-anchor-id="ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</h2>
-<section id="ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" class="level3">
-<h3 class="anchored" data-anchor-id="ejercicio-1-cardinalidad-categórica-e-inferencia-estadística">Ejercicio 1 (Cardinalidad categórica e inferencia estadística)</h3>
+<section id="ejercicios-de-autoevaluación" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="ejercicios-de-autoevaluación"><span class="header-section-number">3.4</span> Ejercicios de Autoevaluación</h2>
+<section id="ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="ejercicio-1-cardinalidad-categórica-e-inferencia-estadística"><span class="header-section-number">3.4.1</span> Ejercicio 1 (Cardinalidad categórica e inferencia estadística)</h3>
 <p>Un analista financiero de la Maestría está trabajando con una base de datos de solicitudes de crédito de Bolivia. La columna <code>"Ciudad"</code> contiene texto ingresado manualmente por los agentes comerciales, registrando un total de 183 variaciones tipográficas distintas para hacer referencia a las 9 capitales departamentales (por ejemplo, <code>"La Paz"</code>, <code>"la paz"</code>, <code>"L.P."</code>, <code>"lp"</code>, etc.). * <strong>A)</strong> Explica conceptualmente las consecuencias estadísticas que tiene esta cardinalidad artificialmente elevada sobre la estimación de la varianza del error y los grados de libertad al ajustar un modelo de regresión lineal para predecir el monto del crédito aprobado utilizando <code>"Ciudad"</code> como predictor. * <strong>B)</strong> Fundamenta por qué el proceso de normalización tipográfica (conversión a minúsculas, eliminación de espacios y estandarización de códigos de extensión) actúa como una técnica de reducción de dimensiones y reducción de ruido en este contexto.</p>
 </section>
-<section id="ejercicio-2-modelado-lógico-mediante-regex" class="level3">
-<h3 class="anchored" data-anchor-id="ejercicio-2-modelado-lógico-mediante-regex">Ejercicio 2 (Modelado lógico mediante Regex)</h3>
+<section id="ejercicio-2-modelado-lógico-mediante-regex" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="ejercicio-2-modelado-lógico-mediante-regex"><span class="header-section-number">3.4.2</span> Ejercicio 2 (Modelado lógico mediante Regex)</h3>
 <p>Estás diseñando una regla de validación de calidad de datos para un dataset nacional de salud pública. El identificador de cada paciente debe seguir una estructura de código específica: <code>"PAC-"</code>, seguido exactamente de un año fiscal de cuatro dígitos (<code>2020</code> a <code>2029</code>), un guion medio y un código alfanumérico secuencial único de 3 caracteres (por ejemplo, <code>"PAC-2024-X4A"</code> o <code>"PAC-2026-99F"</code>). * <strong>A)</strong> Diseña la expresión regular precisa utilizando metacaracteres, clases de caracteres y cuantificadores en R para validar que los códigos cumplan estrictamente con esta estructura. * <strong>B)</strong> Demuestra conceptualmente por qué la expresión <code>^PAC-[0-9]{4}-[A-Za-z0-9]{3}$</code> cumple de forma exhaustiva con esta especificación y explica el rol de las anclas <code>^</code> y <code>$</code> para evitar la validación de falsos positivos que contengan texto adicional al inicio o final de la celda.</p>
 </section>
-<section id="ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" class="level3">
-<h3 class="anchored" data-anchor-id="ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos">Ejercicio 3 (Efectos fijos temporales en Ciencia de Datos)</h3>
+<section id="ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos"><span class="header-section-number">3.4.3</span> Ejercicio 3 (Efectos fijos temporales en Ciencia de Datos)</h3>
 <p>En los modelos predictivos de demanda (por ejemplo, volumen de ventas diarias en supermercados), la variable temporal expresada en el formato secuencial lineal original (número de días desde 1970) no logra capturar la estacionalidad del negocio debido a su comportamiento no estacionario. * <strong>A)</strong> Explica conceptualmente por qué la extracción de características basadas en ciclos estacionales cerrados (como el mes del año y el día de la semana mediante <code>lubridate</code>) permite descomponer la variable temporal lineal en un conjunto de variables categóricas con efectos periódicos de negocio. * <strong>B)</strong> Escribe un script conceptual en R utilizando la tubería <code>| &gt;</code> que, partiendo de un dataframe con fechas transaccionales crudas en la variable <code>fecha_pago</code>, genere tres nuevas variables estructurales: <code>mes_efecto</code> (factor del mes del año), <code>dia_semana</code> (factor del día) y una variable binaria lógica <code>es_feriado_semanal</code> que identifique si la transacción se procesó en un fin de semana.</p>
 
 

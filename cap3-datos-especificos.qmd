@@ -1,4 +1,4 @@
-# Datos de Tipo Específico: Cadenas de Texto y Fechas {.unnumbered}
+# Datos de Tipo Específico: Cadenas de Texto y Fechas 
 
 ::: {.callout-note}
 ### Cobertura de Sesiones
