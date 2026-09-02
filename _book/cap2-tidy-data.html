@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular – Fundamentos de Análisis de Datos</title>
+<title>2&nbsp; Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular – Fundamentos de Análisis de Datos</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -159,7 +159,7 @@ window.Quarto = {
 };
 </script>
 
-<meta name="twitter:title" content="Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular – Fundamentos de Análisis de Datos">
+<meta name="twitter:title" content="2&nbsp; Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular – Fundamentos de Análisis de Datos">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -333,7 +333,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap2-tidy-data.html">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap2-tidy-data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -403,7 +403,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap2-tidy-data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,23 +424,34 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#dimensiones-fundamentales-de-la-calidad-del-dato" id="toc-dimensiones-fundamentales-de-la-calidad-del-dato" class="nav-link active" data-scroll-target="#dimensiones-fundamentales-de-la-calidad-del-dato">Dimensiones Fundamentales de la Calidad del Dato</a>
+  <li><a href="#dimensiones-fundamentales-de-la-calidad-del-dato" id="toc-dimensiones-fundamentales-de-la-calidad-del-dato" class="nav-link active" data-scroll-target="#dimensiones-fundamentales-de-la-calidad-del-dato"><span class="header-section-number">2.1</span> Dimensiones Fundamentales de la Calidad del Dato</a>
   <ul class="collapse">
-  <li><a href="#precisión-accuracyprecision" id="toc-precisión-accuracyprecision" class="nav-link" data-scroll-target="#precisión-accuracyprecision">Precisión (Accuracy/Precision)</a></li>
-  <li><a href="#consistencia-consistency" id="toc-consistencia-consistency" class="nav-link" data-scroll-target="#consistencia-consistency">Consistencia (Consistency)</a></li>
-  <li><a href="#completitud-completeness" id="toc-completitud-completeness" class="nav-link" data-scroll-target="#completitud-completeness">Completitud (Completeness)</a></li>
-  <li><a href="#puntualidad-timeliness" id="toc-puntualidad-timeliness" class="nav-link" data-scroll-target="#puntualidad-timeliness">Puntualidad (Timeliness)</a></li>
-  <li><a href="#integridad-integrity" id="toc-integridad-integrity" class="nav-link" data-scroll-target="#integridad-integrity">Integridad (Integrity)</a></li>
+  <li><a href="#precisión-accuracyprecision" id="toc-precisión-accuracyprecision" class="nav-link" data-scroll-target="#precisión-accuracyprecision"><span class="header-section-number">2.1.1</span> Precisión (Accuracy/Precision)</a></li>
+  <li><a href="#consistencia-consistency" id="toc-consistencia-consistency" class="nav-link" data-scroll-target="#consistencia-consistency"><span class="header-section-number">2.1.2</span> Consistencia (Consistency)</a></li>
+  <li><a href="#completitud-completeness" id="toc-completitud-completeness" class="nav-link" data-scroll-target="#completitud-completeness"><span class="header-section-number">2.1.3</span> Completitud (Completeness)</a></li>
+  <li><a href="#puntualidad-timeliness" id="toc-puntualidad-timeliness" class="nav-link" data-scroll-target="#puntualidad-timeliness"><span class="header-section-number">2.1.4</span> Puntualidad (Timeliness)</a></li>
+  <li><a href="#integridad-integrity" id="toc-integridad-integrity" class="nav-link" data-scroll-target="#integridad-integrity"><span class="header-section-number">2.1.5</span> Integridad (Integrity)</a></li>
   </ul></li>
-  <li><a href="#fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" id="toc-fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" class="nav-link" data-scroll-target="#fundamentos-conceptuales-de-los-datos-ordenados-tidy-data">Fundamentos Conceptuales de los Datos Ordenados (Tidy Data)</a>
+  <li><a href="#fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" id="toc-fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" class="nav-link" data-scroll-target="#fundamentos-conceptuales-de-los-datos-ordenados-tidy-data"><span class="header-section-number">2.2</span> Fundamentos Conceptuales de los Datos Ordenados (Tidy Data)</a>
   <ul class="collapse">
-  <li><a href="#las-tres-reglas-de-oro" id="toc-las-tres-reglas-de-oro" class="nav-link" data-scroll-target="#las-tres-reglas-de-oro">Las Tres Reglas de Oro</a></li>
-  <li><a href="#formato-ancho-wide-vs.-formato-largo-long" id="toc-formato-ancho-wide-vs.-formato-largo-long" class="nav-link" data-scroll-target="#formato-ancho-wide-vs.-formato-largo-long">Formato Ancho (Wide) vs.&nbsp;Formato Largo (Long)</a></li>
+  <li><a href="#las-tres-reglas-de-oro" id="toc-las-tres-reglas-de-oro" class="nav-link" data-scroll-target="#las-tres-reglas-de-oro"><span class="header-section-number">2.2.1</span> Las Tres Reglas de Oro</a></li>
+  <li><a href="#formato-ancho-wide-vs.-formato-largo-long" id="toc-formato-ancho-wide-vs.-formato-largo-long" class="nav-link" data-scroll-target="#formato-ancho-wide-vs.-formato-largo-long"><span class="header-section-number">2.2.2</span> Formato Ancho (Wide) vs.&nbsp;Formato Largo (Long)</a></li>
   </ul></li>
-  <li><a href="#la-gramática-de-la-manipulación-de-datos-dplyr" id="toc-la-gramática-de-la-manipulación-de-datos-dplyr" class="nav-link" data-scroll-target="#la-gramática-de-la-manipulación-de-datos-dplyr">La Gramática de la Manipulación de Datos (<code>dplyr</code>)</a>
+  <li><a href="#la-gramática-de-la-manipulación-de-datos-dplyr" id="toc-la-gramática-de-la-manipulación-de-datos-dplyr" class="nav-link" data-scroll-target="#la-gramática-de-la-manipulación-de-datos-dplyr"><span class="header-section-number">2.3</span> La Gramática de la Manipulación de Datos (<code>dplyr</code>)</a>
   <ul class="collapse">
-  <li><a href="#los-verbos-principales-de-dplyr" id="toc-los-verbos-principales-de-dplyr" class="nav-link" data-scroll-target="#los-verbos-principales-de-dplyr">Los Verbos Principales de <code>dplyr</code></a></li>
-  <li><a href="#el-paradigma-split-apply-combine-dividir-aplicar-combinar" id="toc-el-paradigma-split-apply-combine-dividir-aplicar-combinar" class="nav-link" data-scroll-target="#el-paradigma-split-apply-combine-dividir-aplicar-combinar">El Paradigma “Split-Apply-Combine” (Dividir-Aplicar-Combinar)</a></li>
+  <li><a href="#los-verbos-principales-de-dplyr" id="toc-los-verbos-principales-de-dplyr" class="nav-link" data-scroll-target="#los-verbos-principales-de-dplyr"><span class="header-section-number">2.3.1</span> Los Verbos Principales de <code>dplyr</code></a></li>
+  </ul></li>
+  <li><a href="#técnicas-de-reestructuración-y-pivoteo-tidyr" id="toc-técnicas-de-reestructuración-y-pivoteo-tidyr" class="nav-link" data-scroll-target="#técnicas-de-reestructuración-y-pivoteo-tidyr"><span class="header-section-number">2.4</span> Técnicas de Reestructuración y Pivoteo (<code>tidyr</code>)</a>
+  <ul class="collapse">
+  <li><a href="#pivoteo-de-ancho-a-largo-pivot_longer" id="toc-pivoteo-de-ancho-a-largo-pivot_longer" class="nav-link" data-scroll-target="#pivoteo-de-ancho-a-largo-pivot_longer"><span class="header-section-number">2.4.1</span> Pivoteo: De Ancho a Largo (<code>pivot_longer()</code>)</a></li>
+  <li><a href="#pivoteo-de-largo-a-ancho-pivot_wider" id="toc-pivoteo-de-largo-a-ancho-pivot_wider" class="nav-link" data-scroll-target="#pivoteo-de-largo-a-ancho-pivot_wider"><span class="header-section-number">2.4.2</span> Pivoteo: De Largo a Ancho (<code>pivot_wider()</code>)</a></li>
+  <li><a href="#limpieza-de-brechas-administrativas-fill-y-replace_na" id="toc-limpieza-de-brechas-administrativas-fill-y-replace_na" class="nav-link" data-scroll-target="#limpieza-de-brechas-administrativas-fill-y-replace_na"><span class="header-section-number">2.4.3</span> Limpieza de Brechas Administrativas: <code>fill()</code> y <code>replace_na()</code></a></li>
+  </ul></li>
+  <li><a href="#ejercicios-de-autoevaluación" id="toc-ejercicios-de-autoevaluación" class="nav-link" data-scroll-target="#ejercicios-de-autoevaluación"><span class="header-section-number">2.5</span> Ejercicios de Autoevaluación</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1-impacto-inferencia-de-la-calidad-del-dato" id="toc-ejercicio-1-impacto-inferencia-de-la-calidad-del-dato" class="nav-link" data-scroll-target="#ejercicio-1-impacto-inferencia-de-la-calidad-del-dato"><span class="header-section-number">2.5.1</span> Ejercicio 1: Impacto Inferencia de la Calidad del Dato</a></li>
+  <li><a href="#ejercicio-2-álgebra-matricial-y-semántica-de-tidy-data" id="toc-ejercicio-2-álgebra-matricial-y-semántica-de-tidy-data" class="nav-link" data-scroll-target="#ejercicio-2-álgebra-matricial-y-semántica-de-tidy-data"><span class="header-section-number">2.5.2</span> Ejercicio 2: Álgebra Matricial y Semántica de Tidy Data</a></li>
+  <li><a href="#ejercicio-3-lógica-de-transformación-integrada" id="toc-ejercicio-3-lógica-de-transformación-integrada" class="nav-link" data-scroll-target="#ejercicio-3-lógica-de-transformación-integrada"><span class="header-section-number">2.5.3</span> Ejercicio 3: Lógica de Transformación Integrada</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -449,9 +460,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap2-tidy-data.html">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap2-tidy-data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></h1>
 </div>
 
 
@@ -478,54 +489,54 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Este capítulo cubre los contenidos correspondientes a las <strong>Sesiones 4 y 5 (Semana 2)</strong> del programa académico <span class="citation" data-cites="chirino2026programa">(<a href="references.html#ref-chirino2026programa" role="doc-biblioref">Chirino Gutiérrez 2026</a>)</span>. Nos enfocaremos en los fundamentos conceptuales de la calidad de datos, la estructura ordenada y en las operaciones de transformación esenciales para preparar un dataset para el análisis.</p>
+<p>Este capítulo cubre los contenidos correspondientes a las <strong>Sesiones 4 y 5 (Semana 2)</strong>. Nos enfocaremos en los fundamentos conceptuales de la calidad de datos, la estructura ordenada y en las operaciones de transformación esenciales para preparar un dataset para el análisis.</p>
 </div>
 </div>
 <p>El análisis de datos profesional no comienza con el ajuste de modelos predictivos o la generación de visualizaciones de alto impacto <span class="citation" data-cites="stoudt2021principles">(<a href="references.html#ref-stoudt2021principles" role="doc-biblioref">Stoudt et al. 2021</a>)</span>. En la práctica, la mayor parte del tiempo de un proyecto se consume en la preparación, limpieza y estructuración de los datos, un proceso a menudo estimado en un 50% o hasta 80% del tiempo total de análisis <span class="citation" data-cites="boehmke2016data kopra2024r">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>; <a href="references.html#ref-kopra2024r" role="doc-biblioref">Kopra et al. 2024</a>)</span>. Este capítulo aborda de manera profunda las dimensiones de la <strong>calidad del dato</strong>, la <strong>Filosofía Tidy Data</strong> (datos ordenados) y los principios lógicos que rigen la manipulación eficiente de estructuras de datos, utilizando las abstracciones conceptuales del ecosistema R.</p>
-<section id="dimensiones-fundamentales-de-la-calidad-del-dato" class="level2">
-<h2 class="anchored" data-anchor-id="dimensiones-fundamentales-de-la-calidad-del-dato">Dimensiones Fundamentales de la Calidad del Dato</h2>
+<section id="dimensiones-fundamentales-de-la-calidad-del-dato" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="dimensiones-fundamentales-de-la-calidad-del-dato"><span class="header-section-number">2.1</span> Dimensiones Fundamentales de la Calidad del Dato</h2>
 <p>La calidad de un conjunto de datos es el pilar que sostiene la validez de cualquier inferencia estadística o modelo de machine learning. Datos de baja calidad conducen al fenómeno clásico de <em>garbage in, garbage out</em> (basura entra, basura sale). Metodológicamente, la calidad del dato se evalúa a través de cinco dimensiones fundamentales <span class="citation" data-cites="groves2009survey">(<a href="references.html#ref-groves2009survey" role="doc-biblioref">Groves et al. 2009</a>)</span>:</p>
-<section id="precisión-accuracyprecision" class="level3">
-<h3 class="anchored" data-anchor-id="precisión-accuracyprecision">Precisión (Accuracy/Precision)</h3>
+<section id="precisión-accuracyprecision" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="precisión-accuracyprecision"><span class="header-section-number">2.1.1</span> Precisión (Accuracy/Precision)</h3>
 <p>Representa el grado de cercanía entre los datos registrados en el dataset y el valor real y verdadero de la característica medida en la población objetivo.</p>
 <ul>
 <li><strong>Implicación estadística</strong>: Las discrepancias constantes en la precisión introducen errores de medición sistemáticos (sesgos) o aleatorios. Estadísticamente, el error de medición aleatorio en variables independientes (predictores) genera un sesgo de atenuación hacia el cero, lo que debilita artificialmente las relaciones estimadas en modelos de regresión lineal o logística.</li>
 </ul>
 </section>
-<section id="consistencia-consistency" class="level3">
-<h3 class="anchored" data-anchor-id="consistencia-consistency">Consistencia (Consistency)</h3>
+<section id="consistencia-consistency" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="consistencia-consistency"><span class="header-section-number">2.1.2</span> Consistencia (Consistency)</h3>
 <p>Determina la ausencia de contradicciones y contradicciones lógicas dentro de un dataset o entre bases de datos relacionadas. Por ejemplo, la consistencia exige que si la variable <code>Edad</code> es <span class="math inline">\(18\)</span>, la fecha de nacimiento registrada corresponda exactamente a hace 18 años, o que una categoría como “La Paz” no esté codificada simultáneamente como “La Paz”, “LP” o “la paz”.</p>
 <ul>
 <li><strong>Implicación analítica</strong>: Las inconsistencias fragmentan artificialmente el espacio de las categorías cualitativas en variables categóricas, subestimando la representatividad y el poder de segmentación de las clases reales, lo que deteriora la validez interna del análisis.</li>
 </ul>
 </section>
-<section id="completitud-completeness" class="level3">
-<h3 class="anchored" data-anchor-id="completitud-completeness">Completitud (Completeness)</h3>
+<section id="completitud-completeness" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="completitud-completeness"><span class="header-section-number">2.1.3</span> Completitud (Completeness)</h3>
 <p>Indica la proporción de observaciones y variables esperadas que contienen registros válidos, en contraste con celdas con valores faltantes (<code>NA</code> o nulos).</p>
 <ul>
 <li><strong>Implicación estadística</strong>: Un dataset incompleto limita el poder estadístico al reducir el tamaño muestral efectivo. Peor aún, si la pérdida de datos no es aleatoria (mecanismos MAR o MNAR), realizar un análisis limitado a casos completos introduce sesgos de selección severos en los estimadores de los parámetros, distorsionando la realidad analizada.</li>
 </ul>
 </section>
-<section id="puntualidad-timeliness" class="level3">
-<h3 class="anchored" data-anchor-id="puntualidad-timeliness">Puntualidad (Timeliness)</h3>
+<section id="puntualidad-timeliness" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="puntualidad-timeliness"><span class="header-section-number">2.1.4</span> Puntualidad (Timeliness)</h3>
 <p>Se refiere a si la información registrada es actual y está disponible a tiempo para reflejar con precisión el estado presente del fenómeno que se estudia. Un conjunto de datos puede ser preciso, completo y consistente, pero si es obsoleto o se procesa con retraso, pierde su valor operativo y analítico.</p>
 <ul>
 <li><strong>Implicación analítica</strong>: En entornos altamente dinámicos (como mercados financieros u operaciones logísticas transaccionales), la obsolescencia de los datos rompe los supuestos de estacionariedad temporal, provocando que los modelos entrenados con datos históricos fallen al predecir comportamientos en tiempo real.</li>
 </ul>
 </section>
-<section id="integridad-integrity" class="level3">
-<h3 class="anchored" data-anchor-id="integridad-integrity">Integridad (Integrity)</h3>
+<section id="integridad-integrity" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="integridad-integrity"><span class="header-section-number">2.1.5</span> Integridad (Integrity)</h3>
 <p>Mide el cumplimiento de las restricciones estructurales y relacionales preestablecidas para los datos. Esto incluye la validación de claves primarias (que no existan identificadores duplicados para unidades de análisis individuales), la existencia de relaciones referenciales válidas y el respeto a las restricciones de rango de las variables.</p>
 <ul>
 <li><strong>Implicación analítica</strong>: La falta de integridad rompe las relaciones lógicas entre las tablas de datos, lo que resulta en uniones incorrectas (<em>joins</em>), pérdida silenciosa de registros al realizar cruces, y duplicaciones artificiales que inflan el tamaño de la muestra y sesgan los resultados.</li>
 </ul>
 </section>
 </section>
-<section id="fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" class="level2">
-<h2 class="anchored" data-anchor-id="fundamentos-conceptuales-de-los-datos-ordenados-tidy-data">Fundamentos Conceptuales de los Datos Ordenados (Tidy Data)</h2>
+<section id="fundamentos-conceptuales-de-los-datos-ordenados-tidy-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="fundamentos-conceptuales-de-los-datos-ordenados-tidy-data"><span class="header-section-number">2.2</span> Fundamentos Conceptuales de los Datos Ordenados (Tidy Data)</h2>
 <p>El concepto de <em>Tidy Data</em> representa un marco teórico propuesto por Hadley Wickham que estandariza la forma en que los conjuntos de datos deben estructurarse físicamente para alinearse con su semántica analítica <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>. Estructuralmente, un conjunto de datos es una colección de <strong>valores</strong>, los cuales pueden clasificarse de manera general en dos categorías: variables y observaciones.</p>
-<section id="las-tres-reglas-de-oro" class="level3">
-<h3 class="anchored" data-anchor-id="las-tres-reglas-de-oro">Las Tres Reglas de Oro</h3>
+<section id="las-tres-reglas-de-oro" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="las-tres-reglas-de-oro"><span class="header-section-number">2.2.1</span> Las Tres Reglas de Oro</h3>
 <p>Para que un dataset se considere ordenado (<em>tidy</em>), debe cumplir estrictamente con tres reglas interconectadas <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>:</p>
 <ol type="1">
 <li><strong>Cada variable debe estar en una columna</strong>: Una variable es una característica o atributo que mide un aspecto específico (por ejemplo, el PIB, la edad o el género) de todas las unidades bajo análisis.</li>
@@ -534,8 +545,8 @@ window.Quarto = {
 </ol>
 <p>Desde una perspectiva estadística, la organización de los datos en formato <em>tidy</em> se alinea perfectamente con la noción matemática de una <strong>matriz de datos</strong> <span class="math inline">\(X_{n \times p}\)</span>, donde las <span class="math inline">\(p\)</span> columnas representan variables aleatorias y las <span class="math inline">\(n\)</span> filas representan realizaciones independientes (observaciones) de estas variables.</p>
 </section>
-<section id="formato-ancho-wide-vs.-formato-largo-long" class="level3">
-<h3 class="anchored" data-anchor-id="formato-ancho-wide-vs.-formato-largo-long">Formato Ancho (Wide) vs.&nbsp;Formato Largo (Long)</h3>
+<section id="formato-ancho-wide-vs.-formato-largo-long" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="formato-ancho-wide-vs.-formato-largo-long"><span class="header-section-number">2.2.2</span> Formato Ancho (Wide) vs.&nbsp;Formato Largo (Long)</h3>
 <p>Los datos se presentan habitualmente en dos estructuras según las necesidades del usuario:</p>
 <ul>
 <li><strong>Formato Ancho (<em>Wide format</em>)</strong>: En esta estructura, cada fila representa una unidad de análisis y los diferentes valores medidos a lo largo del tiempo o bajo diferentes condiciones se distribuyen horizontalmente en columnas separadas (por ejemplo, columnas llamadas <code>2020</code>, <code>2021</code>, <code>2022</code>). Es un formato altamente eficiente para la entrada manual de datos y la visualización en hojas de cálculo por parte de humanos <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.</li>
@@ -578,11 +589,11 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="la-gramática-de-la-manipulación-de-datos-dplyr" class="level2">
-<h2 class="anchored" data-anchor-id="la-gramática-de-la-manipulación-de-datos-dplyr">La Gramática de la Manipulación de Datos (<code>dplyr</code>)</h2>
+<section id="la-gramática-de-la-manipulación-de-datos-dplyr" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="la-gramática-de-la-manipulación-de-datos-dplyr"><span class="header-section-number">2.3</span> La Gramática de la Manipulación de Datos (<code>dplyr</code>)</h2>
 <p>Para transformar datos de manera robusta y legible, el paquete <code>dplyr</code> proporciona una gramática consistente estructurada alrededor de <strong>verbos de acción</strong> <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>. Estos verbos operan sobre dataframes (o su versión moderna, los <code>tibbles</code>) y están diseñados para minimizar la complejidad cognitiva del analista, permitiendo encadenar operaciones secuenciales mediante el operador pipeline (<code>|&gt;</code>).</p>
-<section id="los-verbos-principales-de-dplyr" class="level3">
-<h3 class="anchored" data-anchor-id="los-verbos-principales-de-dplyr">Los Verbos Principales de <code>dplyr</code></h3>
+<section id="los-verbos-principales-de-dplyr" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="los-verbos-principales-de-dplyr"><span class="header-section-number">2.3.1</span> Los Verbos Principales de <code>dplyr</code></h3>
 <p>Cada uno de estos verbos cumple una función de transformación específica en el flujo de trabajo analítico <span class="citation" data-cites="wickham2023r kopra2024r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>; <a href="references.html#ref-kopra2024r" role="doc-biblioref">Kopra et al. 2024</a>)</span>:</p>
 <ul>
 <li><code>select()</code>: Extrae un subconjunto de columnas (variables) según su nombre, posición o tipo de dato, simplificando datasets con exceso de dimensiones.</li>
@@ -592,71 +603,52 @@ window.Quarto = {
 <li><code>summarise()</code>: Reduce múltiples valores de una o más columnas a un único resumen estadístico descriptivo (como la media, desviación estándar, o conteos).</li>
 </ul>
 </section>
-<section id="el-paradigma-split-apply-combine-dividir-aplicar-combinar" class="level3">
-<h3 class="anchored">El Paradigma “Split-Apply-Combine” (Dividir-Aplicar-Combinar)</h3>
-<p>Una de las técnicas más poderosas en estadística analítica es agrupar observaciones homogéneas para comparar sus métricas descriptivas <span class="citation" data-cites="kopra2024r">(<a href="references.html#ref-kopra2024r" role="doc-biblioref">Kopra et al. 2024</a>)</span>. El verbo <code>group_by()</code> de <code>dplyr</code> no altera los valores de los datos, sino que añade un atributo de metadatos invisible al dataframe que indica a los verbos posteriores (principalmente a <code>summarise()</code>) que deben operar de forma independiente en cada categoría o grupo definido <span class="citation" data-cites="kopra2024r">(<a href="references.html#ref-kopra2024r" role="doc-biblioref">Kopra et al. 2024</a>)</span>. Esto permite particionar el espacio muestral, calcular estimadores puntuales por grupo y luego combinar los resultados de vuelta en una estructura tabular limpia.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="" aria-current="page">Enfoque Moderno (<code>dplyr</code> + Pipeline)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Pivoteo: De Ancho a Largo (<code>pivot_longer()</code>)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Pivoteo: De Largo a Ancho (<code>pivot_wider()</code>)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false" href="">Limpieza de Brechas Administrativas: <code>fill()</code> y <code>replace_na()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-5" role="tab" aria-controls="tabset-2-5" aria-selected="false" href="">Ejercicio 1: Impacto Inferencia de la Calidad del Dato</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-6" role="tab" aria-controls="tabset-2-6" aria-selected="false" href="">Ejercicio 2: Álgebra Matricial y Semántica de Tidy Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-7" role="tab" aria-controls="tabset-2-7" aria-selected="false" href="">Ejercicio 3: Lógica de Transformación Integrada</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<p>El uso de <code>dplyr</code> junto con el operador de tubería moderno de R (<code>|&gt;</code>) permite leer el flujo de transformaciones como una secuencia de instrucciones estructuradas, eliminando la necesidad de guardar múltiples objetos intermedios redundantes <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Flujo legible: seleccionar, filtrar, agrupar, resumir y ordenar</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>resumen_exportaciones <span class="ot">&lt;-</span> exportaciones_bolivia <span class="sc">|&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(departamento, categoria, anio, valor_usd) <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">==</span> <span class="dv">2024</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(departamento) <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_exportado =</span> <span class="fu">sum</span>(valor_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">promedio_transaccion =</span> <span class="fu">mean</span>(valor_usd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_operaciones =</span> <span class="fu">n</span>()</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_exportado))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="técnicas-de-reestructuración-y-pivoteo-tidyr" class="level2">
-<h2 class="anchored" data-anchor-id="técnicas-de-reestructuración-y-pivoteo-tidyr">Técnicas de Reestructuración y Pivoteo (<code>tidyr</code>)</h2>
-<p>Cuando nos enfrentamos a conjuntos de datos crudos o reportes provenientes de sistemas transaccionales u hojas de cálculo Excel administrativas, comúnmente encontramos estructuras no optimizadas para el modelado o la visualización estadística <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>. El paquete <code>tidyr</code> proporciona herramientas de reestructuración geométrica para alterar la dimensión espacial de las tablas conservando la consistencia de los datos <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
 </section>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<section id="técnicas-de-reestructuración-y-pivoteo-tidyr" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="técnicas-de-reestructuración-y-pivoteo-tidyr"><span class="header-section-number">2.4</span> Técnicas de Reestructuración y Pivoteo (<code>tidyr</code>)</h2>
+<p>Cuando nos enfrentamos a conjuntos de datos crudos o reportes provenientes de sistemas transaccionales u hojas de cálculo Excel administrativas, comúnmente encontramos estructuras no optimizadas para el modelado o la visualización estadística <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>. El paquete <code>tidyr</code> proporciona herramientas de reestructuración geométrica para alterar la dimensión espacial de las tablas conservando la consistencia de los datos <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
+<section id="pivoteo-de-ancho-a-largo-pivot_longer" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="pivoteo-de-ancho-a-largo-pivot_longer"><span class="header-section-number">2.4.1</span> Pivoteo: De Ancho a Largo (<code>pivot_longer()</code>)</h3>
 <p>La función <code>pivot_longer()</code> resuelve el caso más común de desorden de datos: cuando los nombres de las columnas no son nombres de variables, sino que representan valores de una variable oculta <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>. Esta función colapsa las columnas especificadas en dos nuevas columnas: una que almacena los nombres antiguos como categorías (comúnmente llamada <code>name</code> o <code>key</code>) y otra que almacena los valores numéricos correspondientes (<code>value</code>).</p>
-</div>
-<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+</section>
+<section id="pivoteo-de-largo-a-ancho-pivot_wider" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="pivoteo-de-largo-a-ancho-pivot_wider"><span class="header-section-number">2.4.2</span> Pivoteo: De Largo a Ancho (<code>pivot_wider()</code>)</h3>
 <p>La función <code>pivot_wider()</code> realiza la operación inversa. Se utiliza cuando una observación se encuentra dispersa a lo largo de múltiples filas (por ejemplo, cuando una columna llamada <code>metrica</code> tiene filas con etiquetas “Temperatura” y “Presión”, y otra columna tiene los números). Esta función toma una columna de clave y una de valor, y crea nuevas columnas individuales para cada categoría única.</p>
-</div>
-<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+</section>
+<section id="limpieza-de-brechas-administrativas-fill-y-replace_na" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="limpieza-de-brechas-administrativas-fill-y-replace_na"><span class="header-section-number">2.4.3</span> Limpieza de Brechas Administrativas: <code>fill()</code> y <code>replace_na()</code></h3>
 <p>Un problema persistente al importar reportes de Excel es la presencia de celdas vacías (<code>NA</code>) que ocurren porque los diseñadores omiten repetir el nombre de una categoría o año en filas consecutivas para mejorar la estética visual <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.</p>
 <ul>
 <li><code>fill()</code>: Imputa de manera determinística valores faltantes reemplazándolos con el valor no nulo inmediatamente anterior (<code>.direction = \"down\"</code>) o posterior (<code>.direction = \"up\"</code>) <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.<code>replace_na()</code>: Permite definir valores por defecto estandarizados para reemplazar nulos de forma controlada según el tipo de variable <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.</li>
 </ul>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Pivoteo Largo (Wide to Long)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Pivoteo Ancho (Long to Wide)</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Pivoteo Largo (Wide to Long)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Pivoteo Ancho (Long to Wide)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>Imaginemos que importamos un reporte anual de regalías mineras por departamento boliviano con columnas horizontales para cada año y deseamos ordenarlo bajo el estándar de <em>Tidy Data</em> <span class="citation" data-cites="stoudt2021principles">(<a href="references.html#ref-stoudt2021principles" role="doc-biblioref">Stoudt et al. 2021</a>)</span>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformar columnas anuales en una variable de tiempo explícita</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>regalias_tidy <span class="ot">&lt;-</span> regalias_ancho <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"gestion_"</span>), <span class="co"># Seleccionar las columnas temporales</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"anio"</span>,              <span class="co"># Nombre de la nueva variable cualitativa</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"gestion_"</span>,      <span class="co"># Limpiar el prefijo de texto de los nombres</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"monto_bob"</span>         <span class="co"># Nombre de la variable cuantitativa</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformar columnas anuales en una variable de tiempo explícita</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>regalias_tidy <span class="ot">&lt;-</span> regalias_ancho <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"gestion_"</span>), <span class="co"># Seleccionar las columnas temporales</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"anio"</span>,              <span class="co"># Nombre de la nueva variable cualitativa</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"gestion_"</span>,      <span class="co"># Limpiar el prefijo de texto de los nombres</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"monto_bob"</span>         <span class="co"># Nombre de la variable cuantitativa</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Si tuviéramos un dataset en formato largo donde las variables analíticas de interés (por ejemplo, exportaciones e importaciones de una aduana) están en filas bajo una columna “flujo” y requerimos calcular su saldo neto, pivoteamos para colocarlas lado a lado en columnas separadas <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribuir categorías de flujo en columnas individuales de medición</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>balanza_comercial <span class="ot">&lt;-</span> aduana_largo <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> tipo_flujo,      <span class="co"># Columna que contiene las nuevas etiquetas de columna</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> valor_usd,      <span class="co"># Columna que contiene los números de medición</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_fill =</span> <span class="dv">0</span>               <span class="co"># Rellenar con cero aduanas que no registraron un flujo específico</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">saldo_neto =</span> exportaciones <span class="sc">-</span> importaciones)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribuir categorías de flujo en columnas individuales de medición</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>balanza_comercial <span class="ot">&lt;-</span> aduana_largo <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> tipo_flujo,      <span class="co"># Columna que contiene las nuevas etiquetas de columna</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> valor_usd,      <span class="co"># Columna que contiene los números de medición</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_fill =</span> <span class="dv">0</span>               <span class="co"># Rellenar con cero aduanas que no registraron un flujo específico</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">saldo_neto =</span> exportaciones <span class="sc">-</span> importaciones)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -671,50 +663,53 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>Imagina que has importado un archivo Excel que contiene el reporte de inflación del Banco Central para tres sectores económicos con el formato estético típico de reporte de oficina:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset crudo de simulación</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>reporte_sucio <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sector =</span> <span class="fu">c</span>(<span class="st">"Alimentos"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="st">"Transporte"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metrica =</span> <span class="fu">c</span>(<span class="st">"IPC"</span>, <span class="st">"Ponderacion"</span>, <span class="st">"Variacion"</span>, <span class="st">"IPC"</span>, <span class="st">"Ponderacion"</span>, <span class="st">"Variacion"</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2023</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">105.2</span>, <span class="fl">0.35</span>, <span class="fl">0.02</span>, <span class="fl">102.1</span>, <span class="fl">0.15</span>, <span class="fl">0.01</span>),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2024</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">108.5</span>, <span class="fl">0.35</span>, <span class="fl">0.03</span>, <span class="fl">104.3</span>, <span class="fl">0.15</span>, <span class="fl">0.02</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset crudo de simulación</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>reporte_sucio <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sector =</span> <span class="fu">c</span>(<span class="st">"Alimentos"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="st">"Transporte"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metrica =</span> <span class="fu">c</span>(<span class="st">"IPC"</span>, <span class="st">"Ponderacion"</span>, <span class="st">"Variacion"</span>, <span class="st">"IPC"</span>, <span class="st">"Ponderacion"</span>, <span class="st">"Variacion"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2023</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">105.2</span>, <span class="fl">0.35</span>, <span class="fl">0.02</span>, <span class="fl">102.1</span>, <span class="fl">0.15</span>, <span class="fl">0.01</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2024</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">108.5</span>, <span class="fl">0.35</span>, <span class="fl">0.03</span>, <span class="fl">104.3</span>, <span class="fl">0.15</span>, <span class="fl">0.02</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Tu reto:</strong> Escribe una tubería de código (<code>|&gt;</code>) utilizando <code>dplyr</code> y <code>tidyr</code> que realice las siguientes acciones de forma encadenada: 1. Utiliza <code>fill()</code> para propagar la variable cualitativa <code>Sector</code> hacia abajo eliminando los nulos. 2. Usa <code>pivot_longer()</code> para unificar los años (<code>2023</code> y <code>2024</code>) en una variable llamada <code>Anio</code> y los valores correspondientes en <code>Monto</code>. 3. Usa <code>pivot_wider()</code> para transformar la columna <code>Metrica</code> de modo que <code>IPC</code>, <code>Ponderacion</code> y <code>Variacion</code> se conviertan en tres columnas individuales limpias a nivel de Sector y Año.</p>
 <p><strong>Código de Solución Sugerido:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>reporte_tidy <span class="ot">&lt;-</span> reporte_sucio <span class="sc">|&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(Sector, <span class="at">.direction =</span> <span class="st">"down"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2023</span><span class="st">`</span>, <span class="st">`</span><span class="at">2024</span><span class="st">`</span>),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Anio"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Monto"</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> Metrica,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> Monto</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>reporte_tidy <span class="ot">&lt;-</span> reporte_sucio <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(Sector, <span class="at">.direction =</span> <span class="st">"down"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2023</span><span class="st">`</span>, <span class="st">`</span><span class="at">2024</span><span class="st">`</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Anio"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Monto"</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> Metrica,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> Monto</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<section id="ejercicios-de-autoevaluación" class="level2">
-<h2 class="anchored" data-anchor-id="ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</h2>
 </section>
-</div>
-<div id="tabset-2-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-5-tab">
+</section>
+<section id="ejercicios-de-autoevaluación" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="ejercicios-de-autoevaluación"><span class="header-section-number">2.5</span> Ejercicios de Autoevaluación</h2>
+<section id="ejercicio-1-impacto-inferencia-de-la-calidad-del-dato" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="ejercicio-1-impacto-inferencia-de-la-calidad-del-dato"><span class="header-section-number">2.5.1</span> Ejercicio 1: Impacto Inferencia de la Calidad del Dato</h3>
 <p>Supongamos que trabajas con los registros administrativos de ingresos aduaneros nacionales en Bolivia.</p>
 <ol type="a">
 <li>Describe un escenario de negocio o investigación donde un fallo en la dimensión de <strong>Integridad</strong> afecte directamente los estimadores descriptivos de ingresos totales.</li>
 <li>Explica por qué una baja dimensión en la <strong>Completitud</strong> de los datos no puede resolverse simplemente eliminando de manera automática las observaciones que presenten valores faltantes (<code>drop_na()</code>), fundamentando tu respuesta en el sesgo de selección.</li>
 </ol>
-</div>
-<div id="tabset-2-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-6-tab">
+</section>
+<section id="ejercicio-2-álgebra-matricial-y-semántica-de-tidy-data" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="ejercicio-2-álgebra-matricial-y-semántica-de-tidy-data"><span class="header-section-number">2.5.2</span> Ejercicio 2: Álgebra Matricial y Semántica de Tidy Data</h3>
 <p>Dada una matriz de datos tradicional <span class="math inline">\(X_{n \times p}\)</span>:</p>
 <ol type="a">
 <li>Establece detalladamente la equivalencia matemática y semántica entre los elementos de la matriz (<span class="math inline">\(x_{ij}\)</span>) y las tres reglas de oro de la Filosofía <em>Tidy Data</em>.</li>
 <li>Si un dataset con la estructura <code>| Departamento | Exportaciones_2023 | Exportaciones_2024 |</code> se almacena directamente en un modelo estadístico lineal de la forma <span class="math inline">\(Y = \beta_0 + \beta_1 X + \epsilon\)</span>, explica la colisión estructural que ocurre con la variable explicativa <code>Año</code> y cómo la reestructuración a formato largo soluciona conceptualmente el modelo.</li>
 </ol>
-</div>
-<div id="tabset-2-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-7-tab">
+</section>
+<section id="ejercicio-3-lógica-de-transformación-integrada" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="ejercicio-3-lógica-de-transformación-integrada"><span class="header-section-number">2.5.3</span> Ejercicio 3: Lógica de Transformación Integrada</h3>
 <p>Considera el reporte sucio de inflación sectorial del “Reto de 5 Minutos”:</p>
 <ol type="a">
 <li>Dibuja un diagrama de flujo secuencial que muestre el estado de las dimensiones de la tabla de datos tras la ejecución de cada uno de los tres verbos lógicos empleados (<code>fill</code>, <code>pivot_longer</code>, <code>pivot_wider</code>). Debe incluir la evolución espacial del dataset (número de filas e identidad de las columnas en cada paso).</li>
@@ -722,15 +717,9 @@ window.Quarto = {
 </ol>
 
 
-</div>
-</div>
-</div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-boehmke2016data" class="csl-entry" role="listitem">
 Boehmke, Bradley C. 2016. <em>Data Wrangling with r</em>. Use <span>R</span>! Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-45599-0">https://doi.org/10.1007/978-3-319-45599-0</a>.
-</div>
-<div id="ref-chirino2026programa" class="csl-entry" role="listitem">
-Chirino Gutiérrez, Alvaro. 2026. <em>Programa de La Materia: Fundamentos de an<span>á</span>lisis de Datos</em>. Maestr<span>í</span>a en Inteligencia Artificial y Gesti<span>ó</span>n de Datos para Finanzas, Econom<span>í</span>a y Negocios, Universidad Cat<span>ó</span>lica Boliviana.
 </div>
 <div id="ref-groves2009survey" class="csl-entry" role="listitem">
 Groves, Robert M., Floyd J. Fowler, Mick P. Couper, James M. Lepkowski, Eleanor Singer, and Roger Tourangeau. 2009. <em>Survey Methodology</em>. 2nd ed. John Wiley &amp; Sons.

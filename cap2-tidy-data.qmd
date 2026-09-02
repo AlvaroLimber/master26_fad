@@ -1,8 +1,8 @@
-# Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular {.unnumbered}
+# Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular
 
 ::: {.callout-warning}
 ### Cobertura de Sesiones
-Este capítulo cubre los contenidos correspondientes a las **Sesiones 4 y 5 (Semana 2)** del programa académico [@chirino2026programa]. Nos enfocaremos en los fundamentos conceptuales de la calidad de datos, la estructura ordenada y en las operaciones de transformación esenciales para preparar un dataset para el análisis.
+Este capítulo cubre los contenidos correspondientes a las **Sesiones 4 y 5 (Semana 2)**. Nos enfocaremos en los fundamentos conceptuales de la calidad de datos, la estructura ordenada y en las operaciones de transformación esenciales para preparar un dataset para el análisis.
 :::
 
 El análisis de datos profesional no comienza con el ajuste de modelos predictivos o la generación de visualizaciones de alto impacto [@stoudt2021principles]. En la práctica, la mayor parte del tiempo de un proyecto se consume en la preparación, limpieza y estructuración de los datos, un proceso a menudo estimado en un 50% o hasta 80% del tiempo total de análisis [@boehmke2016data; @kopra2024r]. Este capítulo aborda de manera profunda las dimensiones de la **calidad del dato**, la **Filosofía Tidy Data** (datos ordenados) y los principios lógicos que rigen la manipulación eficiente de estructuras de datos, utilizando las abstracciones conceptuales del ecosistema R.
@@ -81,31 +81,6 @@ Cada uno de estos verbos cumple una función de transformación específica en e
 *   `arrange()`: Reordena las filas de la tabla de manera ascendente o descendente en función del valor de una o más variables específicas.
 *   `mutate()`: Crea nuevas variables agregándolas como columnas calculadas a partir de variables preexistentes o modifica variables actuales.
 *   `summarise()`: Reduce múltiples valores de una o más columnas a un único resumen estadístico descriptivo (como la media, desviación estándar, o conteos).
-
-### El Paradigma "Split-Apply-Combine" (Dividir-Aplicar-Combinar)
-Una de las técnicas más poderosas en estadística analítica es agrupar observaciones homogéneas para comparar sus métricas descriptivas [@kopra2024r]. El verbo `group_by()` de `dplyr` no altera los valores de los datos, sino que añade un atributo de metadatos invisible al dataframe que indica a los verbos posteriores (principalmente a `summarise()`) que deben operar de forma independiente en cada categoría o grupo definido [@kopra2024r]. Esto permite particionar el espacio muestral, calcular estimadores puntuales por grupo y luego combinar los resultados de vuelta en una estructura tabular limpia.
-
-::: {.panel-tabset}
-
-### Enfoque Moderno (`dplyr` + Pipeline)
-
-El uso de `dplyr` junto con el operador de tubería moderno de R (`|>`) permite leer el flujo de transformaciones como una secuencia de instrucciones estructuradas, eliminando la necesidad de guardar múltiples objetos intermedios redundantes [@wickham2023r].
-
-```r
-library(dplyr)
-
-# Flujo legible: seleccionar, filtrar, agrupar, resumir y ordenar
-resumen_exportaciones <- exportaciones_bolivia |>
-  select(departamento, categoria, anio, valor_usd) |>
-  filter(anio == 2024) |>
-  group_by(departamento) |>
-  summarise(
-    total_exportado = sum(valor_usd, na.rm = TRUE),
-    promedio_transaccion = mean(valor_usd, na.rm = TRUE),
-    n_operaciones = n()
-  ) |>
-  arrange(desc(total_exportado))
-```
 
 ## Técnicas de Reestructuración y Pivoteo (`tidyr`)
 
