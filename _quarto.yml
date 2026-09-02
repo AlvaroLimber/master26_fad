@@ -30,7 +30,7 @@ book:
       chapters:
         - cap1-adquisicion.qmd   # Entorno (RStudio/Git), ingesta de archivos planos, bases de datos, consumo de APIs y Web Scraping [1].
         - cap2-tidy-data.qmd     # Filosofía Tidy Data, manipulación y reestructuración de dataframes (dplyr, tidyr) [1, 3].
-    #    - cap3-datos-especificos.qmd # Tratamiento de textos con expresiones regulares (stringr) y manejo de fechas/tiempo (lubridate) [2].
+        - cap3-datos-especificos.qmd # Tratamiento de textos con expresiones regulares (stringr) y manejo de fechas/tiempo (lubridate) [2].
     #- part: "Parte II: Análisis Exploratorio y Tratamiento de Datos Faltantes"
     #  chapters:
     #    - cap4-eda-visualizacion.qmd # Estadística descriptiva, medidas de resumen y visualización de datos con ggplot2 [2, 3].

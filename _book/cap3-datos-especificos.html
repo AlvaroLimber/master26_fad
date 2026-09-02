@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Datos de Tipo Específico: Cadenas de Texto y Fechas – Fundamentos de Análisis de Datos</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./cap2-tidy-data.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b2cbf88ee9ee288985b87b7430834320.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-528989212f0d08e68774375b94c3ff31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="Datos de Tipo Específico: Cadenas de Texto y Fechas – Fundamentos de Análisis de Datos">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap3-datos-especificos.html">Datos de Tipo Específico: Cadenas de Texto y Fechas</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Fundamentos de Análisis de Datos</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/master_fad/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenido</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Parte I: Adquisición, Transformación y Manipulación de Datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap1-adquisicion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Adquisición de Datos y Configuración del Entorno</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2-tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap3-datos-especificos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Datos de Tipo Específico: Cadenas de Texto y Fechas</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#análisis-de-cadenas-de-texto-y-control-de-cardinalidad" id="toc-análisis-de-cadenas-de-texto-y-control-de-cardinalidad" class="nav-link active" data-scroll-target="#análisis-de-cadenas-de-texto-y-control-de-cardinalidad">Análisis de Cadenas de Texto y Control de Cardinalidad</a>
+  <ul class="collapse">
+  <li><a href="#el-impacto-analítico-de-la-cardinalidad-sucia" id="toc-el-impacto-analítico-de-la-cardinalidad-sucia" class="nav-link" data-scroll-target="#el-impacto-analítico-de-la-cardinalidad-sucia">El Impacto Analítico de la Cardinalidad Sucia</a></li>
+  <li><a href="#normalización-de-textos-como-reducción-de-ruido" id="toc-normalización-de-textos-como-reducción-de-ruido" class="nav-link" data-scroll-target="#normalización-de-textos-como-reducción-de-ruido">Normalización de Textos como Reducción de Ruido</a></li>
+  </ul></li>
+  <li><a href="#expresiones-regulares-regex-como-clasificadores-deterministas" id="toc-expresiones-regulares-regex-como-clasificadores-deterministas" class="nav-link" data-scroll-target="#expresiones-regulares-regex-como-clasificadores-deterministas">Expresiones Regulares (Regex) como Clasificadores Deterministas</a>
+  <ul class="collapse">
+  <li><a href="#regex-desde-la-perspectiva-de-datos" id="toc-regex-desde-la-perspectiva-de-datos" class="nav-link" data-scroll-target="#regex-desde-la-perspectiva-de-datos">Regex desde la Perspectiva de Datos</a></li>
+  </ul></li>
+  <li><a href="#álgebra-temporal-y-extracción-de-atributos-estacionales" id="toc-álgebra-temporal-y-extracción-de-atributos-estacionales" class="nav-link" data-scroll-target="#álgebra-temporal-y-extracción-de-atributos-estacionales">Álgebra Temporal y Extracción de Atributos Estacionales</a>
+  <ul class="collapse">
+  <li><a href="#almacenamiento-interno-de-fechas-en-r" id="toc-almacenamiento-interno-de-fechas-en-r" class="nav-link" data-scroll-target="#almacenamiento-interno-de-fechas-en-r">Almacenamiento Interno de Fechas en R</a></li>
+  </ul></li>
+  <li><a href="#ejercicios-de-autoevaluación" id="toc-ejercicios-de-autoevaluación" class="nav-link" data-scroll-target="#ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" id="toc-ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" class="nav-link" data-scroll-target="#ejercicio-1-cardinalidad-categórica-e-inferencia-estadística">Ejercicio 1 (Cardinalidad categórica e inferencia estadística)</a></li>
+  <li><a href="#ejercicio-2-modelado-lógico-mediante-regex" id="toc-ejercicio-2-modelado-lógico-mediante-regex" class="nav-link" data-scroll-target="#ejercicio-2-modelado-lógico-mediante-regex">Ejercicio 2 (Modelado lógico mediante Regex)</a></li>
+  <li><a href="#ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" id="toc-ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" class="nav-link" data-scroll-target="#ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos">Ejercicio 3 (Efectos fijos temporales en Ciencia de Datos)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1-adquisicion.html">Parte I: Adquisición, Transformación y Manipulación de Datos</a></li><li class="breadcrumb-item"><a href="./cap3-datos-especificos.html">Datos de Tipo Específico: Cadenas de Texto y Fechas</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Datos de Tipo Específico: Cadenas de Texto y Fechas</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Cobertura de Sesiones
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este capítulo cubre los contenidos correspondientes a la <strong>Sesión 6 (Fin de la Semana 2)</strong> del programa académico, cerrando formalmente la <strong>Parte I</strong> de la materia dedicada a la adquisición, transformación y manipulación de datos.</p>
+</div>
+</div>
+<p>En la práctica profesional del análisis de datos, con frecuencia nos enfrentamos a información que no se ajusta a la estructura limpia de las variables numéricas tradicionales. Gran parte de la riqueza de los conjuntos de datos modernos reside en campos de texto libre (cadenas de caracteres o <em>strings</em>) y en registros temporales (fechas, marcas de tiempo y horas).</p>
+<p>Desde una perspectiva analítica, el texto libre representa una fuente de datos semiestructurada o no estructurada que contiene una altísima densidad de información. Sin embargo, para que un modelo estadístico pueda procesar esta información, esta debe ser normalizada, depurada y mapeada de manera rigurosa. Por otra parte, las variables temporales añaden una dimensión de orden secuencial indispensable para capturar patrones dinámicos (tendencias y estacionalidad), pero su manipulación matemática requiere un control estricto de las complejidades del calendario humano, tales como años bisiestos, formatos regionales dispares y husos horarios.</p>
+<section id="análisis-de-cadenas-de-texto-y-control-de-cardinalidad" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-de-cadenas-de-texto-y-control-de-cardinalidad">Análisis de Cadenas de Texto y Control de Cardinalidad</h2>
+<p>En la investigación aplicada y en los registros administrativos, las variables cualitativas nominales suelen ingresarse inicialmente como cadenas de caracteres libres. Sin embargo, un campo de texto sin normalizar introduce un grave problema analítico conocido como <strong>explosión de cardinalidad</strong>.</p>
+<section id="el-impacto-analítico-de-la-cardinalidad-sucia" class="level3">
+<h3 class="anchored" data-anchor-id="el-impacto-analítico-de-la-cardinalidad-sucia">El Impacto Analítico de la Cardinalidad Sucia</h3>
+<p>Cuando los usuarios o los sistemas registran información de texto sin restricciones (por ejemplo, el nombre de un departamento de Bolivia ingresado como <code>"La Paz"</code>, <code>"la paz"</code>, <code>"La Paz "</code>, o <code>"LA PAZ"</code>), el software estadístico interpreta cada variación tipográfica como una categoría analítica completamente distinta.</p>
+<p>Desde el punto de vista estadístico, este fenómeno fragmenta de manera artificial el espacio muestral. Al aumentar la cardinalidad (el número de niveles únicos de una variable categórica) debido a errores de registro, se reduce la cantidad de observaciones disponibles por nivel, lo que disminuye drásticamente los grados de libertad del análisis, incrementa la varianza de los estimadores y eleva exponencialmente el riesgo de sobreajuste (<em>overfitting</em>) en modelos lineales o de clasificación.</p>
+</section>
+<section id="normalización-de-textos-como-reducción-de-ruido" class="level3">
+<h3 class="anchored" data-anchor-id="normalización-de-textos-como-reducción-de-ruido">Normalización de Textos como Reducción de Ruido</h3>
+<p>La limpieza de variables de caracteres tiene como propósito unificar representaciones semánticas equivalentes para garantizar la integridad y consistencia del dato. Este flujo comprende:</p>
+<ol type="1">
+<li><strong>Case Folding (Conversión de caja)</strong>: Homogeneizar el texto forzándolo completamente a minúsculas o mayúsculas.</li>
+<li><strong>Eliminación de espacios en blanco huérfanos</strong>: Remover espacios al inicio o al final de la cadena (<em>trimming</em>), así como colapsar espacios dobles internos.</li>
+<li><strong>Limpieza de caracteres especiales y acentos</strong>: Remover tildes, diéresis y puntuaciones que varían según la configuración regional del teclado del transcriptor.</li>
+<li><strong>Extracción de Atributos</strong>: Aislar componentes clave dentro de una cadena compleja para transformarlos en variables estructuradas individuales (por ejemplo, extraer la provincia o zona a partir de un campo de dirección postal).</li>
+</ol>
+</section>
+</section>
+<section id="expresiones-regulares-regex-como-clasificadores-deterministas" class="level2">
+<h2 class="anchored" data-anchor-id="expresiones-regulares-regex-como-clasificadores-deterministas">Expresiones Regulares (Regex) como Clasificadores Deterministas</h2>
+<p>Para realizar búsquedas, validaciones e investigaciones estructuradas dentro de variables de texto, la herramienta metodológica por excelencia es la <strong>Expresión Regular (Regex)</strong>.</p>
+<section id="regex-desde-la-perspectiva-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="regex-desde-la-perspectiva-de-datos">Regex desde la Perspectiva de Datos</h3>
+<p>Desde una perspectiva teórica, una expresión regular es una regla lógica que define un autómata determinista. Este autómata evalúa cada cadena de texto y divide el dataset en dos subespacios mutuamente excluyentes: las observaciones que cumplen con el patrón y las que no. Esto nos permite generar de manera inmediata <strong>variables indicadoras binarias</strong> (0 o 1) que indican la presencia o ausencia de un atributo analítico complejo.</p>
+<p>Los componentes fundamentales de la sintaxis de Regex se resumen en:</p>
+<ul>
+<li><strong>Anclas</strong>: Delimitan la posición del patrón. El símbolo <code>^</code> representa el inicio absoluto de la cadena, mientras que <code>$</code> representa el final de la cadena.</li>
+<li><strong>Clases de caracteres</strong>: Permiten definir conjuntos de caracteres válidos usando corchetes, como <code>[a-zA-Z]</code> para letras o <code>[0-9]</code> para dígitos numéricos.</li>
+<li><strong>Metacaracteres y Secuencias de Escape</strong>: Caracteres con significados predefinidos (como <code>.</code> que coincide con cualquier carácter, o <code>\d</code> para dígitos). En R, debido a la forma en que el compilador procesa los strings, las secuencias de escape de Regex siempre requieren un doble backslash (por ejemplo, <code>\\d</code> para un dígito o <code>\\s</code> para un espacio en blanco).</li>
+<li><strong>Cuantificadores</strong>: Controlan cuántas veces consecutivas puede aparecer un carácter o grupo (como <code>+</code> para una o más veces, <code>*</code> para cero o más veces, y <code>{n}</code> para exactamente <span class="math inline">\(n\)</span> repeticiones).</li>
+</ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Enfoque con stringr (Tidyverse)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Enfoque con Base R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>El paquete <code>stringr</code> estandariza el procesamiento de texto en R mediante funciones que colocan siempre el vector de datos como el primer argumento, facilitando la composición de tuberías estructuradas (<code>| &gt;</code>).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector con códigos transaccionales de aduanas bolivianas (sucios)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>codigos_aduaneros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"EXP-2026-LP "</span>, <span class="st">"imp-2025-SC"</span>, <span class="st">"EXP-2026-CBX"</span>, <span class="st">"TRN-2026-or"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Normalización básica y remoción de espacios huérfanos</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>codigos_limpios <span class="ot">&lt;-</span> codigos_aduaneros <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>(<span class="at">side =</span> <span class="st">"both"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_to_upper</span>()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Creación de una variable indicadora lógica (Clasificación binaria)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Identifica de forma determinística si la transacción es una exportación (^EXP)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>es_exportacion <span class="ot">&lt;-</span> <span class="fu">str_detect</span>(codigos_limpios, <span class="st">"^EXP"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Extracción estructurada de atributos (Feature Extraction)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraemos exactamente cuatro dígitos numéricos correspondientes a la gestión anual</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>gestion_fiscal <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(codigos_limpios, <span class="st">"</span><span class="sc">\\</span><span class="st">d{4}"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Corrección de errores sistemáticos de codificación categórica</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>codigos_estandar <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(codigos_limpios, <span class="st">"CBX"</span>, <span class="st">"CB"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Base R proporciona funciones sumamente veloces y potentes basadas en la librería de expresiones regulares del sistema operativo, pero su uso requiere precaución debido a la falta de homogeneidad en el orden de sus argumentos (algunas funciones reciben primero el patrón y otras el vector de datos).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector con códigos transaccionales</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>codigos_aduaneros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"EXP-2026-LP "</span>, <span class="st">"imp-2025-SC"</span>, <span class="st">"EXP-2026-CBX"</span>, <span class="st">"TRN-2026-or"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Normalización en Base R</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>codigos_limpios_base <span class="ot">&lt;-</span> <span class="fu">toupper</span>(<span class="fu">gsub</span>(<span class="st">"^[[:space:]]+|[[:space:]]+$"</span>, <span class="st">""</span>, codigos_aduaneros))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Detección de patrones de inicio de cadena (equivalente a str_detect)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>es_exportacion_base <span class="ot">&lt;-</span> <span class="fu">grepl</span>(<span class="st">"^EXP"</span>, codigos_limpios_base)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Reemplazo de subcadenas específicas</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>codigos_estandar_base <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"CBX"</span>, <span class="st">"CB"</span>, codigos_limpios_base)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Extracción de patrones (requiere un flujo indirecto con regmatches y regexpr)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>posiciones <span class="ot">&lt;-</span> <span class="fu">regexpr</span>(<span class="st">"[0-9]{4}"</span>, codigos_limpios_base)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>gestion_base <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(codigos_limpios_base, posiciones)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Actividad de Paso: Expresiones Regulares aplicadas a Identificaciones Nacionales (3 minutos)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En Bolivia, los documentos de Cédula de Identidad (CI) pueden registrarse de forma errónea incluyendo su extensión departamental al final del número (por ejemplo, <code>"1234567-LP"</code> o <code>"9876543-SC"</code>).</p>
+<p>Si necesitas depurar una lista de clientes para separar el número numérico puro de la extensión departamental de dos letras, ¿cómo escribirías una expresión regular en <code>str_extract()</code> que coincida únicamente con la extensión del departamento al final del string, asegurando que se descarte el guion?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="álgebra-temporal-y-extracción-de-atributos-estacionales" class="level2">
+<h2 class="anchored" data-anchor-id="álgebra-temporal-y-extracción-de-atributos-estacionales">Álgebra Temporal y Extracción de Atributos Estacionales</h2>
+<p>La inclusión del tiempo en el análisis de datos es fundamental para comprender comportamientos y procesos dinámicos. Sin embargo, el tiempo plantea un doble desafío analítico: por un lado, fluye de manera continua y lineal; por el otro, la actividad humana lo experimenta de manera cíclica e intermitente (por horas, días de la semana, meses y años).</p>
+<section id="almacenamiento-interno-de-fechas-en-r" class="level3">
+<h3 class="anchored" data-anchor-id="almacenamiento-interno-de-fechas-en-r">Almacenamiento Interno de Fechas en R</h3>
+<p>Para realizar operaciones matemáticas consistentes sobre el tiempo (como calcular días transcurridos o duraciones), R evita la debilidad de almacenar las fechas como simples textos. En su lugar, el motor del software utiliza representaciones numéricas de referencia:</p>
+<ul>
+<li><strong>Clase <code>Date</code></strong>: Almacena de manera interna el número de <strong>días transcurridos</strong> desde un origen de referencia fijado de manera universal el <strong>1 de enero de 1970</strong>. Cualquier fecha previa a este origen se representa internamente como un número entero negativo.</li>
+<li><strong>Clase <code>POSIXct</code></strong>: Representa el tiempo como el número de <strong>segundos transcurridos</strong> desde el mismo origen del 1 de enero de 1970 (con precisión decimal). Es la clase recomendada para almacenar marcas de tiempo (<em>timestamps</em>) detalladas y realizar análisis de alta frecuencia.</li>
+<li><strong>Clase <code>POSIXlt</code></strong>: Almacena el tiempo como una lista detallada de componentes individuales (segundo, minuto, hora, día del mes, mes, año), facilitando la inspección directa del sistema.</li>
+</ul>
+<p>Para realizar el parseo sintáctico sin importar las variaciones de formato regional (como la mezcla de separadores o la posición del mes y el día), utilizaremos el paquete <strong><code>lubridate</code></strong>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Parseo y Conversión</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Extracción y Álgebra Temporal</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><code>lubridate</code> elimina la necesidad de especificar complejas cadenas de formato de entrada (como <code>"%d/%m/%Y"</code>). El analista simplemente debe declarar el orden en que aparecen el día (<code>d</code>), el mes (<code>m</code>) y el año (<code>y</code>) en la cadena de caracteres sucia.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parseo robusto de múltiples formatos regionales a fechas estandarizadas de R</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fecha_bolivia <span class="ot">&lt;-</span> <span class="fu">dmy</span>(<span class="st">"24-08-2026"</span>)    <span class="co"># Formato tradicional boliviano</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fecha_usa     <span class="ot">&lt;-</span> <span class="fu">mdy</span>(<span class="st">"August 24, 2026"</span>) <span class="co"># Formato norteamericano con texto</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fecha_iso     <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2026/08/24"</span>)    <span class="co"># Estándar ISO con barras inclinadas</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir las fechas para confirmar que R las almacena de forma unificada (YYYY-MM-DD)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fecha_bolivia)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(fecha_bolivia) <span class="co"># Devuelve "Date"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Una vez que R reconoce formalmente un objeto temporal, este se puede transformar y descomponer en indicadores estacionales categóricos que alimenten modelos lineales, identificando efectos fijos de fin de semana, meses o trimestres fiscales.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fecha_analisis <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2026-08-24"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extracción de componentes estacionales categóricos (Feature Extraction)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>anio_fiscal  <span class="ot">&lt;-</span> <span class="fu">year</span>(fecha_analisis)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>mes_nombre   <span class="ot">&lt;-</span> <span class="fu">month</span>(fecha_analisis, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">abbr =</span> <span class="cn">FALSE</span>) <span class="co"># Devuelve "agosto" como factor ordenado</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>dia_semana   <span class="ot">&lt;-</span> <span class="fu">wday</span>(fecha_analisis, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">abbr =</span> <span class="cn">FALSE</span>)  <span class="co"># Devuelve "lunes" como factor ordenado</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Creación de variables indicadoras de ciclo de negocio</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Determinar si una fecha transaccional corresponde a un fin de semana</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>es_fin_de_semana <span class="ot">&lt;-</span> <span class="fu">wday</span>(fecha_analisis) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>) <span class="co"># 1 = Domingo, 7 = Sábado</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Operaciones aritméticas controladas (Añadir periodos físicos)</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>proxima_evaluacion <span class="ot">&lt;-</span> fecha_analisis <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">15</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>diferencia_operativa <span class="ot">&lt;-</span> fecha_analisis <span class="sc">-</span> <span class="fu">ymd</span>(<span class="st">"2026-01-01"</span>) <span class="co"># Devuelve la duración en días</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto de 5 Minutos: Extracción y Análisis Temporal Integrado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Imagina que has importado un registro transaccional en el que la columna de fechas se encuentra en un campo de texto combinado sumamente sucio con el formato típico de un archivo log administrativo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copia este vector en tu consola de RStudio para resolver el reto</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>logs_transacciones <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"LOG_2026-08-10_TRANS_77"</span>, <span class="st">"LOG_2026-08-15_TRANS_12"</span>, <span class="st">"LOG_2026-08-16_TRANS_89"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Tu reto:</strong> Escribe una tubería de código (<code>|&gt;</code>) utilizando <code>stringr</code> y <code>lubridate</code> que realice de manera secuencial los siguientes pasos: 1. Extrae de forma precisa únicamente la subcadena que representa la fecha física (es decir, el patrón <code>YYYY-MM-DD</code>). 2. Convierte dicha subcadena en un objeto real de tipo <code>Date</code> de R. 3. Calcula el día de la semana correspondiente a cada registro y genera un vector indicador lógico que marque con <code>TRUE</code> únicamente las transacciones ocurridas durante el fin de semana (Sábado y Domingo) para diagnosticar la regularidad de las operaciones.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="ejercicios-de-autoevaluación" class="level2">
+<h2 class="anchored" data-anchor-id="ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</h2>
+<section id="ejercicio-1-cardinalidad-categórica-e-inferencia-estadística" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-1-cardinalidad-categórica-e-inferencia-estadística">Ejercicio 1 (Cardinalidad categórica e inferencia estadística)</h3>
+<p>Un analista financiero de la Maestría está trabajando con una base de datos de solicitudes de crédito de Bolivia. La columna <code>"Ciudad"</code> contiene texto ingresado manualmente por los agentes comerciales, registrando un total de 183 variaciones tipográficas distintas para hacer referencia a las 9 capitales departamentales (por ejemplo, <code>"La Paz"</code>, <code>"la paz"</code>, <code>"L.P."</code>, <code>"lp"</code>, etc.). * <strong>A)</strong> Explica conceptualmente las consecuencias estadísticas que tiene esta cardinalidad artificialmente elevada sobre la estimación de la varianza del error y los grados de libertad al ajustar un modelo de regresión lineal para predecir el monto del crédito aprobado utilizando <code>"Ciudad"</code> como predictor. * <strong>B)</strong> Fundamenta por qué el proceso de normalización tipográfica (conversión a minúsculas, eliminación de espacios y estandarización de códigos de extensión) actúa como una técnica de reducción de dimensiones y reducción de ruido en este contexto.</p>
+</section>
+<section id="ejercicio-2-modelado-lógico-mediante-regex" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-2-modelado-lógico-mediante-regex">Ejercicio 2 (Modelado lógico mediante Regex)</h3>
+<p>Estás diseñando una regla de validación de calidad de datos para un dataset nacional de salud pública. El identificador de cada paciente debe seguir una estructura de código específica: <code>"PAC-"</code>, seguido exactamente de un año fiscal de cuatro dígitos (<code>2020</code> a <code>2029</code>), un guion medio y un código alfanumérico secuencial único de 3 caracteres (por ejemplo, <code>"PAC-2024-X4A"</code> o <code>"PAC-2026-99F"</code>). * <strong>A)</strong> Diseña la expresión regular precisa utilizando metacaracteres, clases de caracteres y cuantificadores en R para validar que los códigos cumplan estrictamente con esta estructura. * <strong>B)</strong> Demuestra conceptualmente por qué la expresión <code>^PAC-[0-9]{4}-[A-Za-z0-9]{3}$</code> cumple de forma exhaustiva con esta especificación y explica el rol de las anclas <code>^</code> y <code>$</code> para evitar la validación de falsos positivos que contengan texto adicional al inicio o final de la celda.</p>
+</section>
+<section id="ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-3-efectos-fijos-temporales-en-ciencia-de-datos">Ejercicio 3 (Efectos fijos temporales en Ciencia de Datos)</h3>
+<p>En los modelos predictivos de demanda (por ejemplo, volumen de ventas diarias en supermercados), la variable temporal expresada en el formato secuencial lineal original (número de días desde 1970) no logra capturar la estacionalidad del negocio debido a su comportamiento no estacionario. * <strong>A)</strong> Explica conceptualmente por qué la extracción de características basadas en ciclos estacionales cerrados (como el mes del año y el día de la semana mediante <code>lubridate</code>) permite descomponer la variable temporal lineal en un conjunto de variables categóricas con efectos periódicos de negocio. * <strong>B)</strong> Escribe un script conceptual en R utilizando la tubería <code>| &gt;</code> que, partiendo de un dataframe con fechas transaccionales crudas en la variable <code>fecha_pago</code>, genere tres nuevas variables estructurales: <code>mes_efecto</code> (factor del mes del año), <code>dia_semana</code> (factor del día) y una variable binaria lógica <code>es_feriado_semanal</code> que identifique si la transacción se procesó en un fin de semana.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alvarolimber\.github\.io\/master_fad\/_book");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./cap2-tidy-data.html" class="pagination-link" aria-label="Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Filosofía Tidy Data, Calidad de Datos y Manipulación Tabular</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2026, Alvaro Chirino</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Maestría en Inteligencia Artificial y Gestión de Datos - UCB</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

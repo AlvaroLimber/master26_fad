@@ -1,0 +1,193 @@
+# Datos de Tipo Específico: Cadenas de Texto y Fechas {.unnumbered}
+
+::: {.callout-note}
+### Cobertura de Sesiones
+Este capítulo cubre los contenidos correspondientes a la **Sesión 6 (Fin de la Semana 2)** del programa académico, cerrando formalmente la **Parte I** de la materia dedicada a la adquisición, transformación y manipulación de datos.
+:::
+
+En la práctica profesional del análisis de datos, con frecuencia nos enfrentamos a información que no se ajusta a la estructura limpia de las variables numéricas tradicionales. Gran parte de la riqueza de los conjuntos de datos modernos reside en campos de texto libre (cadenas de caracteres o *strings*) y en registros temporales (fechas, marcas de tiempo y horas). 
+
+Desde una perspectiva analítica, el texto libre representa una fuente de datos semiestructurada o no estructurada que contiene una altísima densidad de información. Sin embargo, para que un modelo estadístico pueda procesar esta información, esta debe ser normalizada, depurada y mapeada de manera rigurosa. Por otra parte, las variables temporales añaden una dimensión de orden secuencial indispensable para capturar patrones dinámicos (tendencias y estacionalidad), pero su manipulación matemática requiere un control estricto de las complejidades del calendario humano, tales como años bisiestos, formatos regionales dispares y husos horarios.
+
+## Análisis de Cadenas de Texto y Control de Cardinalidad
+
+En la investigación aplicada y en los registros administrativos, las variables cualitativas nominales suelen ingresarse inicialmente como cadenas de caracteres libres. Sin embargo, un campo de texto sin normalizar introduce un grave problema analítico conocido como **explosión de cardinalidad**.
+
+### El Impacto Analítico de la Cardinalidad Sucia
+Cuando los usuarios o los sistemas registran información de texto sin restricciones (por ejemplo, el nombre de un departamento de Bolivia ingresado como `"La Paz"`, `"la paz"`, `"La Paz "`, o `"LA PAZ"`), el software estadístico interpreta cada variación tipográfica como una categoría analítica completamente distinta. 
+
+Desde el punto de vista estadístico, este fenómeno fragmenta de manera artificial el espacio muestral. Al aumentar la cardinalidad (el número de niveles únicos de una variable categórica) debido a errores de registro, se reduce la cantidad de observaciones disponibles por nivel, lo que disminuye drásticamente los grados de libertad del análisis, incrementa la varianza de los estimadores y eleva exponencialmente el riesgo de sobreajuste (*overfitting*) en modelos lineales o de clasificación.
+
+### Normalización de Textos como Reducción de Ruido
+La limpieza de variables de caracteres tiene como propósito unificar representaciones semánticas equivalentes para garantizar la integridad y consistencia del dato. Este flujo comprende:
+
+1.  **Case Folding (Conversión de caja)**: Homogeneizar el texto forzándolo completamente a minúsculas o mayúsculas.
+2.  **Eliminación de espacios en blanco huérfanos**: Remover espacios al inicio o al final de la cadena (*trimming*), así como colapsar espacios dobles internos.
+3.  **Limpieza de caracteres especiales y acentos**: Remover tildes, diéresis y puntuaciones que varían según la configuración regional del teclado del transcriptor.
+4.  **Extracción de Atributos**: Aislar componentes clave dentro de una cadena compleja para transformarlos en variables estructuradas individuales (por ejemplo, extraer la provincia o zona a partir de un campo de dirección postal).
+
+## Expresiones Regulares (Regex) como Clasificadores Deterministas
+
+Para realizar búsquedas, validaciones e investigaciones estructuradas dentro de variables de texto, la herramienta metodológica por excelencia es la **Expresión Regular (Regex)**. 
+
+### Regex desde la Perspectiva de Datos
+Desde una perspectiva teórica, una expresión regular es una regla lógica que define un autómata determinista. Este autómata evalúa cada cadena de texto y divide el dataset en dos subespacios mutuamente excluyentes: las observaciones que cumplen con el patrón y las que no. Esto nos permite generar de manera inmediata **variables indicadoras binarias** (0 o 1) que indican la presencia o ausencia de un atributo analítico complejo.
+
+Los componentes fundamentales de la sintaxis de Regex se resumen en:
+
+*   **Anclas**: Delimitan la posición del patrón. El símbolo `^` representa el inicio absoluto de la cadena, mientras que `$` representa el final de la cadena.
+*   **Clases de caracteres**: Permiten definir conjuntos de caracteres válidos usando corchetes, como `[a-zA-Z]` para letras o `[0-9]` para dígitos numéricos.
+*   **Metacaracteres y Secuencias de Escape**: Caracteres con significados predefinidos (como `.` que coincide con cualquier carácter, o `\d` para dígitos). En R, debido a la forma en que el compilador procesa los strings, las secuencias de escape de Regex siempre requieren un doble backslash (por ejemplo, `\\d` para un dígito o `\\s` para un espacio en blanco).
+*   **Cuantificadores**: Controlan cuántas veces consecutivas puede aparecer un carácter o grupo (como `+` para una o más veces, `*` para cero o más veces, y `{n}` para exactamente $n$ repeticiones).
+
+::: {.panel-tabset}
+
+### Enfoque con stringr (Tidyverse)
+
+El paquete `stringr` estandariza el procesamiento de texto en R mediante funciones que colocan siempre el vector de datos como el primer argumento, facilitando la composición de tuberías estructuradas (`| >`).
+
+```r
+library(stringr)
+library(dplyr)
+
+# Vector con códigos transaccionales de aduanas bolivianas (sucios)
+codigos_aduaneros <- c("EXP-2026-LP ", "imp-2025-SC", "EXP-2026-CBX", "TRN-2026-or")
+
+# 1. Normalización básica y remoción de espacios huérfanos
+codigos_limpios <- codigos_aduaneros |> 
+  str_trim(side = "both") |> 
+  str_to_upper()
+
+# 2. Creación de una variable indicadora lógica (Clasificación binaria)
+# Identifica de forma determinística si la transacción es una exportación (^EXP)
+es_exportacion <- str_detect(codigos_limpios, "^EXP")
+
+# 3. Extracción estructurada de atributos (Feature Extraction)
+# Extraemos exactamente cuatro dígitos numéricos correspondientes a la gestión anual
+gestion_fiscal <- str_extract(codigos_limpios, "\\d{4}")
+
+# 4. Corrección de errores sistemáticos de codificación categórica
+codigos_estandar <- str_replace(codigos_limpios, "CBX", "CB")
+```
+
+### Enfoque con Base R
+
+Base R proporciona funciones sumamente veloces y potentes basadas en la librería de expresiones regulares del sistema operativo, pero su uso requiere precaución debido a la falta de homogeneidad en el orden de sus argumentos (algunas funciones reciben primero el patrón y otras el vector de datos).
+
+```r
+# Vector con códigos transaccionales
+codigos_aduaneros <- c("EXP-2026-LP ", "imp-2025-SC", "EXP-2026-CBX", "TRN-2026-or")
+
+# 1. Normalización en Base R
+codigos_limpios_base <- toupper(gsub("^[[:space:]]+|[[:space:]]+$", "", codigos_aduaneros))
+
+# 2. Detección de patrones de inicio de cadena (equivalente a str_detect)
+es_exportacion_base <- grepl("^EXP", codigos_limpios_base)
+
+# 3. Reemplazo de subcadenas específicas
+codigos_estandar_base <- sub("CBX", "CB", codigos_limpios_base)
+
+# 4. Extracción de patrones (requiere un flujo indirecto con regmatches y regexpr)
+posiciones <- regexpr("[0-9]{4}", codigos_limpios_base)
+gestion_base <- regmatches(codigos_limpios_base, posiciones)
+```
+
+:::
+
+::: {.callout-note}
+### Actividad de Paso: Expresiones Regulares aplicadas a Identificaciones Nacionales (3 minutos)
+En Bolivia, los documentos de Cédula de Identidad (CI) pueden registrarse de forma errónea incluyendo su extensión departamental al final del número (por ejemplo, `"1234567-LP"` o `"9876543-SC"`). 
+
+Si necesitas depurar una lista de clientes para separar el número numérico puro de la extensión departamental de dos letras, ¿cómo escribirías una expresión regular en `str_extract()` que coincida únicamente con la extensión del departamento al final del string, asegurando que se descarte el guion?
+:::
+
+## Álgebra Temporal y Extracción de Atributos Estacionales
+
+La inclusión del tiempo en el análisis de datos es fundamental para comprender comportamientos y procesos dinámicos. Sin embargo, el tiempo plantea un doble desafío analítico: por un lado, fluye de manera continua y lineal; por el otro, la actividad humana lo experimenta de manera cíclica e intermitente (por horas, días de la semana, meses y años).
+
+### Almacenamiento Interno de Fechas en R
+Para realizar operaciones matemáticas consistentes sobre el tiempo (como calcular días transcurridos o duraciones), R evita la debilidad de almacenar las fechas como simples textos. En su lugar, el motor del software utiliza representaciones numéricas de referencia:
+
+*   **Clase `Date`**: Almacena de manera interna el número de **días transcurridos** desde un origen de referencia fijado de manera universal el **1 de enero de 1970**. Cualquier fecha previa a este origen se representa internamente como un número entero negativo.
+*   **Clase `POSIXct`**: Representa el tiempo como el número de **segundos transcurridos** desde el mismo origen del 1 de enero de 1970 (con precisión decimal). Es la clase recomendada para almacenar marcas de tiempo (*timestamps*) detalladas y realizar análisis de alta frecuencia.
+*   **Clase `POSIXlt`**: Almacena el tiempo como una lista detallada de componentes individuales (segundo, minuto, hora, día del mes, mes, año), facilitando la inspección directa del sistema.
+
+Para realizar el parseo sintáctico sin importar las variaciones de formato regional (como la mezcla de separadores o la posición del mes y el día), utilizaremos el paquete **`lubridate`**.
+
+::: {.panel-tabset}
+
+### Parseo y Conversión
+
+`lubridate` elimina la necesidad de especificar complejas cadenas de formato de entrada (como `"%d/%m/%Y"`). El analista simplemente debe declarar el orden en que aparecen el día (`d`), el mes (`m`) y el año (`y`) en la cadena de caracteres sucia.
+
+```r
+library(lubridate)
+
+# Parseo robusto de múltiples formatos regionales a fechas estandarizadas de R
+fecha_bolivia <- dmy("24-08-2026")    # Formato tradicional boliviano
+fecha_usa     <- mdy("August 24, 2026") # Formato norteamericano con texto
+fecha_iso     <- ymd("2026/08/24")    # Estándar ISO con barras inclinadas
+
+# Imprimir las fechas para confirmar que R las almacena de forma unificada (YYYY-MM-DD)
+print(fecha_bolivia)
+class(fecha_bolivia) # Devuelve "Date"
+```
+
+### Extracción y Álgebra Temporal
+
+Una vez que R reconoce formalmente un objeto temporal, este se puede transformar y descomponer en indicadores estacionales categóricos que alimenten modelos lineales, identificando efectos fijos de fin de semana, meses o trimestres fiscales.
+
+```r
+library(lubridate)
+
+fecha_analisis <- ymd("2026-08-24")
+
+# 1. Extracción de componentes estacionales categóricos (Feature Extraction)
+anio_fiscal  <- year(fecha_analisis)
+mes_nombre   <- month(fecha_analisis, label = TRUE, abbr = FALSE) # Devuelve "agosto" como factor ordenado
+dia_semana   <- wday(fecha_analisis, label = TRUE, abbr = FALSE)  # Devuelve "lunes" como factor ordenado
+
+# 2. Creación de variables indicadoras de ciclo de negocio
+# Determinar si una fecha transaccional corresponde a un fin de semana
+es_fin_de_semana <- wday(fecha_analisis) %in% c(1, 7) # 1 = Domingo, 7 = Sábado
+
+# 3. Operaciones aritméticas controladas (Añadir periodos físicos)
+proxima_evaluacion <- fecha_analisis + days(15)
+diferencia_operativa <- fecha_analisis - ymd("2026-01-01") # Devuelve la duración en días
+```
+
+:::
+
+::: {.callout-tip}
+### Reto de 5 Minutos: Extracción y Análisis Temporal Integrado
+Imagina que has importado un registro transaccional en el que la columna de fechas se encuentra en un campo de texto combinado sumamente sucio con el formato típico de un archivo log administrativo:
+
+```r
+# Copia este vector en tu consola de RStudio para resolver el reto
+logs_transacciones <- c("LOG_2026-08-10_TRANS_77", "LOG_2026-08-15_TRANS_12", "LOG_2026-08-16_TRANS_89")
+```
+
+**Tu reto:** Escribe una tubería de código (`|>`) utilizando `stringr` y `lubridate` que realice de manera secuencial los siguientes pasos:
+1.  Extrae de forma precisa únicamente la subcadena que representa la fecha física (es decir, el patrón `YYYY-MM-DD`).
+2.  Convierte dicha subcadena en un objeto real de tipo `Date` de R.
+3.  Calcula el día de la semana correspondiente a cada registro y genera un vector indicador lógico que marque con `TRUE` únicamente las transacciones ocurridas durante el fin de semana (Sábado y Domingo) para diagnosticar la regularidad de las operaciones.
+:::
+
+---
+
+## Ejercicios de Autoevaluación
+
+### Ejercicio 1 (Cardinalidad categórica e inferencia estadística)
+Un analista financiero de la Maestría está trabajando con una base de datos de solicitudes de crédito de Bolivia. La columna `"Ciudad"` contiene texto ingresado manualmente por los agentes comerciales, registrando un total de 183 variaciones tipográficas distintas para hacer referencia a las 9 capitales departamentales (por ejemplo, `"La Paz"`, `"la paz"`, `"L.P."`, `"lp"`, etc.). 
+*   **A)** Explica conceptualmente las consecuencias estadísticas que tiene esta cardinalidad artificialmente elevada sobre la estimación de la varianza del error y los grados de libertad al ajustar un modelo de regresión lineal para predecir el monto del crédito aprobado utilizando `"Ciudad"` como predictor.
+*   **B)** Fundamenta por qué el proceso de normalización tipográfica (conversión a minúsculas, eliminación de espacios y estandarización de códigos de extensión) actúa como una técnica de reducción de dimensiones y reducción de ruido en este contexto.
+
+### Ejercicio 2 (Modelado lógico mediante Regex)
+Estás diseñando una regla de validación de calidad de datos para un dataset nacional de salud pública. El identificador de cada paciente debe seguir una estructura de código específica: `"PAC-"`, seguido exactamente de un año fiscal de cuatro dígitos (`2020` a `2029`), un guion medio y un código alfanumérico secuencial único de 3 caracteres (por ejemplo, `"PAC-2024-X4A"` o `"PAC-2026-99F"`). 
+*   **A)** Diseña la expresión regular precisa utilizando metacaracteres, clases de caracteres y cuantificadores en R para validar que los códigos cumplan estrictamente con esta estructura.
+*   **B)** Demuestra conceptualmente por qué la expresión `^PAC-[0-9]{4}-[A-Za-z0-9]{3}$` cumple de forma exhaustiva con esta especificación y explica el rol de las anclas `^` y `$` para evitar la validación de falsos positivos que contengan texto adicional al inicio o final de la celda.
+
+### Ejercicio 3 (Efectos fijos temporales en Ciencia de Datos)
+En los modelos predictivos de demanda (por ejemplo, volumen de ventas diarias en supermercados), la variable temporal expresada en el formato secuencial lineal original (número de días desde 1970) no logra capturar la estacionalidad del negocio debido a su comportamiento no estacionario.
+*   **A)** Explica conceptualmente por qué la extracción de características basadas en ciclos estacionales cerrados (como el mes del año y el día de la semana mediante `lubridate`) permite descomponer la variable temporal lineal en un conjunto de variables categóricas con efectos periódicos de negocio.
+*   **B)** Escribe un script conceptual en R utilizando la tubería `| >` que, partiendo de un dataframe con fechas transaccionales crudas en la variable `fecha_pago`, genere tres nuevas variables estructurales: `mes_efecto` (factor del mes del año), `dia_semana` (factor del día) y una variable binaria lógica `es_feriado_semanal` que identifique si la transacción se procesó en un fin de semana.
