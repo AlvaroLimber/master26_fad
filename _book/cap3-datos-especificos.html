@@ -628,7 +628,12 @@ window.Quarto = {
 <p>Imagina que has importado un registro transaccional en el que la columna de fechas se encuentra en un campo de texto combinado sumamente sucio con el formato típico de un archivo log administrativo:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copia este vector en tu consola de RStudio para resolver el reto</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>logs_transacciones <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"LOG_2026-08-10_TRANS_77"</span>, <span class="st">"LOG_2026-08-15_TRANS_12"</span>, <span class="st">"LOG_2026-08-16_TRANS_89"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Tu reto:</strong> Escribe una tubería de código (<code>|&gt;</code>) utilizando <code>stringr</code> y <code>lubridate</code> que realice de manera secuencial los siguientes pasos: 1. Extrae de forma precisa únicamente la subcadena que representa la fecha física (es decir, el patrón <code>YYYY-MM-DD</code>). 2. Convierte dicha subcadena en un objeto real de tipo <code>Date</code> de R. 3. Calcula el día de la semana correspondiente a cada registro y genera un vector indicador lógico que marque con <code>TRUE</code> únicamente las transacciones ocurridas durante el fin de semana (Sábado y Domingo) para diagnosticar la regularidad de las operaciones.</p>
+<p><strong>Tu reto:</strong> Escribe una tubería de código (<code>|&gt;</code>) utilizando <code>stringr</code> y <code>lubridate</code> que realice de manera secuencial los siguientes pasos:</p>
+<ol type="1">
+<li>Extrae de forma precisa únicamente la subcadena que representa la fecha física (es decir, el patrón <code>YYYY-MM-DD</code>).</li>
+<li>Convierte dicha subcadena en un objeto real de tipo <code>Date</code> de R.</li>
+<li>Calcula el día de la semana correspondiente a cada registro y genera un vector indicador lógico que marque con <code>TRUE</code> únicamente las transacciones ocurridas durante el fin de semana (Sábado y Domingo) para diagnosticar la regularidad de las operaciones.</li>
+</ol>
 </div>
 </div>
 <hr>

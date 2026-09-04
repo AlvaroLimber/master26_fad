@@ -168,6 +168,7 @@ logs_transacciones <- c("LOG_2026-08-10_TRANS_77", "LOG_2026-08-15_TRANS_12", "L
 ```
 
 **Tu reto:** Escribe una tubería de código (`|>`) utilizando `stringr` y `lubridate` que realice de manera secuencial los siguientes pasos:
+
 1.  Extrae de forma precisa únicamente la subcadena que representa la fecha física (es decir, el patrón `YYYY-MM-DD`).
 2.  Convierte dicha subcadena en un objeto real de tipo `Date` de R.
 3.  Calcula el día de la semana correspondiente a cada registro y genera un vector indicador lógico que marque con `TRUE` únicamente las transacciones ocurridas durante el fin de semana (Sábado y Domingo) para diagnosticar la regularidad de las operaciones.

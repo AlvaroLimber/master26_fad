@@ -150,6 +150,7 @@ reporte_sucio <- tibble::tibble(
 ```
 
 **Tu reto:** Escribe una tubería de código (`|>`) utilizando `dplyr` y `tidyr` que realice las siguientes acciones de forma encadenada:
+
 1.  Utiliza `fill()` para propagar la variable cualitativa `Sector` hacia abajo eliminando los nulos.
 2.  Usa `pivot_longer()` para unificar los años (`2023` y `2024`) en una variable llamada `Anio` y los valores correspondientes en `Monto`.
 3.  Usa `pivot_wider()` para transformar la columna `Metrica` de modo que `IPC`, `Ponderacion` y `Variacion` se conviertan en tres columnas individuales limpias a nivel de Sector y Año.
