@@ -1,0 +1,384 @@
+# Análisis Exploratorio de Datos: Medidas Estadísticas y Visualización {.unnumbered}
+
+::: {.callout-warning}
+### Cobertura de Sesiones
+Este capítulo cubre los contenidos correspondientes a las **Sesiones 7 y 8 (Semana 3)** del programa académico. Nos enfocaremos en los fundamentos conceptuales del Análisis Exploratorio de Datos (EDA), el cálculo e interpretación de las medidas descriptivas numéricas y el descubrimiento visual de patrones mediante la gramática de gráficos de `ggplot2` y gráficos de Base R.
+:::
+
+El Análisis Exploratorio de Datos (*Exploratory Data Analysis*, EDA) representa una filosofía de investigación estadística orientada a descubrir estructuras latentes, detectar anomalías y evaluar supuestos fundamentales sin imponer modelos rígidos a priori [@rememberances_eda]. Popularizado por John W. Tukey, el EDA enfatiza la importancia de comprender la distribución subyacente de las variables mediante resúmenes numéricos resistentes y representaciones visuales inmediatas [@rememberances_eda].
+
+Antes de ajustar modelos predictivos complejos o construir tableros de control, el analista debe caracterizar cuantitativa y visualmente el comportamiento de cada variable. En este capítulo, estudiaremos los cinco grupos fundamentales de medidas estadísticas descriptivas (**Tendencia Central**, **Variabilidad**, **Posición**, **Forma** y **Concentración**), e introduciremos las herramientas esenciales de **visualización exploratoria** con Base R y `ggplot2`.
+
+## Medidas de Tendencia Central y Resumen
+
+Las medidas de tendencia central o localización buscan sintetizar un conjunto de datos numéricos en un único valor representativo que señale el "centro" de la distribución muestral [@wickham2023r].
+
+::: {.panel-tabset}
+
+### Fundamentación Matemática
+
+Dada una muestra de $n$ observaciones $X = \{x_1, x_2, \dots, x_n\}$:
+
+1. **Media Aritmética ($\bar{x}$)**: Es el centro de gravedad de la distribución, definido como la suma de todos los valores dividida por el tamaño muestral:
+$$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
+*Propiedad*: La suma de las desviaciones respecto a la media es siempre cero: $\sum_{i=1}^{n} (x_i - \bar{x}) = 0$. Es altamente sensible a valores atípicos (*outliers*).
+
+2. **Media Recortada ($\bar{x}_{\alpha}$)**: Alternativa robusta que elimina una proporción $\alpha$ (por ejemplo, $\alpha = 0.05$ o $5\%$) de los valores más extremos en ambas colas antes de calcular el promedio.
+
+3. **Mediana ($\tilde{x}$ o $Q_2$)**: Es el valor que divide a la muestra ordenada $x_{(1)} \le x_{(2)} \le \dots \le x_{(n)}$ en dos partes de igual frecuencia ($50\%$ superior y $50\%$ inferior):
+$$\tilde{x} = \begin{cases} x_{\left(\frac{n+1}{2}\right)} & \text{si } n \text{ es impar} \\[8pt] \frac{x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2} + 1\right)}}{2} & \text{si } n \text{ es par} \end{cases}$$
+Es una medida **resistente** a observaciones atípicas.
+
+4. **Moda ($M_o$)**: Es el valor numérico o categoría que se registra con la máxima frecuencia absoluta en el conjunto de datos.
+
+### Implementación en R
+
+```r
+library(dplyr)
+
+# Muestra de prueba de ingresos mensuales en BOB (con un valor atípico)
+ingresos <- c(2500, 2800, 3000, 3100, 3200, 3500, 4000, 4200, 4500, 85000)
+
+# 1. Media Aritmética
+media_ingresos <- mean(ingresos)
+print(paste("Media:", media_ingresos))
+
+# 2. Media Recortada (al 10% en cada extremo)
+media_recortada <- mean(ingresos, trim = 0.10)
+print(paste("Media Recortada (10%):", media_recortada))
+
+# 3. Mediana
+mediana_ingresos <- median(ingresos)
+print(paste("Mediana:", mediana_ingresos))
+
+# 4. Moda (Función personalizada para datos tabulares)
+obtener_moda <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+print(paste("Moda:", obtener_moda(ingresos)))
+```
+
+:::
+
+---
+
+## Medidas de Variabilidad y Dispersión
+
+Las medidas de variabilidad cuantifican el grado de dispersión o alejamiento de los datos con respecto a su centro. Una medida de tendencia central resulta insuficiente sin una métrica que indique cuán homogénea o heterogénea es la muestra.
+
+::: {.panel-tabset}
+
+### Fundamentación Matemática
+
+1. **Varianza Muestral ($s^2$)**: Promedio ponderado de las desviaciones cuadráticas respecto a la media muestral. Se divide por $n-1$ (corrección de Bessel) para obtener un estimador insesgado de la varianza poblacional $\sigma^2$:
+$$s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2$$
+
+2. **Desviación Estándar ($s$)**: Raíz cuadrada positiva de la varianza. Expresa la dispersión en las mismas unidades de medida originales de la variable:
+$$s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}$$
+
+3. **Rango Intercuartílico ($IQR$)**: Medida resistente de dispersión que evalúa la amplitud del $50\%$ central de los datos:
+$$IQR = Q_3 - Q_1$$
+
+4. **Desviación Absoluta de la Mediana ($MAD$)**: Métrica de dispersión altamente robusta contra observaciones anómalas:
+$$MAD = \text{mediana}(|x_i - \tilde{x}|)$$
+
+5. **Coeficiente de Variación ($CV$)**: Métrica adimensional de dispersión relativa, útil para comparar la variabilidad entre variables con diferentes escalas o unidades:
+$$CV = \left( \frac{s}{\bar{x}} \right) \times 100\%$$
+
+### Implementación en R
+
+```r
+library(dplyr)
+
+# 1. Varianza y Desviación Estándar Muestral
+var_val <- var(ingresos)
+sd_val  <- sd(ingresos)
+
+# 2. Rango Intercuartílico (IQR)
+iqr_val <- IQR(ingresos)
+
+# 3. Desviación Absoluta de la Mediana (MAD)
+mad_val <- mad(ingresos)
+
+# 4. Coeficiente de Variación (CV %)
+cv_val <- (sd(ingresos) / mean(ingresos)) * 100
+
+# Resumen integrado
+data.frame(
+  Varianza = var_val,
+  Desv_Estandar = sd_val,
+  IQR = iqr_val,
+  MAD = mad_val,
+  CV_Porcentaje = cv_val
+)
+```
+
+:::
+
+## Medidas de Posición Relativa
+
+Las medidas de posición o cuantiles dividen a la distribución ordenada de los datos en partes proporcionalmente iguales, permitiendo identificar la ubicación relativa de una observación respecto al conjunto [@boehmke2016data].
+
+::: {.panel-tabset}
+
+### Fundamentación Matemática
+
+1. **Cuantiles / Percentiles ($P_p$)**: Dado un ordenamiento $x_{(1)} \le x_{(2)} \le \dots \le x_{(n)}$, el percentil $p \in [0, 1]$ representa el valor por debajo del cual se encuentra el porcentaje $p \times 100\%$ de los datos:
+$$P_p = F^{-1}(p)$$
+
+2. **Cuartiles ($Q_1, Q_2, Q_3$)**: Dividen la distribución en cuatro partes iguales ($25\%, 50\%, 75\%$):
+   * $Q_1 = P_{0.25}$ (Primer cuartil / Percentil 25)
+   * $Q_2 = P_{0.50} = \tilde{x}$ (Segundo cuartil / Mediana)
+   * $Q_3 = P_{0.75}$ (Tercer cuartil / Percentil 75)
+
+3. **Puntuación Estandarizada ($Z$-score)**: Mide el número de desviaciones estándar que una observación dista de la media muestral, permitiendo la comparación de observaciones entre distintas distribuciones:
+$$z_i = \frac{x_i - \bar{x}}{s}$$
+
+### Implementación en R
+
+```r
+# 1. Obtención de Cuartiles y Percentiles Específicos
+cuartiles <- quantile(ingresos, probs = c(0.25, 0.50, 0.75))
+percentiles_deciles <- quantile(ingresos, probs = seq(0.1, 0.9, by = 0.1))
+
+# 2. Cálculo del Z-score (Estandarización)
+z_scores <- scale(ingresos)
+
+# Mostrar resumen posicional
+list(
+  Cuartiles = cuartiles,
+  Percentiles_10_90 = percentiles_deciles,
+  Z_Scores_Primeros5 = head(as.vector(z_scores), 5)
+)
+```
+
+:::
+
+## Medidas de Forma: Asimetría y Curtosis
+
+Las medidas de forma caracterizan la geometría de la función de densidad de probabilidad o del histograma muestral, evaluando el grado de simetría y el peso relativo de las colas [@wickham2023r].
+
+::: {.panel-tabset}
+
+### Fundamentación Matemática
+
+1. **Coeficiente de Asimetría de Fisher ($\gamma_1$ o $SK$)**: Evalúa la simetría de los datos alrededor de la media muestral mediante el tercer momento estandarizado:
+$$\gamma_1 = \frac{\frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^3}{s^3}$$
+   * $\gamma_1 = 0$: Distribución simétrica (ej. Normal).
+   * $\gamma_1 > 0$: Asimetría positiva (cola alargada a la derecha).
+   * $\gamma_1 < 0$: Asimetría negativa (cola alargada a la izquierda).
+
+2. **Coeficiente de Curtosis de Fisher ($\gamma_2$ o Exceso de Curtosis)**: Evalúa el apuntamiento de la distribución y la concentración de masa en las colas mediante el cuarto momento estandarizado:
+$$\gamma_2 = \frac{\frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^4}{s^4} - 3$$
+   * $\gamma_2 = 0$: Mesocúrtica (comportamiento similar a la distribución Normal).
+   * $\gamma_2 > 0$: Leptocúrtica (colas pesadas y mayor apuntamiento en el centro).
+   * $\gamma_2 < 0$: Platicúrtica (colas livianas y centro más aplanado).
+
+### Implementación en R
+
+```r
+library(e1071)
+
+# Generación de datos simétricos vs asimétricos
+set.seed(123)
+datos_normales   <- rnorm(1000, mean = 100, sd = 15)
+datos_asimetricos <- rlnorm(1000, meanlog = 2, sdlog = 1)
+
+# Cálculo de Asimetría (Skewness) y Curtosis
+asimetria_norm <- skewness(datos_normales)
+curtosis_norm  <- kurtosis(datos_normales)
+
+asimetria_asim <- skewness(datos_asimetricos)
+curtosis_asim  <- kurtosis(datos_asimetricos)
+
+data.frame(
+  Dataset = c("Normal Simulada", "Log-Normal Simulada"),
+  Asimetria = c(asimetria_norm, asimetria_asim),
+  Curtosis_Exceso = c(curtosis_norm, curtosis_asim)
+)
+```
+
+:::
+
+## Medidas de Concentración y Desigualdad
+
+Las medidas de concentración evalúan el grado de distribución o disparidad en el reparto de una magnitud económica o cuantitativa (como ingresos, patrimonio o cuotas de mercado) entre las unidades de análisis.
+
+::: {.panel-tabset}
+
+### Fundamentación Matemática
+
+1. **Curva de Lorenz**: Es una representación gráfica acumulativa de la distribución de una variable. Mapea la proporción acumulada de la población ($p_i = \frac{i}{n}$) frente a la proporción acumulada de la variable ($q_i = \frac{\sum_{j=1}^{i} x_{(j)}}{\sum_{j=1}^{n} x_{(j)}}$). La bisectriz a $45^\circ$ representa la equidistribución perfecta.
+
+2. **Índice de Gini ($G$)**: Mide el área entre la curva de equidistribución perfecta y la Curva de Lorenz. Se expresa analíticamente como:
+$$G = \frac{\sum_{i=1}^{n} (2i - n - 1) x_{(i)}}{n \sum_{i=1}^{n} x_{(i)}}$$
+donde $x_{(1)} \le x_{(2)} \le \dots \le x_{(n)}$ son las observaciones ordenadas de menor a mayor.
+   * $G = 0$: Igualdad perfecta.
+   * $G = 1$: Desigualdad extrema.
+
+### Implementación en R
+
+```r
+library(ineq)
+
+# Muestra de cuotas de mercado o ingresos de empresas
+ingresos_empresas <- c(500, 1200, 1500, 2000, 8500, 14000)
+
+# 1. Cálculo del Índice de Gini
+gini_val <- ineq(ingresos_empresas, type = "Gini")
+print(paste("Índice de Gini:", round(gini_val, 4)))
+
+# 2. Graficar la Curva de Lorenz
+plot(Lc(ingresos_empresas), col = "darkblue", lwd = 2, main = "Curva de Lorenz - Concentración de Ingresos")
+```
+
+:::
+
+## Visualización Exploratoria de Datos (EDA Visual)
+
+Como enfatizó John Tukey, las representaciones visuales son herramientas de detección esenciales para identificar patrones que los resúmenes numéricos no pueden reflejar completamente [@rememberances_eda].
+
+En R, existen dos enfoques principales para la exploración gráfica: las funciones nativas de **Base R** (rápidas para diagnósticos iniciales) y el paquete **`ggplot2`**, basado en la **Gramática de Gráficos** (*Grammar of Graphics*) de Leland Wilkinson [@wickham2023r].
+
+### Componentes Principales de `ggplot2`
+La gramática de gráficos construye visualizaciones por capas superpuestas [@wickham2023r]:
+
+1. **Datos (`data`)**: El dataframe o `tibble` ordenado (*Tidy Data*).
+2. **Mapeo Estético (`aes`)**: Conexión entre las variables del dataset y las propiedades visuales del gráfico (ejes $x, y$, color, tamaño, forma).
+3. **Geometrías (`geom_*`)**: El tipo de representación física de las observaciones (puntos, barras, líneas, cajas).
+4. **Facetas (`facet_wrap`/`facet_grid`)**: Subdivisión del gráfico en paneles según categorías cualitativas.
+5. **Capas adicionales**: Escalas (`scale_*`), etiquetas (`labs`) y temas visuales (`theme_*`).
+
+::: {.panel-tabset}
+
+### Exploración Univariada (Variables Continuas)
+
+Para analizar la forma, el centro, la dispersión y la presencia de *outliers* en una variable continua, se emplean **Histogramas** y **Diagramas de Cajas (Boxplots)**.
+
+```r
+library(ggplot2)
+set.seed(123)
+df_ejemplo <- data.frame(
+  monto = c(rnorm(90, mean = 500, sd = 100), 1200, 1500, 1800),
+  categoria = rep(c("Tipo A", "Tipo B", "Tipo C"), length.out = 93)
+)
+
+# Base R: Histograma y Boxplot rápido
+par(mfrow = c(1, 2))
+hist(df_ejemplo$monto, main = "Histograma (Base R)", xlab = "Monto", col = "lightblue")
+boxplot(df_ejemplo$monto, main = "Boxplot (Base R)", col = "orange")
+par(mfrow = c(1, 1))
+
+# ggplot2: Histograma con curva de densidad
+ggplot(df_ejemplo, aes(x = monto)) +
+  geom_histogram(aes(y = ..density..), bins = 20, fill = "steelblue", color = "black", alpha = 0.7) +
+  geom_density(color = "red", size = 1) +
+  labs(title = "Distribución de Montos con ggplot2", x = "Monto (BOB)", y = "Densidad") +
+  theme_minimal()
+```
+
+### Exploración Univariada (Variables Categóricas)
+
+Para caracterizar la frecuencia de variables cualitativas o factores, se utilizan **Gráficos de Barras**.
+
+```r
+library(ggplot2)
+
+# Base R: Gráfico de Barras
+barplot(table(df_ejemplo$categoria), col = c("darkgreen", "gold", "darkred"),
+        main = "Frecuencia por Categoría (Base R)")
+
+# ggplot2: Gráfico de Barras con ggplot2
+ggplot(df_ejemplo, aes(x = categoria, fill = categoria)) +
+  geom_bar(show.legend = FALSE) +
+  labs(title = "Conteo por Categoría de Cliente", x = "Categoría", y = "Frecuencia Absoluta") +
+  theme_light()
+```
+
+### Exploración Bivariada y Multivariada
+
+Para evaluar la relación entre dos variables continuas (Diagrama de Dispersión / *Scatter Plot*) o comparar la distribución de una variable continua entre distintos grupos (*Boxplots comparativos* o *Facetas*).
+
+```r
+library(ggplot2)
+
+# 1. Boxplots Comparativos por Categoría en ggplot2
+ggplot(df_ejemplo, aes(x = categoria, y = monto, fill = categoria)) +
+  geom_boxplot(alpha = 0.8) +
+  geom_jitter(width = 0.1, alpha = 0.5) + # Superponer puntos reales para observar densidad
+  labs(title = "Comparación de Montos por Categoría", x = "Categoría", y = "Monto (BOB)") +
+  theme_minimal()
+
+# 2. Gráfico de Dispersión con Línea de Tendencia (Scatter Plot)
+set.seed(42)
+df_relacion <- data.frame(
+  experiencia = runif(100, 1, 15),
+  salario = 2000 + runif(100, 1, 15) * 400 + rnorm(100, 0, 500),
+  sector = sample(c("Privado", "Público"), 100, replace = TRUE)
+)
+
+ggplot(df_relacion, aes(x = experiencia, y = salario, color = sector)) +
+  geom_point(size = 2.5, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE) + # Agregar línea de tendencia lineal
+  facet_wrap(~ sector) +                   # Dividir por sectores (Facetas)
+  labs(title = "Relación Experiencia vs Salario por Sector",
+       x = "Años de Experiencia", y = "Salario (BOB)") +
+  theme_bw()
+```
+
+:::
+
+::: {.callout-tip}
+### Reto de 5 Minutos: Exploración Descriptiva y Gráfica Integrada
+En tu consola de RStudio, simula un conjunto de datos de montos de transacciones bancarias clasificadas por canal de atención:
+
+```r
+set.seed(42)
+datos_reto <- data.frame(
+  monto = c(rnorm(100, mean = 500, sd = 80), rnorm(100, mean = 1200, sd = 250), 25000),
+  canal = rep(c("Cajero Automático", "Banca Móvil"), length.out = 201)
+)
+```
+
+**Tu desafío:** Escribe una tubería de código en R utilizando `dplyr` y `ggplot2` que:
+1. Calcule un resumen tabular comparativo por `canal` con la **mediana**, el **rango intercuartílico ($IQR$)** y el **coeficiente de asimetría** (`e1071::skewness`).
+2. Genere un gráfico de **Boxplot comparativo con `ggplot2`** resaltando la diferencia de montos entre los dos canales y la presencia del valor atípico.
+
+**Código de Solución Sugerido:**
+```r
+library(dplyr)
+library(e1071)
+library(ggplot2)
+
+# 1. Resumen Tabular
+resumen_canal <- datos_reto %>%
+  group_by(canal) %>%
+  summarise(
+    Mediana = median(monto),
+    IQR_val = IQR(monto),
+    Asimetria = skewness(monto)
+  )
+print(resumen_canal)
+
+# 2. Visualización
+ggplot(datos_reto, aes(x = canal, y = monto, fill = canal)) +
+  geom_boxplot(outlier.color = "red", outlier.size = 3) +
+  labs(title = "Distribución Exploratoria de Montos por Canal",
+       x = "Canal de Atención", y = "Monto (BOB)") +
+  theme_minimal()
+```
+:::
+
+## Ejercicios de Autoevaluación
+
+1. **Impacto de Valores Atípicos en Estimadores de Tendencia Central y Dispersión**:  
+   Un analista evalúa la ejecución presupuestaria mensual en diez municipios rurales bolivianos. Nueve de ellos registraron ejecuciones entre $1.2$ y $1.8$ millones de BOB, mientras que uno solo registró un proyecto extraordinario de $45$ millones de BOB. Demuestra analítica y computacionalmente cómo reaccionan la media aritmética frente a la mediana, y la desviación estándar frente al $IQR$ en presencia de este valor atípico. ¿Qué medida deberías reportar en la Ficha Técnica oficial del proyecto y por qué?
+
+2. **Diagnóstico de Forma, Curtosis y Selección de Representaciones Gráficas**:  
+   Explicita la relación teórica entre el coeficiente de asimetría de Fisher y la posición relativa de la media, la mediana y la moda. Si un dataset de tiempos de espera en atención al cliente presenta un exceso de curtosis de $\gamma_2 = 4.2$ y un coeficiente de asimetría de $\gamma_1 = 2.1$, ¿qué tipo de gráfico exploratorio (histograma, boxplot o diagrama de dispersión) resulta más idóneo para diagnosticar visualmente esta asimetría y el peso de las colas, y por qué?
+
+3. **Análisis de Concentración de Mercado y Visualización Exploratoria**:  
+   Supón que el Órgano Regulador del Sector Financiero en Bolivia analiza la concentración de depósitos del público entre 6 entidades bancarias con los siguientes valores (en millones de USD): $c(120, 180, 250, 300, 850, 2100)$.  
+   a) Calcula el Índice de Gini .  
+   b) Construye en R la **Curva de Lorenz** utilizando el paquete `ineq` o `ggplot2` y compara visualmente la curva observada frente a la bisectriz de equidad perfecta.  
