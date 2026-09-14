@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -52,19 +55,19 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cap4-eda-visualizacion.html" rel="prev">
+<link href="./cap5-datos-faltantes.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b2cbf88ee9ee288985b87b7430834320.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-528989212f0d08e68774375b94c3ff31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-035b2e48652b13be5ac8f4e35786aa71.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-f8f3d26bd46026ae1cfd5c1012b9ff7e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -361,6 +364,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="./cap4-eda-visualizacion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Análisis Exploratorio de Datos: Medidas Estadísticas y Visualización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap5-datos-faltantes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tratamiento de Datos Faltantes: Diagnóstico y Técnicas Iniciales</span></a>
   </div>
 </li>
       </ul>
@@ -861,8 +870,8 @@ Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./cap4-eda-visualizacion.html" class="pagination-link" aria-label="Análisis Exploratorio de Datos: Medidas Estadísticas y Visualización">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Análisis Exploratorio de Datos: Medidas Estadísticas y Visualización</span>
+      <a href="./cap5-datos-faltantes.html" class="pagination-link" aria-label="Tratamiento de Datos Faltantes: Diagnóstico y Técnicas Iniciales">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tratamiento de Datos Faltantes: Diagnóstico y Técnicas Iniciales</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

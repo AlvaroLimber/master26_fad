@@ -34,7 +34,7 @@ book:
     - part: "Parte II: Análisis Exploratorio y Tratamiento de Datos Faltantes"
       chapters:
         - cap4-eda-visualizacion.qmd # Estadística descriptiva, medidas de resumen y visualización de datos con ggplot2 [2, 3].
-    #    - cap5-datos-faltantes.qmd   # Mecanismos de pérdida (MCAR, MAR, MNAR), diagnóstico, imputación simple y múltiple [2].
+        - cap5-datos-faltantes.qmd   # Mecanismos de pérdida (MCAR, MAR, MNAR), diagnóstico, imputación simple y múltiple [2].
     #    - cap6-dashboards-kpis.qmd   # Aplicación práctica: Desarrollo de dashboards interactivos (Shiny/flexdashboard) y diseño de KPIs [4, 5].
     #- part: "Parte III: Wrangling Avanzado, Big Data y Datos Desequilibrados"
     #  chapters:
