@@ -1,0 +1,253 @@
+# Data Wrangling Avanzado, Programación Funcional y Valores Atípicos {.unnumbered}
+
+::: {.callout-warning}
+### Cobertura de Sesiones
+Este capítulo cubre los contenidos correspondientes a las **Sesiones 13, 14 y 15 (Semana 5)** del programa académico [@chirino2026programa]. Abordaremos la programación funcional para la automatización de procesos, los cruces relacionales y espaciales avanzados, la caracterización estadística de valores atípicos (univariantes y multivariantes) y las estrategias de optimización para volúmenes de datos masivos.
+:::
+
+En las etapas avanzadas del ciclo de vida de los datos, el analista se enfrenta a desafíos que van más allá de la limpieza básica de una tabla individual. Los flujos de trabajo profesionales requieren procesar múltiples archivos en lote de manera automatizada, integrar fuentes de información heterogéneas mediante relaciones complejas y diagnosticar observaciones anómalas que pueden distorsionar las inferencias estadísticas.
+
+Este capítulo consolida las técnicas avanzadas de preparación de datos (*Data Wrangling*), priorizando los fundamentos estadísticos y metodológicos. Se estudia la programación funcional como paradigma para eliminar la redundancia de código, la teoría de los cruces de tablas, la detección matemática de valores atípicos univariantes y multivariantes, y las estrategias computacionales para optimizar el manejo de conjuntos de datos de gran tamaño [@wickham2023r].
+
+---
+
+## Programación Funcional e Iteración con `purrr`
+
+El paradigma de la **programación funcional** propone tratar a las funciones como ciudadanos de primera clase (*first-class functions*), permitiendo pasarlas como argumentos a otras funciones o devolverlas como resultados. En el contexto del *Data Wrangling*, la programación funcional reemplaza los bucles iterativos imperativos tradicionales (como los bucles `for`) por operaciones declarativas expresadas mediante funciones de orden superior (*map functions*) [@boehmke2016data].
+
+### Iteración Imperativa vs. Declarativa
+En la programación imperativa, el código especifica *cómo* realizar una iteración controlando explícitamente los índices de un bucle y la modificación de un objeto contenedor intermedio. En la programación declarativa, el código indica *qué* transformación aplicar a cada elemento de una estructura (lista o vector), delegando la gestión de memoria e índices al motor del lenguaje.
+
+Las ventajas de la programación funcional incluyen:
+*   **Reducción del código repetitivo** (*Boilerplate code*): Elimina la necesidad de inicializar vectores vacíos y gestionar contadores de posición.
+*   **Aislamiento de efectos secundarios**: Cada iteración es independiente, garantizando que el resultado de un elemento no altere el procesamiento de los demás.
+*   **Tipado estricto de retorno**: Garantiza que el objeto devuelto mantenga una estructura predecible (por ejemplo, asegurando un vector numérico o un dataframe unificado).
+
+El paquete **`purrr`** de la suite `tidyverse` estandariza estas operaciones mediante la familia de funciones `map()`.
+
+::: {.panel-tabset}
+
+### Enfoque Funcional (`purrr`)
+
+```r
+library(purrr)
+library(readr)
+
+# Supongamos que tenemos una lista de rutas de archivos CSV mensuales
+archivos_mensuales <- list.files(path = "data/raw_ventas/", pattern = "*.csv", full.names = TRUE)
+
+# Importar y consolidar múltiples archivos en un único dataframe
+# map_dfr aplica read_csv a cada archivo y une las filas automáticamente
+ventas_consolidadas <- map_dfr(archivos_mensuales, read_csv, col_types = "cdd")
+
+# Aplicar un cálculo estadístico a todas las columnas numéricas de un dataframe
+resumen_medias <- map_dbl(ventas_consolidadas[, c("monto", "unidades")], mean, na.rm = TRUE)
+```
+
+### Enfoque Imperativo (Bucles `for`)
+
+```r
+# Bucle for tradicional en Base R
+archivos_mensuales <- list.files(path = "data/raw_ventas/", pattern = "*.csv", full.names = TRUE)
+
+# Requiere crear explícitamente una lista contenedora e incrementar un índice
+lista_temporal <- vector("list", length(archivos_mensuales))
+for (i in seq_along(archivos_mensuales)) {
+  lista_temporal[[i]] <- read.csv(archivos_mensuales[i], stringsAsFactors = FALSE)
+}
+
+# Consolidar manualmente la lista en un dataframe
+ventas_consolidadas_base <- do.call(rbind, lista_temporal)
+```
+
+:::
+
+---
+
+## Cruces Relacionales y Espaciales Complejos (Joins)
+
+En sistemas de información reales, los datos se encuentran normalizados y distribuidos en múltiples tablas conectadas mediante llaves primarias y foráneas. La teoría de conjuntos y el álgebra relacional proporcionan el marco para integrar estas fuentes de datos de forma consistente [@wickham2023r].
+
+### Tipos de Cruces Relacionales
+
+1.  **Joins Mutativos**: Añaden variables de una tabla a otra en función de coincidencias en las llaves.
+    *   `left_join(x, y)`: Preserva todas las filas de la tabla izquierda `x`, añadiendo las columnas de `y` donde exista coincidencia. Si no hay coincidencia, asigna `NA`.
+    *   `inner_join(x, y)`: Conserva únicamente las filas que registran coincidencia exacta en ambas tablas.
+    *   `full_join(x, y)`: Mantiene todas las observaciones de ambas tablas, rellenando con `NA` los registros sin correspondencia.
+2.  **Joins de Filtrado**: Filtran observaciones de la primera tabla según la presencia o ausencia de coincidencias en la segunda, sin modificar las columnas.
+    *   `semi_join(x, y)`: Mantiene las filas de `x` que tienen coincidencia en `y`.
+    *   `anti_join(x, y)`: Mantiene las filas de `x` que **no** tienen coincidencia en `y` (herramienta fundamental para auditar inconsistencias e integridad referencial).
+
+### Fundamentos de Cruces Espaciales (*Spatial Joins*)
+Cuando la llave de integración no es un código alfanumérico sino una localización geográfica (coordenadas de latitud/longitud, polígonos municipales o áreas censales), se utilizan los **cruces espaciales** [@lovelace2019geocomputation]. A diferencia de los joins relacionales basados en igualdad de caracteres ($key_x == key_y$), los joins espaciales evalúan relaciones topológicas geométricas, tales como *intersección*, *contención* (un punto dentro de un polígono) o *proximidad*.
+
+```r
+# Ejemplo conceptual de cruce relacional de filtrado
+library(dplyr)
+
+# Auditar clientes registrados que no han realizado ninguna transacción
+clientes_sin_compras <- clientes |>
+  anti_join(transacciones, by = "id_cliente")
+```
+
+---
+
+## Diagnóstico y Tratamiento de Valores Atípicos (*Outliers*)
+
+Un **valor atípico** (*outlier*) es una observación que se desvía considerablemente del comportamiento general del resto de los datos. Los atípicos pueden originarse por tres causas principales:
+1.  **Errores de medición o digitación**: Captura defectuosa de datos (por ejemplo, registrar un salario de 50.000 BOB como 500.000 BOB por un cero adicional).
+2.  **Valores nulos codificados erróneamente**: Uso de números extremos (como `999` o `-9999`) para señalar ausencia de dato.
+3.  **Variabilidad biológica o económica real**: Eventos extremos genuinos pero poco frecuentes (por ejemplo, transacciones financieras fraudulentas o catástrofes naturales).
+
+Desde la perspectiva del modelado estadístico, un valor atípico puede sesgar severamente la estimación de la media y la varianza, distorsionar la pendiente en un modelo de regresión lineal y alterar los supuestos de normalidad [@kuhn2019feature].
+
+### Valores Atípicos Univariantes
+
+Se evalúan analizando una única variable de manera aislada. Los tres criterios matemáticos más utilizados son:
+
+::: {.panel-tabset}
+
+### Regla de la Desviación Estándar (Z-score)
+
+Asume que los datos provienen de una distribución aproximadamente Normal. Una observación $x_i$ se clasifica como atípica si su puntuación estandarizada dista del centro en más de $c$ desviaciones estándar (habitualmente $c = 3$):
+
+$$|z_i| = \left| \frac{x_i - \bar{x}}{s} \right| > 3$$
+
+*Limitación*: La media ($\bar{x}$) y la desviación estándar ($s$) se encuentran infladas por el propio valor atípico, lo que reduce la sensibilidad del test (efecto enmascaramiento).
+
+### Regla del Rango Intercuartílico de Tukey ($1.5 \times IQR$)
+
+Es una regla **resistente** que no asume normalidad. Define barreras o "cercas" en función de los cuartiles:
+
+*   Barrera Inferior: $Q_1 - 1.5 \times IQR$
+*   Barrera Superior: $Q_3 + 1.5 \times IQR$
+
+Toda observación que caiga fuera de este intervalo se considera un valor atípico moderado. Si el factor es $3.0 \times IQR$, se clasifica como atípico extremo.
+
+### Desviación Absoluta respecto a la Mediana ($MAD$)
+
+Métrica altamente robusta para datos con fuerte asimetría. Se define la distancia modificada $M_i$:
+
+$$M_i = \frac{0.6745 \cdot |x_i - \tilde{x}|}{MAD}$$
+
+donde $MAD = \text{mediana}(|x_i - \tilde{x}|)$. Observaciones con $M_i > 3.5$ se clasifican como atípicas.
+
+:::
+
+### Valores Atípicos Multivariantes
+
+Un punto en un espacio multidimensional puede presentar valores perfectamente normales cuando se examina cada una de sus variables de forma univariante, pero representar una combinación **improbable o imposible** cuando se analiza el patrón conjunto.
+
+*Ejemplo*: En un estudio de salud, un individuo con una edad de 12 años tiene un valor razonable. Un individuo de estado civil "casado" tiene un valor razonable. Sin embargo, la combinación simultánea de (Edad = 12, Estado Civil = "Casado") es un valor atípico multivariante.
+
+Para detectar atípicos multivariantes numéricos se utiliza la **Distancia de Mahalanobis** ($D^2$), la cual mide la distancia de cada punto $\mathbf{x}_i$ al centroide de la distribución ($\boldsymbol{\mu}$) considerando la matriz de covarianza ($\boldsymbol{\Sigma}$) de los datos:
+
+$$D^2_i = (\mathbf{x}_i - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}_i - \boldsymbol{\mu})$$
+
+Bajo el supuesto de normalidad multivariante, las distancias de Mahalanobis cuadráticas $D^2_i$ siguen aproximadamente una distribución Chi-cuadrado con $p$ grados de libertad ($\chi^2_p$), donde $p$ es el número de variables evaluadas. Puntos con valores de $D^2_i$ que superen el cuantil crítico $\chi^2_{p, 0.999}$ se identifican como atípicos multivariantes.
+
+```r
+# Implementación de la Distancia de Mahalanobis en R
+datos_num <- df[, c("ingreso", "gasto", "credito")]
+centroide <- colMeans(datos_num, na.rm = TRUE)
+matriz_cov <- cov(datos_num, use = "complete.obs")
+
+# Cálculo de la distancia para cada observación
+d2_mahalanobis <- mahalanobis(datos_num, center = centroide, cov = matriz_cov)
+
+# Identificar atípicos con α = 0.001 y p = 3 grados de libertad
+umbral_critico <- qchisq(p = 0.999, df = 3)
+atipicos_multivariantes <- which(d2_mahalanobis > umbral_critico)
+```
+
+### Tratamiento de Atípicos
+Ante un valor atípico, el analista no debe proceder inmediatamente a su eliminación. Las alternativas metodológicas incluyen:
+1.  **Corrección**: Si es un error de digitación comprobado, corregir el dato en la fuente.
+2.  **Aislamiento / Filtrado**: Separar los casos extremos para analizarlos en un subgrupo independiente (útil en detección de fraude).
+3.  **Transformación**: Aplicar transformaciones cóncavas (como $\log(x)$ o $\sqrt{x}$) para estabilizar la varianza y comprimir la cola derecha.
+4.  **Winsorización**: Reemplazar los valores atípicos que superen un percentil extremo (ej. percentil 99) por el valor exacto de dicho percentil.
+
+---
+
+## Preparación de Datos para Grandes Volúmenes (Big Data)
+
+Cuando la escala de los datos supera la capacidad de memoria RAM activa de R, la estrategia tradicional de cargar dataframes completos colapsa. Para abordar grandes volúmenes de datos desde un enfoque de fundamentos, se utilizan tres estrategias principales:
+
+1.  **Procesamiento por Bloques (*Chunking*)**: Leer, transformar y resumir el dataset en piezas secuenciales (*chunks*) sin cargar todo el archivo en memoria simultáneamente.
+2.  **Formatos de Almacenamiento Eficientes**: Reemplazar archivos planos CSV por formatos binarios orientados a columnas como **Parquet** o **Feather** (vía paquetes como `arrow`), los cuales comprimen la información y permiten leer solo las columnas necesarias.
+3.  **Evaluación Lazy (*Lazy Evaluation*)**: Construir la secuencia de transformaciones relacionales de forma diferida antes de ejecutar la computación física en memoria o en un motor distribuido.
+
+---
+
+::: {.callout-tip}
+### Reto de 5 Minutos: Detección Integrada de Atípicos y Procesamiento Funcional
+En tu consola de RStudio, simula un conjunto de datos con dos variables cuantitativas correlacionadas que contengan un atípico multivariante:
+
+```r
+library(purrr)
+library(dplyr)
+
+set.seed(123)
+# Simular 100 observaciones correlacionadas
+x1 <- rnorm(100, mean = 50, sd = 10)
+x2 <- x1 * 2 + rnorm(100, mean = 0, sd = 5)
+
+# Introducir un atípico multivariante (no es atípico en x1 ni en x2 por separado)
+x1[50] <- 50
+x2[50] <- 150 # Rompe la relación x2 ≈ 2 * x1
+
+df_reto <- data.frame(x1, x2)
+```
+
+**Tu desafío:**
+1.  Calcula el $IQR$ y los límites de Tukey para $x_1$ y $x_2$ usando `purrr::map()` para verificar que la observación 50 **no** es un atípico univariante en ninguna variable.
+2.  Calcula la distancia de Mahalanobis $D^2$ sobre el dataset y verifica si la observación 50 es detectada con éxito como un atípico multivariante con un nivel de significancia $\alpha = 0.01$ ($\chi^2_{2, 0.99}$).
+
+**Código de Solución Sugerido:**
+```r
+# 1. Verificación univariante con purrr
+limites_tukey <- map(df_reto, function(v) {
+  q1 <- quantile(v, 0.25)
+  q3 <- quantile(v, 0.75)
+  iqr <- q3 - q1
+  c(inf = q1 - 1.5 * iqr, sup = q3 + 1.5 * iqr)
+})
+print(limites_tukey)
+
+# 2. Detección multivariante
+d2 <- mahalanobis(df_reto, center = colMeans(df_reto), cov = cov(df_reto))
+umbral <- qchisq(0.99, df = 2)
+which(d2 > umbral) # Debe identificar la fila 50
+```
+:::
+
+---
+
+## Ejercicios de Autoevaluación
+
+1. **Programación Funcional y Mantenibilidad de Código**:  
+   Un analista financiero necesita importar 12 archivos mensuales de ejecución presupuestaria departamental. Un colega le sugiere escribir 12 llamadas consecutivas a `read_csv()` asociadas a 12 objetos individuales y luego unirlos con `rbind()`.  
+   a) Explica conceptualmente por qué esta aproximación resulta ineficiente y propensa a errores.  
+   b) Justifica las ventajas metodológicas de implementar una solución basada en `purrr::map_dfr()`.
+
+2. **Diagnóstico Comparativo de Atípicos Univariantes vs. Multivariantes**:  
+   En una encuesta de microempresas bolivianas, se registran las variables `Numero_Empleados` e `Ingreso_Mensual_BOB`. La empresa A tiene 2 empleados y registra un ingreso mensual de 800.000 BOB. La empresa B tiene 150 empleados y registra un ingreso mensual de 12.000 BOB.  
+   a) Clasifica el tipo de valor atípico (univariante o multivariante) que representa cada una de estas empresas justificando tu respuesta.  
+   b) Explica por qué el método de las 3 desviaciones estándar ($Z$-score) puede fallar al detectar a la empresa A si la muestra contiene otros valores extremos (*efecto enmascaramiento*), y propone una alternativa resistente.
+
+3. **Inconsistencias Relacionales y Auditoría de Joins**:  
+   Se cuenta con una tabla de `Padron_Electoral` (1.000.000 de registros) y una tabla de `Votos_Emitidos` (850.000 registros).  
+   a) ¿Qué función de filtrado relacional de `dplyr` deberías aplicar para identificar a los ciudadanos empadronados que **no** ejercieron su voto?  
+   b) Si al aplicar un `left_join` entre `Padron_Electoral` y `Votos_Emitidos` el número de filas del dataframe resultante asciende a 1.050.000 filas, ¿qué error grave ocurrió en las llaves de la tabla de votos y cómo afecta esto a la validez de las métricas agregadas?
+
+---
+
+## Referencias Bibliográficas
+
+- Boehmke, B. (2016). *Data Wrangling with R*. Springer.
+- Chirino Gutiérrez, A. (2026). *Programa de la Materia: Fundamentos de Análisis de Datos*. Universidad Católica Boliviana.
+- Friendly, M. (2020). *Rememberances of Things EDA*. DataVis.ca.
+- Kuhn, M., & Johnson, K. (2019). *Feature Engineering and Selection: A Practical Approach for Predictive Models*. CRC Press.
+- Lovelace, R., Nowosad, J., & Muenchow, J. (2019). *Geocomputation with R*. CRC Press.
+- Stoudt, S., Vásquez, V. N., & Martinez, C. C. (2021). Principles for data analysis workflows. *PLOS Computational Biology*, 17(3), e1008770.
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* (2nd ed.). O'Reilly Media.

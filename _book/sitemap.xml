@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alvarolimber.github.io/master_fad/_book/index.html</loc>
-    <lastmod>2026-09-14T00:58:45.914Z</lastmod>
+    <lastmod>2026-08-25T00:20:54.184Z</lastmod>
   </url>
   <url>
     <loc>https://alvarolimber.github.io/master_fad/_book/cap1-adquisicion.html</loc>
-    <lastmod>2026-09-14T00:58:45.825Z</lastmod>
+    <lastmod>2026-09-02T15:54:10.017Z</lastmod>
   </url>
   <url>
     <loc>https://alvarolimber.github.io/master_fad/_book/cap2-tidy-data.html</loc>
-    <lastmod>2026-09-14T00:58:45.825Z</lastmod>
+    <lastmod>2026-09-04T22:34:43.914Z</lastmod>
   </url>
   <url>
     <loc>https://alvarolimber.github.io/master_fad/_book/cap3-datos-especificos.html</loc>
-    <lastmod>2026-09-14T00:58:45.825Z</lastmod>
+    <lastmod>2026-09-04T22:34:11.919Z</lastmod>
   </url>
   <url>
     <loc>https://alvarolimber.github.io/master_fad/_book/cap4-eda-visualizacion.html</loc>
-    <lastmod>2026-09-14T00:58:45.826Z</lastmod>
+    <lastmod>2026-09-09T21:50:46.149Z</lastmod>
   </url>
   <url>
     <loc>https://alvarolimber.github.io/master_fad/_book/cap5-datos-faltantes.html</loc>
-    <lastmod>2026-09-14T01:17:56.722Z</lastmod>
+    <lastmod>2026-09-19T21:26:15.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alvarolimber.github.io/master_fad/_book/cap6-wrangling-avanzado.html</loc>
+    <lastmod>2026-09-19T22:09:45.284Z</lastmod>
   </url>
   <url>
     <loc>https://alvarolimber.github.io/master_fad/_book/references.html</loc>
-    <lastmod>2026-09-14T00:58:45.914Z</lastmod>
+    <lastmod>2026-08-25T00:20:54.184Z</lastmod>
   </url>
 </urlset>
