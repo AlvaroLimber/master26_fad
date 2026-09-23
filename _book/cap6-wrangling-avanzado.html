@@ -102,8 +102,8 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2815bcb3ca37e3cb0e324e4adf17580a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-dbdc99282be6f8ab365cefe7450a57b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2ed06f4e74e1ba95e0e3293705fc1527.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-4cd3a455cdccbce1cfbd6d406d6abfb5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -473,20 +473,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#programación-funcional-e-iteración-con-purrr" id="toc-programación-funcional-e-iteración-con-purrr" class="nav-link active" data-scroll-target="#programación-funcional-e-iteración-con-purrr">Programación Funcional e Iteración con <code>purrr</code></a>
-  <ul class="collapse">
-  <li><a href="#iteración-imperativa-vs.-declarativa" id="toc-iteración-imperativa-vs.-declarativa" class="nav-link" data-scroll-target="#iteración-imperativa-vs.-declarativa">Iteración Imperativa vs.&nbsp;Declarativa</a></li>
-  </ul></li>
-  <li><a href="#cruces-relacionales-y-espaciales-complejos-joins" id="toc-cruces-relacionales-y-espaciales-complejos-joins" class="nav-link" data-scroll-target="#cruces-relacionales-y-espaciales-complejos-joins">Cruces Relacionales y Espaciales Complejos (Joins)</a>
-  <ul class="collapse">
-  <li><a href="#tipos-de-cruces-relacionales" id="toc-tipos-de-cruces-relacionales" class="nav-link" data-scroll-target="#tipos-de-cruces-relacionales">Tipos de Cruces Relacionales</a></li>
-  <li><a href="#fundamentos-de-cruces-espaciales-spatial-joins" id="toc-fundamentos-de-cruces-espaciales-spatial-joins" class="nav-link" data-scroll-target="#fundamentos-de-cruces-espaciales-spatial-joins">Fundamentos de Cruces Espaciales (<em>Spatial Joins</em>)</a></li>
-  </ul></li>
-  <li><a href="#diagnóstico-y-tratamiento-de-valores-atípicos-outliers" id="toc-diagnóstico-y-tratamiento-de-valores-atípicos-outliers" class="nav-link" data-scroll-target="#diagnóstico-y-tratamiento-de-valores-atípicos-outliers">Diagnóstico y Tratamiento de Valores Atípicos (<em>Outliers</em>)</a>
+  <li><a href="#diagnóstico-y-tratamiento-de-valores-atípicos-outliers" id="toc-diagnóstico-y-tratamiento-de-valores-atípicos-outliers" class="nav-link active" data-scroll-target="#diagnóstico-y-tratamiento-de-valores-atípicos-outliers">Diagnóstico y Tratamiento de Valores Atípicos (<em>Outliers</em>)</a>
   <ul class="collapse">
   <li><a href="#valores-atípicos-univariantes" id="toc-valores-atípicos-univariantes" class="nav-link" data-scroll-target="#valores-atípicos-univariantes">Valores Atípicos Univariantes</a></li>
   <li><a href="#valores-atípicos-multivariantes" id="toc-valores-atípicos-multivariantes" class="nav-link" data-scroll-target="#valores-atípicos-multivariantes">Valores Atípicos Multivariantes</a></li>
   <li><a href="#tratamiento-de-atípicos" id="toc-tratamiento-de-atípicos" class="nav-link" data-scroll-target="#tratamiento-de-atípicos">Tratamiento de Atípicos</a></li>
+  </ul></li>
+  <li><a href="#cruces-relacionales-joins" id="toc-cruces-relacionales-joins" class="nav-link" data-scroll-target="#cruces-relacionales-joins">Cruces Relacionales (Joins)</a>
+  <ul class="collapse">
+  <li><a href="#tipos-de-cruces-relacionales" id="toc-tipos-de-cruces-relacionales" class="nav-link" data-scroll-target="#tipos-de-cruces-relacionales">Tipos de Cruces Relacionales</a></li>
+  </ul></li>
+  <li><a href="#programación-funcional-e-iteración-con-purrr" id="toc-programación-funcional-e-iteración-con-purrr" class="nav-link" data-scroll-target="#programación-funcional-e-iteración-con-purrr">Programación Funcional e Iteración con <code>purrr</code></a>
+  <ul class="collapse">
+  <li><a href="#iteración-imperativa-vs.-declarativa" id="toc-iteración-imperativa-vs.-declarativa" class="nav-link" data-scroll-target="#iteración-imperativa-vs.-declarativa">Iteración Imperativa vs.&nbsp;Declarativa</a></li>
   </ul></li>
   <li><a href="#preparación-de-datos-para-grandes-volúmenes-big-data" id="toc-preparación-de-datos-para-grandes-volúmenes-big-data" class="nav-link" data-scroll-target="#preparación-de-datos-para-grandes-volúmenes-big-data">Preparación de Datos para Grandes Volúmenes (Big Data)</a></li>
   <li><a href="#ejercicios-de-autoevaluación" id="toc-ejercicios-de-autoevaluación" class="nav-link" data-scroll-target="#ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</a></li>
@@ -527,57 +526,68 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Este capítulo cubre los contenidos correspondientes a las <strong>Sesiones 13, 14 y 15 (Semana 5)</strong> del programa académico <span class="citation" data-cites="chirino2026programa">(<a href="references.html#ref-chirino2026programa" role="doc-biblioref">Chirino Gutiérrez 2026</a>)</span>. Abordaremos la programación funcional para la automatización de procesos, los cruces relacionales y espaciales avanzados, la caracterización estadística de valores atípicos (univariantes y multivariantes) y las estrategias de optimización para volúmenes de datos masivos.</p>
+<p>Este capítulo cubre los contenidos correspondientes a las <strong>Sesiones 13, 14 y 15 (Semana 5)</strong> del programa académico. Abordaremos los cruces relacionales, la caracterización estadística de valores atípicos (univariantes y multivariantes), la programación funcional para la automatización de procesos y las estrategias de optimización para volúmenes de datos masivos.</p>
 </div>
 </div>
 <p>En las etapas avanzadas del ciclo de vida de los datos, el analista se enfrenta a desafíos que van más allá de la limpieza básica de una tabla individual. Los flujos de trabajo profesionales requieren procesar múltiples archivos en lote de manera automatizada, integrar fuentes de información heterogéneas mediante relaciones complejas y diagnosticar observaciones anómalas que pueden distorsionar las inferencias estadísticas.</p>
 <p>Este capítulo consolida las técnicas avanzadas de preparación de datos (<em>Data Wrangling</em>), priorizando los fundamentos estadísticos y metodológicos. Se estudia la programación funcional como paradigma para eliminar la redundancia de código, la teoría de los cruces de tablas, la detección matemática de valores atípicos univariantes y multivariantes, y las estrategias computacionales para optimizar el manejo de conjuntos de datos de gran tamaño <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
-<hr>
-<section id="programación-funcional-e-iteración-con-purrr" class="level2">
-<h2 class="anchored" data-anchor-id="programación-funcional-e-iteración-con-purrr">Programación Funcional e Iteración con <code>purrr</code></h2>
-<p>El paradigma de la <strong>programación funcional</strong> propone tratar a las funciones como ciudadanos de primera clase (<em>first-class functions</em>), permitiendo pasarlas como argumentos a otras funciones o devolverlas como resultados. En el contexto del <em>Data Wrangling</em>, la programación funcional reemplaza los bucles iterativos imperativos tradicionales (como los bucles <code>for</code>) por operaciones declarativas expresadas mediante funciones de orden superior (<em>map functions</em>) <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.</p>
-<section id="iteración-imperativa-vs.-declarativa" class="level3">
-<h3 class="anchored" data-anchor-id="iteración-imperativa-vs.-declarativa">Iteración Imperativa vs.&nbsp;Declarativa</h3>
-<p>En la programación imperativa, el código especifica <em>cómo</em> realizar una iteración controlando explícitamente los índices de un bucle y la modificación de un objeto contenedor intermedio. En la programación declarativa, el código indica <em>qué</em> transformación aplicar a cada elemento de una estructura (lista o vector), delegando la gestión de memoria e índices al motor del lenguaje.</p>
-<p>Las ventajas de la programación funcional incluyen: * <strong>Reducción del código repetitivo</strong> (<em>Boilerplate code</em>): Elimina la necesidad de inicializar vectores vacíos y gestionar contadores de posición. * <strong>Aislamiento de efectos secundarios</strong>: Cada iteración es independiente, garantizando que el resultado de un elemento no altere el procesamiento de los demás. * <strong>Tipado estricto de retorno</strong>: Garantiza que el objeto devuelto mantenga una estructura predecible (por ejemplo, asegurando un vector numérico o un dataframe unificado).</p>
-<p>El paquete <strong><code>purrr</code></strong> de la suite <code>tidyverse</code> estandariza estas operaciones mediante la familia de funciones <code>map()</code>.</p>
+<section id="diagnóstico-y-tratamiento-de-valores-atípicos-outliers" class="level2">
+<h2 class="anchored" data-anchor-id="diagnóstico-y-tratamiento-de-valores-atípicos-outliers">Diagnóstico y Tratamiento de Valores Atípicos (<em>Outliers</em>)</h2>
+<p>Un <strong>valor atípico</strong> (<em>outlier</em>) es una observación que se desvía considerablemente del comportamiento general del resto de los datos. Los atípicos pueden originarse por tres causas principales: 1. <strong>Errores de medición o digitación</strong>: Captura defectuosa de datos (por ejemplo, registrar un salario de 50.000 BOB como 500.000 BOB por un cero adicional). 2. <strong>Valores nulos codificados erróneamente</strong>: Uso de números extremos (como <code>999</code> o <code>-9999</code>) para señalar ausencia de dato. 3. <strong>Variabilidad biológica o económica real</strong>: Eventos extremos genuinos pero poco frecuentes (por ejemplo, transacciones financieras fraudulentas o catástrofes naturales).</p>
+<p>Desde la perspectiva del modelado estadístico, un valor atípico puede sesgar severamente la estimación de la media y la varianza, distorsionar la pendiente en un modelo de regresión lineal y alterar los supuestos de normalidad <span class="citation" data-cites="kuhn2019feature">(<a href="references.html#ref-kuhn2019feature" role="doc-biblioref">Kuhn and Johnson 2019</a>)</span>.</p>
+<section id="valores-atípicos-univariantes" class="level3">
+<h3 class="anchored" data-anchor-id="valores-atípicos-univariantes">Valores Atípicos Univariantes</h3>
+<p>Se evalúan analizando una única variable de manera aislada. Los tres criterios matemáticos más utilizados son:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Enfoque Funcional (<code>purrr</code>)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Enfoque Imperativo (Bucles <code>for</code>)</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Regla de la Desviación Estándar (Z-score)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Regla del Rango Intercuartílico de Tukey (<span class="math inline">\(1.5 \times IQR\)</span>)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Desviación Absoluta respecto a la Mediana (<span class="math inline">\(MAD\)</span>)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tenemos una lista de rutas de archivos CSV mensuales</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>archivos_mensuales <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data/raw_ventas/"</span>, <span class="at">pattern =</span> <span class="st">"*.csv"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar y consolidar múltiples archivos en un único dataframe</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># map_dfr aplica read_csv a cada archivo y une las filas automáticamente</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ventas_consolidadas <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(archivos_mensuales, read_csv, <span class="at">col_types =</span> <span class="st">"cdd"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicar un cálculo estadístico a todas las columnas numéricas de un dataframe</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>resumen_medias <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(ventas_consolidadas[, <span class="fu">c</span>(<span class="st">"monto"</span>, <span class="st">"unidades"</span>)], mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Asume que los datos provienen de una distribución aproximadamente Normal. Una observación <span class="math inline">\(x_i\)</span> se clasifica como atípica si su puntuación estandarizada dista del centro en más de <span class="math inline">\(c\)</span> desviaciones estándar (habitualmente <span class="math inline">\(c = 3\)</span>):</p>
+<p><span class="math display">\[|z_i| = \left| \frac{x_i - \bar{x}}{s} \right| &gt; 3\]</span></p>
+<p><em>Limitación</em>: La media (<span class="math inline">\(\bar{x}\)</span>) y la desviación estándar (<span class="math inline">\(s\)</span>) se encuentran infladas por el propio valor atípico, lo que reduce la sensibilidad del test (efecto enmascaramiento).</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bucle for tradicional en Base R</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>archivos_mensuales <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data/raw_ventas/"</span>, <span class="at">pattern =</span> <span class="st">"*.csv"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Requiere crear explícitamente una lista contenedora e incrementar un índice</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>lista_temporal <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">length</span>(archivos_mensuales))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(archivos_mensuales)) {</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  lista_temporal[[i]] <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(archivos_mensuales[i], <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Consolidar manualmente la lista en un dataframe</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ventas_consolidadas_base <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, lista_temporal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Es una regla <strong>resistente</strong> que no asume normalidad. Define barreras o “cercas” en función de los cuartiles:</p>
+<ul>
+<li>Barrera Inferior: <span class="math inline">\(Q_1 - 1.5 \times IQR\)</span></li>
+<li>Barrera Superior: <span class="math inline">\(Q_3 + 1.5 \times IQR\)</span></li>
+</ul>
+<p>Toda observación que caiga fuera de este intervalo se considera un valor atípico moderado. Si el factor es <span class="math inline">\(3.0 \times IQR\)</span>, se clasifica como atípico extremo.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Métrica altamente robusta para datos con fuerte asimetría. Se define la distancia modificada <span class="math inline">\(M_i\)</span>:</p>
+<p><span class="math display">\[M_i = \frac{0.6745 \cdot |x_i - \tilde{x}|}{MAD}\]</span></p>
+<p>donde <span class="math inline">\(MAD = \text{mediana}(|x_i - \tilde{x}|)\)</span>. Observaciones con <span class="math inline">\(M_i &gt; 3.5\)</span> se clasifican como atípicas.</p>
 </div>
 </div>
 </div>
-<hr>
+</section>
+<section id="valores-atípicos-multivariantes" class="level3">
+<h3 class="anchored" data-anchor-id="valores-atípicos-multivariantes">Valores Atípicos Multivariantes</h3>
+<p>Un punto en un espacio multidimensional puede presentar valores perfectamente normales cuando se examina cada una de sus variables de forma univariante, pero representar una combinación <strong>improbable o imposible</strong> cuando se analiza el patrón conjunto.</p>
+<p><em>Ejemplo</em>: En un estudio de salud, un individuo con una edad de 12 años tiene un valor razonable. Un individuo de estado civil “casado” tiene un valor razonable. Sin embargo, la combinación simultánea de (Edad = 12, Estado Civil = “Casado”) es un valor atípico multivariante.</p>
+<p>Para detectar atípicos multivariantes numéricos se utiliza la <strong>Distancia de Mahalanobis</strong> (<span class="math inline">\(D^2\)</span>), la cual mide la distancia de cada punto <span class="math inline">\(\mathbf{x}_i\)</span> al centroide de la distribución (<span class="math inline">\(\boldsymbol{\mu}\)</span>) considerando la matriz de covarianza (<span class="math inline">\(\boldsymbol{\Sigma}\)</span>) de los datos:</p>
+<p><span class="math display">\[D^2_i = (\mathbf{x}_i - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}_i - \boldsymbol{\mu})\]</span></p>
+<p>Bajo el supuesto de normalidad multivariante, las distancias de Mahalanobis cuadráticas <span class="math inline">\(D^2_i\)</span> siguen aproximadamente una distribución Chi-cuadrado con <span class="math inline">\(p\)</span> grados de libertad (<span class="math inline">\(\chi^2_p\)</span>), donde <span class="math inline">\(p\)</span> es el número de variables evaluadas. Puntos con valores de <span class="math inline">\(D^2_i\)</span> que superen el cuantil crítico <span class="math inline">\(\chi^2_{p, 0.999}\)</span> se identifican como atípicos multivariantes.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implementación de la Distancia de Mahalanobis en R</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>datos_num <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"ingreso"</span>, <span class="st">"gasto"</span>, <span class="st">"credito"</span>)]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>centroide <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(datos_num, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>matriz_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(datos_num, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de la distancia para cada observación</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>d2_mahalanobis <span class="ot">&lt;-</span> <span class="fu">mahalanobis</span>(datos_num, <span class="at">center =</span> centroide, <span class="at">cov =</span> matriz_cov)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Identificar atípicos con α = 0.001 y p = 3 grados de libertad</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>umbral_critico <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="at">p =</span> <span class="fl">0.999</span>, <span class="at">df =</span> <span class="dv">3</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>atipicos_multivariantes <span class="ot">&lt;-</span> <span class="fu">which</span>(d2_mahalanobis <span class="sc">&gt;</span> umbral_critico)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tratamiento-de-atípicos" class="level3">
+<h3 class="anchored" data-anchor-id="tratamiento-de-atípicos">Tratamiento de Atípicos</h3>
+<p>Ante un valor atípico, el analista no debe proceder inmediatamente a su eliminación. Las alternativas metodológicas incluyen: 1. <strong>Corrección</strong>: Si es un error de digitación comprobado, corregir el dato en la fuente. 2. <strong>Aislamiento / Filtrado</strong>: Separar los casos extremos para analizarlos en un subgrupo independiente (útil en detección de fraude). 3. <strong>Transformación</strong>: Aplicar transformaciones cóncavas (como <span class="math inline">\(\log(x)\)</span> o <span class="math inline">\(\sqrt{x}\)</span>) para estabilizar la varianza y comprimir la cola derecha. 4. <strong>Winsorización</strong>: Reemplazar los valores atípicos que superen un percentil extremo (ej. percentil 99) por el valor exacto de dicho percentil.</p>
 </section>
 </section>
-<section id="cruces-relacionales-y-espaciales-complejos-joins" class="level2">
-<h2 class="anchored" data-anchor-id="cruces-relacionales-y-espaciales-complejos-joins">Cruces Relacionales y Espaciales Complejos (Joins)</h2>
+<section id="cruces-relacionales-joins" class="level2">
+<h2 class="anchored" data-anchor-id="cruces-relacionales-joins">Cruces Relacionales (Joins)</h2>
 <p>En sistemas de información reales, los datos se encuentran normalizados y distribuidos en múltiples tablas conectadas mediante llaves primarias y foráneas. La teoría de conjuntos y el álgebra relacional proporcionan el marco para integrar estas fuentes de datos de forma consistente <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
 <section id="tipos-de-cruces-relacionales" class="level3">
 <h3 class="anchored" data-anchor-id="tipos-de-cruces-relacionales">Tipos de Cruces Relacionales</h3>
@@ -595,72 +605,52 @@ window.Quarto = {
 </ul></li>
 </ol>
 </section>
-<section id="fundamentos-de-cruces-espaciales-spatial-joins" class="level3">
-<h3 class="anchored" data-anchor-id="fundamentos-de-cruces-espaciales-spatial-joins">Fundamentos de Cruces Espaciales (<em>Spatial Joins</em>)</h3>
-<p>Cuando la llave de integración no es un código alfanumérico sino una localización geográfica (coordenadas de latitud/longitud, polígonos municipales o áreas censales), se utilizan los <strong>cruces espaciales</strong> <span class="citation" data-cites="lovelace2019geocomputation">(<a href="references.html#ref-lovelace2019geocomputation" role="doc-biblioref">Lovelace et al. 2019</a>)</span>. A diferencia de los joins relacionales basados en igualdad de caracteres (<span class="math inline">\(key_x == key_y\)</span>), los joins espaciales evalúan relaciones topológicas geométricas, tales como <em>intersección</em>, <em>contención</em> (un punto dentro de un polígono) o <em>proximidad</em>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo conceptual de cruce relacional de filtrado</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Auditar clientes registrados que no han realizado ninguna transacción</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>clientes_sin_compras <span class="ot">&lt;-</span> clientes <span class="sc">|&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(transacciones, <span class="at">by =</span> <span class="st">"id_cliente"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
 </section>
-</section>
-<section id="diagnóstico-y-tratamiento-de-valores-atípicos-outliers" class="level2">
-<h2 class="anchored" data-anchor-id="diagnóstico-y-tratamiento-de-valores-atípicos-outliers">Diagnóstico y Tratamiento de Valores Atípicos (<em>Outliers</em>)</h2>
-<p>Un <strong>valor atípico</strong> (<em>outlier</em>) es una observación que se desvía considerablemente del comportamiento general del resto de los datos. Los atípicos pueden originarse por tres causas principales: 1. <strong>Errores de medición o digitación</strong>: Captura defectuosa de datos (por ejemplo, registrar un salario de 50.000 BOB como 500.000 BOB por un cero adicional). 2. <strong>Valores nulos codificados erróneamente</strong>: Uso de números extremos (como <code>999</code> o <code>-9999</code>) para señalar ausencia de dato. 3. <strong>Variabilidad biológica o económica real</strong>: Eventos extremos genuinos pero poco frecuentes (por ejemplo, transacciones financieras fraudulentas o catástrofes naturales).</p>
-<p>Desde la perspectiva del modelado estadístico, un valor atípico puede sesgar severamente la estimación de la media y la varianza, distorsionar la pendiente en un modelo de regresión lineal y alterar los supuestos de normalidad <span class="citation" data-cites="kuhn2019feature">(<a href="references.html#ref-kuhn2019feature" role="doc-biblioref">Kuhn and Johnson 2019</a>)</span>.</p>
-<section id="valores-atípicos-univariantes" class="level3">
-<h3 class="anchored" data-anchor-id="valores-atípicos-univariantes">Valores Atípicos Univariantes</h3>
-<p>Se evalúan analizando una única variable de manera aislada. Los tres criterios matemáticos más utilizados son:</p>
+<section id="programación-funcional-e-iteración-con-purrr" class="level2">
+<h2 class="anchored" data-anchor-id="programación-funcional-e-iteración-con-purrr">Programación Funcional e Iteración con <code>purrr</code></h2>
+<p>El paradigma de la <strong>programación funcional</strong> propone tratar a las funciones como ciudadanos de primera clase (<em>first-class functions</em>), permitiendo pasarlas como argumentos a otras funciones o devolverlas como resultados. En el contexto del <em>Data Wrangling</em>, la programación funcional reemplaza los bucles iterativos imperativos tradicionales (como los bucles <code>for</code>) por operaciones declarativas expresadas mediante funciones de orden superior (<em>map functions</em>) <span class="citation" data-cites="boehmke2016data">(<a href="references.html#ref-boehmke2016data" role="doc-biblioref">Boehmke 2016</a>)</span>.</p>
+<section id="iteración-imperativa-vs.-declarativa" class="level3">
+<h3 class="anchored" data-anchor-id="iteración-imperativa-vs.-declarativa">Iteración Imperativa vs.&nbsp;Declarativa</h3>
+<p>En la programación imperativa, el código especifica <em>cómo</em> realizar una iteración controlando explícitamente los índices de un bucle y la modificación de un objeto contenedor intermedio. En la programación declarativa, el código indica <em>qué</em> transformación aplicar a cada elemento de una estructura (lista o vector), delegando la gestión de memoria e índices al motor del lenguaje.</p>
+<p>Las ventajas de la programación funcional incluyen:</p>
+<ul>
+<li><strong>Reducción del código repetitivo</strong> (<em>Boilerplate code</em>): Elimina la necesidad de inicializar vectores vacíos y gestionar contadores de posición.</li>
+<li><strong>Aislamiento de efectos secundarios</strong>: Cada iteración es independiente, garantizando que el resultado de un elemento no altere el procesamiento de los demás.</li>
+<li><strong>Tipado estricto de retorno</strong>: Garantiza que el objeto devuelto mantenga una estructura predecible (por ejemplo, asegurando un vector numérico o un dataframe unificado).</li>
+</ul>
+<p>El paquete <strong><code>purrr</code></strong> de la suite <code>tidyverse</code> estandariza estas operaciones mediante la familia de funciones <code>map()</code>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Regla de la Desviación Estándar (Z-score)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Regla del Rango Intercuartílico de Tukey (<span class="math inline">\(1.5 \times IQR\)</span>)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Desviación Absoluta respecto a la Mediana (<span class="math inline">\(MAD\)</span>)</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Enfoque Funcional (<code>purrr</code>)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Enfoque Imperativo (Bucles <code>for</code>)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<p>Asume que los datos provienen de una distribución aproximadamente Normal. Una observación <span class="math inline">\(x_i\)</span> se clasifica como atípica si su puntuación estandarizada dista del centro en más de <span class="math inline">\(c\)</span> desviaciones estándar (habitualmente <span class="math inline">\(c = 3\)</span>):</p>
-<p><span class="math display">\[|z_i| = \left| \frac{x_i - \bar{x}}{s} \right| &gt; 3\]</span></p>
-<p><em>Limitación</em>: La media (<span class="math inline">\(\bar{x}\)</span>) y la desviación estándar (<span class="math inline">\(s\)</span>) se encuentran infladas por el propio valor atípico, lo que reduce la sensibilidad del test (efecto enmascaramiento).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tenemos una lista de rutas de archivos CSV mensuales</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>archivos_mensuales <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data/raw_ventas/"</span>, <span class="at">pattern =</span> <span class="st">"*.csv"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar y consolidar múltiples archivos en un único dataframe</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># map_dfr aplica read_csv a cada archivo y une las filas automáticamente</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ventas_consolidadas <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(archivos_mensuales, read_csv, <span class="at">col_types =</span> <span class="st">"cdd"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicar un cálculo estadístico a todas las columnas numéricas de un dataframe</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>resumen_medias <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(ventas_consolidadas[, <span class="fu">c</span>(<span class="st">"monto"</span>, <span class="st">"unidades"</span>)], mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<p>Es una regla <strong>resistente</strong> que no asume normalidad. Define barreras o “cercas” en función de los cuartiles:</p>
-<ul>
-<li>Barrera Inferior: <span class="math inline">\(Q_1 - 1.5 \times IQR\)</span></li>
-<li>Barrera Superior: <span class="math inline">\(Q_3 + 1.5 \times IQR\)</span></li>
-</ul>
-<p>Toda observación que caiga fuera de este intervalo se considera un valor atípico moderado. Si el factor es <span class="math inline">\(3.0 \times IQR\)</span>, se clasifica como atípico extremo.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bucle for tradicional en Base R</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>archivos_mensuales <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data/raw_ventas/"</span>, <span class="at">pattern =</span> <span class="st">"*.csv"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Requiere crear explícitamente una lista contenedora e incrementar un índice</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>lista_temporal <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">length</span>(archivos_mensuales))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(archivos_mensuales)) {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  lista_temporal[[i]] <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(archivos_mensuales[i], <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Consolidar manualmente la lista en un dataframe</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ventas_consolidadas_base <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, lista_temporal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
-<p>Métrica altamente robusta para datos con fuerte asimetría. Se define la distancia modificada <span class="math inline">\(M_i\)</span>:</p>
-<p><span class="math display">\[M_i = \frac{0.6745 \cdot |x_i - \tilde{x}|}{MAD}\]</span></p>
-<p>donde <span class="math inline">\(MAD = \text{mediana}(|x_i - \tilde{x}|)\)</span>. Observaciones con <span class="math inline">\(M_i &gt; 3.5\)</span> se clasifican como atípicas.</p>
 </div>
 </div>
-</div>
-</section>
-<section id="valores-atípicos-multivariantes" class="level3">
-<h3 class="anchored" data-anchor-id="valores-atípicos-multivariantes">Valores Atípicos Multivariantes</h3>
-<p>Un punto en un espacio multidimensional puede presentar valores perfectamente normales cuando se examina cada una de sus variables de forma univariante, pero representar una combinación <strong>improbable o imposible</strong> cuando se analiza el patrón conjunto.</p>
-<p><em>Ejemplo</em>: En un estudio de salud, un individuo con una edad de 12 años tiene un valor razonable. Un individuo de estado civil “casado” tiene un valor razonable. Sin embargo, la combinación simultánea de (Edad = 12, Estado Civil = “Casado”) es un valor atípico multivariante.</p>
-<p>Para detectar atípicos multivariantes numéricos se utiliza la <strong>Distancia de Mahalanobis</strong> (<span class="math inline">\(D^2\)</span>), la cual mide la distancia de cada punto <span class="math inline">\(\mathbf{x}_i\)</span> al centroide de la distribución (<span class="math inline">\(\boldsymbol{\mu}\)</span>) considerando la matriz de covarianza (<span class="math inline">\(\boldsymbol{\Sigma}\)</span>) de los datos:</p>
-<p><span class="math display">\[D^2_i = (\mathbf{x}_i - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}_i - \boldsymbol{\mu})\]</span></p>
-<p>Bajo el supuesto de normalidad multivariante, las distancias de Mahalanobis cuadráticas <span class="math inline">\(D^2_i\)</span> siguen aproximadamente una distribución Chi-cuadrado con <span class="math inline">\(p\)</span> grados de libertad (<span class="math inline">\(\chi^2_p\)</span>), donde <span class="math inline">\(p\)</span> es el número de variables evaluadas. Puntos con valores de <span class="math inline">\(D^2_i\)</span> que superen el cuantil crítico <span class="math inline">\(\chi^2_{p, 0.999}\)</span> se identifican como atípicos multivariantes.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implementación de la Distancia de Mahalanobis en R</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>datos_num <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"ingreso"</span>, <span class="st">"gasto"</span>, <span class="st">"credito"</span>)]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>centroide <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(datos_num, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>matriz_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(datos_num, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de la distancia para cada observación</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>d2_mahalanobis <span class="ot">&lt;-</span> <span class="fu">mahalanobis</span>(datos_num, <span class="at">center =</span> centroide, <span class="at">cov =</span> matriz_cov)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Identificar atípicos con α = 0.001 y p = 3 grados de libertad</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>umbral_critico <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="at">p =</span> <span class="fl">0.999</span>, <span class="at">df =</span> <span class="dv">3</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>atipicos_multivariantes <span class="ot">&lt;-</span> <span class="fu">which</span>(d2_mahalanobis <span class="sc">&gt;</span> umbral_critico)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="tratamiento-de-atípicos" class="level3">
-<h3 class="anchored" data-anchor-id="tratamiento-de-atípicos">Tratamiento de Atípicos</h3>
-<p>Ante un valor atípico, el analista no debe proceder inmediatamente a su eliminación. Las alternativas metodológicas incluyen: 1. <strong>Corrección</strong>: Si es un error de digitación comprobado, corregir el dato en la fuente. 2. <strong>Aislamiento / Filtrado</strong>: Separar los casos extremos para analizarlos en un subgrupo independiente (útil en detección de fraude). 3. <strong>Transformación</strong>: Aplicar transformaciones cóncavas (como <span class="math inline">\(\log(x)\)</span> o <span class="math inline">\(\sqrt{x}\)</span>) para estabilizar la varianza y comprimir la cola derecha. 4. <strong>Winsorización</strong>: Reemplazar los valores atípicos que superen un percentil extremo (ej. percentil 99) por el valor exacto de dicho percentil.</p>
-<hr>
 </section>
 </section>
 <section id="preparación-de-datos-para-grandes-volúmenes-big-data" class="level2">
@@ -671,7 +661,6 @@ window.Quarto = {
 <li><strong>Formatos de Almacenamiento Eficientes</strong>: Reemplazar archivos planos CSV por formatos binarios orientados a columnas como <strong>Parquet</strong> o <strong>Feather</strong> (vía paquetes como <code>arrow</code>), los cuales comprimen la información y permiten leer solo las columnas necesarias.</li>
 <li><strong>Evaluación Lazy (<em>Lazy Evaluation</em>)</strong>: Construir la secuencia de transformaciones relacionales de forma diferida antes de ejecutar la computación física en memoria o en un motor distribuido.</li>
 </ol>
-<hr>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -683,37 +672,36 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>En tu consola de RStudio, simula un conjunto de datos con dos variables cuantitativas correlacionadas que contengan un atípico multivariante:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simular 100 observaciones correlacionadas</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> x1 <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Introducir un atípico multivariante (no es atípico en x1 ni en x2 por separado)</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>x1[<span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>x2[<span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="dv">150</span> <span class="co"># Rompe la relación x2 ≈ 2 * x1</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>df_reto <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simular 100 observaciones correlacionadas</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> x1 <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Introducir un atípico multivariante (no es atípico en x1 ni en x2 por separado)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>x1[<span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>x2[<span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="dv">150</span> <span class="co"># Rompe la relación x2 ≈ 2 * x1</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df_reto <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Tu desafío:</strong> 1. Calcula el <span class="math inline">\(IQR\)</span> y los límites de Tukey para <span class="math inline">\(x_1\)</span> y <span class="math inline">\(x_2\)</span> usando <code>purrr::map()</code> para verificar que la observación 50 <strong>no</strong> es un atípico univariante en ninguna variable. 2. Calcula la distancia de Mahalanobis <span class="math inline">\(D^2\)</span> sobre el dataset y verifica si la observación 50 es detectada con éxito como un atípico multivariante con un nivel de significancia <span class="math inline">\(\alpha = 0.01\)</span> (<span class="math inline">\(\chi^2_{2, 0.99}\)</span>).</p>
 <p><strong>Código de Solución Sugerido:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Verificación univariante con purrr</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>limites_tukey <span class="ot">&lt;-</span> <span class="fu">map</span>(df_reto, <span class="cf">function</span>(v) {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(v, <span class="fl">0.25</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(v, <span class="fl">0.75</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  iqr <span class="ot">&lt;-</span> q3 <span class="sc">-</span> q1</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">inf =</span> q1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr, <span class="at">sup =</span> q3 <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(limites_tukey)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Detección multivariante</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">mahalanobis</span>(df_reto, <span class="at">center =</span> <span class="fu">colMeans</span>(df_reto), <span class="at">cov =</span> <span class="fu">cov</span>(df_reto))</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>umbral <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="fl">0.99</span>, <span class="at">df =</span> <span class="dv">2</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(d2 <span class="sc">&gt;</span> umbral) <span class="co"># Debe identificar la fila 50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Verificación univariante con purrr</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>limites_tukey <span class="ot">&lt;-</span> <span class="fu">map</span>(df_reto, <span class="cf">function</span>(v) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(v, <span class="fl">0.25</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(v, <span class="fl">0.75</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  iqr <span class="ot">&lt;-</span> q3 <span class="sc">-</span> q1</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">inf =</span> q1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr, <span class="at">sup =</span> q3 <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(limites_tukey)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Detección multivariante</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">mahalanobis</span>(df_reto, <span class="at">center =</span> <span class="fu">colMeans</span>(df_reto), <span class="at">cov =</span> <span class="fu">cov</span>(df_reto))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>umbral <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="fl">0.99</span>, <span class="at">df =</span> <span class="dv">2</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(d2 <span class="sc">&gt;</span> umbral) <span class="co"># Debe identificar la fila 50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<hr>
 </section>
 <section id="ejercicios-de-autoevaluación" class="level2">
 <h2 class="anchored" data-anchor-id="ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</h2>
@@ -759,14 +747,8 @@ Se cuenta con una tabla de <code>Padron_Electoral</code> (1.000.000 de registros
 <div id="ref-boehmke2016data" class="csl-entry" role="listitem">
 Boehmke, Bradley C. 2016. <em>Data Wrangling with r</em>. Use <span>R</span>! Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-45599-0">https://doi.org/10.1007/978-3-319-45599-0</a>.
 </div>
-<div id="ref-chirino2026programa" class="csl-entry" role="listitem">
-Chirino Gutiérrez, Alvaro. 2026. <em>Programa de La Materia: Fundamentos de an<span>á</span>lisis de Datos</em>. Maestr<span>í</span>a en Inteligencia Artificial y Gesti<span>ó</span>n de Datos para Finanzas, Econom<span>í</span>a y Negocios, Universidad Cat<span>ó</span>lica Boliviana.
-</div>
 <div id="ref-kuhn2019feature" class="csl-entry" role="listitem">
 Kuhn, Max, and Kjell Johnson. 2019. <em>Feature Engineering and Selection: A Practical Approach for Predictive Models</em>. CRC Press. <a href="https://bookdown.org/max/FES/">https://bookdown.org/max/FES/</a>.
-</div>
-<div id="ref-lovelace2019geocomputation" class="csl-entry" role="listitem">
-Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2019. <em>Geocomputation with r</em>. CRC Press. <a href="https://geocompr.robinlovelace.net/">https://geocompr.robinlovelace.net/</a>.
 </div>
 <div id="ref-wickham2023r" class="csl-entry" role="listitem">
 Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science</em>. 2nd ed. O’Reilly Media. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.

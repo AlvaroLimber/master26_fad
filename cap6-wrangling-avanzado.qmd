@@ -2,95 +2,12 @@
 
 ::: {.callout-warning}
 ### Cobertura de Sesiones
-Este capítulo cubre los contenidos correspondientes a las **Sesiones 13, 14 y 15 (Semana 5)** del programa académico [@chirino2026programa]. Abordaremos la programación funcional para la automatización de procesos, los cruces relacionales y espaciales avanzados, la caracterización estadística de valores atípicos (univariantes y multivariantes) y las estrategias de optimización para volúmenes de datos masivos.
+Este capítulo cubre los contenidos correspondientes a las **Sesiones 13, 14 y 15 (Semana 5)** del programa académico. Abordaremos los cruces relacionales, la caracterización estadística de valores atípicos (univariantes y multivariantes), la programación funcional para la automatización de procesos y las estrategias de optimización para volúmenes de datos masivos.
 :::
 
 En las etapas avanzadas del ciclo de vida de los datos, el analista se enfrenta a desafíos que van más allá de la limpieza básica de una tabla individual. Los flujos de trabajo profesionales requieren procesar múltiples archivos en lote de manera automatizada, integrar fuentes de información heterogéneas mediante relaciones complejas y diagnosticar observaciones anómalas que pueden distorsionar las inferencias estadísticas.
 
 Este capítulo consolida las técnicas avanzadas de preparación de datos (*Data Wrangling*), priorizando los fundamentos estadísticos y metodológicos. Se estudia la programación funcional como paradigma para eliminar la redundancia de código, la teoría de los cruces de tablas, la detección matemática de valores atípicos univariantes y multivariantes, y las estrategias computacionales para optimizar el manejo de conjuntos de datos de gran tamaño [@wickham2023r].
-
----
-
-## Programación Funcional e Iteración con `purrr`
-
-El paradigma de la **programación funcional** propone tratar a las funciones como ciudadanos de primera clase (*first-class functions*), permitiendo pasarlas como argumentos a otras funciones o devolverlas como resultados. En el contexto del *Data Wrangling*, la programación funcional reemplaza los bucles iterativos imperativos tradicionales (como los bucles `for`) por operaciones declarativas expresadas mediante funciones de orden superior (*map functions*) [@boehmke2016data].
-
-### Iteración Imperativa vs. Declarativa
-En la programación imperativa, el código especifica *cómo* realizar una iteración controlando explícitamente los índices de un bucle y la modificación de un objeto contenedor intermedio. En la programación declarativa, el código indica *qué* transformación aplicar a cada elemento de una estructura (lista o vector), delegando la gestión de memoria e índices al motor del lenguaje.
-
-Las ventajas de la programación funcional incluyen:
-*   **Reducción del código repetitivo** (*Boilerplate code*): Elimina la necesidad de inicializar vectores vacíos y gestionar contadores de posición.
-*   **Aislamiento de efectos secundarios**: Cada iteración es independiente, garantizando que el resultado de un elemento no altere el procesamiento de los demás.
-*   **Tipado estricto de retorno**: Garantiza que el objeto devuelto mantenga una estructura predecible (por ejemplo, asegurando un vector numérico o un dataframe unificado).
-
-El paquete **`purrr`** de la suite `tidyverse` estandariza estas operaciones mediante la familia de funciones `map()`.
-
-::: {.panel-tabset}
-
-### Enfoque Funcional (`purrr`)
-
-```r
-library(purrr)
-library(readr)
-
-# Supongamos que tenemos una lista de rutas de archivos CSV mensuales
-archivos_mensuales <- list.files(path = "data/raw_ventas/", pattern = "*.csv", full.names = TRUE)
-
-# Importar y consolidar múltiples archivos en un único dataframe
-# map_dfr aplica read_csv a cada archivo y une las filas automáticamente
-ventas_consolidadas <- map_dfr(archivos_mensuales, read_csv, col_types = "cdd")
-
-# Aplicar un cálculo estadístico a todas las columnas numéricas de un dataframe
-resumen_medias <- map_dbl(ventas_consolidadas[, c("monto", "unidades")], mean, na.rm = TRUE)
-```
-
-### Enfoque Imperativo (Bucles `for`)
-
-```r
-# Bucle for tradicional en Base R
-archivos_mensuales <- list.files(path = "data/raw_ventas/", pattern = "*.csv", full.names = TRUE)
-
-# Requiere crear explícitamente una lista contenedora e incrementar un índice
-lista_temporal <- vector("list", length(archivos_mensuales))
-for (i in seq_along(archivos_mensuales)) {
-  lista_temporal[[i]] <- read.csv(archivos_mensuales[i], stringsAsFactors = FALSE)
-}
-
-# Consolidar manualmente la lista en un dataframe
-ventas_consolidadas_base <- do.call(rbind, lista_temporal)
-```
-
-:::
-
----
-
-## Cruces Relacionales y Espaciales Complejos (Joins)
-
-En sistemas de información reales, los datos se encuentran normalizados y distribuidos en múltiples tablas conectadas mediante llaves primarias y foráneas. La teoría de conjuntos y el álgebra relacional proporcionan el marco para integrar estas fuentes de datos de forma consistente [@wickham2023r].
-
-### Tipos de Cruces Relacionales
-
-1.  **Joins Mutativos**: Añaden variables de una tabla a otra en función de coincidencias en las llaves.
-    *   `left_join(x, y)`: Preserva todas las filas de la tabla izquierda `x`, añadiendo las columnas de `y` donde exista coincidencia. Si no hay coincidencia, asigna `NA`.
-    *   `inner_join(x, y)`: Conserva únicamente las filas que registran coincidencia exacta en ambas tablas.
-    *   `full_join(x, y)`: Mantiene todas las observaciones de ambas tablas, rellenando con `NA` los registros sin correspondencia.
-2.  **Joins de Filtrado**: Filtran observaciones de la primera tabla según la presencia o ausencia de coincidencias en la segunda, sin modificar las columnas.
-    *   `semi_join(x, y)`: Mantiene las filas de `x` que tienen coincidencia en `y`.
-    *   `anti_join(x, y)`: Mantiene las filas de `x` que **no** tienen coincidencia en `y` (herramienta fundamental para auditar inconsistencias e integridad referencial).
-
-### Fundamentos de Cruces Espaciales (*Spatial Joins*)
-Cuando la llave de integración no es un código alfanumérico sino una localización geográfica (coordenadas de latitud/longitud, polígonos municipales o áreas censales), se utilizan los **cruces espaciales** [@lovelace2019geocomputation]. A diferencia de los joins relacionales basados en igualdad de caracteres ($key_x == key_y$), los joins espaciales evalúan relaciones topológicas geométricas, tales como *intersección*, *contención* (un punto dentro de un polígono) o *proximidad*.
-
-```r
-# Ejemplo conceptual de cruce relacional de filtrado
-library(dplyr)
-
-# Auditar clientes registrados que no han realizado ninguna transacción
-clientes_sin_compras <- clientes |>
-  anti_join(transacciones, by = "id_cliente")
-```
-
----
 
 ## Diagnóstico y Tratamiento de Valores Atípicos (*Outliers*)
 
@@ -167,7 +84,72 @@ Ante un valor atípico, el analista no debe proceder inmediatamente a su elimina
 3.  **Transformación**: Aplicar transformaciones cóncavas (como $\log(x)$ o $\sqrt{x}$) para estabilizar la varianza y comprimir la cola derecha.
 4.  **Winsorización**: Reemplazar los valores atípicos que superen un percentil extremo (ej. percentil 99) por el valor exacto de dicho percentil.
 
----
+## Cruces Relacionales (Joins)
+
+En sistemas de información reales, los datos se encuentran normalizados y distribuidos en múltiples tablas conectadas mediante llaves primarias y foráneas. La teoría de conjuntos y el álgebra relacional proporcionan el marco para integrar estas fuentes de datos de forma consistente [@wickham2023r].
+
+### Tipos de Cruces Relacionales
+
+1.  **Joins Mutativos**: Añaden variables de una tabla a otra en función de coincidencias en las llaves.
+    *   `left_join(x, y)`: Preserva todas las filas de la tabla izquierda `x`, añadiendo las columnas de `y` donde exista coincidencia. Si no hay coincidencia, asigna `NA`.
+    *   `inner_join(x, y)`: Conserva únicamente las filas que registran coincidencia exacta en ambas tablas.
+    *   `full_join(x, y)`: Mantiene todas las observaciones de ambas tablas, rellenando con `NA` los registros sin correspondencia.
+2.  **Joins de Filtrado**: Filtran observaciones de la primera tabla según la presencia o ausencia de coincidencias en la segunda, sin modificar las columnas.
+    *   `semi_join(x, y)`: Mantiene las filas de `x` que tienen coincidencia en `y`.
+    *   `anti_join(x, y)`: Mantiene las filas de `x` que **no** tienen coincidencia en `y` (herramienta fundamental para auditar inconsistencias e integridad referencial).
+
+## Programación Funcional e Iteración con `purrr`
+
+El paradigma de la **programación funcional** propone tratar a las funciones como ciudadanos de primera clase (*first-class functions*), permitiendo pasarlas como argumentos a otras funciones o devolverlas como resultados. En el contexto del *Data Wrangling*, la programación funcional reemplaza los bucles iterativos imperativos tradicionales (como los bucles `for`) por operaciones declarativas expresadas mediante funciones de orden superior (*map functions*) [@boehmke2016data].
+
+### Iteración Imperativa vs. Declarativa
+
+En la programación imperativa, el código especifica *cómo* realizar una iteración controlando explícitamente los índices de un bucle y la modificación de un objeto contenedor intermedio. En la programación declarativa, el código indica *qué* transformación aplicar a cada elemento de una estructura (lista o vector), delegando la gestión de memoria e índices al motor del lenguaje.
+
+Las ventajas de la programación funcional incluyen:
+
+*   **Reducción del código repetitivo** (*Boilerplate code*): Elimina la necesidad de inicializar vectores vacíos y gestionar contadores de posición.
+*   **Aislamiento de efectos secundarios**: Cada iteración es independiente, garantizando que el resultado de un elemento no altere el procesamiento de los demás.
+*   **Tipado estricto de retorno**: Garantiza que el objeto devuelto mantenga una estructura predecible (por ejemplo, asegurando un vector numérico o un dataframe unificado).
+
+El paquete **`purrr`** de la suite `tidyverse` estandariza estas operaciones mediante la familia de funciones `map()`.
+
+::: {.panel-tabset}
+
+### Enfoque Funcional (`purrr`)
+
+```r
+library(purrr)
+library(readr)
+
+# Supongamos que tenemos una lista de rutas de archivos CSV mensuales
+archivos_mensuales <- list.files(path = "data/raw_ventas/", pattern = "*.csv", full.names = TRUE)
+
+# Importar y consolidar múltiples archivos en un único dataframe
+# map_dfr aplica read_csv a cada archivo y une las filas automáticamente
+ventas_consolidadas <- map_dfr(archivos_mensuales, read_csv, col_types = "cdd")
+
+# Aplicar un cálculo estadístico a todas las columnas numéricas de un dataframe
+resumen_medias <- map_dbl(ventas_consolidadas[, c("monto", "unidades")], mean, na.rm = TRUE)
+```
+
+### Enfoque Imperativo (Bucles `for`)
+
+```r
+# Bucle for tradicional en Base R
+archivos_mensuales <- list.files(path = "data/raw_ventas/", pattern = "*.csv", full.names = TRUE)
+
+# Requiere crear explícitamente una lista contenedora e incrementar un índice
+lista_temporal <- vector("list", length(archivos_mensuales))
+for (i in seq_along(archivos_mensuales)) {
+  lista_temporal[[i]] <- read.csv(archivos_mensuales[i], stringsAsFactors = FALSE)
+}
+
+# Consolidar manualmente la lista en un dataframe
+ventas_consolidadas_base <- do.call(rbind, lista_temporal)
+```
+
+:::
 
 ## Preparación de Datos para Grandes Volúmenes (Big Data)
 
@@ -177,10 +159,9 @@ Cuando la escala de los datos supera la capacidad de memoria RAM activa de R, la
 2.  **Formatos de Almacenamiento Eficientes**: Reemplazar archivos planos CSV por formatos binarios orientados a columnas como **Parquet** o **Feather** (vía paquetes como `arrow`), los cuales comprimen la información y permiten leer solo las columnas necesarias.
 3.  **Evaluación Lazy (*Lazy Evaluation*)**: Construir la secuencia de transformaciones relacionales de forma diferida antes de ejecutar la computación física en memoria o en un motor distribuido.
 
----
-
 ::: {.callout-tip}
 ### Reto de 5 Minutos: Detección Integrada de Atípicos y Procesamiento Funcional
+
 En tu consola de RStudio, simula un conjunto de datos con dos variables cuantitativas correlacionadas que contengan un atípico multivariante:
 
 ```r
@@ -220,8 +201,6 @@ umbral <- qchisq(0.99, df = 2)
 which(d2 > umbral) # Debe identificar la fila 50
 ```
 :::
-
----
 
 ## Ejercicios de Autoevaluación
 
