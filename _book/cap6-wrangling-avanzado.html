@@ -489,7 +489,6 @@ window.Quarto = {
   </ul></li>
   <li><a href="#preparación-de-datos-para-grandes-volúmenes-big-data" id="toc-preparación-de-datos-para-grandes-volúmenes-big-data" class="nav-link" data-scroll-target="#preparación-de-datos-para-grandes-volúmenes-big-data">Preparación de Datos para Grandes Volúmenes (Big Data)</a></li>
   <li><a href="#ejercicios-de-autoevaluación" id="toc-ejercicios-de-autoevaluación" class="nav-link" data-scroll-target="#ejercicios-de-autoevaluación">Ejercicios de Autoevaluación</a></li>
-  <li><a href="#referencias-bibliográficas" id="toc-referencias-bibliográficas" class="nav-link" data-scroll-target="#referencias-bibliográficas">Referencias Bibliográficas</a></li>
   </ul>
 </nav>
     </div>
@@ -583,7 +582,13 @@ window.Quarto = {
 </section>
 <section id="tratamiento-de-atípicos" class="level3">
 <h3 class="anchored" data-anchor-id="tratamiento-de-atípicos">Tratamiento de Atípicos</h3>
-<p>Ante un valor atípico, el analista no debe proceder inmediatamente a su eliminación. Las alternativas metodológicas incluyen: 1. <strong>Corrección</strong>: Si es un error de digitación comprobado, corregir el dato en la fuente. 2. <strong>Aislamiento / Filtrado</strong>: Separar los casos extremos para analizarlos en un subgrupo independiente (útil en detección de fraude). 3. <strong>Transformación</strong>: Aplicar transformaciones cóncavas (como <span class="math inline">\(\log(x)\)</span> o <span class="math inline">\(\sqrt{x}\)</span>) para estabilizar la varianza y comprimir la cola derecha. 4. <strong>Winsorización</strong>: Reemplazar los valores atípicos que superen un percentil extremo (ej. percentil 99) por el valor exacto de dicho percentil.</p>
+<p>Ante un valor atípico, el analista no debe proceder inmediatamente a su eliminación. Las alternativas metodológicas incluyen:</p>
+<ol type="1">
+<li><strong>Corrección</strong>: Si es un error de digitación comprobado, corregir el dato en la fuente.</li>
+<li><strong>Aislamiento / Filtrado</strong>: Separar los casos extremos para analizarlos en un subgrupo independiente (útil en detección de fraude).</li>
+<li><strong>Transformación</strong>: Aplicar transformaciones cóncavas (como <span class="math inline">\(\log(x)\)</span> o <span class="math inline">\(\sqrt{x}\)</span>) para estabilizar la varianza y comprimir la cola derecha.</li>
+<li><strong>Winsorización</strong>: Reemplazar los valores atípicos que superen un percentil extremo (ej. percentil 99) por el valor exacto de dicho percentil.</li>
+</ol>
 </section>
 </section>
 <section id="cruces-relacionales-joins" class="level2">
@@ -728,19 +733,6 @@ Se cuenta con una tabla de <code>Padron_Electoral</code> (1.000.000 de registros
 <li>Si al aplicar un <code>left_join</code> entre <code>Padron_Electoral</code> y <code>Votos_Emitidos</code> el número de filas del dataframe resultante asciende a 1.050.000 filas, ¿qué error grave ocurrió en las llaves de la tabla de votos y cómo afecta esto a la validez de las métricas agregadas?</li>
 </ol></li>
 </ol>
-<hr>
-</section>
-<section id="referencias-bibliográficas" class="level2">
-<h2 class="anchored" data-anchor-id="referencias-bibliográficas">Referencias Bibliográficas</h2>
-<ul>
-<li>Boehmke, B. (2016). <em>Data Wrangling with R</em>. Springer.</li>
-<li>Chirino Gutiérrez, A. (2026). <em>Programa de la Materia: Fundamentos de Análisis de Datos</em>. Universidad Católica Boliviana.</li>
-<li>Friendly, M. (2020). <em>Rememberances of Things EDA</em>. DataVis.ca.</li>
-<li>Kuhn, M., &amp; Johnson, K. (2019). <em>Feature Engineering and Selection: A Practical Approach for Predictive Models</em>. CRC Press.</li>
-<li>Lovelace, R., Nowosad, J., &amp; Muenchow, J. (2019). <em>Geocomputation with R</em>. CRC Press.</li>
-<li>Stoudt, S., Vásquez, V. N., &amp; Martinez, C. C. (2021). Principles for data analysis workflows. <em>PLOS Computational Biology</em>, 17(3), e1008770.</li>
-<li>Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for Data Science</em> (2nd ed.). O’Reilly Media.</li>
-</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

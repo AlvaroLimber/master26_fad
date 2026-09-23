@@ -79,6 +79,7 @@ atipicos_multivariantes <- which(d2_mahalanobis > umbral_critico)
 
 ### Tratamiento de Atípicos
 Ante un valor atípico, el analista no debe proceder inmediatamente a su eliminación. Las alternativas metodológicas incluyen:
+
 1.  **Corrección**: Si es un error de digitación comprobado, corregir el dato en la fuente.
 2.  **Aislamiento / Filtrado**: Separar los casos extremos para analizarlos en un subgrupo independiente (útil en detección de fraude).
 3.  **Transformación**: Aplicar transformaciones cóncavas (como $\log(x)$ o $\sqrt{x}$) para estabilizar la varianza y comprimir la cola derecha.
@@ -218,15 +219,3 @@ which(d2 > umbral) # Debe identificar la fila 50
    Se cuenta con una tabla de `Padron_Electoral` (1.000.000 de registros) y una tabla de `Votos_Emitidos` (850.000 registros).  
    a) ¿Qué función de filtrado relacional de `dplyr` deberías aplicar para identificar a los ciudadanos empadronados que **no** ejercieron su voto?  
    b) Si al aplicar un `left_join` entre `Padron_Electoral` y `Votos_Emitidos` el número de filas del dataframe resultante asciende a 1.050.000 filas, ¿qué error grave ocurrió en las llaves de la tabla de votos y cómo afecta esto a la validez de las métricas agregadas?
-
----
-
-## Referencias Bibliográficas
-
-- Boehmke, B. (2016). *Data Wrangling with R*. Springer.
-- Chirino Gutiérrez, A. (2026). *Programa de la Materia: Fundamentos de Análisis de Datos*. Universidad Católica Boliviana.
-- Friendly, M. (2020). *Rememberances of Things EDA*. DataVis.ca.
-- Kuhn, M., & Johnson, K. (2019). *Feature Engineering and Selection: A Practical Approach for Predictive Models*. CRC Press.
-- Lovelace, R., Nowosad, J., & Muenchow, J. (2019). *Geocomputation with R*. CRC Press.
-- Stoudt, S., Vásquez, V. N., & Martinez, C. C. (2021). Principles for data analysis workflows. *PLOS Computational Biology*, 17(3), e1008770.
-- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* (2nd ed.). O'Reilly Media.
