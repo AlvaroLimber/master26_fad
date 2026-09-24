@@ -102,8 +102,8 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2ed06f4e74e1ba95e0e3293705fc1527.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-4cd3a455cdccbce1cfbd6d406d6abfb5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2815bcb3ca37e3cb0e324e4adf17580a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-dbdc99282be6f8ab365cefe7450a57b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -532,7 +532,12 @@ window.Quarto = {
 <p>Este capítulo consolida las técnicas avanzadas de preparación de datos (<em>Data Wrangling</em>), priorizando los fundamentos estadísticos y metodológicos. Se estudia la programación funcional como paradigma para eliminar la redundancia de código, la teoría de los cruces de tablas, la detección matemática de valores atípicos univariantes y multivariantes, y las estrategias computacionales para optimizar el manejo de conjuntos de datos de gran tamaño <span class="citation" data-cites="wickham2023r">(<a href="references.html#ref-wickham2023r" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
 <section id="diagnóstico-y-tratamiento-de-valores-atípicos-outliers" class="level2">
 <h2 class="anchored" data-anchor-id="diagnóstico-y-tratamiento-de-valores-atípicos-outliers">Diagnóstico y Tratamiento de Valores Atípicos (<em>Outliers</em>)</h2>
-<p>Un <strong>valor atípico</strong> (<em>outlier</em>) es una observación que se desvía considerablemente del comportamiento general del resto de los datos. Los atípicos pueden originarse por tres causas principales: 1. <strong>Errores de medición o digitación</strong>: Captura defectuosa de datos (por ejemplo, registrar un salario de 50.000 BOB como 500.000 BOB por un cero adicional). 2. <strong>Valores nulos codificados erróneamente</strong>: Uso de números extremos (como <code>999</code> o <code>-9999</code>) para señalar ausencia de dato. 3. <strong>Variabilidad biológica o económica real</strong>: Eventos extremos genuinos pero poco frecuentes (por ejemplo, transacciones financieras fraudulentas o catástrofes naturales).</p>
+<p>Un <strong>valor atípico</strong> (<em>outlier</em>) es una observación que se desvía considerablemente del comportamiento general del resto de los datos. Los atípicos pueden originarse por tres causas principales:</p>
+<ol type="1">
+<li><strong>Errores de medición o digitación</strong>: Captura defectuosa de datos (por ejemplo, registrar un salario de 50.000 BOB como 500.000 BOB por un cero adicional).</li>
+<li><strong>Valores nulos codificados erróneamente</strong>: Uso de números extremos (como <code>999</code> o <code>-9999</code>) para señalar ausencia de dato.</li>
+<li><strong>Variabilidad biológica o económica real</strong>: Eventos extremos genuinos pero poco frecuentes (por ejemplo, transacciones financieras fraudulentas o catástrofes naturales).</li>
+</ol>
 <p>Desde la perspectiva del modelado estadístico, un valor atípico puede sesgar severamente la estimación de la media y la varianza, distorsionar la pendiente en un modelo de regresión lineal y alterar los supuestos de normalidad <span class="citation" data-cites="kuhn2019feature">(<a href="references.html#ref-kuhn2019feature" role="doc-biblioref">Kuhn and Johnson 2019</a>)</span>.</p>
 <section id="valores-atípicos-univariantes" class="level3">
 <h3 class="anchored" data-anchor-id="valores-atípicos-univariantes">Valores Atípicos Univariantes</h3>

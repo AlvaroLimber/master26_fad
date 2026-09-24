@@ -12,6 +12,7 @@ Este capítulo consolida las técnicas avanzadas de preparación de datos (*Data
 ## Diagnóstico y Tratamiento de Valores Atípicos (*Outliers*)
 
 Un **valor atípico** (*outlier*) es una observación que se desvía considerablemente del comportamiento general del resto de los datos. Los atípicos pueden originarse por tres causas principales:
+
 1.  **Errores de medición o digitación**: Captura defectuosa de datos (por ejemplo, registrar un salario de 50.000 BOB como 500.000 BOB por un cero adicional).
 2.  **Valores nulos codificados erróneamente**: Uso de números extremos (como `999` o `-9999`) para señalar ausencia de dato.
 3.  **Variabilidad biológica o económica real**: Eventos extremos genuinos pero poco frecuentes (por ejemplo, transacciones financieras fraudulentas o catástrofes naturales).
