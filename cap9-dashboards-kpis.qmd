@@ -1,0 +1,92 @@
+# Dashboards e Indicadores Clave (KPIs) {.unnumbered}
+
+El cierre del ciclo de vida del análisis de datos no culmina en la depuración del código ni en el ajuste de un modelo analítico. La verdadera prueba de valor de la ciencia de datos reside en la capacidad de transformar datos limpios y enriquecidos en **información estratégica accionable** para la toma de decisiones [@stoudt2021principles; @wickham2023r].
+
+En entornos profesionales, financieros y de políticas públicas, los tomadores de decisiones rara vez interactúan con scripts de R o tablas de datos crudas. Demandan síntesis cuantitativa rigurosa, interactividad para explorar escenarios y una narrativa visual coherente. Este capítulo aborda la construcción de **Indicadores Clave de Desempeño** (*Key Performance Indicators*, KPIs) y el desarrollo de **paneles de control interactivos (Dashboards)** en R, enfatizando los fundamentos estadísticos de la métrica, la reducción de la carga cognitiva y las buenas prácticas de reproducibilidad [@stoudt2021principles].
+
+## Fundamentos y Diseño Metodológico de KPIs
+
+Un **KPI** no es simplemente cualquier métrica o resumen numérico que pueda calcularse a partir de un conjunto de datos. Mientras que una *métrica* representa una medida cuantitativa directa de una actividad (por ejemplo, el número total de llamadas atendidas o los gigabytes consumidos), un **indicador clave** evalúa el desempeño de un proceso crítico respecto a un objetivo explícito y predefinido.
+
+### Taxonomía de Indicadores
+
+Desde la perspectiva del diseño analítico, los indicadores se clasifican en dos grandes familias temporales:
+
+1. **Indicadores de Resultado (*Lagging Indicators*)**: Miden el desenlace de acciones ya concluidas en el pasado (por ejemplo, el PIB trimestral, la tasa de deserción anual o la morosidad al cierre de mes). Son métricas de alta precisión histórica, pero ofrecen capacidad nula para intervenir preventivamente en el proceso.
+2. **Indicadores de Proceso o Predictivos (*Leading Indicators*)**: Miden factores intermedios o señales tempranas que correlacionan con el desempeño futuro (por ejemplo, días promedio de retraso en pagos menores a 30 días, volumen de reclamos no resueltos o solicitudes de reprogramación crediticia). Permiten anticipar tendencias y activar alertas tempranas.
+
+### Formulación Matemática y Precauciones Estadísticas
+
+La formalización rigurosa de un indicador requiere definir su operador matemático, su unidad de medida y el ámbito temporal de referencia:
+
+::: {.panel-tabset}
+
+### Formulación Matemática
+
+1. **Tasas y Razones Relativas**:
+   Una tasa mide la frecuencia de un fenómeno en relación con la población expuesta al riesgo en un periodo $t$:
+   $$T_t = \left( \frac{\text{Eventos observados}_t}{\text{Población en riesgo}_t} \right) \times 10^k$$
+
+2. **Variación Intertemporal (Interanual e Intermensual)**:
+   Evalúa el crecimiento relativo de una magnitud agregada $Y$ entre el periodo actual $t$ y un periodo base $t-k$:
+   $$\Delta\%_{t, t-k} = \left( \frac{Y_t - Y_{t-k}}{Y_{t-k}} \right) \times 100\%$$
+   *Efecto base*: Si $Y_{t-k}$ fue inusualmente bajo (por ejemplo, durante la pandemia de 2020), la tasa de crecimiento resultante $\Delta\%$ se sobreestimará sin reflejar una aceleración económica real.
+
+3. **Normalizaciones y Semáforos de Desempeño**:
+   Para contrastar el valor observado $y_t$ frente a una meta histórica ($\mu$) o límites de tolerancia ($\sigma$), se calculan puntajes de desviación:
+   $$Z_t = \frac{y_t - \mu}{\sigma}$$
+   Los límites de semaforización (verde, amarillo, rojo) deben basarse en cuantiles empíricos o tolerancias de riesgo formales, evitando asignaciones arbitrarias de umbrales.
+
+
+## Principios de Diseño Visual y Comunicación Analítica
+
+Un dashboard eficiente responde a una necesidad cognitiva clara: permitir que el usuario interprete el estado del sistema en menos de cinco segundos y profundice de forma interactiva si detecta una anomalía [@friendly2020rememberances].
+
+### Carga Cognitiva y el Ratio Dato-Tinta
+
+El diseño de paneles debe guiarse por:
+
+*   **Maximizar el ratio Dato-Tinta**: Eliminar bordes pesados, sombras tridimensionales, fondos decorativos y colores saturados innecesarios. Cada píxel en pantalla debe portar significado informativo.
+*   **Jerarquía Visual en F o Z**: Los ojos del usuario examinan la pantalla comenzando en la esquina superior izquierda. Por ello, las métricas agregadas de alto nivel (KPIs primarios) deben ubicarse en la fila superior, seguidas de la evolución temporal en el cuerpo central y las distribuciones desagregadas al final.
+*   **Consistencia Cromática Semántica**: El color debe usarse como canal de datos categórico o de alerta, nunca como adorno. Si el color rojo se reserva para indicar degradación de un KPI, no debe emplearse en barras de categorías no relacionadas.
+
+### Selección de Componentes Visuales
+
+1.  **Tarjetas de Valor (*Value Boxes*)**: Muestran el valor actual del KPI, una etiqueta descriptiva clara, el cambio porcentual frente al periodo anterior y una flecha o semáforo contextual.
+2.  **Micrográficos de Tendencia (*Sparklines*)**: Pequeños gráficos de líneas sin ejes visibles incrustados junto al valor numérico para proporcionar contexto histórico inmediato (mostrando si el número actual es un pico o un mínimo).
+
+## Arquitecturas de Dashboards en R: `flexdashboard` vs. `Shiny`
+
+En el ecosistema de R conviven dos soluciones complementarias para la creación de tableros [@stoudt2021principles]:
+
+*   **`flexdashboard`**: Marco basado en R Markdown / Quarto que traduce sintaxis markdown sencilla (niveles de encabezados) en una cuadrícula CSS responsiva. Puede generar tanto tableros estáticos en HTML (sin necesidad de servidor R activo) como tableros interactivos si se integra con Shiny.
+*   **`Shiny`**: Marco de desarrollo de aplicaciones web reactivas completas que requiere una sesión activa de R para ejecutar cómputo dinámico en tiempo real ante eventos del usuario.
+
+::: {.panel-tabset}
+
+### Enfoque `flexdashboard` (Estructurado y Declarativo)
+
+Los tableros basados en `flexdashboard` son ideales para reportes reproducibles, dashboards ejecutivos y despliegues estáticos en GitHub Pages o Quarto [@stoudt2021principles].
+
+### Enfoque `Shiny` (Reactividad Dinámica Servidor-Cliente)
+
+`Shiny` separa formalmente la interfaz de usuario (`ui`), donde se definen los controles de entrada (*inputs*) y salidas (*outputs*), de la lógica computacional del servidor (`server`), donde opera el grafo de dependencias reactivo [@wickham2023r].
+
+:::
+
+## Ejercicios de Autoevaluación
+
+1. **Diseño Metodológico de una Batería de KPIs**:  
+   Un consorcio hospitalario público en Bolivia requiere supervisar el desempeño de sus unidades de terapia intensiva durante los periodos invernales.  
+   a) Propón y formaliza matemáticamente un indicador de resultado (*lagging*) y dos indicadores de proceso (*leading*).  
+   b) Define la unidad de análisis, el numerador, el denominador y la periodicidad de corte para cada uno.  
+
+2. **Auditoría de Carga Cognitiva y Selección Gráfica**:  
+   Un analista júnior presenta un borrador de dashboard para el Directorio de una empresa de telecomunicaciones que contiene 14 gráficos de pastel (*pie charts*), fondos oscuros con texto multicolor y 8 velocímetros (*gauges*) circulares sin escalas claras.  
+   a) Critica esta propuesta aplicando los principios del ratio dato-tinta y la jerarquía visual de Tufte.  
+   b) Propón una reestructuración del tablero seleccionando geometrías alternativas (como *bullet graphs*, tablas de resumen y *value boxes*) que optimicen la legibilidad ejecutiva.
+
+3. **Arquitectura Reactiva y Prevención de Errores en Shiny**:  
+   En una aplicación interactiva en Shiny que procesa microdatos del Censo Nacional de Población y Vivienda (con más de 3 millones de registros):  
+   a) Explica por qué realizar el filtrado y agrupamiento de los microdatos dentro de un bloque `renderPlot()` en lugar de utilizar una expresión `reactive()` genera degradación severa en el rendimiento del servidor.  
+   b) Diseña el pseudocódigo conceptual de la arquitectura de la aplicación en Shiny, mostrando el flujo de datos desde los controles de entrada (*inputs*) hasta los objetos reactivos intermedios y las salidas (*outputs*) finales.

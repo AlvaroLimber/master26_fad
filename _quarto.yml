@@ -40,7 +40,7 @@ book:
         - cap6-wrangling-avanzado.qmd 
         - cap7-ingenieria_variables.qmd 
         #- cap8-datos-desequilibrados.qmd 
-        #- cap9-dashboards-kpis.qmd
+        - cap9-dashboards-kpis.qmd
     - references.qmd
 
 bibliography: references.bib
